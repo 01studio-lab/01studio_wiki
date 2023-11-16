@@ -1,0 +1,8 @@
+{
+  "label": "网络应用",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "CanMV开发板实现Socket、MQTT等常用网络编程应用"
+  }
+}
