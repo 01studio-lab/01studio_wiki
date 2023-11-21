@@ -34,6 +34,8 @@ sidebar_position: 1
     - [PWM(蜂鸣器)](./basic_examples/pwm_beep.md) 
     - [UART(串口通讯)](./basic_examples/uart.md) 
     - [thread(线程)](./basic_examples/thread.md) 
+    - [LCD显示屏](./basic_examples/lcd.md) 
+    - [电阻触摸屏](./basic_examples/touchscreen.md) 
 
 - **机器视觉**
 
