@@ -169,7 +169,7 @@ const config = {
                 to: '/blog',
               },*/
               {
-                label: 'QQ群: 759452434',
+                label: 'CanMV QQ群: 578895334',
                 to: '/',
               },
               {
@@ -184,6 +184,35 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'CBRI4D5J5W',
+  
+        // Public API key: it is safe to commit it
+        apiKey: 'a4332836df0f6e8e381b4083d3bf0639',
+  
+        indexName: '01studio',
+  
+        // Optional: see doc section below
+        contextualSearch: true,
+  
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        externalUrlRegex: 'external\\.com|domain\\.com',
+  
+        // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+        //replaceSearchResultPathname: {
+         // from: '/docs/', // or as RegExp: /\/docs\//
+        //  to: '/',
+       // },
+  
+        // Optional: Algolia search parameters
+        searchParameters: {},
+  
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: 'search',
+  
+        //... other Algolia params
       },
     }),
 };
