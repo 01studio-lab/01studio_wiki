@@ -111,8 +111,8 @@ graph TD
 from maix import GPIO
 from fpioa_manager import fm
 
-#注册IO，蓝灯-->IO12,KEY-->IO16
-fm.register(12, fm.fpioa.GPIO0)
+#注册IO，蓝灯-->IO35,KEY-->IO16
+fm.register(35, fm.fpioa.GPIO0)
 fm.register(16, fm.fpioa.GPIO1)
 
 #初始化IO
