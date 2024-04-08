@@ -3,6 +3,7 @@
 
 # Production
 /build
+*.rar
 
 # Generated files
 .docusaurus
