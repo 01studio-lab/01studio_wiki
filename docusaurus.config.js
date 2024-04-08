@@ -94,7 +94,7 @@ const config = {
             label: 'NEW',
           },*/
           {
-            href: 'https://forum.01studio.cc',
+            href: 'https://bbs.01studio.cc',
             label: '论坛',
             position: 'left',
           },
@@ -140,7 +140,7 @@ const config = {
               },
               {
                 label: '论坛',
-                href: 'https://forum.01studio.cc',
+                href: 'https://bbs.01studio.cc',
               },
               {
                 label: 'GitHub',
