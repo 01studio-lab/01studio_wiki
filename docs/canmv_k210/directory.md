@@ -23,6 +23,7 @@ sidebar_position: 1
     - [REPL串口交互](./getting_start/repl.md)
     - [文件系统](./getting_start/file_system.md)
     - [SD卡使用](./getting_start/sd.md)
+    - [代码离线运行](./getting_start/run_offline.md)
     - [固件更新](./getting_start/firmware_update.md)
 
 - **基础实验**
