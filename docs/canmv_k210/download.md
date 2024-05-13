@@ -1,10 +1,10 @@
 ---
-sidebar_position: 5
+sidebar_position: 3
 ---
 
-# 资料下载
+# 开发板资料下载
 
-CanMV K210教程配套软件、源代码、原理图、芯片手册等。
+CanMV K210在线教程配套软件、源代码、原理图、芯片手册等。
 
 - 百度网盘链接：https://pan.baidu.com/s/1P-lju8EH-fd4Rfy67Ge-Gg
 - 提取码：**01KJ**

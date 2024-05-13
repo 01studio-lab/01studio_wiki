@@ -4,6 +4,10 @@ sidebar_position: 8
 
 # 固件更新
 
+:::tip 提示
+当前最新固件版本为v1.0.7，建议升级到此版本。
+:::
+
 当CanMV K210上的固件意外丢失或者我们希望升级到较新版本固件时候，就需重新烧录固件。CanMV K210上面是一个K210单片机，所以这个操作相当于给K210 MCU重新烧录MicroPython固件。
 
 官方提供了免安装的烧录工具，通过板载USB转串口烧录的。我们打开 <u>MicroPython开发套件配套资料\开发工具\Windows\固件更新工具\ kflash_gui</u> 目录下的kflash_gui.exe烧录软件。

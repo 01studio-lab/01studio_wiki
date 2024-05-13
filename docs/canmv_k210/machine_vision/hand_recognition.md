@@ -1,18 +1,18 @@
 ---
-sidebar_position: 12
+sidebar_position: 14
 ---
 
-# 人手识别
+# 人手检测
 
 ## 前言
-人手识别是判断摄像头画面中有无出现人的手部。本节我们来学习一下如何通过MicroPython编程快速实现人手识别。
+人手检测是判断摄像头画面中有无出现人的手部。本节我们来学习一下如何通过MicroPython编程快速实现人手检测。
 
 ## 实验目的
-人手识别并通过画框提示。
+人手检测并通过画框提示。
 
 ## 实验讲解
 
-本实验还是使用到YOLO2网络，，结合人手检测模型来识别人手。KPU对象说明可参考[KPU简介](./kpu)章节内容。
+本实验还是使用到YOLO2网络，结合人手检测模型来识别人手。KPU对象说明可参考[KPU简介](./kpu)章节内容。
 
 具体编程思路如下：
 
@@ -94,6 +94,3 @@ kpu.deinit()
 识别结果：
 
 ![hand_recognition](./img/hand_recognition/hand_recognition2.png)
-
-
-本节学习了物体识别，可以看到CanMV K210通过KPU+YOLO2+20class模型轻松实现特定物体识别，而且检测的准确率非常高，也就是结合MicroPython编程我们轻松完成了实验。

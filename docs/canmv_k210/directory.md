@@ -50,11 +50,15 @@ sidebar_position: 1
     - [AprilTag标签识别](./machine_vision/apriltag.md) 
     - [KPU简介](./machine_vision/kpu.md) 
     - [物体识别](./machine_vision/object_recognition.md) 
-    - [人手识别](./machine_vision/hand_recognition.md) 
+    - [人体检测](./machine_vision/body_detection.md) 
+    - [头部检测](./machine_vision/head_detection.md) 
+    - [人手检测](./machine_vision/hand_recognition.md) 
     - [口罩识别](./machine_vision/mask_recognition.md) 
     - [人脸检测](./machine_vision/face_detection.md) 
     - [人脸特征](./machine_vision/face_features.md) 
     - [人脸轮廓](./machine_vision/face_outline.md) 
+    - [人脸识别](./machine_vision/face_recognition.md) 
+    - [数字识别](./machine_vision/mnist.md) 
 
 - **机器听觉**
 

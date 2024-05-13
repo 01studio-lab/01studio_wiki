@@ -1,8 +1,16 @@
 ---
-sidebar_position: 10
+sidebar_position: 11
 ---
 
 # 更新说明
+
+## 2024-5-8
+
+- 增加 **机器视觉**  ：
+    - [人体检测](./machine_vision/body_detection.md) 
+    - [头部检测](./machine_vision/head_detection.md) 
+    - [人脸识别](./machine_vision/face_recognition.md) 
+    - [数字识别](./machine_vision/mnist.md) 
 
 ## 2024-4-8
 

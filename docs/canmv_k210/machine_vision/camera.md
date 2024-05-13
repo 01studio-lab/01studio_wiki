@@ -40,6 +40,28 @@ sensor.reset()
 <br></br>
 
 ```python
+sensor.set_hmirror(enable)
+```
+设置摄像头水平镜像。
+- `enable`: 格式。
+    - `1` : 开启水平镜像；
+    - `0` : 关闭水平镜像。
+
+<br></br>
+
+```python
+sensor.set_vflip(enable)
+```
+设置摄像头垂直翻转。
+- `enable`: 格式。
+    - `1` : 开启垂直翻转；
+    - `0` : 关闭垂直翻转。
+
+**提示：通过设置摄像头的水平镜像和垂直翻转组合可以实现任意画面变换。**
+
+<br></br>
+
+```python
 sensor.set_pixformat(pixformat)
 ```
 设置像素格式。
@@ -131,7 +153,7 @@ import sensor, image, time, lcd
 lcd.init(freq=15000000)             #初始化LCD
 sensor.reset()                      #复位和初始化摄像头，执行sensor.run(0)停止。
 sensor.set_vflip(1)                 #将摄像头设置成后置方式（所见即所得）
-
+sensor.set_hmirror(1)               #GC0328摄像头（如果使用ov2640摄像头，注释此行。）
 
 sensor.set_pixformat(sensor.RGB565) # 设置像素格式为彩色 RGB565 (或灰色)
 sensor.set_framesize(sensor.QVGA)   # 设置帧大小为 QVGA (320x240)
