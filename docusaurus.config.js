@@ -84,22 +84,21 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'CanMV-K210教程',
-          },
-          /*
+            label: 'CanMV K210教程',
+          },                
           {
             type: 'docSidebar',
             sidebarId: 'newSidebar',
             position: 'left',
-            label: 'NEW',
-          },*/
-          {
-            href: 'https://bbs.01studio.cc',
-            label: '论坛',
-            position: 'left',
+            label: 'CanMV K230教程（新）',
           },
           {
-            href: 'https://item.taobao.com/item.htm?id=686202955706',
+            href: 'https://forum.01studio.cc',
+            label: '论坛',
+            position: 'right',
+          },
+          {
+            href: 'https://item.taobao.com/item.htm?id=821397288809',
             label: '购买',
             position: 'right',
           },

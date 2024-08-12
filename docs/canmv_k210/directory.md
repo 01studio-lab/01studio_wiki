@@ -7,11 +7,12 @@ sidebar_position: 1
 
 ![directory](./img/directory/directory1.png)
 
-- **CanMV K210开发套件**
+- **CanMV-K210套件介绍**
 
     - [CanMV K210](./intro/canmv_k210.md)
     - [支架安装](./intro/bracket.md)
-    - [资料下载](./intro/download.md)
+
+- [**开发板资料下载**](./download.md)
 
 - [**Python3基础知识**](./python_learn.md)
 
@@ -59,6 +60,7 @@ sidebar_position: 1
     - [人脸轮廓](./machine_vision/face_outline.md) 
     - [人脸识别](./machine_vision/face_recognition.md) 
     - [数字识别](./machine_vision/mnist.md) 
+    - [自分类学习](./machine_vision/self_learning.md) 
 
 - **机器听觉**
 

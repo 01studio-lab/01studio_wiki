@@ -10,7 +10,7 @@ CanMV拥有自己官方的IDE，安装包位于 零一科技（01Studio）MicroP
 
 打开后根据提示安装即可，安装完成后如果在桌面没用找到该软件，可以在安装路径或者在系统搜索栏搜索 CanMV关键词找到该软件。
 
-![canmv_ide2](./img/canmv_ide/canmv_ide2.jpg)
+![canmv_ide2](./img/canmv_ide/canmv_ide2.png)
 
 打开软件，如下图所示，至此安装完成。
 

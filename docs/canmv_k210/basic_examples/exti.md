@@ -130,6 +130,10 @@ def fun(KEY):
 #开启中断，下降沿触发
 KEY.irq(fun, GPIO.IRQ_FALLING)
 
+while True:
+
+    pass
+
 ```
 
 ## 实验结果

@@ -4,6 +4,15 @@ sidebar_position: 11
 
 # 更新说明
 
+## 2024-6-27
+
+- 增加 [**CanMV K210 mini开发板相关说明**](./intro/canmv_k210.md#canmv-k210-mini-开发板) 。
+
+## 2024-5-30
+
+- 增加 **机器视觉**  ：
+    - [自分类学习](./machine_vision/self_learning.md) 
+
 ## 2024-5-8
 
 - 增加 **机器视觉**  ：

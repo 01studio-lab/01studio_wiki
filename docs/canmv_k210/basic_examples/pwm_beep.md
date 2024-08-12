@@ -93,6 +93,8 @@ graph TD
 
 ## 参考代码
 
+### CanMV K210平台
+
 ```python
 '''
 实验名称： PWM
@@ -125,6 +127,40 @@ while True:
     beep.freq(1000)
     time.sleep(1)
 ```
+### CanMV K210 mini平台
+
+```python
+'''
+实验名称： PWM
+版本： v1.0
+作者： 01Studio
+说明：通过不同频率的 PWM 信号输出，驱动无源蜂鸣器发出不同频率的声音。
+实验平台：01Studio CanMV K210 mini (需要通过3P接口外接无源蜂鸣器)
+'''
+from machine import Timer,PWM
+import time
+
+#PWM通过定时器配置，接到IO9引脚
+tim = Timer(Timer.TIMER0, Timer.CHANNEL0, mode=Timer.MODE_PWM)
+beep = PWM(tim, freq=1, duty=50, pin=8)
+
+#循环发出不同频率响声。
+while True:
+    beep.freq(200)
+    time.sleep(1)
+
+    beep.freq(400)
+    time.sleep(1)
+
+    beep.freq(600)
+    time.sleep(1)
+
+    beep.freq(800)
+    time.sleep(1)
+
+    beep.freq(1000)
+    time.sleep(1)
+```
 
 ## 实验结果
 
@@ -132,7 +168,11 @@ while True:
 
 ![pwm4](./img/pwm/pwm4.png)
 
-有条件的朋友可以使用示波器测量CanMV K210的IO9引脚。观察PWM波形变化。
+如果你使用CanMV K210 mini平台，可以通过配套的3p线外接无源蜂鸣器完成此实验。
+
+![pwm4](./img/pwm/pwm4_1.png)
+
+有条件的朋友可以使用示波器测量CanMV K210的IO9引脚（CanMV K210 mini的IO8引脚）。观察PWM波形变化。
 
 ![pwm5](./img/pwm/pwm5.png)
 

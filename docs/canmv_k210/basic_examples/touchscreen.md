@@ -46,10 +46,10 @@ ts.calibrate()
 ts.read()
 ```
 读取屏幕状态和坐标信息。返回（status,x,y）。
-- `status`: 触摸状态，取值有如下：
-    - `touchscreen.STATUS_RELEASE`: 值为1，触摸屏没动作；
-    - `touchscreen.STATUS_PRESS`: 值为2，触摸屏没动作；
-    - `touchscreen.STATUS_MOVE`: 值为3，触摸屏没动作；
+- `status`: 触摸状态，首次运行返回0，开始触摸后返回下面取值：
+    - `touchscreen.STATUS_RELEASE`: 值为1，松开；
+    - `touchscreen.STATUS_PRESS`: 值为2，长按；
+    - `touchscreen.STATUS_MOVE`: 值为3，滑动；
 - `x`: x轴坐标
 - `y`: y轴坐标
 

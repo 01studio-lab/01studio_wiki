@@ -21,6 +21,10 @@ CanMV K210在线教程配套软件、源代码、原理图、芯片手册等。
 
 ## 例程源码
 
+注意区分CanMV K210和CanMV K210 mini不同平台，代码有些少区别。
+
+![download](./img/download/download2_1.png)
+
 本在线教程所有源代码。
 
 ![download](./img/download/download3.png)
