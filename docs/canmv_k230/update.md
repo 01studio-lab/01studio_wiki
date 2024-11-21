@@ -1,8 +1,15 @@
 ---
-sidebar_position: 11
+sidebar_position: 15
 ---
 
 # 更新说明
+
+## 2024-9-11
+
+- 增加 **机器视觉 -- 摄像头** ：
+
+    - [多路摄像头接口使用说明](./machine_vision/camera.md#多路摄像头接口使用) 
+
 
 ## 2024-8-8
 

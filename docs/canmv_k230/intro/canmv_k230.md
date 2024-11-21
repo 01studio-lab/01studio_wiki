@@ -27,7 +27,7 @@ CanMV开源项目由嘉楠科技（Canaan）官方创建和维护。是将MicroP
 |  产品参数 |
 |  :---:  | ---  |
 | K230主控  | ● CPU1: RISC-V , 1.6GHz, 支持RVV 1.0<br></br> ● CPU0: RISC-V , 800MHz |
-| 神经网络处理器  | KPU（6TOPS），支持INT8和INT16|
+| 神经网络处理器  | KPU（6TOPS等效算力），支持INT8和INT16|
 | 内存  | 1GBytes （LPDDR4） | 
 | 存储  | MicroSD（最大支持512G） |
 | 摄像头  | ● GC2093(标配) / OV5647<br></br> ● 支持3路输入（3 x 2 lane CSI） |
@@ -65,7 +65,7 @@ CanMV开源项目由嘉楠科技（Canaan）官方创建和维护。是将MicroP
 |  K230芯片参数 |
 |  :---:  | ---  |
 | CPU  | ● CPU1: RISC-V处理器 , 1.6GHz, 32KB I-cache, 32KB D-cache, 256KB L2 Cache, 128bit RVV 1.0扩展<br></br> ● CPU0: RISC-V处理器 , 800MHz, 32KB I-cache, 32KB D-cache, 128KB L2 Cache |
-| KPU  | 6TOP算力，支持INT8和INT16<br></br>典型网络性能：<br></br>Resnet50 ≥ 85fps @ INT8；Mobilenet_v2 ≥ 670fps @ INT8；YOLO V5s  ≥ 38fps @ INT8|
+| KPU  | 6TOPS等效算力，支持INT8和INT16<br></br>典型网络性能：<br></br>Resnet50 ≥ 85fps @ INT8；Mobilenet_v2 ≥ 670fps @ INT8；YOLO V5s  ≥ 38fps @ INT8|
 | DPU  | 3D结构光深度引擎，最大分辨率支持1920x1080 | 
 | VPU  | H.264和H.265视频编解码，最大支持4096x4096<br></br>编码器性能：4K@20fps<br></br>解码器性能：4K@40fps<br></br>JEPG编解码器：最大支持8K(8192x8192)分辨率 |
 | 图像输入  | 最大支持3路MIPI CSI输入：1x4 lane+1x2 lane 或 3x2 lane |

@@ -14,7 +14,7 @@ sidebar_position: 4
 
 ## 实验讲解
 
-有线以太网需要借助一个USB转以太网设备，型号为：USB2.0 RTL8152B 免驱百兆网卡： [**点击购买>>**](https://01studio.taobao.com)
+有线以太网需要借助一个USB转以太网设备，型号为：USB2.0 RTL8152B 免驱百兆网卡： [**点击购买>>**](https://item.taobao.com/item.htm?id=822775353673)
 
 将USB转以太网卡USB端插入01Studio CanMV K230开发板，另一头插入网线连接到路由器。
 

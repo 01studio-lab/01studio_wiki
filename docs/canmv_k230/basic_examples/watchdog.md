@@ -14,7 +14,7 @@ sidebar_position: 10
 
 CanMV K230的MicroPython固件已经集成了看门狗WDT模块。我们直接调用即可。
 
-## WTD对象
+## WDT对象
 
 ### 构造函数
 ```python

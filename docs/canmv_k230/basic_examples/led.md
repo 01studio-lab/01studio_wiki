@@ -16,7 +16,7 @@ CanMV K230有一个跟GPIO连接可控制的LED灯。
 
 ![led](./img/led/led1.png)
 
-其连接到CanMV K230的IO引脚如下（可以看开发板原理图），LED蓝灯对应的GPIO为IO35，从电路可以看到当IO35为高电平时，蓝灯被点亮。
+其连接到CanMV K230的IO引脚如下（可以看开发板原理图），LED蓝灯对应的GPIO为IO52，从电路可以看到当IO52为高电平时，蓝灯被点亮。
 
 ![led](./img/led/led2.png)
 

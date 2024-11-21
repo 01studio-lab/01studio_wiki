@@ -78,7 +78,7 @@ sensor.set_pixformat(pixformat, chn = CAM_CHN_ID_0)
 ```
 设置图像像素格式。
 - `pixformat`: 格式。
-    - `sensor.GRAYSCAL` : 灰度图像，每像素8位（1字节），处理速度快。
+    - `sensor.GRAYSCALE` : 灰度图像，每像素8位（1字节），处理速度快。
     - `sensor.RGB565` : 每像素为16位（2字节），5位用于红色，6位用于绿色，5位用于蓝色，处理速度比灰度图像要慢。
     - `sensor.RGB888` 
     - `sensor.RGBP888` 
@@ -127,8 +127,7 @@ sensor.snapshot()
 使用相机拍摄一张照片，并返回 image 对象。
 
 
-更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/sensor.html
+更多用法请阅读: [CanMV K230官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Sensor%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
 
 ## clock对象
 
@@ -280,3 +279,28 @@ finally:
 
 
 通过本实验，我们了解了摄像头sensor模块以及时间time模块的原理和应用，可以看到CanMV将摄像头功能封装成sensor模块，用户不必关注底层代码编可以轻松使用。
+
+## 多路摄像头接口使用
+
+01科技 CanMV K230除了CSI2接口标配的GC2093（60FPS）摄像头外，还可以通过CSI0、CSI1接口外接摄像头。外接摄像头目前支持型号:
+
+- OV5647（1080P 30FPS）。6cm/15cm/30cm 3款长度可选。 [**点击购买>>**](https://item.taobao.com/item.htm?id=833993249110)
+
+![camera](./img/camera/camera4.png)
+
+使用方法很简单，只需要在上面示例代码基础上在初始化时候配置`id`参数即可。
+
+# CSI0接口
+```python
+    ...
+    sensor = Sensor(id=0) #id=0表示使用CSI0接口上的摄像头
+    ...
+```
+# CSI1接口
+
+```python
+    ...
+    sensor = Sensor(id=1) #id=1表示使用CSI1接口上的摄像头
+    ...
+```
+

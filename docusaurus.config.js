@@ -29,7 +29,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'zh',
-    locales: ['en','zh'],
+    locales: ['zh','en'],
   },
 
   markdown: {
@@ -97,10 +97,26 @@ const config = {
             label: '论坛',
             position: 'right',
           },
-          {
+          /*{
             href: 'https://item.taobao.com/item.htm?id=821397288809',
             label: '购买',
             position: 'right',
+          },*/
+          {
+            type: 'dropdown',
+            label: '购买',
+            position: 'right',
+            className: 'navbar_dorp_items',
+            items: [
+              {
+                label: '淘宝店铺',
+                href: 'https://item.taobao.com/item.htm?id=821397288809',
+              },
+              {
+                label: 'Aliexpress',
+                href: 'https://www.aliexpress.com/item/1005007573129445.html',
+              },
+            ],
           },
           //{to: '/blog', label: 'Blog', position: 'left'},
           /*{
@@ -139,7 +155,7 @@ const config = {
               },
               {
                 label: '论坛',
-                href: 'https://bbs.01studio.cc',
+                href: 'https://forum.01studio.cc',
               },
               {
                 label: 'GitHub',

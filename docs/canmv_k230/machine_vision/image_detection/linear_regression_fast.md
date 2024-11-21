@@ -54,7 +54,7 @@ graph TD
 
 ```python
 '''
-实验名称：矩形检测
+实验名称：快速线性回归（巡线）
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
 '''

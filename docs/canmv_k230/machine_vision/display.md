@@ -189,6 +189,15 @@ finally:
 
 ### 3.5寸mipi显示屏显示
 
+使用3.5寸mipi显示屏显示图像需要修改2个地方：
+
+将摄像头采集分辨率改成800x480以下：
+```python
+    #sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，缓冲区和HDMI用,默认通道0
+    sensor.set_framesize(width=800,height=480) #设置帧大小800x480,LCD专用,默认通道0
+    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+```
+
 将参考代码中的代码改成ST7701 :
 ```python
     #################################
@@ -201,7 +210,7 @@ finally:
 
 ```
 
-通过排线线连接01Studio 3.5寸mipi屏：
+通过排线连接01Studio 3.5寸mipi屏：
 ![display](./img/display/display4.png)
 
 运行代码，可以看到mipi屏上显示摄像头采集图像，最大支持800x480：
