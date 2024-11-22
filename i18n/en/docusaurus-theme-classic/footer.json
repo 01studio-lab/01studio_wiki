@@ -1,0 +1,46 @@
+{
+  "link.title.开发者资源": {
+    "message": "Developers",
+    "description": "The title of the footer links column with title=开发者资源 in the footer"
+  },
+  "link.title.联系我们": {
+    "message": "Contact Us",
+    "description": "The title of the footer links column with title=联系我们 in the footer"
+  },
+  "link.title.社区": {
+    "message": "Community",
+    "description": "The title of the footer links column with title=社区 in the footer"
+  },
+  "link.item.label.教程": {
+    "message": "Tutorial",
+    "description": "The label of footer link with label=教程 linking to /docs/canmv_k210"
+  },
+  "link.item.label.论坛": {
+    "message": "Forum",
+    "description": "The label of footer link with label=论坛 linking to https://forum.01studio.cc"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/01studio-lab"
+  },
+  "link.item.label.电话: +86-18123953882 (微信同号)": {
+    "message": "Tel: +86-18123953882 (Wechat)",
+    "description": "The label of footer link with label=电话: +86-18123953882 (微信同号) linking to /"
+  },
+  "link.item.label.邮箱: support@01studio.cc": {
+    "message": "Email: support@01studio.cc",
+    "description": "The label of footer link with label=邮箱: support@01studio.cc linking to /"
+  },
+  "link.item.label.CanMV QQ群: 578895334": {
+    "message": "CanMV QQ Group: 578895334",
+    "description": "The label of footer link with label=CanMV QQ群: 578895334 linking to /"
+  },
+  "link.item.label.微信公众号: 01Studio社区": {
+    "message": "Twitter(X): 01Studio_Lab",
+    "description": "The label of footer link with label=微信公众号: 01Studio社区 linking to /"
+  },
+  "copyright": {
+    "message": "Copyright © 2024 01Studio, Inc. Built with Docusaurus.",
+    "description": "The footer copyright"
+  }
+}

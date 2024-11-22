@@ -1,0 +1,174 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.CanMV-K210套件介绍": {
+    "message": "CanMV-K210套件介绍",
+    "description": "The label for category CanMV-K210套件介绍 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CanMV-K210套件介绍.link.generated-index.description": {
+    "message": "硬件和相关资源介绍",
+    "description": "The generated-index page description for category CanMV-K210套件介绍 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.开发环境搭建": {
+    "message": "开发环境搭建",
+    "description": "The label for category 开发环境搭建 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.开发环境搭建.link.generated-index.description": {
+    "message": "01科技CanMV K230开发环境准备工作。",
+    "description": "The generated-index page description for category 开发环境搭建 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.基础实验": {
+    "message": "基础实验",
+    "description": "The label for category 基础实验 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.基础实验.link.generated-index.description": {
+    "message": "常用GPIO基础实验",
+    "description": "The generated-index page description for category 基础实验 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.机器视觉": {
+    "message": "机器视觉",
+    "description": "The label for category 机器视觉 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.机器视觉.link.generated-index.description": {
+    "message": "AI机器视觉实验",
+    "description": "The generated-index page description for category 机器视觉 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.机器听觉": {
+    "message": "机器听觉",
+    "description": "The label for category 机器听觉 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.机器听觉.link.generated-index.description": {
+    "message": "数字麦克风和麦克风阵列使用",
+    "description": "The generated-index page description for category 机器听觉 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.网络应用": {
+    "message": "网络应用",
+    "description": "The label for category 网络应用 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.网络应用.link.generated-index.description": {
+    "message": "CanMV开发板实现Socket、MQTT等常用网络编程应用",
+    "description": "The generated-index page description for category 网络应用 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.传感器和模块": {
+    "message": "传感器和模块",
+    "description": "The label for category 传感器和模块 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.传感器和模块.link.generated-index.description": {
+    "message": "CanMV K210开发板使用传感器和其它模块",
+    "description": "The generated-index page description for category 传感器和模块 in sidebar tutorialSidebar"
+  },
+  "sidebar.newSidebar.category.CanMV-K230套件介绍": {
+    "message": "CanMV K230 Development Kits Introduction",
+    "description": "The label for category CanMV-K230套件介绍 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.CanMV-K230套件介绍.link.generated-index.description": {
+    "message": "Introduction to hardware and related resources",
+    "description": "The generated-index page description for category CanMV-K230套件介绍 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.开发环境搭建": {
+    "message": "开发环境搭建",
+    "description": "The label for category 开发环境搭建 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.开发环境搭建.link.generated-index.description": {
+    "message": "开始使用你的CanMV K230 AI开发板。",
+    "description": "The generated-index page description for category 开发环境搭建 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.基础实验": {
+    "message": "基础实验",
+    "description": "The label for category 基础实验 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.基础实验.link.generated-index.description": {
+    "message": "常用GPIO基础实验",
+    "description": "The generated-index page description for category 基础实验 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.机器视觉": {
+    "message": "机器视觉",
+    "description": "The label for category 机器视觉 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.机器视觉.link.generated-index.description": {
+    "message": "AI机器视觉实验，CanMV K230核心教程。",
+    "description": "The generated-index page description for category 机器视觉 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.图像检测": {
+    "message": "图像检测",
+    "description": "The label for category 图像检测 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.图像检测.link.generated-index.description": {
+    "message": "图像特征检测相关例程",
+    "description": "The generated-index page description for category 图像检测 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.颜色识别": {
+    "message": "颜色识别",
+    "description": "The label for category 颜色识别 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.颜色识别.link.generated-index.description": {
+    "message": "颜色识别例程",
+    "description": "The generated-index page description for category 颜色识别 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.码类识别": {
+    "message": "码类识别",
+    "description": "The label for category 码类识别 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.码类识别.link.generated-index.description": {
+    "message": "条形码、二维码等识别",
+    "description": "The generated-index page description for category 码类识别 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.AI视觉（KPU）": {
+    "message": "AI视觉（KPU）",
+    "description": "The label for category AI视觉（KPU） in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.AI视觉（KPU）.link.generated-index.description": {
+    "message": "AI视觉开发。",
+    "description": "The generated-index page description for category AI视觉（KPU） in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.人脸相关": {
+    "message": "人脸相关",
+    "description": "The label for category 人脸相关 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.人脸相关.link.generated-index.description": {
+    "message": "人脸相关视觉识别教程",
+    "description": "The generated-index page description for category 人脸相关 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.人体相关": {
+    "message": "人体相关",
+    "description": "The label for category 人体相关 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.人体相关.link.generated-index.description": {
+    "message": "人体相关视觉识别",
+    "description": "The generated-index page description for category 人体相关 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.手部相关": {
+    "message": "手部相关",
+    "description": "The label for category 手部相关 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.手部相关.link.generated-index.description": {
+    "message": "手部相关视觉识别",
+    "description": "The generated-index page description for category 手部相关 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.车牌相关": {
+    "message": "车牌相关",
+    "description": "The label for category 车牌相关 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.车牌相关.link.generated-index.description": {
+    "message": "车牌相关视觉识别",
+    "description": "The generated-index page description for category 车牌相关 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.网络应用": {
+    "message": "网络应用",
+    "description": "The label for category 网络应用 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.网络应用.link.generated-index.description": {
+    "message": "CanMV开发板实现Socket、MQTT等常用网络编程应用",
+    "description": "The generated-index page description for category 网络应用 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.传感器和模块": {
+    "message": "传感器和模块",
+    "description": "The label for category 传感器和模块 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.传感器和模块.link.generated-index.description": {
+    "message": "CanMV K230开发板使用传感器和其它模块。",
+    "description": "The generated-index page description for category 传感器和模块 in sidebar newSidebar"
+  }
+}

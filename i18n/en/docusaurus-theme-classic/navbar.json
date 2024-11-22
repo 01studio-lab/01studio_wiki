@@ -1,0 +1,34 @@
+{
+  "title": {
+    "message": "01Studio",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "My Site Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.CanMV K210教程": {
+    "message": "CanMV K210 Tutorial",
+    "description": "Navbar item with label CanMV K210教程"
+  },
+  "item.label.CanMV K230教程（新）": {
+    "message": "CanMV K230 Tutorial（New）",
+    "description": "Navbar item with label CanMV K230教程（新）"
+  },
+  "item.label.论坛": {
+    "message": "Forum",
+    "description": "Navbar item with label 论坛"
+  },
+  "item.label.购买": {
+    "message": "Buy",
+    "description": "Navbar item with label 购买"
+  },
+  "item.label.淘宝店铺": {
+    "message": "淘宝店铺",
+    "description": "Navbar item with label 淘宝店铺"
+  },
+  "item.label.Aliexpress": {
+    "message": "Aliexpress",
+    "description": "Navbar item with label Aliexpress"
+  }
+}

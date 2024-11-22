@@ -1,0 +1,8 @@
+{
+  "label": "图像检测",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "图像特征检测相关例程"
+  }
+}

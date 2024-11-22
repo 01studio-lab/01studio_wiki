@@ -2,33 +2,35 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
+import Translate, {translate} from '@docusaurus/Translate';
+
 const FeatureList = [
   {
-    title: '超强算力',
+    title: <Translate>超强算力</Translate>,
     Svg: require('@site/static/img/canmv_k210.svg').default,
     description: (
-      <>* K210双核RISC-V高性能处理器<br></br>
-        * 主频400MHz，算力1TOPS<br></br>
-        * 摄像头LCD一体化设计<br></br>
+      <>* <Translate>K210双核RISC-V高性能处理器</Translate><br></br>
+        * <Translate>主频400MHz，算力1TOPS</Translate><br></br>
+        * <Translate>摄像头LCD一体化设计</Translate><br></br>
       </>
     ),
   },
   {
-    title: '模块堆叠',
+    title: <Translate>模块堆叠</Translate>,
     Svg: require('@site/static/img/module.svg').default,
     description: (
       <>
-        支持WiFi、红外测温、MPU6050六轴、TOF激光测距等多款模块拓展
+        <Translate>支持WiFi、红外测温、MPU6050六轴、TOF激光测距等多款模块拓展</Translate>
       </>
     ),
   },
   {
-    title: 'Python开发',
+    title: <Translate>Python开发</Translate>,
     Svg: require('@site/static/img/ide.svg').default,
     description: (
       <>
-        * CanMV IDE可视化编程，实时查看图像识别结果<br></br>
-        * Python开发，快速上手
+        * <Translate>CanMV IDE可视化编程，实时查看图像识别结果</Translate><br></br>
+        * <Translate>Python开发，快速上手</Translate>
       </>
     ),
   },

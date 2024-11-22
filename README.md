@@ -6,7 +6,11 @@
 
 ## 贡献说明
 
-本项目使用 [Docusaurus](https://docusaurus.io/) 构建。主要内容放在 `01studio_wiki/docs` 目录下，大家可以遵循我们的文档格式提交教程贡献。
+本项目使用 [Docusaurus](https://docusaurus.io/) 构建。大家可以遵循我们的文档格式提交教程贡献。
+
+文档主要内容放在 `01studio_wiki/docs` 目录下，默认中文；
+
+不同语言翻译后的文档位于 `01studio_wiki/i18n` 目录下。（感兴趣用户翻译后提交即可！）
 
 ### 安装Node.js
 
@@ -19,10 +23,14 @@
 git clone https://github.com/01studio-lab/01studio_wiki.git
 ```
 
-### 运行
-
+### 首次安装依赖库
 ```
 cd 01studio_wiki
+npm install
+```
+
+### 运行
+```
 npm run start
 ```
 
@@ -31,5 +39,12 @@ npm run start
 ![readme1](./static/img/readme1.png)
 
 ![readme2](./static/img/readme2.png)
+
+其它语言版本可以通过下面指令查看：
+
+例如英文版本：
+```
+npm run start -- --locale en
+```
 
 详细教程请看官方文档：[https://tutorial.docusaurus.io/docs/intro/](https://tutorial.docusaurus.io/docs/intro/)

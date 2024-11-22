@@ -1,3 +1,4 @@
+
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
@@ -119,7 +120,7 @@ const config = {
             ],
           },
           //{to: '/blog', label: 'Blog', position: 'left'},
-          /*{
+          {
             type: 'localeDropdown',
             position: 'right',
             dropdownItemsAfter: [
@@ -128,11 +129,11 @@ const config = {
                 value: '<hr style="margin: 0.3rem 0;">',
               },
               {
-                href: 'https://github.com/facebook/docusaurus/issues/3526',
+                href: 'https://github.com/01studio-lab/01studio_wiki',
                 label: 'Help Us Translate',
               },
             ],
-          },*/
+          },
           {
             href: 'https://github.com/01studio-lab',
             //label: 'GitHub',
