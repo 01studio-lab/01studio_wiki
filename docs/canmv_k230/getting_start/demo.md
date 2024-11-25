@@ -36,7 +36,7 @@ LED.value(1) #点亮LED，也可以使用led.on()
 
 ![demo2](./img/demo/demo2.png)
 
-接下来我们需要连接开发板，。点击左下角连接按钮：
+接下来我们需要连接开发板，点击左下角连接按钮：
 
 ![demo3](./img/demo/demo3.png)
 

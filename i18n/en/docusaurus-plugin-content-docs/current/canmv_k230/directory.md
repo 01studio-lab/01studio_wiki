@@ -13,9 +13,9 @@ sidebar_position: 1
     - [Accessories installation and use](./intro/module.md)
     - [Bracket assembly](./intro/bracket.md)
 
-- [**开发板资料下载**](./download.md)
+- [**Resource Downloads**](./download.md)
 
-- [**Python3基础知识**](./python_learn.md)
+- [**Python3 Basics**](./python_learn.md)
 
 - **开发环境搭建**
 
@@ -96,6 +96,6 @@ sidebar_position: 1
 
     - [继电器](./sensor_module/relay.md) 
 
-- [**更新说明**](./update.md)
+- [**Updage Notes**](./update.md)
 
 

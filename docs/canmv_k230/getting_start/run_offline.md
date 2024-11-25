@@ -15,6 +15,10 @@ Micropython机制是上电默认先运行名字为boot.py文件，然后在运�
 
 也就是我们只需要将代码以boot.py或main.py文件发送到开发板，那么开发板就可以实现上电运行相关程序。
 
+:::tip Tips
+通常情况下我们只需要使用main.py即可。
+:::
+
 可以将在当前CanMV K230 IDE连接开发板后将打开的例程代码以main.py发送到开发板:
 
 ![run_offline](./img/run_offline/run_offline1.png)

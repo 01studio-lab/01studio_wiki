@@ -68,11 +68,11 @@
     "description": "The generated-index page description for category CanMV-K230套件介绍 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.开发环境搭建": {
-    "message": "开发环境搭建",
+    "message": "Getting Start",
     "description": "The label for category 开发环境搭建 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.开发环境搭建.link.generated-index.description": {
-    "message": "开始使用你的CanMV K230 AI开发板。",
+    "message": "Getting starte with your CanMV K230 AI development board.",
     "description": "The generated-index page description for category 开发环境搭建 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.基础实验": {

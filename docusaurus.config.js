@@ -114,7 +114,7 @@ const config = {
                 href: 'https://item.taobao.com/item.htm?id=821397288809',
               },
               {
-                label: 'Aliexpress',
+                label: 'AliExpress',
                 href: 'https://www.aliexpress.com/item/1005007573129445.html',
               },
             ],

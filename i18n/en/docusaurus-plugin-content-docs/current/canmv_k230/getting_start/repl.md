@@ -2,40 +2,43 @@
 sidebar_position: 4
 ---
 
-# REPL串口交互调试
-:::tip 提示
-REPL是MicroPython特有的功能，由于大部分IDE都集成了串口终端信息打印，所以这个功能一般情况下不需要用到。
+# REPL（Read-Eval-Print Loop）
+
+:::tip Tips
+REPL is a feature unique to MicroPython. Since most IDEs have integrated serial terminal information printing, this feature is generally not needed.
 :::
 
-上一节在IDE中的提及的串口终端打印调试数据，并不能实现交互，CanMV K230 的MicroPython固件集成了交互解释器REPL 【读取(Read)-运算(Eval)-输出(Print)-循环(Loop) 】，开发者可以直接通过串口终端来调试CanMV K230开发板。我们使用的软件是一款免费的串口终端软件putty。
+The serial terminal mentioned in the previous section prints debugging data in the IDE, but cannot realize interaction. The MicroPython firmware of CanMV K230 integrates the interactive interpreter REPL [Read-Eval-Print-Loop], and developers can debug the CanMV K230 development board directly through the serial terminal. The software we use is a free serial terminal software putty.
 
-将开发板连接到电脑，从我的电脑—属性—设备管理器中找到当前的串口号，这里是COM73。
+Connect the development board to the computer and find the current serial port number from My Computer-Properties-Device Manager, which is COM73 here.
 
 ![repl1](./img/repl/repl1.png)
 
-打开<u>**CanMV k230开发套件配套资料\01-开发工具\Windows\串口终端工具\Putty.exe**</u> 配置信息如下：
+Open <u>**01Studio MicroPython Develop Kits (Base on CanMV K230) Resources_2024-11-8\01-Tools\01-Windows\Serial Terminal\Putty.exe**</u> 
 
-1、右边选择`Serial` ，表示串口模式；
+The configuration information is as follows:
 
-2、填写`COM73` ,根据自己电脑端口填写；
+1. Select `Serial` on the right to indicate the serial port mode;
 
-3、波特率填写`115200`。
+2. Fill in `COM73` according to your computer port;
+
+3. Fill in `115200` for the baud rate.
 
 ![repl2](./img/repl/repl2.png)
 
-串口号通常不会变化，我们在Save Session下方输入`27`或者自己喜欢的名称，点右边Save，在空白框里面就出现`27`字样，以后可以直接双击使用。
+The serial port number usually does not change. We enter `27` or a name we like under Save Session, click Save on the right, and the word `27` will appear in the blank box. You can double-click it to use it later.
 
 ![repl3](./img/repl/repl3.png)
 
-设置好后我们点击Open打开。按回车可以看到出现`>>>`表示等待输入命令：
+After setting, we click Open. Press Enter and you can see `>>>` appears, indicating that it is waiting for input commands:
 
 ![repl4](./img/repl/repl4.png)
 
-如果按回车没有出现`>>>`，说明开发板里面有死循环代码在运行，阻塞了REPL，这时候只需要按下键盘的Ctrl + C键即可打断在运行的程序。
+If you press Enter and no `>>>` appears, it means that there is an infinite loop code running in the development board, blocking the REPL. At this time, just press `Ctrl` + `C` on the keyboard to interrupt the running program.
 
 ![repl5](./img/repl/repl5.png)
 
-现在对话框相当于连接上了开发板上，由于CanMV K230集成了MicroPython解析器。我们在这里可以进行调试和简单编程，接下来我们测试一下。在对话框输入下面代码，按回车，可以看到代码运行情况。
+Now the dialog box is equivalent to connecting to the development board. Since CanMV K230 integrates the MicroPython parser, we can debug and do simple programming here. Next, let's test it. Enter the following code in the dialog box and press Enter to see the code running.
 
 ```python
 print("Hello 01Studio!")
@@ -43,7 +46,7 @@ print("Hello 01Studio!")
 
 ![repl6](./img/repl/repl6.png)
 
-我们再输入1+1按回车，得到了计算结果2。
+Enter 1+1 again and press Enter to get the calculation result 2.
 
 ![repl7](./img/repl/repl7.png)
 

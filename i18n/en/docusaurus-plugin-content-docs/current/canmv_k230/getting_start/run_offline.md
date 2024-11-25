@@ -2,25 +2,29 @@
 sidebar_position: 7
 ---
 
-# 代码离线运行
+# Run code offline
 
-直接在IDE里面运行功能代码是保存在开发板的RAM（内存）里面，方便调试，但断电后丢失，那么如何实现开发板上电运行我们的代码呢？方法如下：
+Running the function code directly in the IDE is saved in the RAM (memory) of the development board, which is convenient for debugging, but it is lost after power failure. So how can we run our code when the development board is powered on? The method is as follows:
 
-Micropython机制是上电默认先运行名字为boot.py文件，然后在运行main.py文件，如果没有boot.py那么直接运行main.py。
+The Micropython mechanism is to run the boot.py file by default when powered on, and then run the main.py file. If there is no boot.py, then run main.py directly.
 
 
-- boot.py: **上电第1个运行的脚本，如果代码有while True阻塞，将不会运行下面的main.py。**
+- `boot.py`: **When the first script is run after power-on, if the code has a while True block, the main.py below will not be run.**
 
-- main.py：**上电第2个运行的脚本。**
+- `main.py`：**Power on the second script to run.**
 
-也就是我们只需要将代码以boot.py或main.py文件发送到开发板，那么开发板就可以实现上电运行相关程序。
+That is, we only need to send the code to the development board in the form of boot.py or main.py file, and then the development board can be powered on and run related programs.
 
-可以将在当前CanMV K230 IDE连接开发板后将打开的例程代码以main.py发送到开发板:
+:::tip Tips
+Normally we only use main.py
+:::
+
+You can send the opened routine code to the development board as main.py after the current CanMV K230 IDE is connected to the development board:
 
 ![run_offline](./img/run_offline/run_offline1.png)
 
-保存后打开CanMV盘符，可以看到main.py放在了`CanMV\sdcard`目录下。也就是说我们可以把main.py直接拷贝过来也可以实现离线运行。**（如果main.py调用了其它python库也放到这个目录下。）**
+After saving, open the CanMV drive letter and you can see that main.py is placed in the `CanMV\sdcard` directory. This means that we can copy main.py directly and run it offline.**（If main.py calls other python libraries, put them in this directory as well.）**
 
 ![run_offline](./img/run_offline/run_offline2.png)
 
-然后关闭IDE，按下开发板复位键，代码实现了离线运行。
+Then close the IDE and press the reset button on the development board to enable the code to run offline.

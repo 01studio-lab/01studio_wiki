@@ -2,52 +2,54 @@
 sidebar_position: 3
 ---
 
-# 第1个代码测试
+# The first Demo test
 
-我们使用CanMV K230 IDE来进行我们的第一个实验，借此来熟悉开发环境。插入带镜像SD卡，将CanMV K230开发板通过type-c线连接到电脑。
+We use CanMV K230 IDE to conduct our first experiment to get familiar with the development environment. Insert the SD card with image and connect the CanMV K230 development board to the computer via a type-c cable.
 
 ![demo1](./img/demo/demo1.png)
 
-我们用最简单的LED程序来测试，在CanMV K230 IDE中打开 **零一科技（01Studio）MicroPython开发套件（基于CanMV K230平台）配套资料\02-例程源码\1.基础实验\1.点亮第一个LED** 里面的led.py例程（也可以直接拖动过去），如下图所示：
+We use the simplest LED program to test, open it in CanMV K230 IDE **01Studio MicroPython Develop Kits (Base on CanMV K230) Resources_2024-11-8\02-Codes\1.Basic Examples\1.LED** led.py demo（You can also drag it to the IDE directly），As shown in the figure below：
 
-（这里暂时不对代码进行讲解，后面章节会有详细讲解）。
+（The code will not be explained here for the time being, and will be explained in detail in the following chapters）
 
 ![demo1](./img/demo/demo1_1.png)
 
 ```python
 '''
-实验名称：点亮LED蓝灯
-版本：v1.0
-作者：01Studio
-实验平台：01科技 CanMV K230
-社区：wiki.01studio.cc
+'''
+Demo Name：Light up the Blue LED
+Version：v1.0
+Author：01Studio
+Platform：01Studio CanMV K230
+Tutorial：wiki.01studio.cc
 '''
 
-from machine import Pin #导入Pin模块
+from machine import Pin 
 from machine import FPIOA
 import time
 
+#Configure GPIO52 as a normal GPIO
 fpioa = FPIOA()
 fpioa.set_function(52,FPIOA.GPIO52)
 
-LED=Pin(52,Pin.OUT) #构建led对象，GPIO52,输出
-LED.value(1) #点亮LED，也可以使用led.on()
+LED=Pin(52,Pin.OUT) #Construct LED object, GPIO52, output
+LED.value(1) #To turn on the LED, you can also use led.on()
 ```
 
 ![demo2](./img/demo/demo2.png)
 
-接下来我们需要连接开发板，。点击左下角连接按钮：
+Next we need to connect the development board, click the connect button in the lower left corner:
 
 ![demo3](./img/demo/demo3.png)
 
-连接成功后，运行按钮变成绿色。
+After the connection is successful, the Run button turns green.
 
 ![demo5](./img/demo/demo5.png)
 
-当前的例程是点亮LED蓝灯，我们点击绿色按键“运行”按钮，当看到CanMV K230开发板上的蓝灯亮时，说明代码运行成功:
+The current routine is to light up the blue LED. We click the green "Run" button. When the blue light on the CanMV K230 development board is on, it means the code is running successfully:
 
 ![demo6](./img/demo/demo6.png)
 
-点击运行按钮旁边的`串口终端`窗口，这里可以看到代码调试信息。
+Click the `Serial Terminal` window next to the Run button, where you can see the code debugging information.
 
 ![demo6](./img/demo/demo7.png)

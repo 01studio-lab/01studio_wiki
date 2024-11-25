@@ -1,17 +1,17 @@
 ---
 sidebar_position: 1
 ---
+ 
+# CanMV K230 IDE installation
 
-# CanMV K230 IDE开发软件安装
-
-CanMV拥有自己官方的IDE，需要注意的是K210和K230使用不同的IDE开发，CanMV K230 IDE安装包位于 **零一科技（01Studio）MicroPython开发套件（基于CanMV K230平台）配套资料\01-开发工具\01-Windows\CanMV IDE K230开发软件** 文件夹下：
+CanMV has its own official IDE. It should be noted that K210 and K230 use different IDEs for development. The CanMV K230 IDE installation package is located at **01Studio MicroPython Develop Kits (Base on CanMV K230) Resources\01-Tools\01-Windows\CanMV IDE K230 IDE** folder：
 
 ![canmv_ide1](./img/canmv_ide/canmv_ide1.png)
 
-打开后根据提示安装即可，安装完成后如果在桌面没用找到该软件，可以在安装路径或者在系统搜索栏搜索 CanMV关键词找到该软件。注意名称为：**CanMV IDE K230**
+After opening, follow the prompts to install. If you cannot find the software on the desktop after installation, you can search for the CanMV keyword in the installation path or in the system search bar to find the software. Note that the name is:**CanMV IDE K230**
 
 ![canmv_ide2](./img/canmv_ide/canmv_ide2.png)
 
-打开软件，如下图所示，至此安装完成。
+Open the software, as shown in the figure below, and the installation is complete.
 
 ![canmv_ide3](./img/canmv_ide/canmv_ide3.png)

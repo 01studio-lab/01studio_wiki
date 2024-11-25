@@ -105,7 +105,7 @@ The standard GC2093 camera can be extended using an FPC extension cable. 24P, le
 |  :---:  | ---  |
 | Sensor  | OV5647 |
 | Resolution | 500万（K230 support up to 1080P with AI）|
-| viewing angle   | 72° | 
+| viewing angle   | 72° / 120° | 
 | Interface  | 22P-0.5mm FPC |
 
 |  Appearance Parameters |
