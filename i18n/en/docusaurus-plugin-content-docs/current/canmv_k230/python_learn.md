@@ -2,334 +2,433 @@
 sidebar_position: 4
 ---
 
-# Python3基础知识
+# Python3 Basics
 
-:::tip 提示
+:::tip Tips
 
-本章仅作为手册查阅使用，如果你有MicroPython或Python基础可以直接跳过。
+This chapter is only used as a manual reference. If you have a basic understanding of MicroPython or Python, you can skip it directly.
 
 ::: 
 
-由于python语言是学习micropython的基础，为了照顾没有python基础的朋友，我们一直在思考应该给大家提供怎么样的教程。Python相关的书籍和学习资料相信大家能在网上找到不少，所以这里整理给大家的经典的python3快速学习资料，你甚至可以使用它来当作python字典查阅！
+Since Python is the basis for learning MicroPython, we have been thinking about what kind of tutorials we should provide for those who don't have Python basics. I believe that you can find a lot of Python-related books and learning materials on the Internet, so here we organize classic Python3 quick learning materials for you, you can even use it as a Python dictionary!
 
-【10分钟快速熟悉Python3, 原著：Louie Dinh，翻译：Geoff Liu】
+[Get familiar with Python 3 in 10 minutes, original author: Louie Dinh]
+
 ```python
-# 用井字符开头的是单行注释
+# Single line comments start with a number symbol.
 
-""" 多行字符串用三个引号
-    包裹，也常被用来做多
-    行注释
+""" Multiline strings can be written
+    using three "s, and are often used
+    as documentation.
 """
 ```
-## 原始数据类型和运算符
+## Primitive Datatypes and Operators
 
 ```python
 ####################################################
-## 1. 原始数据类型和运算符
+## 1. Primitive Datatypes and Operators
 ####################################################
 
-# 整数
+# You have numbers
 3  # => 3
 
-# 算术没有什么出乎意料的
-1 + 1  # => 2
-8 - 1  # => 7
+# Math is what you would expect
+1 + 1   # => 2
+8 - 1   # => 7
 10 * 2  # => 20
-
-# 但是除法例外，会自动转换成浮点数
 35 / 5  # => 7.0
-5 / 3  # => 1.6666666666666667
 
-# 整数除法的结果都是向下取整
-5 // 3     # => 1
-5.0 // 3.0 # => 1.0 # 浮点数也可以
--5 // 3  # => -2
--5.0 // 3.0 # => -2.0
+# Floor division rounds towards negative infinity
+5 // 3       # => 1
+-5 // 3      # => -2
+5.0 // 3.0   # => 1.0  # works on floats too
+-5.0 // 3.0  # => -2.0
 
-# 浮点数的运算结果也是浮点数
-3 * 2.0 # => 6.0
+# The result of division is always a float
+10.0 / 3  # => 3.3333333333333335
 
-# 模除
-7 % 3 # => 1
+# Modulo operation
+7 % 3   # => 1
+# i % j have the same sign as j, unlike C
+-7 % 3  # => 2
 
-# x的y次方
-2**4 # => 16
+# Exponentiation (x**y, x to the yth power)
+2**3  # => 8
 
-# 用括号决定优先级
+# Enforce precedence with parentheses
+1 + 3 * 2    # => 7
 (1 + 3) * 2  # => 8
 
-# 布尔值
-True
-False
+# Boolean values are primitives (Note: the capitalization)
+True   # => True
+False  # => False
 
-# 用not取非
-not True  # => False
+# negate with not
+not True   # => False
 not False  # => True
 
-# 逻辑运算符，注意and和or都是小写
-True and False # => False
-False or True # => True
+# Boolean Operators
+# Note "and" and "or" are case-sensitive
+True and False  # => False
+False or True   # => True
 
-# 整数也可以当作布尔值
-0 and 2 # => 0
--5 or 0 # => -5
-0 == False # => True
-2 == True # => False
-1 == True # => True
+# True and False are actually 1 and 0 but with different keywords
+True + True  # => 2
+True * 8     # => 8
+False - 5    # => -5
 
-# 用==判断相等
+# Comparison operators look at the numerical value of True and False
+0 == False   # => True
+2 > True     # => True
+2 == True    # => False
+-5 != False  # => True
+
+# None, 0, and empty strings/lists/dicts/tuples/sets all evaluate to False.
+# All other values are True
+bool(0)      # => False
+bool("")     # => False
+bool([])     # => False
+bool({})     # => False
+bool(())     # => False
+bool(set())  # => False
+bool(4)      # => True
+bool(-6)     # => True
+
+# Using boolean logical operators on ints casts them to booleans for evaluation,
+# but their non-cast value is returned. Don't mix up with bool(ints) and bitwise
+# and/or (&,|)
+bool(0)   # => False
+bool(2)   # => True
+0 and 2   # => 0
+bool(-5)  # => True
+bool(2)   # => True
+-5 or 0   # => -5
+
+# Equality is ==
 1 == 1  # => True
 2 == 1  # => False
 
-# 用!=判断不等
+# Inequality is !=
 1 != 1  # => False
 2 != 1  # => True
 
-# 比较大小
+# More comparisons
 1 < 10  # => True
 1 > 10  # => False
 2 <= 2  # => True
 2 >= 2  # => True
 
-# 大小比较可以连起来！
+# Seeing whether a value is in a range
+1 < 2 and 2 < 3  # => True
+2 < 3 and 3 < 2  # => False
+# Chaining makes this look nicer
 1 < 2 < 3  # => True
 2 < 3 < 2  # => False
 
-# 字符串用单引双引都可以
-"这是个字符串"
-'这也是个字符串'
+# (is vs. ==) is checks if two variables refer to the same object, but == checks
+# if the objects pointed to have the same values.
+a = [1, 2, 3, 4]  # Point a at a new list, [1, 2, 3, 4]
+b = a             # Point b at what a is pointing to
+b is a            # => True, a and b refer to the same object
+b == a            # => True, a's and b's objects are equal
+b = [1, 2, 3, 4]  # Point b at a new list, [1, 2, 3, 4]
+b is a            # => False, a and b do not refer to the same object
+b == a            # => True, a's and b's objects are equal
 
-# 用加号连接字符串
+# Strings are created with " or '
+"This is a string."
+'This is also a string.'
+
+# Strings can be added too
 "Hello " + "world!"  # => "Hello world!"
+# String literals (but not variables) can be concatenated without using '+'
+"Hello " "world!"    # => "Hello world!"
 
-# 字符串可以被当作字符列表
-"This is a string"[0]  # => 'T'
+# A string can be treated like a list of characters
+"Hello world!"[0]  # => 'H'
 
-# 用.format来格式化字符串
-"{} can be {}".format("strings", "interpolated")
+# You can find the length of a string
+len("This is a string")  # => 16
 
-# 可以重复参数以节省时间
-"{0} be nimble, {0} be quick, {0} jump over the {1}".format("Jack", "candle stick")
-# => "Jack be nimble, Jack be quick, Jack jump over the candle stick"
+# Since Python 3.6, you can use f-strings or formatted string literals.
+name = "Reiko"
+f"She said her name is {name}."  # => "She said her name is Reiko"
+# Any valid Python expression inside these braces is returned to the string.
+f"{name} is {len(name)} characters long."  # => "Reiko is 5 characters long."
 
-# 如果不想数参数，可以用关键字
-"{name} wants to eat {food}".format(name="Bob", food="lasagna") 
-# => "Bob wants to eat lasagna"
-
-# 如果你的Python3程序也要在Python2.5以下环境运行，也可以用老式的格式化语法
-"%s can be %s the %s way" % ("strings", "interpolated", "old")
-
-# None是一个对象
+# None is an object
 None  # => None
 
-# 当与None进行比较时不要用 ==，要用is。is是用来比较两个变量是否指向同一个对象。
+# Don't use the equality "==" symbol to compare objects to None
+# Use "is" instead. This checks for equality of object identity.
 "etc" is None  # => False
-None is None  # => True
-
-# None，0，空字符串，空列表，空字典都算是False
-# 所有其他值都是True
-bool(0)  # => False
-bool("")  # => False
-bool([]) # => False
-bool({}) # => False
+None is None   # => True
 ```
 
-## 变量和集合
+## Variables and Collections
 
 ```python
 
 ####################################################
-## 2. 变量和集合
+## 2. Variables and Collections
 ####################################################
 
-# print是内置的打印函数
-print("I'm Python. Nice to meet you!")
+# Python has a print function
+print("I'm Python. Nice to meet you!")  # => I'm Python. Nice to meet you!
 
-# 在给变量赋值前不用提前声明
-# 传统的变量命名是小写，用下划线分隔单词
+# By default the print function also prints out a newline at the end.
+# Use the optional argument end to change the end string.
+print("Hello, World", end="!")  # => Hello, World!
+
+# Simple way to get input data from console
+input_string_var = input("Enter some data: ")  # Returns the data as a string
+
+# There are no declarations, only assignments.
+# Convention in naming variables is snake_case style
 some_var = 5
 some_var  # => 5
 
-# 访问未赋值的变量会抛出异常
-# 参考流程控制一段来学习异常处理
-some_unknown_var  # 抛出NameError
+# Accessing a previously unassigned variable is an exception.
+# See Control Flow to learn more about exception handling.
+some_unknown_var  # Raises a NameError
 
-# 用列表(list)储存序列
+# if can be used as an expression
+# Equivalent of C's '?:' ternary operator
+"yay!" if 0 > 1 else "nay!"  # => "nay!"
+
+# Lists store sequences
 li = []
-# 创建列表时也可以同时赋给元素
+# You can start with a prefilled list
 other_li = [4, 5, 6]
 
-# 用append在列表最后追加元素
-li.append(1)    # li现在是[1]
-li.append(2)    # li现在是[1, 2]
-li.append(4)    # li现在是[1, 2, 4]
-li.append(3)    # li现在是[1, 2, 4, 3]
-# 用pop从列表尾部删除
-li.pop()        # => 3 且li现在是[1, 2, 4]
-# 把3再放回去
-li.append(3)    # li变回[1, 2, 4, 3]
+# Add stuff to the end of a list with append
+li.append(1)    # li is now [1]
+li.append(2)    # li is now [1, 2]
+li.append(4)    # li is now [1, 2, 4]
+li.append(3)    # li is now [1, 2, 4, 3]
+# Remove from the end with pop
+li.pop()        # => 3 and li is now [1, 2, 4]
+# Let's put it back
+li.append(3)    # li is now [1, 2, 4, 3] again.
 
-# 列表存取跟数组一样
-li[0]  # => 1
-# 取出最后一个元素
+# Access a list like you would any array
+li[0]   # => 1
+# Look at the last element
 li[-1]  # => 3
 
-# 越界存取会造成IndexError
-li[4]  # 抛出IndexError
+# Looking out of bounds is an IndexError
+li[4]  # Raises an IndexError
 
-# 列表有切割语法
-li[1:3]  # => [2, 4]
-# 取尾
-li[2:]  # => [4, 3]
-# 取头
-li[:3]  # => [1, 2, 4]
-# 隔一个取一个
-li[::2]   # =>[1, 4]
-# 倒排列表
-li[::-1]   # => [3, 4, 2, 1]
-# 可以用三个参数的任何组合来构建切割
-# li[始:终:步伐]
+# You can look at ranges with slice syntax.
+# The start index is included, the end index is not
+# (It's a closed/open range for you mathy types.)
+li[1:3]   # Return list from index 1 to 3 => [2, 4]
+li[2:]    # Return list starting from index 2 => [4, 3]
+li[:3]    # Return list from beginning until index 3  => [1, 2, 4]
+li[::2]   # Return list selecting elements with a step size of 2 => [1, 4]
+li[::-1]  # Return list in reverse order => [3, 4, 2, 1]
+# Use any combination of these to make advanced slices
+# li[start:end:step]
 
-# 用del删除任何一个元素
-del li[2]   # li is now [1, 2, 3]
+# Make a one layer deep copy using slices
+li2 = li[:]  # => li2 = [1, 2, 4, 3] but (li2 is li) will result in false.
 
-# 列表可以相加
-# 注意：li和other_li的值都不变
-li + other_li   # => [1, 2, 3, 4, 5, 6]
+# Remove arbitrary elements from a list with "del"
+del li[2]  # li is now [1, 2, 3]
 
-# 用extend拼接列表
-li.extend(other_li)   # li现在是[1, 2, 3, 4, 5, 6]
+# Remove first occurrence of a value
+li.remove(2)  # li is now [1, 3]
+li.remove(2)  # Raises a ValueError as 2 is not in the list
 
-# 用in测试列表是否包含值
-1 in li   # => True
+# Insert an element at a specific index
+li.insert(1, 2)  # li is now [1, 2, 3] again
 
-# 用len取列表长度
-len(li)   # => 6
+# Get the index of the first item found matching the argument
+li.index(2)  # => 1
+li.index(4)  # Raises a ValueError as 4 is not in the list
+
+# You can add lists
+# Note: values for li and for other_li are not modified.
+li + other_li  # => [1, 2, 3, 4, 5, 6]
+
+# Concatenate lists with "extend()"
+li.extend(other_li)  # Now li is [1, 2, 3, 4, 5, 6]
+
+# Check for existence in a list with "in"
+1 in li  # => True
+
+# Examine the length with "len()"
+len(li)  # => 6
 
 
-# 元组是不可改变的序列
+# Tuples are like lists but are immutable.
 tup = (1, 2, 3)
-tup[0]   # => 1
-tup[0] = 3  # 抛出TypeError
+tup[0]      # => 1
+tup[0] = 3  # Raises a TypeError
 
-# 列表允许的操作元组大都可以
-len(tup)   # => 3
-tup + (4, 5, 6)   # => (1, 2, 3, 4, 5, 6)
-tup[:2]   # => (1, 2)
-2 in tup   # => True
+# Note that a tuple of length one has to have a comma after the last element but
+# tuples of other lengths, even zero, do not.
+type((1))   # => <class 'int'>
+type((1,))  # => <class 'tuple'>
+type(())    # => <class 'tuple'>
 
-# 可以把元组合列表解包，赋值给变量
-a, b, c = (1, 2, 3)     # 现在a是1，b是2，c是3
-# 元组周围的括号是可以省略的
-d, e, f = 4, 5, 6
-# 交换两个变量的值就这么简单
-e, d = d, e     # 现在d是5，e是4
+# You can do most of the list operations on tuples too
+len(tup)         # => 3
+tup + (4, 5, 6)  # => (1, 2, 3, 4, 5, 6)
+tup[:2]          # => (1, 2)
+2 in tup         # => True
+
+# You can unpack tuples (or lists) into variables
+a, b, c = (1, 2, 3)  # a is now 1, b is now 2 and c is now 3
+# You can also do extended unpacking
+a, *b, c = (1, 2, 3, 4)  # a is now 1, b is now [2, 3] and c is now 4
+# Tuples are created by default if you leave out the parentheses
+d, e, f = 4, 5, 6  # tuple 4, 5, 6 is unpacked into variables d, e and f
+# respectively such that d = 4, e = 5 and f = 6
+# Now look how easy it is to swap two values
+e, d = d, e  # d is now 5 and e is now 4
 
 
-# 用字典表达映射关系
+# Dictionaries store mappings from keys to values
 empty_dict = {}
-# 初始化的字典
+# Here is a prefilled dictionary
 filled_dict = {"one": 1, "two": 2, "three": 3}
 
-# 用[]取值
-filled_dict["one"]   # => 1
+# Note keys for dictionaries have to be immutable types. This is to ensure that
+# the key can be converted to a constant hash value for quick look-ups.
+# Immutable types include ints, floats, strings, tuples.
+invalid_dict = {[1,2,3]: "123"}  # => Yield a TypeError: unhashable type: 'list'
+valid_dict = {(1,2,3):[1,2,3]}   # Values can be of any type, however.
+
+# Look up values with []
+filled_dict["one"]  # => 1
+
+# Get all keys as an iterable with "keys()". We need to wrap the call in list()
+# to turn it into a list. We'll talk about those later.  Note - for Python
+# versions <3.7, dictionary key ordering is not guaranteed. Your results might
+# not match the example below exactly. However, as of Python 3.7, dictionary
+# items maintain the order at which they are inserted into the dictionary.
+list(filled_dict.keys())  # => ["three", "two", "one"] in Python <3.7
+list(filled_dict.keys())  # => ["one", "two", "three"] in Python 3.7+
 
 
-# 用 keys 获得所有的键。
-# 因为 keys 返回一个可迭代对象，所以在这里把结果包在 list 里。我们下面会详细介绍可迭代。
-# 注意：字典键的顺序是不定的，你得到的结果可能和以下不同。
-list(filled_dict.keys())   # => ["three", "two", "one"]
+# Get all values as an iterable with "values()". Once again we need to wrap it
+# in list() to get it out of the iterable. Note - Same as above regarding key
+# ordering.
+list(filled_dict.values())  # => [3, 2, 1]  in Python <3.7
+list(filled_dict.values())  # => [1, 2, 3] in Python 3.7+
 
+# Check for existence of keys in a dictionary with "in"
+"one" in filled_dict  # => True
+1 in filled_dict      # => False
 
-# 用values获得所有的值。跟keys一样，要用list包起来，顺序也可能不同。
-list(filled_dict.values())   # => [3, 2, 1]
+# Looking up a non-existing key is a KeyError
+filled_dict["four"]  # KeyError
 
-
-# 用in测试一个字典是否包含一个键
-"one" in filled_dict   # => True
-1 in filled_dict   # => False
-
-# 访问不存在的键会导致KeyError
-filled_dict["four"]   # KeyError
-
-# 用get来避免KeyError
-filled_dict.get("one")   # => 1
-filled_dict.get("four")   # => None
-# 当键不存在的时候get方法可以返回默认值
+# Use "get()" method to avoid the KeyError
+filled_dict.get("one")      # => 1
+filled_dict.get("four")     # => None
+# The get method supports a default argument when the value is missing
 filled_dict.get("one", 4)   # => 1
-filled_dict.get("four", 4)   # => 4
+filled_dict.get("four", 4)  # => 4
 
-# setdefault方法只有当键不存在的时候插入新值
-filled_dict.setdefault("five", 5)  # filled_dict["five"]设为5
-filled_dict.setdefault("five", 6)  # filled_dict["five"]还是5
+# "setdefault()" inserts into a dictionary only if the given key isn't present
+filled_dict.setdefault("five", 5)  # filled_dict["five"] is set to 5
+filled_dict.setdefault("five", 6)  # filled_dict["five"] is still 5
 
-# 字典赋值
-filled_dict.update({"four":4}) # => {"one": 1, "two": 2, "three": 3, "four": 4}
-filled_dict["four"] = 4  # 另一种赋值方法
+# Adding to a dictionary
+filled_dict.update({"four":4})  # => {"one": 1, "two": 2, "three": 3, "four": 4}
+filled_dict["four"] = 4         # another way to add to dict
 
-# 用del删除
-del filled_dict["one"]  # 从filled_dict中把one删除
+# Remove keys from a dictionary with del
+del filled_dict["one"]  # Removes the key "one" from filled dict
+
+# From Python 3.5 you can also use the additional unpacking options
+{"a": 1, **{"b": 2}}  # => {'a': 1, 'b': 2}
+{"a": 1, **{"a": 2}}  # => {'a': 2}
 
 
-# 用set表达集合
+# Sets store ... well sets
 empty_set = set()
-# 初始化一个集合，语法跟字典相似。
-some_set = {1, 1, 2, 2, 3, 4}   # some_set现在是{1, 2, 3, 4}
+# Initialize a set with a bunch of values.
+some_set = {1, 1, 2, 2, 3, 4}  # some_set is now {1, 2, 3, 4}
 
-# 可以把集合赋值于变量
+# Similar to keys of a dictionary, elements of a set have to be immutable.
+invalid_set = {[1], 1}  # => Raises a TypeError: unhashable type: 'list'
+valid_set = {(1,), 1}
+
+# Add one more item to the set
 filled_set = some_set
+filled_set.add(5)  # filled_set is now {1, 2, 3, 4, 5}
+# Sets do not have duplicate elements
+filled_set.add(5)  # it remains as before {1, 2, 3, 4, 5}
 
-# 为集合添加元素
-filled_set.add(5)   # filled_set现在是{1, 2, 3, 4, 5}
-
-# & 取交集
+# Do set intersection with &
 other_set = {3, 4, 5, 6}
-filled_set & other_set   # => {3, 4, 5}
+filled_set & other_set  # => {3, 4, 5}
 
-# | 取并集
-filled_set | other_set   # => {1, 2, 3, 4, 5, 6}
+# Do set union with |
+filled_set | other_set  # => {1, 2, 3, 4, 5, 6}
 
-# - 取补集
-{1, 2, 3, 4} - {2, 3, 5}   # => {1, 4}
+# Do set difference with -
+{1, 2, 3, 4} - {2, 3, 5}  # => {1, 4}
 
-# in 测试集合是否包含元素
+# Do set symmetric difference with ^
+{1, 2, 3, 4} ^ {2, 3, 5}  # => {1, 4, 5}
+
+# Check if set on the left is a superset of set on the right
+{1, 2} >= {1, 2, 3}  # => False
+
+# Check if set on the left is a subset of set on the right
+{1, 2} <= {1, 2, 3}  # => True
+
+# Check for existence in a set with in
 2 in filled_set   # => True
-10 in filled_set   # => False
+10 in filled_set  # => False
+
+# Make a one layer deep copy
+filled_set = some_set.copy()  # filled_set is {1, 2, 3, 4, 5}
+filled_set is some_set        # => False
 
 ```
 
-## 流程控制和迭代器
+## Control Flow and Iterables
+
 ```python
+
 ####################################################
-## 3. 流程控制和迭代器
+## 3. Control Flow and Iterables
 ####################################################
 
-# 先随便定义一个变量
+# Let's just make a variable
 some_var = 5
 
-# 这是个if语句。注意缩进在Python里是有意义的
-# 印出"some_var比10小"
+# Here is an if statement. Indentation is significant in Python!
+# Convention is to use four spaces, not tabs.
+# This prints "some_var is smaller than 10"
 if some_var > 10:
-    print("some_var比10大")
-elif some_var < 10:    # elif句是可选的
-    print("some_var比10小")
-else:                  # else也是可选的
-    print("some_var就是10")
+    print("some_var is totally bigger than 10.")
+elif some_var < 10:    # This elif clause is optional.
+    print("some_var is smaller than 10.")
+else:                  # This is optional too.
+    print("some_var is indeed 10.")
 
 
 """
-用for循环语句遍历列表
-打印:
+For loops iterate over lists
+prints:
     dog is a mammal
     cat is a mammal
     mouse is a mammal
 """
 for animal in ["dog", "cat", "mouse"]:
+    # You can use format() to interpolate formatted strings
     print("{} is a mammal".format(animal))
 
 """
-"range(number)"返回数字列表从0到给的数字
-打印:
+"range(number)" returns an iterable of numbers
+from zero up to (but excluding) the given number
+prints:
     0
     1
     2
@@ -339,8 +438,41 @@ for i in range(4):
     print(i)
 
 """
-while循环直到条件不满足
-打印:
+"range(lower, upper)" returns an iterable of numbers
+from the lower number to the upper number
+prints:
+    4
+    5
+    6
+    7
+"""
+for i in range(4, 8):
+    print(i)
+
+"""
+"range(lower, upper, step)" returns an iterable of numbers
+from the lower number to the upper number, while incrementing
+by step. If step is not indicated, the default value is 1.
+prints:
+    4
+    6
+"""
+for i in range(4, 8, 2):
+    print(i)
+
+"""
+Loop over a list to retrieve both the index and the value of each list item:
+    0 dog
+    1 cat
+    2 mouse
+"""
+animals = ["dog", "cat", "mouse"]
+for i, value in enumerate(animals):
+    print(i, value)
+
+"""
+While loops go until a condition is no longer met.
+prints:
     0
     1
     2
@@ -349,87 +481,124 @@ while循环直到条件不满足
 x = 0
 while x < 4:
     print(x)
-    x += 1  # x = x + 1 的简写
+    x += 1  # Shorthand for x = x + 1
 
-# 用try/except块处理异常状况
+# Handle exceptions with a try/except block
 try:
-    # 用raise抛出异常
+    # Use "raise" to raise an error
     raise IndexError("This is an index error")
 except IndexError as e:
-    pass    # pass是无操作，但是应该在这里处理错误
+    pass                 # Refrain from this, provide a recovery (next example).
 except (TypeError, NameError):
-    pass    # 可以同时处理不同类的错误
-else:   # else语句是可选的，必须在所有的except之后
-    print("All good!")   # 只有当try运行完没有错误的时候这句才会运行
+    pass                 # Multiple exceptions can be processed jointly.
+else:                    # Optional clause to the try/except block. Must follow
+                         # all except blocks.
+    print("All good!")   # Runs only if the code in try raises no exceptions
+finally:                 # Execute under all circumstances
+    print("We can clean up resources here")
+
+# Instead of try/finally to cleanup resources you can use a with statement
+with open("myfile.txt") as f:
+    for line in f:
+        print(line)
+
+# Writing to a file
+contents = {"aa": 12, "bb": 21}
+with open("myfile1.txt", "w") as file:
+    file.write(str(contents))        # writes a string to a file
+
+import json
+with open("myfile2.txt", "w") as file:
+    file.write(json.dumps(contents))  # writes an object to a file
+
+# Reading from a file
+with open("myfile1.txt") as file:
+    contents = file.read()           # reads a string from a file
+print(contents)
+# print: {"aa": 12, "bb": 21}
+
+with open("myfile2.txt", "r") as file:
+    contents = json.load(file)       # reads a json object from a file
+print(contents)
+# print: {"aa": 12, "bb": 21}
 
 
-# Python提供一个叫做可迭代(iterable)的基本抽象。一个可迭代对象是可以被当作序列
-# 的对象。比如说上面range返回的对象就是可迭代的。
+# Python offers a fundamental abstraction called the Iterable.
+# An iterable is an object that can be treated as a sequence.
+# The object returned by the range function, is an iterable.
 
 filled_dict = {"one": 1, "two": 2, "three": 3}
 our_iterable = filled_dict.keys()
-print(our_iterable) # => dict_keys(['one', 'two', 'three'])，是一个实现可迭代接口的对象
+print(our_iterable)  # => dict_keys(['one', 'two', 'three']). This is an object
+                     # that implements our Iterable interface.
 
-# 可迭代对象可以遍历
+# We can loop over it.
 for i in our_iterable:
-    print(i)    # 打印 one, two, three
+    print(i)  # Prints one, two, three
 
-# 但是不可以随机访问
-our_iterable[1]  # 抛出TypeError
+# However we cannot address elements by index.
+our_iterable[1]  # Raises a TypeError
 
-# 可迭代对象知道怎么生成迭代器
+# An iterable is an object that knows how to create an iterator.
 our_iterator = iter(our_iterable)
 
-# 迭代器是一个可以记住遍历的位置的对象
-# 用__next__可以取得下一个元素
-our_iterator.__next__()  # => "one"
+# Our iterator is an object that can remember the state as we traverse through
+# it. We get the next object with "next()".
+next(our_iterator)  # => "one"
 
-# 再一次调取__next__时会记得位置
-our_iterator.__next__()  # => "two"
-our_iterator.__next__()  # => "three"
+# It maintains state as we iterate.
+next(our_iterator)  # => "two"
+next(our_iterator)  # => "three"
 
-# 当迭代器所有元素都取出后，会抛出StopIteration
-our_iterator.__next__() # 抛出StopIteration
+# After the iterator has returned all of its data, it raises a
+# StopIteration exception
+next(our_iterator)  # Raises StopIteration
 
-# 可以用list一次取出迭代器所有的元素
-list(filled_dict.keys())  # => Returns ["one", "two", "three"]
+# We can also loop over it, in fact, "for" does this implicitly!
+our_iterator = iter(our_iterable)
+for i in our_iterator:
+    print(i)  # Prints one, two, three
+
+# You can grab all the elements of an iterable or iterator by call of list().
+list(our_iterable)  # => Returns ["one", "two", "three"]
+list(our_iterator)  # => Returns [] because state is saved
 ```
 
-## 函数
+## Functions
 ```python
 
 ####################################################
-## 4. 函数
+## 4. Functions
 ####################################################
 
-# 用def定义新函数
+# Use "def" to create new functions
 def add(x, y):
     print("x is {} and y is {}".format(x, y))
-    return x + y    # 用return语句返回
+    return x + y  # Return values with a return statement
 
-# 调用函数
-add(5, 6)   # => 印出"x is 5 and y is 6"并且返回11
+# Calling functions with parameters
+add(5, 6)  # => prints out "x is 5 and y is 6" and returns 11
 
-# 也可以用关键字参数来调用函数
-add(y=6, x=5)   # 关键字参数可以用任何顺序
+# Another way to call functions is with keyword arguments
+add(y=6, x=5)  # Keyword arguments can arrive in any order.
 
-
-# 我们可以定义一个可变参数函数
+# You can define functions that take a variable number of
+# positional arguments
 def varargs(*args):
     return args
 
-varargs(1, 2, 3)   # => (1, 2, 3)
+varargs(1, 2, 3)  # => (1, 2, 3)
 
-
-# 我们也可以定义一个关键字可变参数函数
+# You can define functions that take a variable number of
+# keyword arguments, as well
 def keyword_args(**kwargs):
     return kwargs
 
-# 我们来看看结果是什么：
-keyword_args(big="foot", loch="ness")   # => {"big": "foot", "loch": "ness"}
+# Let's call it to see what happens
+keyword_args(big="foot", loch="ness")  # => {"big": "foot", "loch": "ness"}
 
 
-# 这两种可变参数可以混着用
+# You can do both at once, if you like
 def all_the_args(*args, **kwargs):
     print(args)
     print(kwargs)
@@ -439,32 +608,51 @@ all_the_args(1, 2, a=3, b=4) prints:
     {"a": 3, "b": 4}
 """
 
-# 调用可变参数函数时可以做跟上面相反的，用*展开序列，用**展开字典。
+# When calling functions, you can do the opposite of args/kwargs!
+# Use * to expand args (tuples) and use ** to expand kwargs (dictionaries).
 args = (1, 2, 3, 4)
 kwargs = {"a": 3, "b": 4}
-all_the_args(*args)   # 相当于 foo(1, 2, 3, 4)
-all_the_args(**kwargs)   # 相当于 foo(a=3, b=4)
-all_the_args(*args, **kwargs)   # 相当于 foo(1, 2, 3, 4, a=3, b=4)
+all_the_args(*args)            # equivalent: all_the_args(1, 2, 3, 4)
+all_the_args(**kwargs)         # equivalent: all_the_args(a=3, b=4)
+all_the_args(*args, **kwargs)  # equivalent: all_the_args(1, 2, 3, 4, a=3, b=4)
 
+# Returning multiple values (with tuple assignments)
+def swap(x, y):
+    return y, x  # Return multiple values as a tuple without the parenthesis.
+                 # (Note: parenthesis have been excluded but can be included)
 
-# 函数作用域
+x = 1
+y = 2
+x, y = swap(x, y)     # => x = 2, y = 1
+# (x, y) = swap(x,y)  # Again the use of parenthesis is optional.
+
+# global scope
 x = 5
 
-def setX(num):
-    # 局部作用域的x和全局域的x是不同的
-    x = num # => 43
-    print (x) # => 43
+def set_x(num):
+    # local scope begins here
+    # local var x not the same as global var x
+    x = num    # => 43
+    print(x)   # => 43
 
-def setGlobalX(num):
+def set_global_x(num):
+    # global indicates that particular var lives in the global scope
     global x
-    print (x) # => 5
-    x = num # 现在全局域的x被赋值
-    print (x) # => 6
+    print(x)   # => 5
+    x = num    # global var x is now set to 6
+    print(x)   # => 6
 
-setX(43)
-setGlobalX(6)
+set_x(43)
+set_global_x(6)
+"""
+prints:
+    43
+    5
+    6
+"""
 
-# 函数在Python是一等公民
+
+# Python has first class functions
 def create_adder(x):
     def adder(y):
         return x + y
@@ -473,159 +661,461 @@ def create_adder(x):
 add_10 = create_adder(10)
 add_10(3)   # => 13
 
-# 也有匿名函数
-(lambda x: x > 2)(3)   # => True
+# Closures in nested functions:
+# We can use the nonlocal keyword to work with variables in nested scope which shouldn't be declared in the inner functions.
+def create_avg():
+    total = 0
+    count = 0
+    def avg(n):
+        nonlocal total, count
+        total += n
+        count += 1
+        return total/count
+    return avg
+avg = create_avg()
+avg(3)  # => 3.0
+avg(5)  # (3+5)/2 => 4.0
+avg(7)  # (8+7)/3 => 5.0
 
-# 内置的高阶函数
-map(add_10, [1, 2, 3])   # => [11, 12, 13]
-filter(lambda x: x > 5, [3, 4, 5, 6, 7])   # => [6, 7]
+# There are also anonymous functions
+(lambda x: x > 2)(3)                  # => True
+(lambda x, y: x ** 2 + y ** 2)(2, 1)  # => 5
 
-# 用列表推导式可以简化映射和过滤。列表推导式的返回值是另一个列表。
-[add_10(i) for i in [1, 2, 3]]  # => [11, 12, 13]
-[x for x in [3, 4, 5, 6, 7] if x > 5]   # => [6, 7]
+# There are built-in higher order functions
+list(map(add_10, [1, 2, 3]))          # => [11, 12, 13]
+list(map(max, [1, 2, 3], [4, 2, 1]))  # => [4, 2, 3]
+
+list(filter(lambda x: x > 5, [3, 4, 5, 6, 7]))  # => [6, 7]
+
+# We can use list comprehensions for nice maps and filters
+# List comprehension stores the output as a list (which itself may be nested).
+[add_10(i) for i in [1, 2, 3]]         # => [11, 12, 13]
+[x for x in [3, 4, 5, 6, 7] if x > 5]  # => [6, 7]
+
+# You can construct set and dict comprehensions as well.
+{x for x in "abcddeef" if x not in "abc"}  # => {'d', 'e', 'f'}
+{x: x**2 for x in range(5)}  # => {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
 
 ```
 
-## 类
+## Modules
 ```python
 
 ####################################################
-## 5. 类
+## 5. Modules
 ####################################################
 
+# You can import modules
+import math
+print(math.sqrt(16))  # => 4.0
 
-# 定义一个继承object的类
-class Human(object):
+# You can get specific functions from a module
+from math import ceil, floor
+print(ceil(3.7))   # => 4
+print(floor(3.7))  # => 3
 
-    # 类属性，被所有此类的实例共用。
+# You can import all functions from a module.
+# Warning: this is not recommended
+from math import *
+
+# You can shorten module names
+import math as m
+math.sqrt(16) == m.sqrt(16)  # => True
+
+# Python modules are just ordinary Python files. You
+# can write your own, and import them. The name of the
+# module is the same as the name of the file.
+
+# You can find out which functions and attributes
+# are defined in a module.
+import math
+dir(math)
+
+# If you have a Python script named math.py in the same
+# folder as your current script, the file math.py will
+# be loaded instead of the built-in Python module.
+# This happens because the local folder has priority
+# over Python's built-in libraries.
+```
+
+## Classes
+
+```python
+####################################################
+## 6. Classes
+####################################################
+
+# We use the "class" statement to create a class
+class Human:
+
+    # A class attribute. It is shared by all instances of this class
     species = "H. sapiens"
 
-    # 构造方法，当实例被初始化时被调用。注意名字前后的双下划线，这是表明这个属
-    # 性或方法对Python有特殊意义，但是允许用户自行定义。你自己取名时不应该用这
-    # 种格式。
+    # Basic initializer, this is called when this class is instantiated.
+    # Note that the double leading and trailing underscores denote objects
+    # or attributes that are used by Python but that live in user-controlled
+    # namespaces. Methods(or objects or attributes) like: __init__, __str__,
+    # __repr__ etc. are called special methods (or sometimes called dunder
+    # methods). You should not invent such names on your own.
     def __init__(self, name):
         # Assign the argument to the instance's name attribute
         self.name = name
 
-    # 实例方法，第一个参数总是self，就是这个实例对象
-    def say(self, msg):
-        return "{name}: {message}".format(name=self.name, message=msg)
+        # Initialize property
+        self._age = 0   # the leading underscore indicates the "age" property is
+                        # intended to be used internally
+                        # do not rely on this to be enforced: it's a hint to other devs
 
-    # 类方法，被所有此类的实例共用。第一个参数是这个类对象。
+    # An instance method. All methods take "self" as the first argument
+    def say(self, msg):
+        print("{name}: {message}".format(name=self.name, message=msg))
+
+    # Another instance method
+    def sing(self):
+        return "yo... yo... microphone check... one two... one two..."
+
+    # A class method is shared among all instances
+    # They are called with the calling class as the first argument
     @classmethod
     def get_species(cls):
         return cls.species
 
-    # 静态方法。调用时没有实例或类的绑定。
+    # A static method is called without a class or instance reference
     @staticmethod
     def grunt():
         return "*grunt*"
 
+    # A property is just like a getter.
+    # It turns the method age() into a read-only attribute of the same name.
+    # There's no need to write trivial getters and setters in Python, though.
+    @property
+    def age(self):
+        return self._age
 
-# 构造一个实例
-i = Human(name="Ian")
-print(i.say("hi"))     # 印出 "Ian: hi"
+    # This allows the property to be set
+    @age.setter
+    def age(self, age):
+        self._age = age
 
-j = Human("Joel")
-print(j.say("hello"))  # 印出 "Joel: hello"
+    # This allows the property to be deleted
+    @age.deleter
+    def age(self):
+        del self._age
 
-# 调用一个类方法
-i.get_species()   # => "H. sapiens"
 
-# 改一个共用的类属性
-Human.species = "H. neanderthalensis"
-i.get_species()   # => "H. neanderthalensis"
-j.get_species()   # => "H. neanderthalensis"
+# When a Python interpreter reads a source file it executes all its code.
+# This __name__ check makes sure this code block is only executed when this
+# module is the main program.
+if __name__ == "__main__":
+    # Instantiate a class
+    i = Human(name="Ian")
+    i.say("hi")                     # "Ian: hi"
+    j = Human("Joel")
+    j.say("hello")                  # "Joel: hello"
+    # i and j are instances of type Human; i.e., they are Human objects.
 
-# 调用静态方法
-Human.grunt()   # => "*grunt*"
+    # Call our class method
+    i.say(i.get_species())          # "Ian: H. sapiens"
+    # Change the shared attribute
+    Human.species = "H. neanderthalensis"
+    i.say(i.get_species())          # => "Ian: H. neanderthalensis"
+    j.say(j.get_species())          # => "Joel: H. neanderthalensis"
+
+    # Call the static method
+    print(Human.grunt())            # => "*grunt*"
+
+    # Static methods can be called by instances too
+    print(i.grunt())                # => "*grunt*"
+
+    # Update the property for this instance
+    i.age = 42
+    # Get the property
+    i.say(i.age)                    # => "Ian: 42"
+    j.say(j.age)                    # => "Joel: 0"
+    # Delete the property
+    del i.age
+    # i.age                         # => this would raise an AttributeError
+```
+### Inheritance
+
+```python
+####################################################
+## 6.1 Inheritance
+####################################################
+
+# Inheritance allows new child classes to be defined that inherit methods and
+# variables from their parent class.
+
+# Using the Human class defined above as the base or parent class, we can
+# define a child class, Superhero, which inherits variables like "species",
+# "name", and "age", as well as methods, like "sing" and "grunt"
+# from the Human class, but can also have its own unique properties.
+
+# To take advantage of modularization by file you could place the classes above
+# in their own files, say, human.py
+
+# To import functions from other files use the following format
+# from "filename-without-extension" import "function-or-class"
+
+from human import Human
+
+
+# Specify the parent class(es) as parameters to the class definition
+class Superhero(Human):
+
+    # If the child class should inherit all of the parent's definitions without
+    # any modifications, you can just use the "pass" keyword (and nothing else)
+    # but in this case it is commented out to allow for a unique child class:
+    # pass
+
+    # Child classes can override their parents' attributes
+    species = "Superhuman"
+
+    # Children automatically inherit their parent class's constructor including
+    # its arguments, but can also define additional arguments or definitions
+    # and override its methods such as the class constructor.
+    # This constructor inherits the "name" argument from the "Human" class and
+    # adds the "superpower" and "movie" arguments:
+    def __init__(self, name, movie=False,
+                 superpowers=["super strength", "bulletproofing"]):
+
+        # add additional class attributes:
+        self.fictional = True
+        self.movie = movie
+        # be aware of mutable default values, since defaults are shared
+        self.superpowers = superpowers
+
+        # The "super" function lets you access the parent class's methods
+        # that are overridden by the child, in this case, the __init__ method.
+        # This calls the parent class constructor:
+        super().__init__(name)
+
+    # override the sing method
+    def sing(self):
+        return "Dun, dun, DUN!"
+
+    # add an additional instance method
+    def boast(self):
+        for power in self.superpowers:
+            print("I wield the power of {pow}!".format(pow=power))
+
+
+if __name__ == "__main__":
+    sup = Superhero(name="Tick")
+
+    # Instance type checks
+    if isinstance(sup, Human):
+        print("I am human")
+    if type(sup) is Superhero:
+        print("I am a superhero")
+
+    # Get the "Method Resolution Order" used by both getattr() and super()
+    # (the order in which classes are searched for an attribute or method)
+    # This attribute is dynamic and can be updated
+    print(Superhero.__mro__)    # => (<class '__main__.Superhero'>,
+                                # => <class 'human.Human'>, <class 'object'>)
+
+    # Calls parent method but uses its own class attribute
+    print(sup.get_species())    # => Superhuman
+
+    # Calls overridden method
+    print(sup.sing())           # => Dun, dun, DUN!
+
+    # Calls method from Human
+    sup.say("Spoon")            # => Tick: Spoon
+
+    # Call method that exists only in Superhero
+    sup.boast()                 # => I wield the power of super strength!
+                                # => I wield the power of bulletproofing!
+
+    # Inherited class attribute
+    sup.age = 31
+    print(sup.age)              # => 31
+
+    # Attribute that only exists within Superhero
+    print("Am I Oscar eligible? " + str(sup.movie))
 ```
 
-## 模块
+### Multiple Inheritance
+```python
+####################################################
+## 6.2 Multiple Inheritance
+####################################################
+
+
+# Another class definition
+# bat.py
+class Bat:
+
+    species = "Baty"
+
+    def __init__(self, can_fly=True):
+        self.fly = can_fly
+
+    # This class also has a say method
+    def say(self, msg):
+        msg = "... ... ..."
+        return msg
+
+    # And its own method as well
+    def sonar(self):
+        return "))) ... ((("
+
+
+if __name__ == "__main__":
+    b = Bat()
+    print(b.say("hello"))
+    print(b.fly)
+
+
+# And yet another class definition that inherits from Superhero and Bat
+# superhero.py
+from superhero import Superhero
+from bat import Bat
+
+# Define Batman as a child that inherits from both Superhero and Bat
+class Batman(Superhero, Bat):
+
+    def __init__(self, *args, **kwargs):
+        # Typically to inherit attributes you have to call super:
+        # super(Batman, self).__init__(*args, **kwargs)
+        # However we are dealing with multiple inheritance here, and super()
+        # only works with the next base class in the MRO list.
+        # So instead we explicitly call __init__ for all ancestors.
+        # The use of *args and **kwargs allows for a clean way to pass
+        # arguments, with each parent "peeling a layer of the onion".
+        Superhero.__init__(self, "anonymous", movie=True,
+                           superpowers=["Wealthy"], *args, **kwargs)
+        Bat.__init__(self, *args, can_fly=False, **kwargs)
+        # override the value for the name attribute
+        self.name = "Sad Affleck"
+
+    def sing(self):
+        return "nan nan nan nan nan batman!"
+
+
+if __name__ == "__main__":
+    sup = Batman()
+
+    # The Method Resolution Order
+    print(Batman.__mro__)     # => (<class '__main__.Batman'>,
+                              # => <class 'superhero.Superhero'>,
+                              # => <class 'human.Human'>,
+                              # => <class 'bat.Bat'>, <class 'object'>)
+
+    # Calls parent method but uses its own class attribute
+    print(sup.get_species())  # => Superhuman
+
+    # Calls overridden method
+    print(sup.sing())         # => nan nan nan nan nan batman!
+
+    # Calls method from Human, because inheritance order matters
+    sup.say("I agree")        # => Sad Affleck: I agree
+
+    # Call method that exists only in 2nd ancestor
+    print(sup.sonar())        # => ))) ... (((
+
+    # Inherited class attribute
+    sup.age = 100
+    print(sup.age)            # => 100
+
+    # Inherited attribute from 2nd ancestor whose default value was overridden.
+    print("Can I fly? " + str(sup.fly))  # => Can I fly? False
+```
+
+## Advanced
+
 ```python
 
 ####################################################
-## 6. 模块
+## 7. Advanced
 ####################################################
 
-# 用import导入模块
-import math
-print(math.sqrt(16))  # => 4.0
-
-# 也可以从模块中导入个别值
-from math import ceil, floor
-print(ceil(3.7))  # => 4.0
-print(floor(3.7))   # => 3.0
-
-# 可以导入一个模块中所有值
-# 警告：不建议这么做
-from math import *
-
-# 如此缩写模块名字
-import math as m
-math.sqrt(16) == m.sqrt(16)   # => True
-
-# Python模块其实就是普通的Python文件。你可以自己写，然后导入，
-# 模块的名字就是文件的名字。
-
-# 你可以这样列出一个模块里所有的值
-import math
-dir(math)
-
-```
-
-## 高级用法
-
-```python
-
-####################################################
-## 7. 高级用法
-####################################################
-
-# 用生成器(generators)方便地写惰性运算
+# Generators help you make lazy code.
 def double_numbers(iterable):
     for i in iterable:
         yield i + i
 
-# 生成器只有在需要时才计算下一个值。它们每一次循环只生成一个值，而不是把所有的
-# 值全部算好。
-#
-# range的返回值也是一个生成器，不然一个1到900000000的列表会花很多时间和内存。
-#
-# 如果你想用一个Python的关键字当作变量名，可以加一个下划线来区分。
-range_ = range(1, 900000000)
-# 当找到一个 >=30 的结果就会停
-# 这意味着 `double_numbers` 不会生成大于30的数。
-for i in double_numbers(range_):
+# Generators are memory-efficient because they only load the data needed to
+# process the next value in the iterable. This allows them to perform
+# operations on otherwise prohibitively large value ranges.
+# NOTE: `range` replaces `xrange` in Python 3.
+for i in double_numbers(range(1, 900000000)):  # `range` is a generator.
     print(i)
     if i >= 30:
         break
 
+# Just as you can create a list comprehension, you can create generator
+# comprehensions as well.
+values = (-x for x in [1,2,3,4,5])
+for x in values:
+    print(x)  # prints -1 -2 -3 -4 -5 to console/terminal
 
-# 装饰器(decorators)
-# 这个例子中，beg装饰say
-# beg会先调用say。如果返回的say_please为真，beg会改变返回的字符串。
-from functools import wraps
+# You can also cast a generator comprehension directly to a list.
+values = (-x for x in [1,2,3,4,5])
+gen_to_list = list(values)
+print(gen_to_list)  # => [-1, -2, -3, -4, -5]
 
 
-def beg(target_function):
-    @wraps(target_function)
+# Decorators are a form of syntactic sugar.
+# They make code easier to read while accomplishing clunky syntax.
+
+# Wrappers are one type of decorator.
+# They're really useful for adding logging to existing functions without needing to modify them.
+
+def log_function(func):
     def wrapper(*args, **kwargs):
-        msg, say_please = target_function(*args, **kwargs)
-        if say_please:
-            return "{} {}".format(msg, "Please! I am poor :(")
-        return msg
-
+        print("Entering function", func.__name__)
+        result = func(*args, **kwargs)
+        print("Exiting function", func.__name__)
+        return result
     return wrapper
 
+@log_function               # equivalent:
+def my_function(x,y):       # def my_function(x,y):
+    return x+y              #   return x+y
+                            # my_function = log_function(my_function)
+# The decorator @log_function tells us as we begin reading the function definition
+# for my_function that this function will be wrapped with log_function.
+# When function definitions are long, it can be hard to parse the non-decorated
+# assignment at the end of the definition.
 
-@beg
-def say(say_please=False):
-    msg = "Can you buy me a beer?"
-    return msg, say_please
+my_function(1,2)  # => "Entering function my_function"
+                  # => "3"
+                  # => "Exiting function my_function"
 
+# But there's a problem.
+# What happens if we try to get some information about my_function?
 
-print(say())  # Can you buy me a beer?
-print(say(say_please=True))  # Can you buy me a beer? Please! I am poor :(
+print(my_function.__name__)  # => 'wrapper'
+print(my_function.__code__.co_argcount)  # => 0. The argcount is 0 because both arguments in wrapper()'s signature are optional.
+
+# Because our decorator is equivalent to my_function = log_function(my_function)
+# we've replaced information about my_function with information from wrapper
+
+# Fix this using functools
+
+from functools import wraps
+
+def log_function(func):
+    @wraps(func)  # this ensures docstring, function name, arguments list, etc. are all copied
+                  # to the wrapped function - instead of being replaced with wrapper's info
+    def wrapper(*args, **kwargs):
+        print("Entering function", func.__name__)
+        result = func(*args, **kwargs)
+        print("Exiting function", func.__name__)
+        return result
+    return wrapper
+
+@log_function
+def my_function(x,y):
+    return x+y
+
+my_function(1,2)  # => "Entering function my_function"
+                  # => "3"
+                  # => "Exiting function my_function"
+
+print(my_function.__name__)  # => 'my_function'
+print(my_function.__code__.co_argcount)  # => 2
 
 ```

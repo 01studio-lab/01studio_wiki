@@ -10,36 +10,36 @@ sidebar_position: 3
 
 ## Information
 
-CanMV K230在线教程配套软件、源代码、原理图、芯片手册等。
+CanMV K230 Online tutorials supporting software, source code, schematics, chip manuals, etc.
 
 ![download](./img/download/download1.png)
 
-### 开发工具
+### Development tool software
 
-开发软件、相关驱动。
+Develop software and related drivers.
 
 ![download](./img/download/download2.png)
 
-### 例程源码
+### Example Codes
 
-本在线教程所有源代码。
+All source code for this online tutorial.
 
 ![download](./img/download/download3.png)
 
-### 镜像
+### Firmware & Image
 
-开发板镜像，烧录到SD卡插入开发板启动。
+Development board image, burn it to SD card and insert it into the development board to start.
 
 ![download](./img/download/download4.png)
 
-### 原理图和功能图
+### Schematic & Functional Description
 
-开发板原理图和接口说明图片。
+Development board schematics and interface description pictures.
 
 ![download](./img/download/download5.png)
 
-### 产品图片
+### Products Photos
 
-产品的一些拍摄图，纯粹欣赏用。
+Some pictures of the product, purely for appreciation.
 
 ![download](./img/download/download7.png)

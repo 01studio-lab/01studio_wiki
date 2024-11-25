@@ -2,26 +2,28 @@
 sidebar_position: 3
 ---
 
-# 支架安装
+# Bracket assembly
 
-01Studio CanMV K230支持3款支架安装，分别是**固定支架，角度可调节支架，高度+角度可调节支架**，方便用于小车、云台等需要固定或调节高度角度的各类场景。
+01Studio CanMV K230 Support 3 bracket installations，They are **fixed bracket, angle adjustable bracket, height + angle adjustable bracket**, which are convenient for various scenes such as cars and gimbals that need to fix or adjust the height angle.
+
+[**Click to Buy>>**](https://www.aliexpress.com/item/1005007707000572.html)
 
 ![bracket](./img/bracket/bracket1.png)
 
-- 安装到小车
+- Install on the car
 
 ![bracket](./img/bracket/car.png)
 
-## 安装方法
+## Installation Method
 
-由于支架是组装发货，因此只需要将CanMV K230下方的螺丝M2.5x6螺丝拧下：
+Since the bracket is shipped assembled, you only need to unscrew the M2.5x6 screws under the CanMV K230:
 
 ![bracket](./img/bracket/bracket2.png)
 
-将支架固定孔对准开发板固定孔，使用螺丝拧紧即可。
+Align the bracket fixing holes with the development board fixing holes and tighten them with screws.
 
 ![bracket](./img/bracket/bracket4.png)
 
-## 尺寸图
+## Size
 
 ![bracket](./img/bracket/bracket5.png)

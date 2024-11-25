@@ -2,15 +2,15 @@
 sidebar_position: 15
 ---
 
-# 更新说明
+# Update Notes
 
 ## 2024-9-11
 
-- 增加 **机器视觉 -- 摄像头** ：
+- add **Machine Vision -- Camera** ：
 
-    - [多路摄像头接口使用说明](./machine_vision/camera.md#多路摄像头接口使用) 
+    - [How to use the multi-channel camera interface](../canmv_k230/machine_vision/camera.md#multi-channel-camera-interface-usage) 
 
 
 ## 2024-8-8
 
-- 第一版正式发布 
+- The first version released. 

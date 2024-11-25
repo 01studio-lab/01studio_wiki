@@ -2,90 +2,90 @@
 sidebar_position: 2
 ---
 
-# 配件安装使用
+# Accessories installation and use
 
-本节介绍01Studio CanMV K230相关配件模块的安装和使用方法。
+This section introduces the installation and use of 01Studio CanMV K230 related accessory modules.
 
-## 散热片
+## Heat sink
 
-散热片能帮助CanMV K230更加有效散热，特别在高温的环境下实现稳定工作。安装也是很简单，将散热片底部的3M胶撕开，对准K230和内存芯片的丝印框贴上即可。由于散热片具有导电性，注意安装过程中不要与电路板其它元件（电容、电阻）接触到，避免发生短路。
+The heat sink can help CanMV K230 dissipate heat more effectively, especially in high temperature environments to achieve stable operation. Installation is also very simple. Tear off the 3M adhesive at the bottom of the heat sink and stick it on the silk screen frame of K230 and memory chip. Because the heat sink is conductive, be careful not to contact other components (capacitors, resistors) on the circuit board during installation to avoid short circuits.
 
 ![module](./img/module/module1.png)
 
 ![module](./img/module/module2.jpg)
 
-## 亚克力保护板
+## Acrylic protection plate
 
-亚克力的底板的作用是避免PCB底部跟其它金属物体接触短路，避免焊脚刮花桌面，同时底部产生了空间也提升了散热效果。
+The function of the acrylic base plate is to prevent the bottom of the PCB from short-circuiting with other metal objects and to prevent the solder pins from scratching the desktop. At the same time, the space created at the bottom also improves the heat dissipation effect.
 
-CanMV K230亚克力底板安装方法非常简单，撕掉亚克力保护膜，中间嵌套铜柱，上下两端分别用M2.5螺丝拧紧即可。
+The installation method of the CanMV K230 acrylic base plate is very simple. Tear off the acrylic protective film, embed the copper column in the middle, and tighten the upper and lower ends with M2.5 screws.
 
 ![module](./img/module/module3.png)
 
 ![module](./img/module/module4.png)
 
-## 3.5寸MIPI显示屏
+## 3.5 inch MIPI display
 
-[点击购买>>](https://item.taobao.com/item.htm?id=822563446455)
+[Click to Buy>>](https://www.aliexpress.com/item/1005007579014355.html)
 
-### 功能介绍
+### Function Introduction
 
 ![module](./img/module/lcd.png)
 
-### 产品参数
+### Product Parameters
 
-|  产品参数 |
+|  Product Parameters |
 |  :---:  | ---  |
-| 分辨率  | 800 x 480（Pixel） |
-| 接口 | MIPI 2lane|
-| 显示驱动IC  | ST7701S | 
-| 触摸面板  | FT53xx（电容触摸） |
-| 工作温度  | -20℃ ~ 70℃ |
+| Resolution  | 800 x 480（Pixel） |
+| Interface | MIPI 2lane|
+| Driver IC  | ST7701S | 
+| Touch  | FT53xx (Capacitive touch) |
+| Operating Temperature  | -20℃ ~ 70℃ |
 
-|  外观规格 |
+|  Appearance Parameters |
 |  :---:  | ---  |
-| 尺寸  | 87 x 56 mm |
-| 重量  | 52克 |
+| Size  | 87 x 56 mm |
+| weight  | 52g |
 
-### 组装说明
+### Assembly
 
-使用配套的31P排线可将CanMV K230开发板和3.5寸MIPI屏连接起来。**排线金手指触点均朝下插入，如下图所示：**
+The CanMV K230 development board and the 3.5-inch MIPI screen can be connected using the matching 31P cable. **The gold finger contacts of the cable are inserted downwards, as show in the following figure:**
 
 ![module](./img/module/module5_1.png)
 
-插入后下压锁紧卡扣：
+After insertion, press down to lock the buckle:
 
 ![module](./img/module/module5.png)
 
-组装后可以同向使用：
+It can be used in the same direction:
 
 ![module](./img/module/module6.png)
 
-也可以通过螺柱固定在开发板背面使用：
+It can also be fixed on the back of the development board using studs:
 
 ![module](./img/module/module7.png)
 
-## 摄像头
+## Camera
 
 ### GC2093
-01科技CanMV K230开发板标配GC2093摄像头（可视角70°），可以额外购买140°广角镜头版本。[**点击购买>>**](https://item.taobao.com/item.htm?id=841926094725)
+01Studio CanMV K230 development board comes standard with a GC2093 camera (70° viewing angle), and a 140° wide-angle lens version can be purchased additionally.[**Click to Buy>>**](https://item.taobao.com/item.htm?id=841926094725)
 
-|  产品参数 |
+|  Product Parameters |
 |  :---:  | ---  |
-| 感光芯片  | GC2093 |
-| 像素 | 1920X1080（1080P） |
-| 视场角  | 70° (140°可选购) | 
-| 接口  | 24P接口 |
+| Sensor  | GC2093 |
+| Resolution | 1920X1080（1080P） |
+| viewing angle | 70° (140° Available) | 
+| Interface  | 24P |
 
-|  外观规格 |
+|  Appearance Parameters |
 |  :---:  | ---  |
-| 尺寸  | 总长17mm |
+| Size  | 17mm (Total length) |
 
 ![module](./img/module/gc20931.png)
 
-### 摄像头延长线
+### Camera extension cable
 
-标配GC2093摄像头可使用FPC延长线延长。24P，长度15cm。[**点击购买>>**](https://item.taobao.com/item.htm?id=843993980296)
+The standard GC2093 camera can be extended using an FPC extension cable. 24P, length 15cm.[**Clikc to Buy>>**](https://item.taobao.com/item.htm?id=843993980296)
 
 ![module](./img/module/fpc1.png)
 
@@ -93,31 +93,31 @@ CanMV K230亚克力底板安装方法非常简单，撕掉亚克力保护膜，�
 
 ### OV5647
 
-[**点击购买>>**](https://item.taobao.com/item.htm?id=833993249110)
+[**Click to Buy>>**](https://www.aliexpress.com/item/1005007707000572.html)
 
-CanMV K230可以通过CSI0、CSI1接口外接此摄像头。[多路摄像头接口使用教程>>](../machine_vision/camera.md#多路摄像头接口使用)
+01Studio CanMV K230 can connect to the OV5647 camera with CSI0 and CSI1 interfaces. [Tutorial on how to use the multi-channel camera interface>>](../machine_vision/camera.md#multi-channel-camera-interface-usage)
 
 ![module](./img/module/ov5647_1.png)
 
-#### 产品参数
+#### Product Parameters
 
-|  产品参数 |
+|  Product Parameters |
 |  :---:  | ---  |
-| 感光芯片  | OV5647 |
-| 像素 | 500万（K230最大支持1080P）|
-| 视场角  | 72° | 
-| 接口  | 22P-0.5mm FPC |
+| Sensor  | OV5647 |
+| Resolution | 500万（K230 support up to 1080P with AI）|
+| viewing angle   | 72° | 
+| Interface  | 22P-0.5mm FPC |
 
-|  外观规格 |
+|  Appearance Parameters |
 |  :---:  | ---  |
-| 尺寸  | 6cm/15cm/30cm 长度可选 |
+| Szie  | 6cm/15cm/30cm (Optional length)  |
 
 ![module](./img/module/ov5647_2.png)
 
-## USB转以太网卡
+## USB to Ethernet Cable
 
-可选配件，适用于有需要使用以太网连接的场景。[点击购买>>](https://item.taobao.com/item.htm?id=822775353673)
+Optional accessory, suitable for scenarios where Ethernet connection is required. [Click to Buy>>](https://www.aliexpress.com/item/1005007591736465.html)
 
-[以太网有线连接使用教程](../network/ethernet.md)
+[Ethernet Wired Connection Usage Tutorial](../network/ethernet.md)
 
 ![module](./img/module/module8.jpg)

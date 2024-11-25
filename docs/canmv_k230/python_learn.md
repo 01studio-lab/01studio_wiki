@@ -485,12 +485,45 @@ filter(lambda x: x > 5, [3, 4, 5, 6, 7])   # => [6, 7]
 [x for x in [3, 4, 5, 6, 7] if x > 5]   # => [6, 7]
 
 ```
-
-## 类
+## 模块
 ```python
 
 ####################################################
-## 5. 类
+## 5. 模块
+####################################################
+
+# 用import导入模块
+import math
+print(math.sqrt(16))  # => 4.0
+
+# 也可以从模块中导入个别值
+from math import ceil, floor
+print(ceil(3.7))  # => 4.0
+print(floor(3.7))   # => 3.0
+
+# 可以导入一个模块中所有值
+# 警告：不建议这么做
+from math import *
+
+# 如此缩写模块名字
+import math as m
+math.sqrt(16) == m.sqrt(16)   # => True
+
+# Python模块其实就是普通的Python文件。你可以自己写，然后导入，
+# 模块的名字就是文件的名字。
+
+# 你可以这样列出一个模块里所有的值
+import math
+dir(math)
+
+```
+
+## 类
+
+```python
+
+####################################################
+## 6. 类
 ####################################################
 
 
@@ -540,38 +573,181 @@ j.get_species()   # => "H. neanderthalensis"
 # 调用静态方法
 Human.grunt()   # => "*grunt*"
 ```
+### 类的继承
 
-## 模块
 ```python
-
 ####################################################
-## 6. 模块
+## 6.1 类的继承
 ####################################################
 
-# 用import导入模块
-import math
-print(math.sqrt(16))  # => 4.0
+# 继承机制允许子类可以继承父类上的方法和变量。
+# 我们可以把 Human 类作为一个基础类或者说叫做父类，
+# 然后定义一个名为 Superhero 的子类来继承父类上的比如 "species"、 "name"、 "age" 的属性
+# 和比如 "sing" 、"grunt" 这样的方法，同时，也可以定义它自己独有的属性
 
-# 也可以从模块中导入个别值
-from math import ceil, floor
-print(ceil(3.7))  # => 4.0
-print(floor(3.7))   # => 3.0
+# 基于 Python 文件模块化的特点，你可以把这个类放在独立的文件中，比如说，human.py。
 
-# 可以导入一个模块中所有值
-# 警告：不建议这么做
-from math import *
+# 要从别的文件导入函数，需要使用以下的语句
+# from "filename-without-extension" import "function-or-class"
 
-# 如此缩写模块名字
-import math as m
-math.sqrt(16) == m.sqrt(16)   # => True
+from human import Human
 
-# Python模块其实就是普通的Python文件。你可以自己写，然后导入，
-# 模块的名字就是文件的名字。
+# 指定父类作为类初始化的参数
+class Superhero(Human):
 
-# 你可以这样列出一个模块里所有的值
-import math
-dir(math)
+    # 如果子类需要继承所有父类的定义，并且不需要做任何的修改，
+    # 你可以直接使用 "pass" 关键字（并且不需要其他任何语句）
+    # 但是在这个例子中会被注释掉，以用来生成不一样的子类。
+    # pass
 
+    # 子类可以重写父类定义的字段
+    species = 'Superhuman'
+
+    # 子类会自动的继承父类的构造函数包括它的参数，但同时，子类也可以新增额外的参数或者定义，
+    # 甚至去覆盖父类的方法比如说构造函数。
+    # 这个构造函数从父类 "Human" 上继承了 "name" 参数，同时又新增了 "superpower" 和
+    # "movie" 参数:
+    def __init__(self, name, movie=False,
+                 superpowers=["super strength", "bulletproofing"]):
+
+        # 新增额外类的参数
+        self.fictional = True
+        self.movie = movie
+        # 注意可变的默认值，因为默认值是共享的
+        self.superpowers = superpowers
+
+        # "super" 函数让你可以访问父类中被子类重写的方法
+        # 在这个例子中，被重写的是 __init__ 方法
+        # 这个语句是用来运行父类的构造函数:
+        super().__init__(name)
+
+    # 重写父类中的 sing 方法
+    def sing(self):
+        return 'Dun, dun, DUN!'
+
+    # 新增一个额外的方法
+    def boast(self):
+        for power in self.superpowers:
+            print("I wield the power of {pow}!".format(pow=power))
+
+
+if __name__ == '__main__':
+    sup = Superhero(name="Tick")
+
+    # 检查实例类型
+    if isinstance(sup, Human):
+        print('I am human')
+    if type(sup) is Superhero:
+        print('I am a superhero')
+
+    # 获取方法解析顺序 MRO，MRO 被用于 getattr() 和 super()
+    # 这个字段是动态的，并且可以被修改
+    print(Superhero.__mro__)    # => (<class '__main__.Superhero'>,
+                                # => <class 'human.Human'>, <class 'object'>)
+
+    # 调用父类的方法并且使用子类的属性
+    print(sup.get_species())    # => Superhuman
+
+    # 调用被重写的方法
+    print(sup.sing())           # => Dun, dun, DUN!
+
+    # 调用 Human 的方法
+    sup.say('Spoon')            # => Tick: Spoon
+
+    # 调用 Superhero 独有的方法
+    sup.boast()                 # => I wield the power of super strength!
+                                # => I wield the power of bulletproofing!
+
+    # 继承类的字段
+    sup.age = 31
+    print(sup.age)              # => 31
+
+    # Superhero 独有的字段
+    print('Am I Oscar eligible? ' + str(sup.movie))
+```
+
+### 多重继承
+
+```python
+####################################################
+## 6.2 多重继承
+####################################################
+
+# 定义另一个类
+# bat.py
+class Bat:
+
+    species = 'Baty'
+
+    def __init__(self, can_fly=True):
+        self.fly = can_fly
+
+    # 这个类同样有 say 的方法
+    def say(self, msg):
+        msg = '... ... ...'
+        return msg
+
+    # 新增一个独有的方法
+    def sonar(self):
+        return '))) ... ((('
+
+if __name__ == '__main__':
+    b = Bat()
+    print(b.say('hello'))
+    print(b.fly)
+
+# 现在我们来定义一个类来同时继承 Superhero 和 Bat
+# superhero.py
+from superhero import Superhero
+from bat import Bat
+
+# 定义 Batman 作为子类，来同时继承 SuperHero 和 Bat
+class Batman(Superhero, Bat):
+
+    def __init__(self, *args, **kwargs):
+        # 通常要继承属性，你必须调用 super:
+        # super(Batman, self).__init__(*args, **kwargs)
+        # 然而在这里我们处理的是多重继承，而 super() 只会返回 MRO 列表的下一个基础类。
+        # 因此，我们需要显式调用初始类的 __init__
+        # *args 和 **kwargs 传递参数时更加清晰整洁，而对于父类而言像是 “剥了一层洋葱”
+        Superhero.__init__(self, 'anonymous', movie=True,
+                           superpowers=['Wealthy'], *args, **kwargs)
+        Bat.__init__(self, *args, can_fly=False, **kwargs)
+        # 重写了 name 字段
+        self.name = 'Sad Affleck'
+
+    def sing(self):
+        return 'nan nan nan nan nan batman!'
+
+
+if __name__ == '__main__':
+    sup = Batman()
+
+    # 获取方法解析顺序 MRO，MRO 被用于 getattr() 和 super()
+    # 这个字段是动态的，并且可以被修改
+    print(Batman.__mro__)       # => (<class '__main__.Batman'>,
+                                # => <class 'superhero.Superhero'>,
+                                # => <class 'human.Human'>,
+                                # => <class 'bat.Bat'>, <class 'object'>)
+
+    # 调用父类的方法并且使用子类的属性
+    print(sup.get_species())    # => Superhuman
+
+    # 调用被重写的类
+    print(sup.sing())           # => nan nan nan nan nan batman!
+
+    # 调用 Human 上的方法，(之所以是 Human 而不是 Bat)，是因为继承顺序起了作用
+    sup.say('I agree')          # => Sad Affleck: I agree
+
+    # 调用仅存在于第二个继承的父类的方法
+    print(sup.sonar())          # => ))) ... (((
+
+    # 继承类的属性
+    sup.age = 100
+    print(sup.age)              # => 100
+
+    # 从第二个类上继承字段，并且其默认值被重写
+    print('Can I fly? ' + str(sup.fly)) # => Can I fly? False
 ```
 
 ## 高级用法

@@ -280,7 +280,7 @@ finally:
 
 通过本实验，我们了解了摄像头sensor模块以及时间time模块的原理和应用，可以看到CanMV将摄像头功能封装成sensor模块，用户不必关注底层代码编可以轻松使用。
 
-## 多路摄像头接口使用
+## Multi-channel camera interface usage
 
 01科技 CanMV K230除了CSI2接口标配的GC2093（60FPS）摄像头外，还可以通过CSI0、CSI1接口外接摄像头。外接摄像头目前支持型号:
 
