@@ -84,11 +84,11 @@
     "description": "The generated-index page description for category 基础实验 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.机器视觉": {
-    "message": "机器视觉",
+    "message": "Machine Vision",
     "description": "The label for category 机器视觉 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.机器视觉.link.generated-index.description": {
-    "message": "AI机器视觉实验，CanMV K230核心教程。",
+    "message": "AI machine vision experiment, CanMV K230 core tutorial.",
     "description": "The generated-index page description for category 机器视觉 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.图像检测": {
@@ -156,19 +156,19 @@
     "description": "The generated-index page description for category 车牌相关 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.网络应用": {
-    "message": "网络应用",
+    "message": "Network",
     "description": "The label for category 网络应用 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.网络应用.link.generated-index.description": {
-    "message": "CanMV开发板实现Socket、MQTT等常用网络编程应用",
+    "message": "CanMV K230 development board realizes common network programming applications such as Socket and MQTT",
     "description": "The generated-index page description for category 网络应用 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.传感器和模块": {
-    "message": "传感器和模块",
+    "message": "Sensors & Modules",
     "description": "The label for category 传感器和模块 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.传感器和模块.link.generated-index.description": {
-    "message": "CanMV K230开发板使用传感器和其它模块。",
+    "message": "CanMV K230 development board using sensors and other modules",
     "description": "The generated-index page description for category 传感器和模块 in sidebar newSidebar"
   }
 }

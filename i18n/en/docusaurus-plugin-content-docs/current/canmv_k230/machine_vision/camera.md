@@ -2,121 +2,127 @@
 sidebar_position: 1
 ---
 
-# 摄像头
+# Camera
 
-## 前言
-从前面的基础实验我们熟悉了K230基于MicroPython的编程方法，但那可以说是只发挥了K230冰山一角的性能应用，摄像头是整个机器视觉应用的基础。今天我们就通过示例代码来看看CanMV K230是如何使用摄像头的。
+## Foreword
+From the previous basic experiments, we are familiar with the programming method of K230 based on MicroPython, but that can be said to be only the tip of the iceberg of K230's performance application. The camera is the basis of the entire machine vision application. Today we will use the sample code to see how CanMV K230 uses the camera.
 
-## 实验目的
-学习K230摄像头使用。
+## Experiment Purpose
+Learn how to use the K230 camera.
 
-## 实验讲解
+## Experimental Explanation
 
-在CanMV IDE中打开 <u>零一科技（01Studio）CanMV K230开发套件配套资料\02-例程源码\2.机器视觉\1.摄像头应用</u> 目录下的camera.py文件。
+In CanMV IDE, open the `camera.py` file in the directory of <u>01Studio MicroPython Develop Kits (Base on CanMV K230) Resources_2024-11-8\02-Codes\2.Machine Vision\1.Camera</u>
 
 ![camera](./img/camera/camera1.png)
 
-打开后发现编辑框出现了相关代码，我们可以先直接跑一下代码看看实验现象，连接CanMV K230，点击运行，可以发右图上方出现了摄像头实时采集的图像。
+After opening, we can find relevant codes in the edit box. We can run the code directly to see the experimental phenomenon. Connect CanMV K230 and click Run. The image collected by the camera in real time will appear above the right picture.
 
 ![camera](./img/camera/camera2.png)
 
-CanMV K230使用camera模块实现摄像头采集图像功能，K230硬件支持3路sensor输入（CSI接口），每个sensor设备均可独立完成图像数据采集捕获处理，并可以同时输出3路图像数据。如下图：
+CanMV K230 uses the camera module to realize the camera image acquisition function. The K230 hardware supports 3-way sensor input (CSI interface). Each sensor device can independently complete the image data acquisition and capture processing, and can output 3-way image data at the same time. As shown below:
 
 ![camera](./img/camera/camera2_1.png)
 
-sensor 0，sensor 1，sensor 2表示三个图像传感器；Camera Device 0，Camera Device 1，Camera Device 2表示三个sensor设备；output channel 0，output channel 1，output channel 2表示sensor设备的三个输出通道。三个图像传感器可以通过软件配置映射到不同的sensor 设备。
+`sensor 0，sensor 1，sensor 2`: 3 Physical Sensors；
+
+`Camera Device 0，Camera Device 1，Camera Device 2`: 3 Sofeware Sensors；
+
+`output channel 0，output channel 1，output channel 2`:sensor's 3 channel to Output.
+
+The 3 sensors can be mapped to different sensor devices through software configuration.
 
 
-## Sensor对象
+## class Sensor
 
-### 构造函数
+### Constructors
 ```python
-from media.sensor import * #导入sensor模块，使用摄像头相关接口
+from media.sensor import * #Import the sensor module and use the camera API
 
 sensor = Sensor(id,[width, height, fps])
 ```
-构建摄像头对象。目前支持摄像头型号有：GC2093、OV5647
-- `id`: CSI输入号。
+Construct a camera object. Currently supported camera models are: GC2093、OV5647
+- `id`: CSI ID。
     - `0` : CSI0；
     - `1` : CSI1；
-    - `2` : CSI2；默认值，开发板上的摄像头。
+    - `2` : CSI2；Default, the camera on the development board.
 
-- `width`: 可选参数，sensor采集图像宽度。默认1920；
-- `height`: 可选参数，sensor采集图像高度。默认1080；
-- `fps`: 可选参数，sensor最大帧率。默认30；
+- `width`: Optional parameter, the width of the image collected by the sensor. default: 1920；
+- `height`: Optional parameter, sensor acquisition image height. Default: 1080；
+- `fps`: Optional parameter, sensor maximum frame rate. Default: 30；
 
-### 使用方法
+### Methods
 
 ```python
 sensor.reset()
 ```
-复位和初始化摄像头。
+reset the Camera.
 
 <br></br>
 
 ```python
 sensor.set_framesize(framesize = FRAME_SIZE_INVAILD, [width, height],chn = CAM_CHN_ID_0, alignment=0, **kwargs)
 ```
-设置每个通道的图像输出尺寸。
+Set the output image size for each channel.
 
-- `framesize`: 通道图像输出尺寸。下面列出一些常用尺寸。自定义尺寸可以通过`[width, height]`参数设置，如:** width=800, height=480** 。注意`framesize`和 `[width,  height]`只使用其中一种方式设置。
+- `framesize`: Channel image output size. Some common sizes are listed below. Custom sizes can be set via the `[width, height]` parameters, such as:** width=800, height=480** 。Note that `framesize` and `[width, height]` can only be set in one or the other way.
     - `sensor.QQVGA` : 320x240
     - `sensor.QVGA` : 320x240
     - `sensor.VGA` : 640x480;
     - `Sensor.FHD` : 1920x1080;
     - `Sensor.HD` : 1280x720;
 
-- `chn`: 通道编号。每个摄像头设备有3个通道。
-    - `CAM_CHN_ID_0` : 通道0；
-    - `CAM_CHN_ID_1` : 通道1；
-    - `CAM_CHN_ID_2` : 通道2；
+- `chn`: Channel number. Each camera device has 3 channels.
+    - `CAM_CHN_ID_0` : channel 0；
+    - `CAM_CHN_ID_1` : channel 1；
+    - `CAM_CHN_ID_2` : channel 2；
 
 <br></br>
 
 ```python
 sensor.set_pixformat(pixformat, chn = CAM_CHN_ID_0)
 ```
-设置图像像素格式。
-- `pixformat`: 格式。
-    - `sensor.GRAYSCALE` : 灰度图像，每像素8位（1字节），处理速度快。
-    - `sensor.RGB565` : 每像素为16位（2字节），5位用于红色，6位用于绿色，5位用于蓝色，处理速度比灰度图像要慢。
+Sets the image pixel format.
+- `pixformat`: format。
+    - `sensor.GRAYSCALE` : Grayscale images, 8 bits (1 byte) per pixel, are fast to process.
+    - `sensor.RGB565` : Each pixel is 16 bits (2 bytes), 5 bits for red, 6 bits for green, and 5 bits for blue, and the processing speed is slower than grayscale images.
     - `sensor.RGB888` 
     - `sensor.RGBP888` 
     - `sensor.YUV420SP` 
 
-- `chn`: 通道编号。每个摄像头设备有3个通道。
-    - `CAM_CHN_ID_0` : 通道0；
-    - `CAM_CHN_ID_1` : 通道1；
-    - `CAM_CHN_ID_2` : 通道2；
+- `chn`: Channel number. Each camera device has 3 channels.
+    - `CAM_CHN_ID_0` : channel 0；
+    - `CAM_CHN_ID_1` : channel 1；
+    - `CAM_CHN_ID_2` : channel 2；
 
 <br></br>
 
 ```python
 sensor.set_hmirror(enable)
 ```
-设置摄像头画面水平镜像。
-- `enable`: 格式。
-    - `1` : 开启水平镜像；
-    - `0` : 关闭水平镜像。
+Set the camera image to mirror horizontally.
+- `enable`: set value.
+    - `1` : enable horizontal mirroring；
+    - `0` : disable horizontal mirroring.
 
 <br></br>
 
 ```python
 sensor.set_vflip(enable)
 ```
-设置摄像头画面垂直翻转。
-- `enable`: 格式。
-    - `1` : 开启垂直翻转；
-    - `0` : 关闭垂直翻转。
+Set the camera image to flip vertically.
+- `enable`: set value.
+    - `1` : enable vertical flip;
+    - `0` : disable vertical flip;
 
-**提示：通过设置摄像头的水平镜像和垂直翻转组合可以实现任意画面变换。**
+**Tip: You can achieve any image transformation by setting the camera's horizontal mirroring and vertical flipping combination. **
 
 <br></br>
 
 ```python
 sensor.run()
 ```
-启动摄像头。
+Start the Sensor.
 
 <br></br>
 
@@ -124,95 +130,96 @@ sensor.run()
 ```python
 sensor.snapshot()
 ```
-使用相机拍摄一张照片，并返回 image 对象。
+Take a picture and return an image object.
 
 
-更多用法请阅读: [CanMV K230官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Sensor%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
+For more usage, please refer to:[CanMV K230 Docs](https://developer.canaan-creative.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Sensor%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
 
-## clock对象
+## class clock
 
-我们再来看看本例程用于计算FPS（每秒帧数）的clock模块。
+Let's take a look at the clock module used in this example to calculate FPS (frames per second).
 
-### 构造函数
+### Constructors
 ```python
 clock=time.clock()
 ```
-构建一个时钟对象。
+Construct a clock object.
 
-### 使用方法
+### Methods
 ```python
 clock.tick()
 ```
-开始追踪运行时间。
+Start tracking run time.
 
 <br></br>
 
 ```python
 clock.fps()
 ```
-停止追踪运行时间，并返回当前FPS（每秒帧数）。**在调用该函数前始终首先调用 clock.tick() 。**
+Stops tracking elapsed time and returns the current FPS (frames per second). **Always call clock.tick() before calling this function.**
 
 <br></br>
 
-本节还有缓冲区图像显示代码，会在下一节会详细讲解，本节主要讲述摄像头使用。我们来看看代码的编写流程图：
+This section also contains the CanMV IDE buffer image display code, which will be explained in detail in the next section. This section mainly describes the use of the camera. Let's take a look at the code writing flow chart:
 
 
 ```mermaid
 graph TD
-    导入sensor和相关模块 --> 初始化sensor模块 --> 创建1个时钟 --> 摄像头拍摄 -->IDE缓冲区显示图片--> 打印FPS每秒帧数--> 摄像头拍摄;
+    id1[Import sensor and related modules] --> id2[Initialize the sensor module] --> id3[Create a clock] --> id4[Camera shooting] --> id5[IDE buffer display image] --> id6[Print FPS] --> id4;
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
-实验名称：摄像头使用
-实验平台：01Studio CanMV K230
-说明：实现摄像头图像采集显示
+Demo Name：Camera
+Platform：01Studio CanMV K230
+Description: Realize camera image acquisition and display
+Tutorial：wiki.01studio.cc
 '''
 
 import time, os, sys
 
-from media.sensor import * #导入sensor模块，使用摄像头相关接口
-from media.display import * #导入display模块，使用display相关接口
-from media.media import * #导入media模块，使用meida相关接口
+from media.sensor import * #Import the sensor module and use the camera API
+from media.display import * #Import the display module and use display API
+from media.media import * #Import the media module and use meida API
 
 try:
 
-    sensor = Sensor() #构建摄像头对象
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+    sensor = Sensor() #Constructing a camera object
+    sensor.reset() #reset the Camera
+    sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
+    sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
 
-    #使用IDE缓冲区输出图像,显示尺寸和sensor配置一致。
+    #Use IDE buffer to output images, the display size is consistent with sensor configuration.
     Display.init(Display.VIRT, sensor.width(), sensor.height())
 
-    MediaManager.init() #初始化media资源管理器
+    MediaManager.init() #Initialize the media resource manager
 
-    sensor.run() #启动sensor
+    sensor.run() #Start the camera
 
     clock = time.clock()
 
     while True:
 
 
-        os.exitpoint() #检测IDE中断
+        os.exitpoint() #Detect IDE interrupts
 
-        ################
-        ## 这里编写代码 ##
-        ################
+        ####################
+        ## Write codes here
+        ####################
         clock.tick()
 
-        img = sensor.snapshot() #拍摄一张图
+        img = sensor.snapshot() #Take a picture
 
-        Display.show_image(img) #显示图片
+        Display.show_image(img) #Show the Picture
 
-        print(clock.fps()) #打印FPS
+        print(clock.fps()) #FPS
 
 
-###################
-# IDE中断释放资源代码
-###################
+##############################################
+# IDE interrupts the release of resource code
+##############################################
 except KeyboardInterrupt as e:
     print("user stop: ", e)
 except BaseException as e:
@@ -230,77 +237,76 @@ finally:
 
 ```
 
-由于CanMV K230 MicroPython底层基于Linux + RTOS实现，因此可以看到代码中出现一些辅助中断等代码，这些代码相对固定，本节中核心代码如下，非常简洁：
+Since the underlying layer of CanMV K230 MicroPython is based on Linux + RTOS, you can see some auxiliary interrupt codes in the code. These codes are relatively fixed. The core code in this section is as follows, which is very concise:
 
 ```python
     ...
-    sensor = Sensor() #构建摄像头对象
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+    sensor = Sensor() #Constructing a camera object
+    sensor.reset() #reset the Camera
+    sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
+    sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
 
-    #使用IDE缓冲区输出图像,显示尺寸和sensor配置一致。
+    #Use IDE buffer to output images, the display size is consistent with sensor configuration.
     Display.init(Display.VIRT, sensor.width(), sensor.height())
 
-    MediaManager.init() #初始化media资源管理器
+    MediaManager.init() #Initialize the media resource manager
 
-    sensor.run() #启动sensor
+    sensor.run() #Start the camera
 
     clock = time.clock()
 
     while True:
 
 
-        os.exitpoint() #检测IDE中断
+        os.exitpoint() #Detect IDE interrupts
 
-        ################
-        ## 这里编写代码 ##
-        ################
+        ####################
+        ## Write codes here
+        ####################
         clock.tick()
 
-        img = sensor.snapshot() #拍摄一张图
+        img = sensor.snapshot() #Take a picture
 
-        Display.show_image(img) #显示图片
+        Display.show_image(img) #Show the Picture
 
-        print(clock.fps()) #打印FPS
-
+        print(clock.fps()) #FPS
     ...
 ```
 
-## 实验结果
+## Experimental Results
 
-点击运行代码，可以看到在右边显示摄像头实时拍摄情况，下方则显示RGB颜色直方图。
+Click to run the code, and you can see the real-time camera shooting status displayed on the right and the RGB color histogram displayed below.
 
 ![camera2](./img/camera/camera2.png)
 
-点击左下角串口终端，可以看到实时显示当前的FPS(每秒帧数)值约为30帧。
+Click the serial terminal in the lower left corner, and you can see the current FPS (frames per second) value is about 30 frames in real time.
 
 ![camera3](./img/camera/camera3.png)
 
 
-通过本实验，我们了解了摄像头sensor模块以及时间time模块的原理和应用，可以看到CanMV将摄像头功能封装成sensor模块，用户不必关注底层代码编可以轻松使用。
+Through this experiment, we understand the principles and applications of the camera sensor module and the time module. We can see that CanMV encapsulates the camera function into a sensor module, and users can use it easily without having to pay attention to the underlying code.
 
 ## Multi-channel camera interface usage
 
-01科技 CanMV K230除了CSI2接口标配的GC2093（60FPS）摄像头外，还可以通过CSI0、CSI1接口外接摄像头。外接摄像头目前支持型号:
+In addition to the GC2093 (60FPS) camera that comes stand ard with the CSI2 interface, the 01Tech CanMV K230 can also connect external cameras via the CSI0 and CSI1 interfaces. The currently supported external cameras are:
 
-- OV5647（1080P 30FPS）。6cm/15cm/30cm 3款长度可选。 [**点击购买>>**](https://item.taobao.com/item.htm?id=833993249110)
+- OV5647 (1080P 30FPS). 3 lengths are available: 6cm/15cm/30cm. [**Click to Buy>>**](https://www.aliexpress.com/item/1005007707000572.html)
 
 ![camera](./img/camera/camera4.png)
 
-使用方法很简单，只需要在上面示例代码基础上在初始化时候配置`id`参数即可。
+The usage is very simple. You only need to configure the `id` parameter during initialization based on the above sample code.
 
-# CSI0接口
+# CSI0 interface
 ```python
     ...
-    sensor = Sensor(id=0) #id=0表示使用CSI0接口上的摄像头
+    sensor = Sensor(id=0) #id=0 means using the camera on the CSI0 interface
     ...
 ```
-# CSI1接口
+# CSI1 interface
 
 ```python
     ...
-    sensor = Sensor(id=1) #id=1表示使用CSI1接口上的摄像头
+    sensor = Sensor(id=1) #id=1 means using the camera on the CSI1 interface
     ...
 ```
 

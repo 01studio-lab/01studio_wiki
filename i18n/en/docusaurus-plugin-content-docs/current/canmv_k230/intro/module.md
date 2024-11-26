@@ -68,7 +68,7 @@ It can also be fixed on the back of the development board using studs:
 ## Camera
 
 ### GC2093
-01Studio CanMV K230 development board comes standard with a GC2093 camera (70° viewing angle), and a 140° wide-angle lens version can be purchased additionally.[**Click to Buy>>**](https://item.taobao.com/item.htm?id=841926094725)
+01Studio CanMV K230 development board comes standard with a GC2093 camera (70° viewing angle), and a 140° wide-angle lens version can be purchased additionally.[**Click to Buy>>**](https://www.aliexpress.com/item/3256807959778168.html)
 
 |  Product Parameters |
 |  :---:  | ---  |
@@ -85,7 +85,7 @@ It can also be fixed on the back of the development board using studs:
 
 ### Camera extension cable
 
-The standard GC2093 camera can be extended using an FPC extension cable. 24P, length 15cm.[**Clikc to Buy>>**](https://item.taobao.com/item.htm?id=843993980296)
+The standard GC2093 camera can be extended using an FPC extension cable. 24P, length 15cm.[**Clikc to Buy>>**](https://www.aliexpress.com/item/1005008146010210.html)
 
 ![module](./img/module/fpc1.png)
 
