@@ -2,15 +2,15 @@
 sidebar_position: 3
 ---
 
-# 按键
+# Key
 
-## 前言
-按键是最简单也最常见的输入设备，很多产品都离不开按键，包括早期的iphone，今天我们就来学习一下如何使用MicroPython来编写按键程序。有了按键输入功能，我们就可以做很多好玩的东西了。
+## Foreword
+Keys are the simplest and most common input devices. Many products cannot do without buttons, including early iPhones. Today we will learn how to use MicroPython to write button programs. With the key input function, we can do a lot of fun things.
 
-## 实验目的
+## Experiment Purpose
 学习MicroPython编程使用按键功能，通过检测按键被按下后，改变LED（蓝灯）的亮灭状态。
 
-## 实验讲解
+## Experimental Explanation
 
 CanMV K230自带功能按键KEY位于开发板下图所示位置：
 
@@ -26,39 +26,40 @@ CanMV K230自带功能按键KEY位于开发板下图所示位置：
 
 和前面LED一样，按键的输入检测也是用到Pin对象模块，具体如下：
 
-Pin引脚对象。
+## class Pin
+Pin Module
 
-### 构造函数
+### Constructors
 ```python
 KEY = machine.Pin(id, mode, pull)
 ```
 
 Pin位于machine模块下:
 
-- `id` ：芯片引脚编号。如：0、2、46。
-- `mode` ：输入/输出模式。
-    - `Pin.IN` : 输入模式；
-    - `Pin.OUT` : 输出模式；   
-- `pull`: 上下拉电阻配置。
-    - `None` : 无上下拉电阻；
-    - `Pin.PULL_UP` : 上拉电阻启用；
-    - `Pin.PULL_DOWN` : 下拉电阻启用。
+- `id` ：Chip pin number.For example:0、2、46
+- `mode` : Input/Output mode.
+    - `Pin.IN` : Input mode;
+    - `Pin.OUT` : Output mode;   
+- `pull`: Pull-up and pull-down resistor configuration.
+    - `None` : None;
+    - `Pin.PULL_UP` : Pull-up resistor enabled;
+    - `Pin.PULL_DOWN` : Pull-down resistor enabled.
 
 
 
-### 使用方法
+### Methods
 ```python
 KEY.value([X])
 ```
-配置引脚电平值：
-- `输出模式` ：输出电平值。
-    - `0` : 输出低电平；
-    - `1` : 输出高电平。
-- `输入模式` ：无需参数，获取当前引脚输入电平值。
+Set the pin level value：
+- `Output Mode` ：Output level value.
+    - `0` :  Output low level (0V);
+    - `1` :  Output high level (3.3V);
+- `Input Mode` ：No parameters are required. Get the current pin input level value.
 
 <br></br>
 
-更多用法请阅读官方文档：<br></br>
+For more usage, please read the official documentation:<br></br>
 https://docs.micropython.org/en/latest/library/machine.Pin.html#machine-pin
 
 <br></br>
@@ -90,10 +91,10 @@ graph TD
 
 ```python
 '''
-实验名称：按键
-版本：v1.0
-作者：01Studio
-实验平台：01Studio CanMV K230
+Demo Name：KEY
+Version：v1.0
+Author：01Studio
+Platform：01Studio CanMV K230
 说明：通过按键改变LED的亮灭状态
 '''
 
@@ -102,13 +103,13 @@ from machine import FPIOA
 import time
 
 
-#将GPIO52、GPIO21配置为普通GPIO模式
+#Configure GPIO52、GPIO21 as a normal GPIO
 fpioa = FPIOA()
 fpioa.set_function(52,FPIOA.GPIO52)
 fpioa.set_function(21,FPIOA.GPIO21)
 
 LED=Pin(52,Pin.OUT) #构建LED对象,开始熄灭
-KEY=Pin(21,Pin.IN,Pin.PULL_UP) #构建KEY对象
+KEY=Pin(21,Pin.IN,Pin.PULL_UP) #Construct KEY object
 
 state=0 #LED引脚状态
 
@@ -127,7 +128,7 @@ while True:
 
 ```
 
-## 实验结果
+## Experimental Results
 
 在CanMV K230 IDE运行代码：
 
