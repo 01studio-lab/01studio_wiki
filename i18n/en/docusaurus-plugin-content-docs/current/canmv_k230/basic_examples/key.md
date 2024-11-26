@@ -80,14 +80,14 @@ start = time.ticks_ms() # Get the millisecond timer start value
 delta = time.ticks_diff(time.ticks_ms(), start) # Calculate the difference from power-on to the current time
 ```
 
-我们将按键引脚21配置成输入模式，实现当检测到按键被按下时候点亮LED蓝灯，松开时关闭LED蓝灯来做指示。代码编写流程如下：
+We configure the button pin 21 to input mode, so that when the Key is pressed, the blue LED light turns on, and when it is released, the blue LED light turns off to indicate. The code writing process is as follows:
 
 ```mermaid
 graph TD
-    导入Pin和time模块 --> 构建KEY和LED对象 --> 检测按键是否被按下 --> 按下执行LED状态翻转--> 检测按键是否被按下;
+    Import Pin and time Module --> Construct KEY and LED objects --> Detect whether the key is pressed --> Press to execute LED status flip--> Detect wheher the key is pressed;
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
@@ -95,7 +95,7 @@ Demo Name：KEY
 Version：v1.0
 Author：01Studio
 Platform：01Studio CanMV K230
-说明：通过按键改变LED的亮灭状态
+Description: Change the LED on/off status by pressing the key
 '''
 
 from machine import Pin
@@ -108,34 +108,34 @@ fpioa = FPIOA()
 fpioa.set_function(52,FPIOA.GPIO52)
 fpioa.set_function(21,FPIOA.GPIO21)
 
-LED=Pin(52,Pin.OUT) #构建LED对象,开始熄灭
+LED=Pin(52,Pin.OUT) #Build LED object and turn off LED
 KEY=Pin(21,Pin.IN,Pin.PULL_UP) #Construct KEY object
 
-state=0 #LED引脚状态
+state=0 #LED status
 
 while True:
 
-    if KEY.value()==0:   #按键被按下
-        time.sleep_ms(10) #消除抖动
-        if KEY.value()==0: #确认按键被按下
+    if KEY.value()==0:   #Key pressed
+        time.sleep_ms(10) #Eliminate jitter
+        if KEY.value()==0: #Confirm key is pressed
 
-            state=not state  #使用not语句而非~语句
-            LED.value(state) #LED状态翻转
+            state=not state  #Use the not statement instead of the ~ 
+            LED.value(state) #LED status flip
             print('KEY')
 
-            while not KEY.value(): #检测按键是否松开
+            while not KEY.value(): #Detect whether the button is released
                 pass
 
 ```
 
 ## Experimental Results
 
-在CanMV K230 IDE运行代码：
+After connecting the development board, run the above code in the CanMV K230 IDE:
 
 ![key](./img/key/key4.png)
 
-可以看到当按键KEY每次被按下时候，LED蓝灯亮灭状态发生翻转。
+It can be seen that each time the key KEY is pressed, the on and off status of the LED blue light flip.
 
 ![key](./img/key/key5.png)
 
-Pin是非常通用的功能，学会了Pin，就可以把开发板所有的引脚为自己所用，灵活性很强。
+Pin is a very common function. Once you have learned Pin, you can use all the pins of the development board for your own use, which is very flexible.
