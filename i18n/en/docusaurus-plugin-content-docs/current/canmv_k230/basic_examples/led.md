@@ -2,33 +2,33 @@
 sidebar_position: 2
 ---
 
-# 点亮第1个LED
+# Light up LED
 
-## 前言
-相信大部分人开始学习嵌入式单片机编程都会从点亮LED开始，基于K230平台的MicroPython的学习也不例外，通过点亮第一个LED能让你对编译环境和程序架构有一定的认识，为以后的学习和更大型的程序打下基础，增加信心。
+## Foreword
+I believe that most people start learning embedded MCU programming by lighting up an LED. Learning MicroPython based on the K230 platform is no exception. By lighting up the first LED, you can have a certain understanding of the compilation environment and program architecture, laying a foundation for future learning and larger programs, and increasing your confidence.
 
-## 实验目的
-学习LED的点亮，点亮LED（蓝灯）。
+## Experiment Purpose
+Learn how to light up the LED and turn on the LED (blue light).
 
-## 实验讲解
+## Experimental Explanation
 
-CanMV K230有一个跟GPIO连接可控制的LED灯。
+CanMV K230 has a controllable LED light connected to GPIO.
 
 ![led](./img/led/led1.png)
 
-其连接到CanMV K230的IO引脚如下（可以看开发板原理图），LED蓝灯对应的GPIO为IO52，从电路可以看到当IO52为高电平时，蓝灯被点亮。
+The IO pins connected to CanMV K230 are as follows (see the schematic diagram of the development board). The GPIO corresponding to the LED blue light is IO52. From the circuit, we can see that when IO52 is high, the blue light is on.
 
 ![led](./img/led/led2.png)
 
-由于K230功能多，所以大部分GPIO引脚会复用多个功能，因此CanMV K230 提供FPIOA库（Field Programmable Input and Output Array **现场可编程IO阵列**)，以便实现不同引脚功能选择。详情请参考：[FPIOA 说明](https://developer.canaan-creative.com/k230_canmv/main/zh/api/machine/K230_CanMV_FPIOA%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
+Since K230 has many functions, most GPIO pins will reuse multiple functions. Therefore, CanMV K230 provides FPIOA library (Field Programmable Input and Output Array) to realize different pin function selection. For details, please refer to:[FPIOA](https://developer.canaan-creative.com/k230_canmv/en/main/api/machine/K230_CanMV_FPIOA_API_Manual.html)。
 
-控制LED使用machine模块中的Pin对象，使用说明如下：
+To control the LED, use the Pin object in the machine module. The instructions are as follows:
 
-## Pin对象
+## class Pin
 
-Pin引脚对象。
+Pin Module.
 
-### 构造函数
+### Constructors
 
 ```python
 from machine import Pin
@@ -36,34 +36,34 @@ from machine import Pin
 LED = Pin(id, mode, pull)
 ```
 
-Pin位于machine模块下，直接import使用:
+Pin is located in the machine module and can be imported directly:
 
-- `id` ：芯片引脚编号。如：1、2、52。
-- `mode` ：输入/输出模式。
-    - `Pin.IN` : 输入模式；
-    - `Pin.OUT` : 输出模式；   
-- `pull`: 上下拉电阻配置。
-    - `None` : 无上下拉电阻；
-    - `Pin.PULL_UP` : 上拉电阻启用；
-    - `Pin.PULL_DOWN` : 下拉电阻启用。
+- `id` ：Chip pin number. For example:1、2、52。
+- `mode` ：Input/output mode.
+    - `Pin.IN` : Input mode;
+    - `Pin.OUT` : Output mode;   
+- `pull`: Pull-up and pull-down resistor configuration.
+    - `None` : None;
+    - `Pin.PULL_UP` : Pull-up resistor enabled;
+    - `Pin.PULL_DOWN` : Pull-down resistor enabled.
 
 
-### 使用方法
+### Methods
 ```python
 LED.value([X])
 ```
-配置引脚电平值：
-- `输出模式` ：输出电平值。
-    - `0` : 输出低电平；
-    - `1` : 输出高电平。
-- `输入模式` ：无需参数，获取当前引脚输入电平值。
+Set the pin level value:
+- `Output Mode` ：Output level value.
+    - `0` : Output low level (0V);
+    - `1` : Output high level (3.3V);
+- `Input Mode` ：No parameters are required. Get the current pin input level value.
 
 <br></br>
 
 ```python
 LED.on()
 ```
-引出输出高电平“1”，3.3V。
+Lead out the output high level "1", 3.3V.
 
 <br></br>
 
@@ -71,61 +71,61 @@ LED.on()
 LED.off()
 ```
 
-引出输出低电平“0”，0V。
+Lead out the output low level "0", 0V.
 
 <br></br>
 
-更多用法请阅读官方文档：<br></br>
+For more usage, please read the official documentation: <br></br>
 https://docs.micropython.org/en/latest/library/machine.Pin.html#machine-pin
 
 
 <br></br>
 
-上面对MicroPython的machine中Pin对象做了详细的说明，machine是大模块，Pin是machine下面的其中一个小模块，在Python编程里有两种方式引用相关模块:
+The above is a detailed description of the Pin object in MicroPython's machine. Machine is a large module, and Pin is one of the small modules under machine. There are two ways to reference related modules in Python programming:
 
-- 方式1是：import machine，然后通过machine.Pin来操作；
+- Method 1 : import machine, and then operate through machine.Pin;
 
-- 方式2是：from machine import Pin,意思是直接从machine中引入Pin模块，然后直接通过构建led对象来操作。显然方式2会显得更直观和方便，本实验也是使用方式2来编程。
+- Method 2 : from machine import Pin, which means directly importing the Pin module from machine, and then directly operating by constructing the LED object. Obviously, method 2 will appear more intuitive and convenient, and this experiment also uses method 2 for programming.
 
-代码编写流程如下：
-
+The coding process is as follows:
 
 ```mermaid
 graph TD
-    导入Pin模块 --> 配置引脚功能为普通IO --> GPIO52输出高电平点亮LED蓝灯;
+    id1[Import the Pin module] --> id2[Configure the pin function as normal IO] --> id3[GPIO52 outputs high level to light up the blue LED];
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
-实验名称：点亮LED蓝灯
-版本：v1.0
-作者：01Studio
-实验平台：01Studio CanMV K230
-教程：wiki.01studio.cc
+Demo Name：Light up the Blue LED
+Version：v1.0
+Author：01Studio
+Platform：01Studio CanMV K230
+Tutorial：wiki.01studio.cc
 '''
 
-from machine import Pin #导入Pin模块
+from machine import Pin 
 from machine import FPIOA
 import time
 
-#将GPIO52配置为普通GPIO
+#Configure GPIO52 as a normal GPIO
 fpioa = FPIOA()
 fpioa.set_function(52,FPIOA.GPIO52)
 
-LED=Pin(52,Pin.OUT) #构建led对象，GPIO52,输出
-LED.value(1) #点亮LED，也可以使用led.on()
+LED=Pin(52,Pin.OUT) #Construct LED object, GPIO52, output
+LED.value(1) #To turn on the LED, you can also use led.on()
+
 ```
 
-## 实验结果
+## Experimental Results
 
-连接开发板后在CanMV K230 IDE中运行上述代码:
+After connecting the development board, run the above code in the CanMV K230 IDE:
 
 ![led](./img/led/led3.png)
 
-可以看到LED蓝灯被点亮。
+You can see the blue LED light is on.
 
 ![led](./img/led/led1.png)
 
-从第一个实验我们可以看到，使用MicroPython来开发关键是要学会构造函数和其使用方法，便可完成对相关对象的操作，在强大的模块函数支持下，实验只用了简单的两行代码便实现了点亮LED灯。
+From the first experiment, we can see that the key to using MicroPython for development is to learn the constructor and its usage, so that operations on related objects can be completed. With the support of powerful module functions, the experiment only used two simple lines of code to light up the LED.

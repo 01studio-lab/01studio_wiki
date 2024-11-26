@@ -2,32 +2,32 @@
 sidebar_position: 1
 ---
 
-# GPIO介绍
+# GPIO Introduction
 
-我们先来介绍一下01科技CanMV K230的GPIO，也就是常用的I/O（输入输出引脚）、UART(串口)、I2C、SPI、PWM、ADC等功能。CanMV K230不仅是一款强大的AI视觉开发板，也能实现各类单片机的GPIO功能，熟悉GPIO相关功能说明对关于本章基础实验的学习有很大帮助。
+Let's introduce the GPIO of 01Studio CanMV K230 first, which is the commonly used I/O (input and output pins), UART (serial port), I2C, SPI, PWM, ADC and other functions. CanMV K230 is not only a powerful AI vision development board, but also can realize the GPIO functions of various microcontrollers. Familiarity with the GPIO related function description is very helpful for learning the basic experiments in this chapter.
 
 ![gpio](./img/gpio_intro/gpio.png)
 
-下面是01科技CanMV K230开发板的GPIO的引脚图：
+Below is the GPIO pin diagram of the 01Studio CanMV K230 development board:
 
-![pinout](./img/gpio_intro/pinout.jpg)
+![pinout](./img/gpio_intro/pinout.png)
 
-从上面表格和图例可以看到，GPIO和传统的单片机开发相似，除了普通IO口外，也有I2C、串口（UART）、SPI等总线接口，以及电源输出供电引脚（3.3V和5V）。可以外接各类传感器和模块，相关内容在后面教程都会涉及。
+From the table and illustration above, we can see that GPIO is similar to traditional MCU development. In addition to ordinary IO ports, it also has I2C, serial port (UART), SPI and other bus interfaces, as well as power output pins (3.3V and 5V). It can be connected to various sensors and modules, and related content will be covered in the following tutorials.
 
-## 电源引脚
+## Power pin
 
-CanMV K230 40Pin GPIO中有两路5V和两路3.3V输出引脚，以及8个GND引脚，可对外供电。也可以接入电源（5V）到5V引脚给开发板供电。
+The CanMV K230 40Pin GPIO has two 5V and two 3.3V output pins, as well as eight GND pins, which can provide external power. You can also connect a power supply (5V) to the 5V pin to power the development board.
 
-## 普通IO
+## IO
 
-除了电源引脚和4个ADC引脚外，所有IO口都可以配置为输入/输出引脚使用。IO电平为3.3V。
+Except for the power pin and 4 ADC pins, all IO ports can be configured as input/output pins. The IO level is 3.3V.
 
-## 其它功能
+## Pin multiplexing function
 
-部分引脚有其它功能，具体如下：
+Some pins have other functions, as follows:
 
-:::tip 提示
-部分功能还没有micropython API，具体以01科技教程和CanMV官方文档说明为准。
+:::tip Tips
+Some functions do not have MicroPython API yet. Please refer to the 01Studio tutorial and CanMV official documentation for details.
 :::
 
 ### PWM
@@ -70,10 +70,10 @@ CanMV K230 40Pin GPIO中有两路5V和两路3.3V输出引脚，以及8个GND引�
 
 ### ADC
 
-请勿超出测量量程!
+Do not exceed the measuring range!
 
-- ADC0（排针32引脚，量程0-3.6V）
-- ADC1（排针36引脚，量程0-3.6V）
-- ADC2（排针38引脚，量程0-1.8V）
-- ADC3（排针40引脚，量程0-1.8V）
+- ADC0（Pin header No.32, Range: 0-3.6V）
+- ADC1（Pin header No.36, Range: 0-3.6V）
+- ADC2（Pin header No.38, Range: 0-1.8V）
+- ADC3（Pin header No.40, Range: 0-1.8V）
 
