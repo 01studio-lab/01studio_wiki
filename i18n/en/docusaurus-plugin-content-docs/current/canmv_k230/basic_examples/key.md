@@ -84,7 +84,7 @@ We configure the button pin 21 to input mode, so that when the Key is pressed, t
 
 ```mermaid
 graph TD
-    Import Pin and time Module --> Construct KEY and LED objects --> Detect whether the key is pressed --> Press to execute LED status flip--> Detect wheher the key is pressed;
+    id1[Import Pin and time Module] --> id2[Construct KEY and LED objects] --> id3[Detect whether the key is pressed] --> id4[Press to execute LED status flip]--> id5[Detect wheher the key is pressed];
 ```
 
 ## Codes
