@@ -2,85 +2,100 @@
 sidebar_position: 1
 ---
 
-# 条形码识别
+# Barcode recognition
 
-## 前言
-条形码（barcode）是将宽度不等的多个黑条和空白，按照一定的编码规则排列，用以表达一组信息的图形标识符。常见的条形码是由反射率相差很大的黑条（简称条）和白条（简称空）排成的平行线图案。条形码可以标出物品的生产国、制造厂家、商品名称、生产日期、图书分类号、邮件起止地点、类别、日期等许多信息，因而在商品流通、图书管理、邮政管理、银行系统等许多领域都得到广泛的应用。
+## Foreword
+
+A barcode is a graphic identifier that expresses a set of information by arranging multiple black bars and spaces of varying widths according to certain coding rules. Common barcodes are parallel lines formed by black bars (referred to as bars) and white bars (referred to as spaces) with very different reflectivity. Barcodes can indicate a lot of information such as the country of production, manufacturer, product name, production date, book classification number, mail origin and destination, category, date, etc., and are therefore widely used in many fields such as commodity circulation, book management, postal management, and banking systems.
 
 ![barcode](./img/barcode/barcode0.png)
 
-## 实验目的
-编程实现条形码识别，并将识别到的信息通过串口终端打印出来。
+## Experiment Purpose
 
-## 实验讲解
+Program to realize barcode recognition and print the recognized information through the serial port terminal.
 
-而对于CanMV K230而言，直接使用MicroPython中的find_barcodes()即可获取摄像头采集图像中条形码的相关信息。该函数支持所有一维条形码：
+## Experimental Explanation
 
-image.EAN2 image.EAN5 image.EAN8 image.UPCE image.ISBN10 image.UPCA image.EAN13 image.ISBN13 image.I25 image.DATABAR (RSS-14) image.DATABAR_EXP (RSS-Expanded) image.CODABAR image.CODE39 image.PDF417 image.CODE93 image.CODE128
+For CanMV K230, you can directly use find_barcodes() in MicroPython to obtain relevant information about the barcode in the image captured by the camera. This function supports all one-dimensional barcodes:
 
-具体说明如下：
+image.EAN2 <br></br>
+image.EAN5 <br></br>
+image.EAN8 <br></br>
+image.UPCE <br></br>
+image.ISBN10 <br></br>
+image.UPCA <br></br>
+image.EAN13 <br></br>
+image.ISBN13 <br></br>
+image.I25 <br></br>
+image.DATABAR (RSS-14) <br></br>
+image.DATABAR_EXP (RSS-Expanded) <br></br>
+image.CODABAR image.CODE39 <br></br>
+image.PDF417 image.CODE93 <br></br>
+image.CODE128 <br></br>
 
-## find_barcodes对象
+The specific instructions are as follows:
 
-### 构造函数
+## class find_barcodes
+
+### Constructors
 ```python
 image.find_barcodes([roi])
 ```
-查找roi区域内的所有条形码并返回一个image.barcode的对象列表。
+Find all barcodes within the roi region and return a list of image.barcode objects.
 
-### 使用方法
+### Methods
 
-以上函数返回image.barcode对象列表。
+The above function returns a list of image.barcode objects.
 
 ```python
 barcode.rect()
 ```
-返回一个矩形元组（x,y,w,h）,条形码的边界。可以通过索引[0-3]来获得单个值。
+Returns a rectangle tuple (x, y, w, h) that represents the border of the barcode. You can get a single value by indexing [0-3].
 
 <br></br>
 
 ```python
 barcode.payload()
 ```
-返回条形码字符串信息。可以通过索引[4]来获得这个值。
+Returns the barcode string information. You can get this value by indexing [4].
 
 <br></br>
 
 ```python
 barcode.type()
 ```
-返回条形码类型。
+Returns the barcode type.
 
 <br></br>
 
-更多用法请阅读官方文档：<br></br>
+For more usage, please read the official documentation:：<br></br>
 https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-barcodes
 
 <br></br>
 
-从上表可以看到，使用MicroPython编程我们只需要简单地调用find_barcodes()函数，对得到的结果再进行处理即可，非常方便。代码编写流程如下图所示：
+As can be seen from the table above, using MicroPython programming we only need to simply call the find_barcodes() function and process the results, which is very convenient. The code writing process is shown in the figure below:
 
 ```mermaid
 graph TD
-    导入sensor等相关模块 --> 初始化和配置相关模块  --> 寻找拍照到图像中的条形码 --> 画方框指示 --> 终端打印条形码信息;
+    id1[Import sensor and other related modules] --> i2d[Initialize and configure related modules]  --> id3[Find barcodes captured in images] --> id4[Draw a box to indicate] --> id5[Terminal prints barcode information] --> id3 ;
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
-实验名称：条形码识别
-实验平台：01Studio CanMV K230
-说明：编程实现摄像头识别各类条形码
+Demo Name：Barcode recognition
+Platform：01Studio CanMV K230
+Tutorial：wiki.01studio.cc
 '''
 
 import time, math, os, gc
 
-from media.sensor import * #导入sensor模块，使用摄像头相关接口
-from media.display import * #导入display模块，使用display相关接口
-from media.media import * #导入media模块，使用meida相关接口
+from media.sensor import * #Import the sensor module and use the camera API
+from media.display import * #Import the display module and use display API
+from media.media import * #Import the media module and use meida API
 
-#定义条形码类型
+#Define barcode type
 def barcode_name(code):
     if(code.type() == image.EAN2):
         return "EAN2"
@@ -117,48 +132,52 @@ def barcode_name(code):
 
 try:
 
-    sensor = Sensor() #构建摄像头对象
-    sensor.reset() #复位和初始化摄像头
-    #sensor.set_framesize(Sensor.FHD) #设置帧大小FHD（1920x1080），默认通道0
-    sensor.set_framesize(width=800, height=480) #设置帧大小VGA，默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+    sensor = Sensor() #Constructing a camera object
+    sensor.reset() # reset the Camera
+    sensor.set_framesize(width=800, height=480) # Set the frame size to LCD resolution (800x480), channel 0
+    sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
+    
+    #Use 3.5-inch mipi screen and IDE buffer to display images at the same time, 800x480 resolution
+    Display.init(Display.ST7701, to_ide=True) 
+    #Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
 
-    Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
+    MediaManager.init() #Initialize the media resource manager
 
-    MediaManager.init() #初始化media资源管理器
-
-    sensor.run() #启动sensor
+    sensor.run() #Start the camera
 
     clock = time.clock()
 
     while True:
 
-        os.exitpoint() #检测IDE中断
+        os.exitpoint() #Detect IDE interrupts
+
+        ####################
+        ## Write codes here
+        ####################
         clock.tick()
 
-        img = sensor.snapshot() #拍摄图片
+        img = sensor.snapshot() # Take a picture
 
-        codes = img.find_barcodes() #查找图像中所有条形码
+        codes = img.find_barcodes() # Find all barcodes in an image
 
         for code in codes:
 
-            #对条码画矩形表示
+            #Draw a rectangle to represent the barcode
             img.draw_rectangle(code.rect(),thickness=2)
 
-            #打印相关信息
+            #Print related information
             print_args = (barcode_name(code), code.payload(), (180 * code.rotation()) / math.pi, code.quality())
             print("Barcode %s, Payload \"%s\", rotation %f (degrees), quality %d" % print_args)
 
-            img.draw_string_advanced(0, 0, 30, code.payload(), color = (255, 255, 255)) #图像显示条码信息
+            img.draw_string_advanced(0, 0, 30, code.payload(), color = (255, 255, 255)) #Image display barcode information
 
-        Display.show_image(img) #显示图片
+        Display.show_image(img) #Display images
 
-        print(clock.fps()) #打印帧率
+        print(clock.fps()) #FPS
 
-###################
-# IDE中断释放资源代码
-###################
+##############################################
+# IDE interrupts the release of resource code
+##############################################
 except KeyboardInterrupt as e:
     print(f"user stop")
 except BaseException as e:
@@ -177,22 +196,22 @@ finally:
     MediaManager.deinit()
 ```
 
-## 实验结果
+## Experimental Results
 
-为了更好地识别，图像上条形码需比较平展，不能太小。
+For better recognition, the barcode on the image needs to be relatively flat and not too small.
 
-运行程序，打开一个条形码图片。摄像头正对条形码，识别成功后可以看到图片出现方框以及在串口终端打印出条形码信息。
+Run the program and open a barcode image. The camera faces the barcode. After successful recognition, you can see a box appear in the image and the barcode information is printed on the serial terminal.
 
-原图：
+Original image:
 
 ![barcode](./img/barcode/barcode1.jpg)
 
-识别结果：
+Identification results:
 
 ![barcode](./img/barcode/barcode2.png)
 
-串口终端打印条形码详细信息：
+Detailed information of barcode printed by serial terminal:
 
 ![barcode](./img/barcode/barcode3.png)
 
-条形码是日常生活应用非常广泛的东西，有了本节实验技能，我们就可以轻松打造一个属于自己的条形码扫描仪了。
+Barcodes are widely used in daily life. With the experimental skills learned in this section, we can easily create a barcode scanner of our own.

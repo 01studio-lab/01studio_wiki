@@ -92,35 +92,35 @@
     "description": "The generated-index page description for category 机器视觉 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.图像检测": {
-    "message": "图像检测",
+    "message": "Image Detection",
     "description": "The label for category 图像检测 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.图像检测.link.generated-index.description": {
-    "message": "图像特征检测相关例程",
+    "message": "Image Detection demos",
     "description": "The generated-index page description for category 图像检测 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.颜色识别": {
-    "message": "颜色识别",
+    "message": "Color recognition",
     "description": "The label for category 颜色识别 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.颜色识别.link.generated-index.description": {
-    "message": "颜色识别例程",
+    "message": "Color recognition demos",
     "description": "The generated-index page description for category 颜色识别 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.码类识别": {
-    "message": "码类识别",
+    "message": "Code recognition",
     "description": "The label for category 码类识别 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.码类识别.link.generated-index.description": {
-    "message": "条形码、二维码等识别",
+    "message": "Barcode, QR code, etc. recognition",
     "description": "The generated-index page description for category 码类识别 in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.AI视觉（KPU）": {
-    "message": "AI视觉（KPU）",
+    "message": "AI Vision（KPU）",
     "description": "The label for category AI视觉（KPU） in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.AI视觉（KPU）.link.generated-index.description": {
-    "message": "AI视觉开发。",
+    "message": "AI vision development.",
     "description": "The generated-index page description for category AI视觉（KPU） in sidebar newSidebar"
   },
   "sidebar.newSidebar.category.人脸相关": {

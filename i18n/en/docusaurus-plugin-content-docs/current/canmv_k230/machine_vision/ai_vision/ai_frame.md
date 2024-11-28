@@ -2,27 +2,27 @@
 sidebar_position: 1
 ---
 
-# AI视觉开发框架
+# AI Vision Development Framework
 
-前面的颜色识别、二维码识别都是使用了一些简单的图像处理功能，而更高级的机器视觉就需要使用KPU。可以简单类别比计算机的GPU（显卡），本质是实现高速的图像数据运算。
+The previous color recognition and QR code recognition all use some simple image processing functions, while more advanced machine vision requires the use of KPU. It can be simply classified as a computer GPU (graphics card), which essentially realizes high-speed image data calculation.
 
-我们来简单介绍一下K230的KPU。KPU是K230内部一个神经网络处理器，它可以在低功耗的情况下实现卷积神经网络计算，实时获取被检测目标的大小、坐标和种类，对人脸或者物体进行检测和分类。**K230 KPU支持INT8和INT16, 典型网络下实测推理能力可达K210的13.7倍，MAC利用率超70%。**
+Let's briefly introduce the KPU of K230. KPU is a neural network processor inside K230. It can realize convolutional neural network calculation under low power consumption, obtain the size, coordinates and type of the detected target in real time, and detect and classify faces or objects. **K230 KPU supports INT8 and INT16. The measured reasoning ability under typical networks can reach 13.7 times that of K210, and the MAC utilization rate exceeds 70%. **
 
-为了帮助用户简化AI部分的开发, CanMV官方基于K230专门搭建了配套的AI视觉开发框架。框架结构如下图所示：
+In order to help users simplify the development of the AI ​​part, CanMV officially built a matching AI vision development framework based on K230. The framework structure is shown in the figure below:
 
 ![ai_frame](./img/ai_frame/ai_frame1.png)
 
-这个框架简单来说就是Sensor(摄像头)默认输出两路图像，一路格式为YUV420，直接给到Display显示；另一路格式为RGB888，给到AI部分进行处理。AI主要实现任务的前处理、推理和后处理流程，得到后处理结果后将其绘制在osd image实例上，并送给Display叠加，最后在HDMI、LCD或IDE缓冲区显示识别结果。
+In simple terms, this framework outputs two images by default from the sensor (camera), one in YUV420 format, which is directly displayed on the display; the other in RGB888 format, which is processed by the AI ​​part. AI mainly implements the pre-processing, reasoning and post-processing processes of the task. After obtaining the post-processing results, it is drawn on the osd image instance and sent to the display for superposition. Finally, the recognition results are displayed on the HDMI, LCD or IDE buffer.
 
-这套框架的优势是用户可以直接基于处理结果编程实现自己的功能，同时AI主要实现任务的前处理、推理和后处理流程也是通过Python代码实现，方便用户深入二次开发。充分满足不同用户和开发者的需求。
+The advantage of this framework is that users can directly implement their own functions based on the processing results. At the same time, AI mainly implements the pre-processing, reasoning and post-processing processes of the task through Python code, which is convenient for users to conduct in-depth secondary development. It fully meets the needs of different users and developers.
 
-AI视觉开发框架主要API接口有：
+The main API interfaces of the AI ​​visual development framework are:
 
-- `PineLine` : 将sensor、display封装成固定接口，用于采集图像、画图以及结果图片显示。[点击查看详细介绍](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#pipeline)
+- `PineLine` : Encapsulate the sensor and display into a fixed interface for image acquisition, drawing, and result image display.[Click to view detailed description](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#pipeline)
 
 
-- `Ai2d` : 预处理（Preprocess）相关接口。[点击查看详细介绍](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#ai2d)
+- `Ai2d` : Preprocessing related interfaces. [Click to view detailed introduction](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#ai2d)
 
-- `AIBase` : 模型推理主要接口。[点击查看详细介绍](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#aibase)
+- `AIBase` : Main interface for model reasoning. [Click here for detailed description](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#aibase)
 
-本章AI视觉例程均通过上述接口实现主要功能。
+The AI ​​vision routines in this chapter all implement their main functions through the above interfaces.

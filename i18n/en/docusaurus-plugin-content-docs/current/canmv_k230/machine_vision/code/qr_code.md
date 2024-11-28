@@ -2,157 +2,128 @@
 sidebar_position: 2
 ---
 
-# 二维码识别
+# QR Code recognition
 
-## 前言
-相信大家都知道二维码了，特别是在扫描支付越来越流行的今天，二维码的应用非常广泛。今天我们就来学习如何使用CanMV K230开发套件实现二维码信息识别。
+## Foreword
+I believe everyone knows about QR codes, especially nowadays when scanning code for payment is becoming more and more popular, QR codes are widely used. Today we will learn how to use the CanMV K230 development kit to realize QR code information recognition.
 
-## 实验目的
-编程实现二维码识别，并将识别到的信息通过串口终端打印出来。
+## Experiment Purpose
+Program to realize QR code recognition and print out the recognized information through the serial port terminal.
 
-## 实验讲解
+## Experimental Explanation
 
-二维码又称二维条码，常见的二维码为QR Code，QR全称Quick Response，是一个近几年来移动设备上超流行的一种编码方式，它比传统的Bar Code条形码能存更多的信息，也能表示更多的数据类型。
+QR code is also called two-dimensional barcode. QR stands for Quick Response. It is a very popular encoding method on mobile devices in recent years. It can store more information than traditional Bar Code and can also represent more data types.
 
-二维条码/二维码（2-dimensional bar code）是用某种特定的几何图形按一定规律在平面（二维方向上）分布的、黑白相间的、记录数据符号信息的图形；在代码编制上巧妙地利用构成计算机内部逻辑基础的“0”、“1”比特流的概念，使用若干个与二进制相对应的几何形体来表示文字数值信息，通过图象输入设备或光电扫描设备自动识读以实现信息自动处理：它具有条码技术的一些共性：每种码制有其特定的字符集；每个字符占有一定的宽度；具有一定的校验功能等。同时还具有对不同行的信息自动识别功能、及处理图形旋转变化点。
+Two-dimensional barcode/two-dimensional code (2-dimensional bar code) is a black and white graphic that records data symbol information distributed in a plane (two-dimensional direction) according to a certain pattern with a certain geometric figure; in the code compilation, the concept of "0" and "1" bit streams that constitute the internal logic basis of the computer is cleverly used, and several geometric figures corresponding to binary are used to represent text numerical information. It is automatically read by image input devices or photoelectric scanning devices to realize automatic information processing: it has some common features of barcode technology: each code system has its own specific character set; each character occupies a certain width; it has certain verification functions, etc. At the same time, it also has the function of automatically identifying information in different rows and processing graphic rotation change points.
 
-而对于CanMV K230而言，直接使用MicroPython中的find_qrcodes()即可获取摄像头采集图像中二维码的相关信息。具体说明如下：
+For CanMV K230, directly use find_qrcodes() in MicroPython to obtain the relevant information of the QR code in the image captured by the camera. The specific instructions are as follows:
 
-## find_qrcodes对象
+## class find_qrcodes
 
-### 构造函数
+### Constructors
 ```python
 image.find_qrcodes([roi])
 ```
-查找roi区域内的所有二维码并返回一个image.qrcode的对象列表。
+Find all QR codes in the roi area and return a list of `image.qrcode` objects
 
-### 使用方法
+### Methods
 
-以上函数返回image.qrcode对象列表。
+The above function returns a list of image.qrcode objects.
 
 ```python
 qrcode.rect()
 ```
-返回一个矩形元组（x,y,w,h）,二维码的边界。可以通过索引[0-3]来获得单个值。
+Returns a rectangle tuple (x, y, w, h) that represents the border of the QR code. You can get a single value by indexing [0-3].
 
 <br></br>
 
 ```python
 qrcode.payload()
 ```
-返回二维码字符串信息。可以通过索引[4]来获得这个值。
+Returns the QR code string information. You can get this value by indexing [4].
 
 <br></br>
 
 ```python
 qrcode.verison()
 ```
-返回二维码版本号。
+Returns the QR code version number.
 
 <br></br>
 
-更多用法请阅读官方文档：<br></br>
+For more usage, please read the official documentation: <br></br>
 https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/image.html#find-qrcodes
 
 <br></br>
 
-从上表可以看到，使用MicroPython编程我们只需要简单地调用find_qrcodes()函数，对得到的结果再进行处理即可，非常方便。代码编写流程如下图所示：
+As can be seen from the table above, using MicroPython programming we only need to simply call the find_qrcodes() function and process the results, which is very convenient. The code writing process is shown in the figure below:
 
 ```mermaid
 graph TD
-    导入sensor等相关模块 --> 初始化和配置相关模块  --> 寻找拍照到图像中的二维码 --> 画方框指示二维码 --> 打印和显示二维码信息;
+    id1[Import sensor and other related modules] --> i2d[Initialize and configure related modules]  --> id3[Find QR Codes captured in images] --> id4[Draw a box to indicate] --> id5[Terminal prints QR Code information] --> id3 ;
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
-实验名称：二维码识别
-实验平台：01Studio CanMV K230
-说明：编程实现摄像头识别二维码
-教程：wiki.01studio.cc
+Demo Name：QR Code recognition
+Platform：01Studio CanMV K230
+Tutorial：wiki.01studio.cc
 '''
 
 import time, math, os, gc
 
-from media.sensor import * #导入sensor模块，使用摄像头相关接口
-from media.display import * #导入display模块，使用display相关接口
-from media.media import * #导入media模块，使用meida相关接口
-
-#定义条形码类型
-def barcode_name(code):
-    if(code.type() == image.EAN2):
-        return "EAN2"
-    if(code.type() == image.EAN5):
-        return "EAN5"
-    if(code.type() == image.EAN8):
-        return "EAN8"
-    if(code.type() == image.UPCE):
-        return "UPCE"
-    if(code.type() == image.ISBN10):
-        return "ISBN10"
-    if(code.type() == image.UPCA):
-        return "UPCA"
-    if(code.type() == image.EAN13):
-        return "EAN13"
-    if(code.type() == image.ISBN13):
-        return "ISBN13"
-    if(code.type() == image.I25):
-        return "I25"
-    if(code.type() == image.DATABAR):
-        return "DATABAR"
-    if(code.type() == image.DATABAR_EXP):
-        return "DATABAR_EXP"
-    if(code.type() == image.CODABAR):
-        return "CODABAR"
-    if(code.type() == image.CODE39):
-        return "CODE39"
-    if(code.type() == image.PDF417):
-        return "PDF417"
-    if(code.type() == image.CODE93):
-        return "CODE93"
-    if(code.type() == image.CODE128):
-        return "CODE128"
+from media.sensor import * #Import the sensor module and use the camera API
+from media.display import * #Import the display module and use display API
+from media.media import * #Import the media module and use meida API
 
 try:
 
-    sensor = Sensor() #构建摄像头对象
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(width=800, height=480) #设置帧大小为LCD分辨率(800x480)，默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+    sensor = Sensor() #Constructing a camera object
+    sensor.reset() # reset the Camera
+    sensor.set_framesize(width=800, height=480) # Set the frame size to LCD resolution (800x480), channel 0
+    sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
+    
+    #Use 3.5-inch mipi screen and IDE buffer to display images at the same time, 800x480 resolution
+    Display.init(Display.ST7701, to_ide=True) 
+    #Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
 
-    Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
+    MediaManager.init() #Initialize the media resource manager
 
-    MediaManager.init() #初始化media资源管理器
-
-    sensor.run() #启动sensor
+    sensor.run() #Start the camera
 
     clock = time.clock()
 
     while True:
 
-        os.exitpoint() #检测IDE中断
+        os.exitpoint() #Detect IDE interrupts
+
+        ####################
+        ## Write codes here
+        ####################
         clock.tick()
 
-        img = sensor.snapshot() #拍摄图片
+        img = sensor.snapshot() # Take a picture
 
-        res = img.find_qrcodes() #寻找二维码
 
-        if len(res) > 0: #在图片和终端显示二维码信息
+        res = img.find_qrcodes() #Find QR Code
 
+        if len(res) > 0: 
+        
+            #Display QR code information in images and terminals
             img.draw_rectangle(res[0].rect(), thickness=2)
             img.draw_string_advanced(0, 0, 30, res[0].payload(), color = (255, 255, 255))
-            
-            print(res[0].payload()) #串口终端打印            
 
-        Display.show_image(img) #显示图片
+            print(res[0].payload()) #Print QR code information on the serial terminal
 
-        print(clock.fps()) #打印帧率
+        Display.show_image(img) #Display images
 
-###################
-# IDE中断释放资源代码
-###################
+        print(clock.fps()) #FPS
+
+##############################################
+# IDE interrupts the release of resource code
+##############################################
 except KeyboardInterrupt as e:
     print(f"user stop")
 except BaseException as e:
@@ -172,22 +143,22 @@ finally:
 
 ```
 
-## 实验结果
+## Experimental Results
 
-为了更好地识别，图像上二维码需比较平展，不能太小。
+For better recognition, the QR code on the image needs to be relatively flat and not too small.
 
-运行程序，打开一个二维码图片（暂时不支持太奇葩的二维码）。摄像头正对二维码，识别成功后可以看到图片出现方框以及在串口终端打印出二维码信息。
+Run the program and open a QR code image (complex QR codes are not supported for the time being). The camera faces the QR code. After successful recognition, a box will appear on the image and the QR code information will be printed on the serial terminal.
 
-原图：
+Original image:
 
 ![qrcode](./img/qrcode/qrcode1.jpg)
 
-识别结果：
+Identification results:
 
 ![qrcode](./img/qrcode/qrcode2.png)
 
-串口终端打印二维码详细信息：
+Detailed information of the QR code printed by the serial terminal:
 
 ![qrcode](./img/qrcode/qrcode3.png)
 
-二维码是日常生活应用非常广泛的东西，有了本节实验技能，我们就可以轻松打造一个属于自己的二维码扫描仪了。
+QR codes are widely used in daily life. With the experimental skills in this section, we can easily create a QR code scanner of our own.

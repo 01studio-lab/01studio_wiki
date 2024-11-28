@@ -261,4 +261,4 @@ finally:
 
 ![line_follow](./img/line_follow/line_follow8.png)
 
-获取便宜角度后可以执行指定动作或结合[UART(串口通讯)](../../basic_examples/uart.md) 章节内容告知其它外设或主控。
+获取偏移角度后可以执行指定动作或结合[UART(串口通讯)](../../basic_examples/uart.md) 章节内容告知其它外设或主控。
