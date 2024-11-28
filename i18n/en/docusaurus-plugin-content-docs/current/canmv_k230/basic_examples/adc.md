@@ -2,106 +2,106 @@
 sidebar_position: 6
 ---
 
-# ADC（电压测量）
+# ADC
 
-## 前言
-ADC(analog to digital conversion) 模拟数字转换。意思就是将模拟信号转化成数字信号，由于单片机只能识别二级制数字，所以外界模拟信号常常会通过ADC转换成其可以识别的数字信息。常见的应用就是将变化的电压转成数字信号实现对电压值测量。
+## Foreword
+ADC(analog to digital conversion) means converting analog signals into digital signals. Since the microcontroller can only recognize binary numbers, external analog signals are often converted into digital information that it can recognize through ADC. A common application is to convert the changing voltage into a digital signal to measure the voltage value.
 
 
-## 实验目的
-学习ADC编程。
+## Experiment Purpose
+Learn ADC programming.
 
-## 实验讲解
+## Experimental Explanation
 
-K230内部包含一个ADC硬件模块，有6个通道，采样分辨率为12bit(0-4095)，采样速率为1M。01Studio CanMV K230开发板引出0~3共4个通道。其中通道0、1量程为0-3.6V，通道2、3量程为0-1.8V。** 请勿超出测量量程, 可能导致主控芯片烧坏!**
+K230 contains an ADC hardware module with 6 channels, a sampling resolution of 12bit (0-4095), and a sampling rate of 1M. 01Studio CanMV K230 development board leads to 4 channels 0~3. The range of channels 0 and 1 is 0-3.6V, and the range of channels 2 and 3 is 0-1.8V.** Do not exceed the measurement range, which may cause the main control chip to burn out!**
 
-我们来看看ADC模块的构造函数和使用方法。
+Let's take a look at the constructor and usage of the ADC module.
 
-## ADC对象
+## Class ADC
 
-### 构造函数
+### Constructors
 ```python
 adc = machine.ADC(channel)
 ```
-构建ADC对象，ADC通道如下：
+Construct ADC object, the ADC channels are as follows:
 
-- `channel` ：通道选择1-3，如：ADC(0)。 
+- `channel` ：Channel selection 1-3, such as: ADC(0). 
 
-    - `0`: ADC0（排针32引脚，量程0-3.6V）
-    - `1`: ADC1（排针36引脚，量程0-3.6V）
-    - `2`: ADC2（排针38引脚，量程0-1.8V）
-    - `3`: ADC3（排针40引脚，量程0-1.8V）
+    - `0`: ADC0（PIN 32 , range 0-3.6V）
+    - `1`: ADC1（PIN 36 , range 0-3.6V）
+    - `2`: ADC2（PIN 38 , range 0-1.8V）
+    - `3`: ADC3（PIN 40 , range 0-1.8V）
 
-### 使用方法
+### Methods
 ```python
 adc.read_u16()
 ```
-获取ADC值，测量精度是12位，返回0-4095。其中通道0、1量程为0-3.6V，通道2、3量程为0-1.8V。
+Get ADC value, the measurement accuracy is 12 bits, and the return value is 0-4095. The range of channels 0 and 1 is 0-3.6V, and the range of channels 2 and 3 is 0-1.8V.
 
 <br></br>
 
 ```python
 adc.read_uv()
 ```
-获取ADC电压值，返回0-1.8,单位V。其中通道0、1实际量程为0-3.6V，通道2、3量程为0-1.8V。
+Get ADC voltage value, return 0-1.8, the Unit is V. The actual range of channels 0 and 1 is 0-3.6V, and the range of channels 2 and 3 is 0-1.8V
 
 <br></br>
 
-熟悉ADC使用方法后，我们通过代码实现周期性测量指定通道引脚电压，代码编程流程图如下：
+After learning how to use ADC, we can use code to periodically measure the voltage of the specified channel pin. The code programming flow chart is as follows:
 
 ```mermaid
 graph TD
-    导入ADC相关模块 --> 获取ADC原始值 --> 获取ADC实际电压值  --> 获取ADC原始值;
+    id1[Import ADC module] --> id2[Get ADC raw value] --> id3[Get the actual ADC voltage value]  --> id2[Get ADC raw value];
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
-实验名称：ADC（电压测量）
-版本：v1.0
-作者：01Studio
-实验平台：01Studio CanMV K230
-说明：ADC共4个通道，其中通道0、1实际量程为0-3.6V，通道2、3量程为0-1.8V。
-    （请勿超出测量量程, 可能导致主控芯片烧坏！）
+Demo Name：ADC
+Version：v1.0
+Author：01Studio
+Platform：01Studio CanMV K230
+Description：The ADC has 4 channels in total, of which channels 0 and 1 have an actual range of 0-3.6V, and channels 2 and 3 have a range of 0-1.8V.(Please do not exceed the measurement range, which may cause the main control chip to burn out!)
+    
 '''
 
 from machine import ADC
 import time
 
 '''
-构建ADC对象:
-ADC0（排针32引脚，量程0-3.6V）, ADC1（排针36引脚，量程0-3.6V）,
-ADC2（排针38引脚，量程0-1.8V）, ADC3（排针40引脚，量程0-1.8V）。
+Construct ADC object:
+ADC0 (PIN 32, range 0-3.6V), ADC1 (PIN 36, range 0-3.6V),
+ADC2 (PIN 38, range 0-1.8V), ADC3 (PIN 40, range 0-1.8V).
 '''
-adc = ADC(0) #通道0
+adc = ADC(0) #Channel 0
 
 while True:
 
-    print(adc.read_u16()) # 获取ADC通道采样值
+    print(adc.read_u16()) # Get ADC value
 
-    # 获取ADC通道电压值，保留2为小数。通道0、1实际量程为0-3.6V，返回值x2。
+    # Get the ADC channel voltage value, retaining 2 as a decimal. The actual range of channels 0 and 1 is 0-3.6V, and the return value is x2.
     print('%.2f'%(adc.read_uv()/1000000*2), "V")
 
-    time.sleep(1) #延时1秒
+    time.sleep(1) # Delay 1s
 ```
 
-## 实验结果
+## Experimental Results
 
-运行代码，为了方便测试可以通过杜邦线将CanMV K230 ADC通道0引脚和旁边GND引脚（黑色排针）短接，可以看到串口终端显示测量到的电压为0V：
+Run the code. For the convenience of testing, you can use a DuPont line to short-circuit the CanMV K230 ADC channel 0 pin and the adjacent GND pin (black pin header). You can see that the serial terminal displays the measured voltage as 0V:
 
 ![adc](./img/adc/adc2.png)
 
 ![adc](./img/adc/adc3.png)
 
-通过杜邦线将CanMV K230 ADC通道0和3.3V引脚（黄色排针）短接，可以看到串口终端显示测量到的电压为3.3V：
+Short-circuit the CanMV K230 ADC channel 0 and the 3.3V pin (yellow header) through a Dupont line, and you can see that the measured voltage on the serial terminal is 3.3V：
 
 ![adc](./img/adc/adc4.png)
 
 ![adc](./img/adc/adc5.png)
 
-:::danger 警告
-ADC测量输入电压请勿超出最大量程，有可能烧坏主控芯片。
+:::danger Danger
+Do not exceed the maximum range of the ADC input voltage measurement, otherwise the main control chip may be burned out.
 :::
 
-大家可以用ADC功能接符合量程的ADC类型传感器或者测量相关设备电压值。
+You can use the ADC function to connect an ADC type sensor that matches the range or measure the voltage value of related equipment.

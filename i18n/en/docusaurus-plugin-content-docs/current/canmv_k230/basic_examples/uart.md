@@ -2,112 +2,112 @@
 sidebar_position: 8
 ---
 
-# UART（串口通讯）
+# UART
 
-## 前言
-串口是非常常用的通信接口，有很多工控产品、无线透传模块都是使用串口来收发指令和传输数据，以及和其它开发板如STM32, ESP32, Arduio,树莓派等带串口的开发板通讯，这样用户就可以在无须考虑底层实现原理的前提下将各类串口功能模块灵活应用起来。
+## Foreword
+UART is a very commonly used communication interface. Many industrial control products and wireless transparent transmission modules use UART to send and receive commands and transmit data, as well as communicate with other development boards such as STM32, ESP32, Arduio, Raspberry Pi and other development boards with UART. In this way, users can flexibly apply various serial port function modules without considering the underlying implementation principles.
 
-## 实验目的
-编程实现串口收发数据。
+## Experiment Purpose
+Programming to send and receive UART data.
 
-## 实验讲解
+## Experimental Explanation
 
-K230内部包含五个UART硬件模块，其中UART0被小核终端占用，UART3被大核终端占用，剩余UART1，UART2，UART4。 01Studio CanMV K230开发板通过排针引出了UART1和UART2共2个UART供用户使用。
+K230 contains five UART hardware modules, of which UART0 is occupied by the small core terminal, UART3 is occupied by the large core terminal, and the remaining ones are UART1, UART2, and UART4. 01Studio CanMV K230 development board leads out two UARTs, UART1 and UART2, through pin headers for users to use.
 
-我们来了解一下CanMV K230串口对象的构造函数和使用方法：
+Let's take a look at the constructor and usage of the CanMV K230 serial port object:
 
-## UART对象
+## Class UART
 
-### 构造函数
+### Constructors
 ```python
 machine.UART(id, baudrate=115200, bits=UART.EIGHTBITS, parity=UART.PARITY_NONE, stop=UART.STOPBITS_ONE)
 ```
-创建UART对象。
+Create a UART object.
 
-- `id` ：串口编号，共2个可用：
+- `id` ：Serial port number, 2 available
     - `UART.UART1`: 串口1；TX1（GPIO3）, RX1（GPIO4）;
     - `UART.UART2`: 串口2；TX2（GPIO11）, RX2（GPIO12）;
 
-- `baudrate`：波特率，常用115200、9600;
+- `baudrate`：Baud rate, commonly used are 115200 and 9600;
 
-- `bits` ：数据位，默认8;
+- `bits` ：Data bits, default 8;
 
-- `parity` ：奇偶校验，默认None;
-    - `UART.PARITY_EVEN`: 偶校验；
-    - `UART.PARITY_ODD`: 奇校验；
+- `parity` ：Parity check, default is None;
+    - `UART.PARITY_EVEN`: Even parity;
+    - `UART.PARITY_ODD`: Odd parity;
 
-- `stop`: 停止位，支持 1， 1.5, 2， 默认 1 。
+- `stop`: Stop bit, supports 1, 1.5, 2, default is 1.
 
-### 使用方法
+### Methods
 
 ```python
 UART.read(num)
 ```
-读取串口缓冲数据。
-- `num`: 读取字节数量。
+Read serial port buffer data.
+- `num`: Read the number of bytes.
 
 <br></br>
 
 ```python
 UART.readline(num)
 ```
-整行读取。
-- `num`: 行数。
+The entire line is read.
+- `num`: Number of rows.
 
 <br></br>
 
 ```python
 UART.write(buf)
 ```
-发送数据。
-- `buf`: 需要发送的数据。
+Send data.
+- `buf`: The data to be sent.
 
 <br></br>
 
 ```python
 UART.deinit()
 ```
-注销串口。
+Unregister UART.
 
-更多用法请阅读官方文档：<br></br>
+For more usage, please read the official documentation：<br></br>
 https://developer.canaan-creative.com/k230_canmv/main/zh/api/machine/K230_CanMV_UART%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html
 
 <br></br>
 
-我们可以用一个USB转TTL工具，配合电脑上位机串口助手来跟CanMV K230开发板进行通信测试。
+We can use a USB to TTL tool and the computer serial port assistant to test the communication with the CanMV K230 development board.
 
 ![uart1](./img/uart/uart1.png)
 
-本实验我们使用CanMV K230的UART1引脚，引出的排针。从CanMV K230原理图可以看到外部引脚为：IO3--TX1 ，IO4--RX1。
+In this experiment, we use the UART1 pin of CanMV K230 and the pin header. From the schematic diagram of CanMV K230, we can see that the external pins are: IO3--TX1, IO4--RX1.
 
 ![uart3](./img/uart/uart2.png)
 
-注意要使用3.3V电平的USB转串口TTL工具，接线示意图如下（交叉接线）：
+Note that you need to use a 3.3V USB to serial TTL tool. The wiring diagram is as follows (cross wiring):
 
 ![uart2](./img/uart/uart3.png)
 
 
 
-在本实验中我们可以先初始化串口，然后给串口发去一条信息，这样PC机的串口助手就会在接收区显示出来，然后进入循环，当检测到有数据可以接收时候就将数据接收并打印，并通过REPL打印显示。代码编写流程图如下：
+n this experiment, we can initialize UART first, and then send a message to UART, so that the PC serial port assistant will be displayed in the receiving area, and then enter the loop. When it detects that there is data to be received, the data will be received and printed, and printed and displayed through REPL. The code writing flow chart is as follows:
 
 
 ```mermaid
 graph TD
-    导入UART相关模块 --> 构建UART对象 --> 串口发送信息 --> 判断是否有信息--是-->接收并在终端打印-->判断是否有信息;
-    判断是否有信息--否-->判断是否有信息;
+    id1[Import UART module] --> id2[Construct UART object] --> id3[Send information through UART] --> id4[Determine whether there is information]--YES-->id5[Receive and print in terminal]-->id4[Determine whether there is information];
+    id4[Determine whether there is information]--NO-->id4[Determine whether there is information];
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
-实验名称：UART（串口通信）
-作者：01Studio
-实验平台：01Studio CanMV K230
-说明：通过编程实现串口通信，跟电脑串口助手实现数据收发。
+Demo Name：UART
+Author：01Studio
+Platform：01Studio CanMV K230
+Description：Realize serial communication through programming, and send and receive data with computer serial assistant
 '''
 
-#导入串口模块
+#Import UART module
 from machine import UART
 from machine import FPIOA
 import time
@@ -118,72 +118,72 @@ fpioa = FPIOA()
 fpioa.set_function(3,FPIOA.UART1_TXD)
 fpioa.set_function(4,FPIOA.UART1_RXD)
 
-uart=UART(UART.UART1,115200) #设置串口号1和波特率
+uart=UART(UART.UART1,115200) #Set UART1 and baud rate
 
 '''
 
-# UART2代码
+# UART2 Code
 fpioa.set_function(11,FPIOA.UART2_TXD)
 fpioa.set_function(12,FPIOA.UART2_RXD)
 
-uart=UART(UART.UART2,115200) #设置串口号2和波特率
+uart=UART(UART.UART2,115200) #Set UART2 and baud rate
 '''
 
-uart.write('Hello 01Studio!')#发送一条数据
+uart.write('Hello 01Studio!')#Send data
 
 while True:
 
-    text=uart.read(128) #接收128个字符
+    text=uart.read(128) #Receive 128 characters
     if text != b'':
-        print(text) #通过REPL打印串口3接收的数据
+        print(text) #Print the data received by UART3 through REPL
 
     time.sleep(0.1) #100ms
 
 ```
 
-## 实验结果
+## Experimental Results
 
-我们按照上述方式将USB转TTL的TX接到IO4，RX接到IO3。GND接一起，3.3V可以选择接或不接。
+We connect the TX of USB to TTL to IO4 and RX to IO3 according to the above method. GND is connected together, and 3.3V can be selected or not.
 
 ![uart4](./img/uart/uart4.png)
 
-这时候打开电脑的设备管理器，能看到2个COM。写着CH340的是串口工具，另外一个则是CanMV K230的REPL。如果CH340驱动没安装，则需要手动安装，驱动在：<u>配套资料包\开发工具\windows\串口终端\CH340文件夹</u> 下。
+At this time, open the computer's device manager and you will see two COMs. The one with CH340 is the serial port tool, and the other is the CanMV K230 REPL. If the CH340 driver is not installed, you need to install it manually. The driver is in：<u>01Studio MicroPython Develop Kits (Base on CanMV K230)\01-Tools\01-windows\Serial Terminal\CH340 Driver</u> .
 
 ![uart5](./img/uart/uart5.png)
 
-本实验要用到串口助手，打开配套资料包\开发工具\windows\串口终端工具下的【UartAssist.exe】软件。
+This experiment requires the use of the UART assistant. Open 01Studio MicroPython Develop Kits (Base on CanMV K230)\01-Tools\01-windows\Serial Terminal\UartAssist.exe.
 
 ![uart6](./img/uart/uart6.png)
 
-将串口工具配置成COM14（根据自己的串口号调整）。波特率115200。运行程序，可以看到一开始串口助手收到CanMV K230上电发来的信息“Hello 01Studio!”。我们在串口助手的发送端输入“http://www.01studio.cc”， 点击发送，可以看到CanMV K230在接收到该信息后在REPL里面打印了出来。如下图所示：
+Configure the serial port tool to COM14 (adjust according to your own serial port number). The baud rate is 115200. Run the program, and you can see that the serial port assistant receives the message "Hello 01Studio!" sent by CanMV K230 when it is powered on. We enter "http://www.01studio.cc" on the sending end of the serial port assistant, click Send, and you can see that CanMV K230 prints out the message in REPL after receiving it. As shown in the figure below:
 
 ![uart7](./img/uart/uart7.png)
 
-通过本节我们学会了串口收发应用，CanMV K230引出2个串口，因此可以接多个串口外设。从而实现更多的功能。
+Through this section, we have learned the application of serial port transmission and reception. CanMV K230 leads to 2 serial ports, so it can connect multiple serial port peripherals to achieve more functions.
 
-## 使用UART2
+## Use UART2
 
-将上面代码的串口1部分注释，去除串口2代码注释，即可使用串口2。
+Comment out UART1 part of the above code and remove the comments of UART2 code to use UART2.
 
 ```python
-# UART2代码
+# UART2 Code
 fpioa.set_function(11,FPIOA.UART2_TXD)
 fpioa.set_function(12,FPIOA.UART2_RXD)
 
-uart=UART(UART.UART2,115200) #设置串口号2和波特率
+uart=UART(UART.UART2,115200) #Set UART2 and baud rate
 ```
 
-### 参考代码
+### Code
 
 ```python
 '''
-实验名称：UART（串口通信）
-作者：01Studio
-实验平台：01Studio CanMV K230
-说明：通过编程实现串口通信，跟电脑串口助手实现数据收发。
+Demo Name：UART
+Author：01Studio
+Platform：01Studio CanMV K230
+Description：Realize serial communication through programming, and send and receive data with computer serial assistant
 '''
 
-#导入串口模块
+#Import UART module
 from machine import UART
 from machine import FPIOA
 import time
@@ -191,34 +191,34 @@ import time
 fpioa = FPIOA()
 
 '''
-# UART1代码
+# UART1 Code
 fpioa.set_function(3,FPIOA.UART1_TXD)
 fpioa.set_function(4,FPIOA.UART1_RXD)
 
-uart=UART(UART.UART1,115200) #设置串口号1和波特率
+uart=UART(UART.UART1,115200) #Set UART1 and baud rate
 '''
 
-# UART2代码
+# UART2 Code
 fpioa.set_function(11,FPIOA.UART2_TXD)
 fpioa.set_function(12,FPIOA.UART2_RXD)
 
-uart=UART(UART.UART2,115200) #设置串口号2和波特率
+uart=UART(UART.UART2,115200) #Set UART2 and baud rate
 
-uart.write('Hello 01Studio!')#发送一条数据
+uart.write('Hello 01Studio!')#Send data
 
 while True:
 
-    text=uart.read(128) #接收128个字符
+    text=uart.read(128) #Receive 128 characters
     if text != b'':
-        print(text) #通过REPL打印串口3接收的数据
+        print(text) #Print the data received by UART3 through REPL
 
     time.sleep(0.1) #100ms
 
 ```
 
-### 接线
+### wiring
 
-串口2可以使用40Pin GPIO11（TX2）、GPIO12(RX2)引脚或者背面的4P座子（使用搭配的1.25mm转2.54mm杜邦线）连接其它外设串口设备模块，实现串口通讯。 
+UART2 can use the 40-pin GPIO11 (TX2), GPIO12 (RX2) pins or the 4-pin connector on the back (using the matching 1.25mm to 2.54mm DuPont cable) to connect other peripheral serial port device modules to achieve serial port communication. 
 
 ![uart](./img/uart/uart8.png)
 

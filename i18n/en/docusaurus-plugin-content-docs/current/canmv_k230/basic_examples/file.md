@@ -2,12 +2,12 @@
 sidebar_position: 11
 ---
 
-# 文件读写
+# Reading and writing Files
 
-## 前言
+## Foreword
 在嵌入式编程中我们经常会遇到需要将某些数据实现掉电保存功能，如传感器数据等。往往会用到EEPROM、flash等一些储存方式。而CanMV K230 MicroPython自带文件系统，我们只需要将数据直接用文件方式保存即可。
 
-## 实验目的
+## Experiment Purpose
 编程实现文件读写操作。
 
 ## 实验讲解
