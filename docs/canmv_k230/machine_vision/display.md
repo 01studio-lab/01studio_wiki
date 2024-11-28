@@ -57,10 +57,7 @@ Display.show_image(img, x = 0, y = 0, layer = None, alpha = 255, flag = 0)
 ```
 显示图像。
 
-- `type`: 显示设备类型。
-    - `VIRT` : IDE缓冲区显示；
-    - `LT9611` : HDMI显示；
-    - `ST7701` : mipi显示屏。
+- `img`: 显示的图像，可以通过创建图像或者摄像头采集。
 
 - `x`: 起始横坐标；
 

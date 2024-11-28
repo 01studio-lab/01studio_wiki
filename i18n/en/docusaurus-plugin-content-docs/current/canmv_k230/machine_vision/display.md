@@ -2,147 +2,145 @@
 sidebar_position: 2
 ---
 
-# 图像3种显示方式
+# Display in 3 ways
 
-## 前言
+## Foreword
 
-在摄像头拍摄图像后我们需要观察图像，这就涉及如何显示的问题，目前CanMV K230支持3种显示方式。分别是：IDE缓冲区显示、外接HDMI显示器或MIPI显示屏。
+After the camera captures the image, we need to observe the image, which involves the issue of how to display it. Currently, CanMV K230 supports three display modes: IDE buffer display, external HDMI display or MIPI display.
 
-## 实验目的
+## Experiment Purpose
 
-编程实现摄像头图像的3种不同显示方式。
+Program to implement 3 different display modes of camera images.
 
-## 实验讲解
+## Experimental Explanation
 
-01Studio CanMV K230开发板目前有3种图像显示方式，各有特点：
+01Studio CanMV K230 development board currently has 3 image display modes, each with its own characteristics:
 
-- `IDE缓冲区显示`：性价比最高，图像质量有一定下降，但能满足大部分场合调试使用。最大支持1920x1080分辨率。
-- `HDMI`：外接HDMI显示屏，清晰度最高。最大支持1920x1080分辨率。
-- `MIPI显示屏`：外接01Studio 3.5寸MiPi显示屏，可以一体化组装，适合离线部署调试使用。最大支持800x480分辨率。
+- `IDE buffer display`：The most cost-effective, image quality is somewhat reduced, but it can meet the debugging needs in most occasions. The maximum supported resolution is 1920x1080.
+- `HDMI`：External HDMI display, with the highest definition. Maximum support resolution of 1920x1080.
+- `MIPI LCD`：The external 01Studio 3.5-inch MiPi display can be integrated with the development board, suitable for offline deployment and debugging. The maximum supported resolution is 800x480.
 
-以上显示方式均集成在 Display Python API。用户只需要简单修改代码即可实现不同方式显示。
+The above display methods are integrated in the Display Python API. Users only need to modify the code to achieve different display methods.
 
-## Display对象
+## class Display
 
-### 构造函数
+### Constructors
 ```python
 from media.display import * 
 ```
-导入Display模块，即可使用Display相关API接口。
+Import the Display module to use the Display-related API.
 
-### 使用方法
+### Methods
 
 ```python
 Display.init(type = None, width = None, height = None, osd_num = 1, to_ide = False, fps = None)
 ```
-初始化Display模块。
+Initialize the Display module.
 
-- `type`: 显示设备类型。
-    - `VIRT` : IDE缓冲区显示；
-    - `LT9611` : HDMI显示；
-    - `ST7701` : mipi显示屏。
+- `type`: Display type.
+    - `VIRT` : IDE buffer；
+    - `LT9611` : HDMI；
+    - `ST7701` : mipi LCD。
 
-- `width`: 可选参数，显示图像宽度；
+- `width`: Optional parameter, display image width;
 
-- `height`: 可选参数，显示图像高度；
+- `height`: Optional parameter, display image height;
 
-- `to_ide`: 同时在IDE显示，仅用于设置为HDMI或MIPI屏显示时使用:
-    - `True` : 同步显示；
-    - `False` : 不显示。
+- `to_ide`: At the same time, it is displayed in IDE, only used when it is set to HDMI or MIPI screen display:
+    - `True` : Synchronous display;
+    - `False` : Not display.
 
 <br></br>
 
 ```python
 Display.show_image(img, x = 0, y = 0, layer = None, alpha = 255, flag = 0)
 ```
-显示图像。
+Display the image.
 
-- `type`: 显示设备类型。
-    - `VIRT` : IDE缓冲区显示；
-    - `LT9611` : HDMI显示；
-    - `ST7701` : mipi显示屏。
+- `img`: The image to be displayed, which can be created by an image or captured by a camera.
 
-- `x`: 起始横坐标；
+- `x`: Starting horizontal coordinate;
 
-- `y`: 起始纵坐标。
+- `y`: Starting vertical coordinate.
 
 <br></br>
 
 ```python
 Display.deinit()
 ```
-注销Display模块。必须在`MediaManager.deinit()`之前, 在`sensor.stop()`之后调用。
+Unregister the Display module. Must be called before `MediaManager.deinit()` and after `sensor.stop()`.
 
 <br></br>
 
-更多用法请阅读: [CanMV K230官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Display%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
+For more usage, please read:[CanMV K230 Docs](https://developer.canaan-creative.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Display%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
 
 
-熟悉Display API用法后，我们来看看代码的编写流程图：
+After getting familiar with the usage of Display API, let's take a look at the code writing flow chart:
 
 
 ```mermaid
 graph TD
-    导入相关模块 --> 初始化sensor模块 --> 摄像头拍摄 --> 通过IDE缓冲区,HDMI或MIPI屏显示图像 --> 摄像头拍摄;
+    id1[Import related modules] --> id2[Initialize the sensor module] --> id3[Camera shooting] --> id4[Display images via IDE buffer, HDMI or MIPI screen] --> id3;
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
-实验名称：图像3种显示方式
-实验平台：01Studio CanMV K230
-说明：实现摄像头图像采集通过IDE、HDMI和MIPI屏显示
+Demo Name：Display in 3 ways
+Platform：01Studio CanMV K230
+Description: Camera image acquisition through IDE, HDMI and MIPI screen display
+Tutorial：wiki.01studio.cc
 '''
 
 import time, os, sys
 
-from media.sensor import * #导入sensor模块，使用摄像头相关接口
-from media.display import * #导入display模块，使用display相关接口
-from media.media import * #导入media模块，使用meida相关接口
+from media.sensor import * #Import the sensor module and use the camera API
+from media.display import * #Import the display module and use display API
+from media.media import * #Import the media module and use meida API
 
 try:
 
-    sensor = Sensor() #构建摄像头对象
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，缓冲区和HDMI用,默认通道0
-    #sensor.set_framesize(width=800,height=480) #设置帧大小800x480,LCD专用,默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+    sensor = Sensor() #Constructing a camera object
+    sensor.reset() #reset the Camera
+    sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
+    #sensor.set_framesize(width=800,height=480) #Set frame size to 800x480,mipi LCD,channel0
+    sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
 
-    #################################
-    ## 图像3种不同显示方式（修改注释实现）
-    #################################
+    ##############################################################
+    ## 3 different ways to display images (modify annotations)
+    #############################################################
 
-    Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
-    #Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
-    #Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
+    Display.init(Display.VIRT, sensor.width(), sensor.height()) #Displaying images via IDE buffer
+    #Display.init(Display.LT9611, to_ide=True) #Displaying images via HDMI
+    #Display.init(Display.ST7701, to_ide=True) #Display images through 01Studio 3.5-inch mipi display
 
-    MediaManager.init() #初始化media资源管理器
+    MediaManager.init() #Initialize the media resource manager
 
-    sensor.run() #启动sensor
+    sensor.run() #Start the camera
 
     clock = time.clock()
 
     while True:
 
 
-        os.exitpoint() #检测IDE中断
+        os.exitpoint() #Detect IDE interrupts
 
         ####################
-        ## 这里编写主要代码
+        ## Write codes here
         ####################
         clock.tick()
 
-        img = sensor.snapshot() #拍摄一张图
+        img = sensor.snapshot() #Take a picture
 
-        Display.show_image(img) #显示图片
+        Display.show_image(img) #Show the Picture
 
-        print(clock.fps()) #打印FPS
+        print(clock.fps()) #FPS
 
 
-###################
-# IDE中断释放资源代码
-###################
+##############################################
+# IDE interrupts the release of resource code
+##############################################
 except KeyboardInterrupt as e:
     print("user stop: ", e)
 except BaseException as e:
@@ -157,61 +155,62 @@ finally:
     time.sleep_ms(100)
     # release media buffer
     MediaManager.deinit()
+
 ```
 
-## 实验结果
+## Experimental Results
 
-### IDE缓冲区显示
+### IDE buffer display
 
-点击运行代码，可以看到在IDE右边显示摄像头实时拍摄图像。
+Click Run Code, and you can see the real-time image captured by the camera displayed on the right side of the IDE.
 
 ![display](./img/display/display1.png)
 
-### HDMI显示器显示
+### HDMI display
 
-将参考代码中的代码改成LT9611 :
+Change the reference code to LT9611:
 ```python
     #################################
-    ## 图像3种不同显示方式（修改注释实现）
+    ##  3 different ways to display images (modify annotations)
     #################################
 
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
-    Display.init(Display.LT9611 ,to_ide=True) #通过HDMI显示图像
-    #Display.init(Display.ST7701 ,to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
+    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #Displaying images via IDE buffer
+    Display.init(Display.LT9611, to_ide=True) #Displaying images via HDMI
+    #Display.init(Display.ST7701, to_ide=True) #Display images through 01Studio 3.5-inch mipi display
 
 ```
 
-通过HDMI线连接到HDMI显示器：
+Connect to an HDMI display via an HDMI cable:
 ![display](./img/display/display2.png)
 
-运行代码，可以看到HDMI显示摄像头采集图像, 最大支持1080p：
+Run the code and you can see the HDMI display camera captures images, which supports up to 1080p:
 ![display](./img/display/display3.png)
 
-### 3.5寸mipi显示屏显示
+### 3.5-inch mipi LCD display
 
-使用3.5寸mipi显示屏显示图像需要修改2个地方：
+To display images using a 3.5-inch mipi display, two places need to be modified:
 
-将摄像头采集分辨率改成800x480以下：
+Change the camera capture resolution to below 800x480:
 ```python
-    #sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，缓冲区和HDMI用,默认通道0
-    sensor.set_framesize(width=800,height=480) #设置帧大小800x480,LCD专用,默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+    #sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
+    sensor.set_framesize(width=800,height=480) #Set frame size to 800x480,mipi LCD,channel0
+    sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
 ```
 
 将参考代码中的代码改成ST7701 :
 ```python
-    #################################
-    ## 图像3种不同显示方式（修改注释实现）
-    #################################
+    ##############################################################
+    ## 3 different ways to display images (modify annotations)
+    #############################################################
 
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
-    #Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
-    Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
+    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #Displaying images via IDE buffer
+    #Display.init(Display.LT9611, to_ide=True) #Displaying images via HDMI
+    Display.init(Display.ST7701, to_ide=True) #Display images through 01Studio 3.5-inch mipi display
 
 ```
 
-通过排线连接01Studio 3.5寸mipi屏：
+Connect 01Studio 3.5-inch mipi screen via cable:
 ![display](./img/display/display4.png)
 
-运行代码，可以看到mipi屏上显示摄像头采集图像，最大支持800x480：
+Run the code, and you can see the camera captured image displayed on the mipi screen, with a maximum supported resolution of 800x480:
 ![display](./img/display/display5.png)

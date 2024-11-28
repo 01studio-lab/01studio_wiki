@@ -42,7 +42,7 @@ img=image.Image(w, h, format)
 - `w`: 图像宽度
 - `h`: 图像高度
 - `format` : 图像格式。部分格式如下：
-    - `GRAYSCALE` : 图像格式；
+    - `GRAYSCALE` : 灰度图像；
     - `RGB565` : 16bit彩色；(大部分image图像处理函数使用这个格式。)
     - `RGB888` : 24bit真彩色
 
@@ -72,7 +72,7 @@ image.draw_rectangle(x, y, w, h[, color[, thickness=1[, fill=False]]])
 - `h`: 高度;
 - `color`: 颜色;
 - `thickness`: 边框粗细;
-- `fill`: 是否填充;、
+- `fill`: 是否填充;
     - `True` : 填充。
     - `False` : 不填充。
 
@@ -83,8 +83,7 @@ image.draw_circle(x, y, radius[, color[, thickness=1[, fill=False]]])
 ```
 画圆。
 - `x, y`: 圆心;
-- `radius`: 宽度;
-- `h`: 高度;
+- `radius`: 半径;
 - `color`: 颜色;
 - `thickness`: 线条粗细;
 - `fill`: 是否填充;、
