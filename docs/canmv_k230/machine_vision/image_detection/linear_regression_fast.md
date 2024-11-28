@@ -14,7 +14,7 @@ sidebar_position: 5
 
 CanMV集成了快速线性回归get_regression函数，位于image模块下，因此我们直接将拍摄到的图片进行处理即可，那么我们像以往一样像看一下函数相关说明，具体如下：
 
-## find_circles对象
+## get_regression对象
 
 ### 构造函数
 ```python

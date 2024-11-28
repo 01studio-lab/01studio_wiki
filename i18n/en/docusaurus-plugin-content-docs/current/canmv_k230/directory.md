@@ -50,7 +50,7 @@ sidebar_position: 1
         - [find edges](./machine_vision/image_detection/find_edges.md) 
         - [find segments](./machine_vision/image_detection/find_segments.md) 
         - [find circles](./machine_vision/image_detection/find_circles.md) 
-        - [find rects](./machine_vision/image_detection/find_rects.md) 
+        - [find rectanglests](./machine_vision/image_detection/find_rects.md) 
         - [linear regression fast（Line patrol）](./machine_vision/image_detection/linear_regression_fast.md) 
     - **Color recognition**
         - [single color recognition](./machine_vision/color_recognition/single_color.md) 
@@ -62,7 +62,7 @@ sidebar_position: 1
         - [QR code](./machine_vision/code/qr_code.md )
         - [AprilTag](./machine_vision/code/apriltag.md) 
     - **AI Vision（KPU）**
-        - [AI Framework](./machine_vision/ai_vision/ai_frame.md) 
+        - [AI Vision Development Framework](./machine_vision/ai_vision/ai_frame.md) 
         - **Face**
             - [face detection](./machine_vision/ai_vision/face/face_detection.md) 
             - [face landmark](./machine_vision/ai_vision/face/face_landmark.md) 

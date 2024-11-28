@@ -2,166 +2,171 @@
 sidebar_position: 4
 ---
 
-# 机器人巡线（实线）
+# Robot line patrol (solid line)
 
-## 前言
+## Foreword
 
-本节的巡线案例仍然是基于颜色识别，原理是根据摄像头采集到的图像直线与中心偏离的位置计算出偏离角度，这个方法让巡线变得更容易。如果你的CanMV K230连接到机器人（或相关设备），那么机器人（设备）可以直接关键计算角度偏离结果做出相应调整。
+The line inspection case in this section is still based on color recognition. The principle is to calculate the deviation angle based on the position of the straight line of the image captured by the camera and the deviation from the center. This method makes line inspection easier. If your CanMV K230 is connected to a robot (or related equipment), the robot (equipment) can directly calculate the angle deviation result and make corresponding adjustments.
 
 ![line_follow](./img/line_follow/line_follow0.png)
 
-## 实验目的
-通过编程实现CanMV K230摄像头画面中黑线的偏离角度。
+## Experiment Purpose
+
+The deviation angle of the black line in the CanMV K230 camera image is achieved through programming.
 
 ## 实验讲解
 
-本实验对画面是有一定要求的，也就是摄像头采集图像一定要出现唯一1条连续的黑色直线。程序通过对画面切割成三部分，计算每个部分黑色线的中心点X坐标，然后采用加权平均算法估算出直线的偏离位置。通常情况下越靠近底部的地方离摄像头越近，顶部表示远方线段。因此底部的图形权重高。以下下是示意图讲解：
+This experiment has certain requirements for the screen, that is, the camera must capture an image with only one continuous black straight line. The program cuts the screen into three parts, calculates the X coordinate of the center point of the black line in each part, and then uses the weighted average algorithm to estimate the deviation position of the straight line. Generally, the closer to the bottom, the closer to the camera, and the top represents the distant line segment. Therefore, the weight of the bottom figure is high. The following is a schematic diagram for explanation:
 
-假设摄像头当前画面的像素是例程的QQVGA分辨率：160（宽）X120（高），左上角坐标为（0,0），然后当前出现直线坐标为（80,120）至（160,0）偏右的直线。上中下三个部分的权重分别为0.1、0.3、0.7（底部图像靠近机器人，权重大，权重总和可以不是1），我们来计算一下其中心值。
+Assume that the pixel of the current screen of the camera is the QQVGA resolution of the routine: 160 (width) X120 (height), the upper left corner coordinate is (0,0), and then the current straight line coordinate is (80,120) to (160,0) to the right. The weights of the upper, middle and lower parts are 0.1, 0.3, and 0.7 respectively (the bottom image is close to the robot, the weight is large, and the sum of the weights may not be 1). Let's calculate its center value.
 
 ![line_follow](./img/line_follow/line_follow1.png)
 
-上图中Y轴的中点坐标就是60，X坐标加权平均值计算如下：
+The midpoint coordinate of the Y axis in the above figure is 60, and the weighted average of the X coordinate is calculated as follows:
 
 X’=（80*0.7+120*0.3+160*0.1）/（0.7+0.3+0.1）=98
 
-那么直线偏离坐标可以认为是（98,60），图中绿色“+”位置。那么利用反正切函数可以求出偏离角度：a = atan((98-80)/60)=16.7°，机器人相当于实线的位置往左偏了，所以加一个负号，即 -16.7°；偏离角度就是这么计算出来的。**得到偏离角度后就可以自己编程去调整小车或者机器人的运动状态，直到0°为没有偏离。**
+Then the straight line deviation coordinate can be considered as (98,60), the green "+" position in the figure. Then the inverse tangent function can be used to calculate the deviation angle: a = atan((98-80)/60)=16.7°. The robot is equivalent to the position of the solid line deviating to the left, so a minus sign is added, that is, -16.7°; the deviation angle is calculated in this way. **After obtaining the deviation angle, you can program yourself to adjust the motion state of the car or robot until 0° means no deviation. **
 
-本实验主要采用find_blobs函数编程，这个函数在上一节已经有讲述，具体使用方法如下表：
+This experiment mainly uses the find_blobs function programming, which has been described in the previous section. The specific usage is as follows:
 
-## find_blobs对象
+## class find_blobs
 
-### 构造函数
+### Constructors
 ```python
 image.find_blobs(thresholds[, invert=False[, roi[, x_stride=2[, y_stride=1[, area_threshold=10
                  [, pixels_threshold=10[, merge=False[, margin=0[, threshold_cb=None[, 
                  merge_cb=None]]]]]]]]]])
 ```
-查找图像中指定的色块。返回image.blog对象列表；参数说明：
-- `thresholds`: 必须是元组列表。 [(lo, hi), (lo, hi), ..., (lo, hi)] 定义你想追踪的颜色范围。 对于灰度图像，每个元组需要包含两个值 - 最小灰度值和最大灰度值。 仅考虑落在这些阈值之间的像素区域。 对于RGB565图像，每个元组需要有六个值(l_lo，l_hi，a_lo，a_hi，b_lo，b_hi) - 分别是LAB L，A和B通道的最小值和最大值。
-- `area_threshold`: 若色块的边界框区域小于此参数值，则会被过滤掉；
-- `pixels_threshold`: 若色块的像素数量小于此参数值，则会被过滤掉；
-- `merge`: 若为True,则合并所有没有被过滤的色块；
-- `margin`: 调整合并色块的边缘。
+Find the specified color block in the image. Returns a list of `image.blog` objects; parameter description:
+- `thresholds`: Must be a list of tuples. [(lo, hi), (lo, hi), ..., (lo, hi)] defines the color range you want to track. For grayscale images, each tuple needs to contain two values ​​- the minimum grayscale value and the maximum grayscale value. Only pixel regions that fall between these thresholds are considered. For RGB565 images, each tuple needs to have six values ​​(l_lo, l_hi, a_lo, a_hi, b_lo, b_hi) - the minimum and maximum values ​​of the LAB L, A and B channels, respectively.
+- `area_threshold`: If the bounding box area of ​​the color block is smaller than this parameter value, it will be filtered out;
+- `pixels_threshold`: If the number of pixels in a color block is less than this parameter value, it will be filtered out;
+- `merge`: If True, merge all unfiltered color blocks;
+- `margin`: Adjusts the edges of merged patches.
 
-### 使用方法
+### Methods
 
-以上函数返回image.blob对象。
+The above function returns an `image.blob` object.
 
 ```python
 blob.rect()
 ```
-返回一个矩形元组（x,y,w,h）,如色块边界。可以通过索引[0-3]来获得这些值。
+Returns a rectangle tuple (x, y, w, h), such as the blob boundary. These values ​​can be obtained by indexing [0-3].
 
 <br></br>
 
 ```python
 blob.cx()
 ```
-返回色块(int)的中心x位置。可以通过索引[5]来获得这个值。
+Returns the center x position of the blob (int). You can get this value by using [5] on the object.
 
 <br></br>
 
 ```python
 blob.cy()
 ```
-返回色块(int)的中心y位置。可以通过索引[6]来获得这个值。
+Returns the center y position of the blob (int). You can get this value by using [6] on the object.
 
 <br></br>
 
-[官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-blobs)
+For more usage, please read: [CanMV K230 Docs](https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-blobs)
 
 <br></br>
 
-了解了找色块函数应用方法后，我们可以理清一下编程思路，代码编写流程如下：
+The code writing process is as follows:
 
 ```mermaid
 graph TD
-    导入sensor等相关模块 --> 初始化和配置相关模块  --> 定义3个ROI区域和设置权重 --> 实时采集图像并计算3个区域位置 --> 计算直线中心偏离值 --> 换算成角度并在终端打印信息 --> 实时采集图像并计算3个区域位置;
+    id1[Import sensor and other related modules] --> i2d[Initialize and configure related modules]  --> id3[Define 3 ROI regions and set weights] --> id4[Real-time image acquisition and calculation of 3 area positions] --> id5[Calculate the deviation value of the center of the line] --> id6[Convert to angle and print information in terminal] --> id4;  
 ```
-
-## 参考代码
+  
+## Codes
 
 ```python
 '''
-实验名称：机器人巡线（实线）
-实验平台：01Studio CanMV K230
-教程：wiki.01studio.cc
+Demo Name：Robot line patrol (solid line)
+Platform：01Studio CanMV K230
+Tutorial：wiki.01studio.cc
 
-# 黑色灰度线巡线跟踪示例
+# Black Grayscale Line Following Example
 #
-#做一个跟随机器人的机器人需要很多的努力。这个示例脚本
-#演示了如何做机器视觉部分的线跟随机器人。你
-#可以使用该脚本的输出来驱动一个差分驱动机器人
-#跟着一条线走。这个脚本只生成一个表示的旋转值（偏离角度）
-#你的机器人向左或向右。
+# Making a robot that follows a robot takes a lot of effort. This example script
+# demonstrates how to make a line following robot for the machine vision part. You
+# can use the output of this script to drive a differential drive robot
+# to follow a line. This script only generates a rotation value (angle of deviation) that indicates
+# your robot is pointing left or right.
 #
-# 为了让本示例正常工作，你应该将摄像头对准一条直线（实线）
-#并将摄像头调整到水平面45度位置。请保证画面内只有1条直线。
+# For this example to work properly, you should aim the camera at a straight line (solid line)
+# and adjust the camera to a 45 degree position on the horizontal plane. Make sure there is only 1 straight line in the 
+# picture.
 '''
 
 import time, os, sys, math
 
-from media.sensor import * #导入sensor模块，使用摄像头相关接口
-from media.display import * #导入display模块，使用display相关接口
-from media.media import * #导入media模块，使用meida相关接口
+from media.sensor import * #Import the sensor module and use the camera API
+from media.display import * #Import the display module and use display API
+from media.media import * #Import the media module and use meida API
 
-# 追踪黑线。使用 [(128, 255)] 追踪白线.
+# Trace the black line. Use [(128, 255)] to trace the white line.
 GRAYSCALE_THRESHOLD = [(0, 64)]
 
-# 下面是一个roi【区域】元组列表。每个 roi 用 (x, y, w, h)表示的矩形。
+# Below is a list of roi [region] tuples. Each roi is a rectangle represented by (x, y, w, h).
 
 '''
-#采样图像QQVGA 160*120，列表把roi把图像分成3个矩形，越靠近的摄像头视野（通常为图像下方）的矩形权重越大。
+# The Sampling image QQVGA 160*120, the list divides the image into 3 rectangles of roi, the rectangle closer to the camera
+# field of view (usually below the image) has a greater weight.
 ROIS = [ # [ROI, weight]
-        (0, 100, 160, 20, 0.7), # 可以根据不同机器人情况进行调整。
+        (0, 100, 160, 20, 0.7), # It can be adjusted according to different robot situations.
         (0,  50, 160, 20, 0.3),
         (0,   0, 160, 20, 0.1)
        ]
 '''
-#采样图像为QVGA 320*240，列表把roi把图像分成3个矩形，越靠近的摄像头视野（通常为图像下方）的矩形权重越大。
+
+# The sampled image is QVGA 320*240. The list divides the image into three rectangles using roi. The rectangles closer to 
+# the camera's field of view (usually below the image) have greater weights.
 ROIS = [ # [ROI, weight]
-        (0, 200, 320, 40, 0.7), # 可以根据不同机器人情况进行调整。
+        (0, 200, 320, 40, 0.7), # It can be adjusted according to different robot situations.
         (0,  100, 320, 40, 0.3),
         (0,   0, 320, 40, 0.1)
        ]
 
-# 计算以上3个矩形的权值【weight】的和，和不需要一定为1.
+# Calculate the sum of the weights of the above three rectangles. The sum does not necessarily need to be 1.
 weight_sum = 0
-for r in ROIS: weight_sum += r[4] # r[4] 为矩形权重值.
+for r in ROIS: weight_sum += r[4] # r[4] is the rectangle weight value.
 
 try:
 
-    sensor = Sensor(width=1280, height=960) #构建摄像头对象，将摄像头长宽设置为4:3
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(width=320, height=240) #设置帧大小，默认通道0
-    sensor.set_pixformat(Sensor.GRAYSCALE) #设置输出图像格式，默认通道0
+    sensor = Sensor(width=1280, height=960) #Build a camera object and set the camera's length and width to 4:3
+    sensor.reset() # reset the Camera
+    sensor.set_framesize(width=320, height=240) # Set the frame size to LCD resolution, channel 0
+    sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
+    
+    #Use 3.5-inch mipi screen and IDE buffer to display images at the same time
+    Display.init(Display.ST7701, to_ide=True) 
+    #Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
 
-    Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
+    MediaManager.init() #Initialize the media resource manager
 
-    MediaManager.init() #初始化media资源管理器
-
-    sensor.run() #启动sensor
+    sensor.run() #Start the camera
 
     clock = time.clock()
 
     while True:
 
+        os.exitpoint() #Detect IDE interrupts
 
-        os.exitpoint() #检测IDE中断
-
-        ################
-        ## 这里编写代码 ##
-        ################
+        ####################
+        ## Write codes here
+        ####################
         clock.tick()
 
-        img = sensor.snapshot() #拍摄一张图片
+        img = sensor.snapshot() # Take a picture
 
         centroid_sum = 0
 
         for r in ROIS:
-            blobs = img.find_blobs(GRAYSCALE_THRESHOLD, roi=r[0:4], merge=True) # r[0:4] 是上面定义的roi元组.
+            blobs = img.find_blobs(GRAYSCALE_THRESHOLD, roi=r[0:4], merge=True) # r[0:4] is the roi tuple defined above.
 
             if blobs:
                 # Find the blob with the most pixels.
@@ -172,39 +177,41 @@ try:
                 img.draw_cross(largest_blob.cx(),
                                largest_blob.cy())
 
-                centroid_sum += largest_blob.cx() * r[4] # r[4] 是每个roi的权重值.
+                centroid_sum += largest_blob.cx() * r[4] # r[4] is the weight value of each roi.
 
-        center_pos = (centroid_sum / weight_sum) # 确定直线的中心.
+        center_pos = (centroid_sum / weight_sum) # Determine the center of the line.
 
-        # 将直线中心位置转换成角度，便于机器人处理.
+        # Convert the center position of the line into an angle for easier robot processing.
         deflection_angle = 0
 
-        # 使用反正切函数计算直线中心偏离角度。可以自行画图理解
-        #权重X坐标落在图像左半部分记作正偏，落在右边部分记为负偏，所以计算结果加负号。
+        # Use the inverse tangent function to calculate the deviation angle of the center of the line. You can draw a 
+        # picture to understand it yourself.
+        # The weight X coordinate falls on the left half of the image and is recorded as a positive deviation, and falls on 
+        # the right half and is recorded as a negative deviation, so the calculation result is added with a negative sign.
 
-        #deflection_angle = -math.atan((center_pos-80)/60) #采用图像为QQVGA 160*120时候使用
+        #deflection_angle = -math.atan((center_pos-80)/60) #Use when the image is QQVGA 160*120
 
-        deflection_angle = -math.atan((center_pos-160)/120) #采用图像为QVGA 320*240时候使用
+        deflection_angle = -math.atan((center_pos-160)/120) #Use when the image is QVGA 320*240
 
-        # 将偏离值转换成偏离角度.
+        # Convert the deviation value to a deviation angle.
         deflection_angle = math.degrees(deflection_angle)
 
-        # 计算偏离角度后可以控制机器人进行调整.
+        # After calculating the deviation angle, the robot can be controlled to make adjustments.
         print("Turn Angle: %f" % deflection_angle)
 
-        # LCD显示偏移角度,scale参数可以改变字体大小
+        # LCD displays the offset angle, and the scale parameter can change the font size
         img.draw_string_advanced(2,2,20, str('%.1f' % deflection_angle), color=(255,255,255))
 
-        #Display.show_image(img) #显示图片
+        #Display.show_image(img) #Dispaly images
 
-        #显示图片，仅用于LCD居中方式显示
+        #Display images, only used for LCD center display
         Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2))
 
-        print(clock.fps()) #打印FPS
+        print(clock.fps()) #FPS
 
-###################
-# IDE中断释放资源代码
-###################
+##############################################
+# IDE interrupts the release of resource code
+##############################################
 except KeyboardInterrupt as e:
     print("user stop: ", e)
 except BaseException as e:
@@ -221,44 +228,44 @@ finally:
     MediaManager.deinit()
 ```
 
-## 实验结果
+## Experimental Results
 
-在CanMV IDE中运行代码，分别观察摄像头采集到没偏移、左偏和右偏各个直线的实验结果。
+Run the code in CanMV IDE and observe the experimental results of the straight lines captured by the camera with no deviation, left deviation, and right deviation.
 
-### 无偏移
+### No offset
 
-可以看到偏移角度接近0°；
+It can be seen that the offset angle is close to 0°;
 
-画面图片：
+Screen image:
 
 ![line_follow](./img/line_follow/line_follow3.png)
 
-终端结果：
+Terminal result:
 
 ![line_follow](./img/line_follow/line_follow4.png)
 
-### 左偏
+### Left deviation
 
-小车或机器人左偏时角度为负数；
+When the car or robot deviates to the left, the angle is negative;
 
-画面图片：
+Screen image:
 
 ![line_follow](./img/line_follow/line_follow5.png)
 
-终端结果：
+Terminal result:
 
 ![line_follow](./img/line_follow/line_follow6.png)
 
-### 右偏
+### Right deviation
 
-小车或机器人左偏时角度为正数；
+The angle is positive when the car or robot deviates to the left;
 
-画面图片：
+Screen image:
 
 ![line_follow](./img/line_follow/line_follow7.png)
 
-终端结果：
+Terminal result:
 
 ![line_follow](./img/line_follow/line_follow8.png)
 
-获取便宜角度后可以执行指定动作或结合[UART(串口通讯)](../../basic_examples/uart.md) 章节内容告知其它外设或主控。
+After obtaining the offset angle, you can perform specified actions or combine the contents of the [UART (Serial Communication)](../../basic_examples/uart.md) section to inform other peripherals or the main control.

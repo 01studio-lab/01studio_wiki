@@ -2,30 +2,30 @@
 sidebar_position: 1
 ---
 
-# 连接无线路由器
+# WiFi Connect
 
-## 前言
-WIFI是物联网中非常重要的角色，现在基本上家家户户都有WIFI网络了，通过WIFI接入到互联网，成了智能家居产品普遍的选择。而要想上网，首先需要连接上无线路由器。这一节我们就来学习如何使用CanMV K230开发板通过MicroPython编程实现连上路由器。
+## Foreword
+WIFI plays a very important role in the Internet of Things. Now almost every household has a WIFI network. Accessing the Internet through WIFI has become a common choice for smart home products. To access the Internet, you first need to connect to a wireless router. In this section, we will learn how to use the CanMV K230 development board to connect to a router through MicroPython programming.
 
-## 实验目的
+## Experiment Purpose
 
-编程实现连接路由器，将IP地址等相关信息通过串口终端打印（只支持2.4G网络）。
+Program to connect to the router and print the IP address and other related information through the serial terminal (only supports 2.4G network).
 
-## 实验讲解
+## Experimental Explanation
 
-连接路由器上网是我们每天都做的事情，日常生活中我们只需要知道路由器的账号和密码，就能使用电脑或者手机连接到无线路由器，然后上网冲浪。
+Connecting to a router to surf the Internet is something we do every day. In daily life, we only need to know the router account and password to use a computer or mobile phone to connect to the wireless router and surf the Internet.
 
-CanMV K230板载WiFi模块和陶瓷天线，可以直接连接2.4G无线网络。
+CanMV K230 has an onboard WiFi module and ceramic antenna, which can directly connect to a 2.4G wireless network.
 
 ![wifi_connect](./img/wifi_connect/wifi_connect0.png)
 
-CanMV K230 MicroPython库已经集成了network模块，开发者使用内置的network模块函数可以非常方便地连接上路由器。
+The CanMV K230 MicroPython library has integrated the network module. Developers can easily connect to the router using the built-in network module functions.
 
-我们先来看看network基于WiFi（WLAN模块）的构造函数和使用方法。
+Let's first look at the constructor and usage of the network based on WiFi (WLAN module).
 
-## network对象
+## class network
 
-### 构造函数
+### Constructors
 ```python
 wlan = network.WLAN(interface_id)
 ```
@@ -36,7 +36,7 @@ wlan = network.WLAN(interface_id)
     - `network.STA_IF`: 客户端（STA）模式;
     - `network.AP_IF`: 热点（AP）模式。
 
-### 使用方法
+### Methods
 ```python
 wlan.active([is_active])
 ```

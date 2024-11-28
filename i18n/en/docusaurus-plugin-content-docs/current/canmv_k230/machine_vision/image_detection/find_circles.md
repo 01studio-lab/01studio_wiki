@@ -2,117 +2,116 @@
 sidebar_position: 3
 ---
 
-# 圆形检测
+# find circles
 
-## 前言
-本节学习的是对图像中的圆形进行检测识别。
+## Foreword
+This section learns to detect and recognize circles in images.
 
-## 实验目的
-通过编程实现CanMV K230对图像中的圆形进行检测识别，并画图指示。
+## Experiment Purpose
+Through programming, CanMV K230 can detect and identify circles in images and draw pictures to indicate them.
 
-## 实验讲解
+## Experimental Explanation
 
-CanMV集成了圆形识别find_circles函数，位于image模块下，因此我们直接将拍摄到的图片进行处理即可，那么我们像以往一样像看一下圆形识别函数相关说明，具体如下：
+CanMV integrates the circle recognition find_circles function, which is located in the image module, so we can directly process the captured pictures. Then we look at the relevant instructions of the circle recognition function as before, as follows:
 
+## class find_circles
 
-## find_circles对象
-
-### 构造函数
+### Constructors
 ```python
 image.find_circles([roi[, x_stride=2[, y_stride=1[, threshold=2000[, x_margin=10[, y_margin=10
                     [, r_margin=10[, r_min=2[, r_max[, r_step=2]]]]]]]]]])
 ```
-找圆函数。返回一个image.circle圆形对象，该圆形对象有4个值： x, y（圆心）, r （半径）和magnitude（量级）；量级越大说明识别到的圆可信度越高。
+Find circle function. Returns an image.circle object, which has 4 values: x, y (center), r (radius) and magnitude. The larger the magnitude, the higher the credibility of the recognized circle.
 
-参数说明：
-- `roi`: 识别区域（x,y,w,h），未指定则默认整张图片。
-- `threshold`: 阈值。返回大于或等于threshold的圆，调整识别可信度。
-- `x_stride`  `y_stride` : 霍夫变换时跳过x，y像素的量；
-- `x_margin` `y_margin` `r_margin` : 控制所检测圆的合并；
-- `r_min`  `r_max`: 控制识别圆形的半径范围；
-- `r_step`:控制识别步骤。
+Parameter Description:
+- `roi`: Recognition area (x, y, w, h). If not specified, the entire image is used by default.
+- `threshold`: Threshold. Return circles greater than or equal to threshold to adjust recognition confidence.
+- `x_stride`  `y_stride` : The amount of x,y pixels to skip during Hough transform;
+- `x_margin` `y_margin` `r_margin` : Controls the merging of detected circles;
+- `r_min`  `r_max`: Control the radius range of the recognized circle;
+- `r_step`: Control identification step.
 
-### 使用方法
+### Methods
 
-直接调用该函数。（大部分参数使用默认即可，**不支持压缩图像和bayer图像**）
+Call this function directly. (Most parameters can be left as default, **compressed images and bayer images are not supported**)
 
-更多用法请阅读官方文档：<br></br>
+For more usage, please read the official documentation:<br></br>
 https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-circles
 
 <br></br>
 
-我们结合前面摄像头的应用，整理一下编程思路如下：
+The programming ideas are as follows:
 
 ```mermaid
 graph TD
-    导入sensor等相关模块 --> 初始化和配置相关模块  --> 摄像头采集图像 --> 圆形识别并画图标示 --> 摄像头采集图像 ;
+    id1[Import sensor and other related modules] --> i2d[Initialize and configure related modules]  --> id3[Camera captures images] --> id4[find circles] --> id3 ;
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
-实验名称：圆形检测
-实验平台：01Studio CanMV K230
-教程：wiki.01studio.cc
-说明：推荐使用320x240以下分辨率，分辨率过大会导致帧率下降。
+Demo Name：find circles
+Platform：01Studio CanMV K230
+Tutorial：wiki.01studio.cc
+Description: It is recommended to use a resolution below 320x240. A resolution that is too high will cause the frame rate to drop.
 '''
 
 import time, os, sys
 
-from media.sensor import * #导入sensor模块，使用摄像头相关接口
-from media.display import * #导入display模块，使用display相关接口
-from media.media import * #导入media模块，使用meida相关接口
+from media.sensor import * #Import the sensor module and use the camera API
+from media.display import * #Import the display module and use display API
+from media.media import * #Import the media module and use meida API
 
 try:
 
-    sensor = Sensor(width=1280, height=960) #构建摄像头对象，将摄像头长宽设置为4:3
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(width=320, height=240) #设置帧大小，默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+    sensor = Sensor(width=1280, height=960) #Build a camera object and set the camera image length and width to 4:3
+    sensor.reset() # reset the Camera
+    sensor.set_framesize(width=320, height=240) #Set the frame size to resolution (320x240), default channel 0
+    sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
 
-    Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
+    Display.init(Display.ST7701, to_ide=True) #Use 3.5-inch mipi screen and IDE buffer to display images at the same time
+    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #Use only the IDE buffer to display images
 
-    MediaManager.init() #初始化media资源管理器
+    MediaManager.init() #Initialize the media resource manager
 
-    sensor.run() #启动sensor
+    sensor.run() #Start the camera
 
     clock = time.clock()
 
     while True:
 
-        os.exitpoint() #检测IDE中断
+        os.exitpoint() #Detect IDE interrupts
 
-        ################
-        ## 这里编写代码 ##
-        ################
+        ####################
+        ## Write codes here
+        ####################
         clock.tick()
 
-        img = sensor.snapshot() #拍摄一张图片
+        img = sensor.snapshot() # Take a picture
 
-        # 圆形类有 4 个参数值： 圆心(x, y), r (半径)和 magnitude（量级）；
-        # 量级越大说明识别到的圆可信度越高。
-        # `threshold` 参数控制找到圆的数量，数值的提升会降低识别圆形的总数。
-        # `x_margin`, `y_margin`, and `r_margin`控制检测到接近圆的合并调节.
-        # r_min, r_max, and r_step 用于指定测试圆的半径范围。
+        # The circle class has 4 parameter values: center (x, y), r (radius) and magnitude;
+        # The larger the magnitude, the higher the credibility of the identified circle.
+        # `threshold` The parameter controls the number of circles found, and increasing the value will reduce the total #             number of recognized circles.
+        # `x_margin`, `y_margin`, and `r_margin` Controls the merge adjustment for detected approaching circles.
+        # r_min, r_max, and r_step Used to specify the radius range of the test circle.
         for c in img.find_circles(threshold = 2000, x_margin = 10, y_margin= 10,
                                   r_margin = 10,r_min = 2, r_max = 100, r_step = 2):
-            #画红色圆做指示
+            #Draw a red circle as an indication
             img.draw_circle(c.x(), c.y(), c.r(), color = (255, 0, 0),thickness=2)
 
-            print(c) #打印圆形的信息
+            print(c) #Print circular information
 
-        #Display.show_image(img) #显示图片
+        #Display.show_image(img) #Display images
 
-        #显示图片，仅用于LCD居中方式显示
+        #Display images, only used for LCD center display
         Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2))
 
-        print(clock.fps()) #打印FPS
+        print(clock.fps()) #FPS
 
-###################
-# IDE中断释放资源代码
-###################
+##############################################
+# IDE interrupts the release of resource code
+##############################################
 except KeyboardInterrupt as e:
     print("user stop: ", e)
 except BaseException as e:
@@ -129,14 +128,14 @@ finally:
     MediaManager.deinit()
 ```
 
-## 实验结果
+## Experimental Results
 
-在CanMV IDE中运行代码，检测识别结果如下：
+Run the code in CanMV IDE, and the recognition results are as follows:
 
-**原图：**
+**Original image:**
 
 ![circles](./img/find_circles/find_circles1.png)
 
-**实验结果：**
+**Identification results:**
 
 ![circles](./img/find_circles/find_circles2.png)

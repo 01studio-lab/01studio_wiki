@@ -16,7 +16,20 @@ sidebar_position: 1
 
 而对于CanMV K230而言，直接使用MicroPython中的find_barcodes()即可获取摄像头采集图像中条形码的相关信息。该函数支持所有一维条形码：
 
-image.EAN2 image.EAN5 image.EAN8 image.UPCE image.ISBN10 image.UPCA image.EAN13 image.ISBN13 image.I25 image.DATABAR (RSS-14) image.DATABAR_EXP (RSS-Expanded) image.CODABAR image.CODE39 image.PDF417 image.CODE93 image.CODE128
+image.EAN2 <br></br>
+image.EAN5 <br></br>
+image.EAN8 <br></br>
+image.UPCE <br></br>
+image.ISBN10 <br></br>
+image.UPCA <br></br>
+image.EAN13 <br></br>
+image.ISBN13 <br></br>
+image.I25 <br></br>
+image.DATABAR (RSS-14) <br></br>
+image.DATABAR_EXP (RSS-Expanded) <br></br>
+image.CODABAR image.CODE39 <br></br>
+image.PDF417 image.CODE93 <br></br>
+image.CODE128 <br></br>
 
 具体说明如下：
 

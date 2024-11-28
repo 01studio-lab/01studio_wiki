@@ -10,7 +10,7 @@ sidebar_position: 3
 AprilTag官网介绍：https://april.eecs.umich.edu/software/apriltag.html
 
 ## 实验目的
-编程实现AprilTag标记识别，并将识别到的信息通过串口终端打印出来。
+编程实现AprilTag标签识别，并将识别到的信息通过串口终端打印出来。
 
 ## 实验讲解
 

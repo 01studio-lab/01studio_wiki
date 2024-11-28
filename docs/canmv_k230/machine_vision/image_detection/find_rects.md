@@ -14,7 +14,7 @@ sidebar_position: 4
 
 CanMV集成了矩形识别find_rects函数，位于image模块下，因此我们直接将拍摄到的图片进行处理即可，那么我们像以往一样像看一下识别函数相关说明，具体如下：
 
-## find_circles对象
+## find_rects对象
 
 ### 构造函数
 ```python
