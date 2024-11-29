@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-# ADC
+# ADC（Voltage measurement）
 
 ## Foreword
 ADC(analog to digital conversion) means converting analog signals into digital signals. Since the microcontroller can only recognize binary numbers, external analog signals are often converted into digital information that it can recognize through ADC. A common application is to convert the changing voltage into a digital signal to measure the voltage value.

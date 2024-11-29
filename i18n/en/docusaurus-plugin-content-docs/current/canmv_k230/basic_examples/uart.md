@@ -25,8 +25,8 @@ machine.UART(id, baudrate=115200, bits=UART.EIGHTBITS, parity=UART.PARITY_NONE, 
 Create a UART object.
 
 - `id` ：Serial port number, 2 available
-    - `UART.UART1`: 串口1；TX1（GPIO3）, RX1（GPIO4）;
-    - `UART.UART2`: 串口2；TX2（GPIO11）, RX2（GPIO12）;
+    - `UART.UART1`: UART1；TX1（GPIO3）, RX1（GPIO4）;
+    - `UART.UART2`: UART2；TX2（GPIO11）, RX2（GPIO12）;
 
 - `baudrate`：Baud rate, commonly used are 115200 and 9600;
 
@@ -114,7 +114,7 @@ import time
 
 fpioa = FPIOA()
 
-# UART1代码
+# UART1 Code
 fpioa.set_function(3,FPIOA.UART1_TXD)
 fpioa.set_function(4,FPIOA.UART1_RXD)
 

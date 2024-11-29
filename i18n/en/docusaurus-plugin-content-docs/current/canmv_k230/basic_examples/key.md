@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Key
+# KEY
 
 ## Foreword
 Keys are the simplest and most common input devices. Many products cannot do without buttons, including early iPhones. Today we will learn how to use MicroPython to write button programs. With the key input function, we can do a lot of fun things.

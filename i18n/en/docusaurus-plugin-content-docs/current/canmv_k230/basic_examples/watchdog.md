@@ -2,90 +2,90 @@
 sidebar_position: 10
 ---
 
-# Watchdog
+# Watch dog
 
 ## Foreword
-任何代码在运行过程中都可能出现崩溃的情况，这时候就可以加入看门狗代码。看门狗的用途是在应用程序崩溃并最终进入不可恢复状态时自动重新启动系统。一旦启动，就无法以任何方式停止或重新配置。启用后，应用程序必须定期“喂食”看门狗，以防止其过期并重置系统。
+Any code may crash during operation, and this is when the watchdog code can be added. The purpose of the watchdog is to automatically restart the system when the application crashes and eventually enters an unrecoverable state. Once started, it cannot be stopped or reconfigured in any way. Once enabled, the application must "feed" the watchdog regularly to prevent it from expiring and resetting the system.
 
 ## Experiment Purpose
-测试看门狗自动复位功能。
+Test the watchdog automatic reset function.
 
-## 实验讲解
+## Experimental Explanation
 
-CanMV K230的MicroPython固件已经集成了看门狗WDT模块。我们直接调用即可。
+The MicroPython firmware of CanMV K230 has integrated the watchdog WDT module. We can call it directly.
 
-## WDT对象
+## Class WDT
 
-### 构造函数
+### Constructors
 ```python
 from machine import WDT
 
 wdt = WDT(id, timeout)
 ```
-创建看门狗对象。
+Createwatchdog object.
 
-- `id` ：看门狗编号。
+- `id` ：Watchdog Number.
 
-    - `1`: 看门狗1。
+    - `1`: Watchdog1.
 
-- `timeout` ：超时时间，单位秒。
+- `timeout` ：Timeout period, unit seconds.
 
-### 使用方法
+### Methods
 
 ```python
 wdt.feed()
 ```
-喂狗。需要在构建看门狗对象时指定的超时时间内执行该指令。
+Feed the watchdog. This instruction needs to be executed within the timeout period specified when constructing the watchdog object.
 
 <br></br>
 
-更多用法请阅读官方文档：<br></br>
+For more usage, please read the official documentation：<br></br>
 https://docs.micropython.org/en/latest/library/machine.WDT.html
 
-编程流程如下：
+The programming process is as follows:：
 
 ```mermaid
 graph TD
-    导入看门狗模块 --> 初始化看门狗对象 --> 喂狗 --> 停止喂狗模拟死机系统自动重启;
+    id1[Import WTD modules] --> id2[Initialize watchdog object] --> id3[Feed dog] --> id4[Stop feeding the dog to simulate a freeze and the system will automatically restart];
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
-实验名称：看门狗
-版本： v1.0
-作者：01Studio
-实验平台：01Studio CanMV K230
-说明：看门狗测试。
+Demo Name：Watchdog
+Version： v1.0
+Author：01Studio
+Platform：01Studio CanMV K230
+Description：Watchdog test.
 '''
 
-from machine import WDT #导入线程模块
+from machine import WDT #Import WDT module
 import time
 
-#构建看门狗对象。
-wdt = WDT(1,3) #看门狗编号1，超时时间3秒。
+#Construct watchdog object.
+wdt = WDT(1,3) #Watchdog number 1, timeout period 3 seconds.
 
 
-#每隔1秒喂一次狗，执行3次。
+#Feed the dog every 1 second, and do this 3 times.
 for i in range(3):
 
     time.sleep(1)
     print(i)
 
-    wdt.feed() #喂狗
+    wdt.feed() #Feed dog
 
-#停止喂狗，系统会重启。
+#Stop feeding the dog, the system will restart.
 while True:
 
-    time.sleep(0.01) #防止CPU满跑
+    time.sleep(0.01) #Prevent CPU from running full.
 
 ```
 
-## 实验结果
+## Experimental Results
 
-运行代码，可以看到串口终端打印了3次信息后自动重启。断开了IDE连接。
+Run the code and you can see that the serial terminal prints information three times and then restarts automatically. The IDE connection is disconnected.
 
 ![watchdog](./img/watchdog/watchdog1.png)
 
-有了看门狗，当开发板死机时候就可以自动重启了。
+With a watchdog, the development board can automatically restart when it crashes.

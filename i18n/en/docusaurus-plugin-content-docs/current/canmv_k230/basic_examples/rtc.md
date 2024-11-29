@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# RTC
+# RTC(real time clock)
 
 
 ## Foreword
