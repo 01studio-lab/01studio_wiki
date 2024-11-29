@@ -2,7 +2,7 @@
 sidebar_position: 7
 ---
 
-# PWM
+# PWM（Beep）
 
 ## Foreword
 PWM (Pulse Width Modulation) is a specific signal output, which is mainly used to output square waves with different frequencies and duty cycles (the proportion of high-level time in a cycle to the total time) to achieve fixed frequency or average voltage output.
@@ -78,7 +78,7 @@ graph TD
     id1[Import PWM module] --> id2[Construct PWM Object] --> id3[PWM output with different frequencies];
 ```
 
-## Code
+## Codes
 
 ```python
 '''
