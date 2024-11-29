@@ -10,7 +10,7 @@ sidebar_position: 1
 
 下面是01科技CanMV K230开发板的GPIO的引脚图：
 
-![pinout](./img/gpio_intro/pinout.jpg)
+![pinout](./img/gpio_intro/pinout.png)
 
 从上面表格和图例可以看到，GPIO和传统的单片机开发相似，除了普通IO口外，也有I2C、串口（UART）、SPI等总线接口，以及电源输出供电引脚（3.3V和5V）。可以外接各类传感器和模块，相关内容在后面教程都会涉及。
 
