@@ -6,7 +6,7 @@ sidebar_position: 3
 
 01Studio CanMV K230 Support 3 bracket installations，They are **fixed bracket, angle adjustable bracket, height + angle adjustable bracket**, which are convenient for various scenes such as cars and gimbals that need to fix or adjust the height angle.
 
-[**Click to Buy>>**](https://www.aliexpress.com/item/1005007707000572.html)
+[**Click to Buy>>**](https://www.aliexpress.com/item/1005007584918864.html)
 
 ![bracket](./img/bracket/bracket1.png)
 
