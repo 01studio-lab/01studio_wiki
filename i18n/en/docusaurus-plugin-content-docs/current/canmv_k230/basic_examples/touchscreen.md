@@ -2,91 +2,91 @@
 sidebar_position: 12
 ---
 
-# 电容触摸屏
+# Touchscreen
 
-## 前言
+## Foreword
 
-触摸屏是非常棒的人机交互方式。看早期的按键手机到现在已经全面被触摸屏取代。触摸屏很好地解决了人跟屏直接交互的问题。今天我们就来学习一下触摸屏的应用。
+Touch screen is a great way for human-computer interaction. Early keypad phones have been completely replaced by touch screens. Touch screens solve the problem of direct interaction between people and screens. Today we will learn about the application of touch screens.
 
-## 实验目的
+## Experiment Purpose
 
-编程实现读取电容触摸屏数据。
+Programming to read capacitive touch screen data.
 
-## 实验讲解
+## Experimental Explanation
 
-01Studio配套的3.5寸mipi LCD分无触摸版本和带触摸版本，带触摸版本配的是电容触摸，支持单点和多点触控。CanMV K230已经将电容触摸相关库封装成了python API，我们直接使用即可。
+The 3.5-inch mipi LCD that comes with 01Studio is divided into a non-touch version and a touch version. The touch version is equipped with capacitive touch and supports single-point and multi-point touch. CanMV K230 has encapsulated the capacitive touch related library into a python API, which we can use directly.
 
-## touchscreen对象
+## class touchscreen
 
-### 构造函数
+### Constructors
 ```python
 from machine import TOUCH
 
 touch = TOUCH(index, rotation)
 ```
-构建一个电容触摸对象。
-- `index`: TOUCH的设备号，01Studio 3.5寸mipi屏设备号为`0`；
-- `rotation`: 面板输出坐标旋转，取值[0-3]。
-    - `0`: 坐标不旋转。
-    - `1`: 坐标旋转90°。
-    - `2`: 坐标旋转180°。
-    - `3`: 坐标旋转270°。
+Construct a capacitive touch object.
+- `index`: The device number of TOUCH, the device number of 01Studio 3.5-inch mipi screen is `0`
+- `rotation`: The panel output coordinates are rotated, the value is [0-3].
+    - `0`: Coordinates do not rotate.
+    - `1`: The coordinates are rotated 90°.
+    - `2`: The coordinates are rotated 180°.
+    - `3`: The coordinates are rotated 270°.
 
-### 使用方法
+### Methods
 
 ```python
 touch.read([count])
 ```
-获取触摸数据。
-- `count`: 触摸点数。取值[0:10]，默认0，读取全部触摸点。
+Get touch data.
+- `count`: Number of touch points. The value range is [0:10], and the default value is 0, which means all touch points are read.
 
-结果返回 TOUCH_INFO 类。类里面的x,y表示坐标。
+The result returns the TOUCH_INFO class, where x and y represent coordinates.
 
-使用例：
+Use example:
 
-p= touch.read() #读取TOUCH数据
+p= touch.read() #Reading TOUCH data
 
-print(p) #原始信息
+print(p) #Original information
 
-print(len(p)) #表示触摸点数量，最大5个
+print(len(p)) #Indicates the number of touch points, up to 5
 
-print(p[0].x, p[0].y) #打印第1个点的x,y坐标
+print(p[0].x, p[0].y) #Print the x,y coordinates of the first point
 
-更多用法请阅读[官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/machine/K230_CanMV_TOUCH%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
+For more usage, please read [Official Website](https://developer.canaan-creative.com/k230_canmv/main/zh/api/machine/K230_CanMV_TOUCH%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
 
-从上表可以看到，通过MicroPython封装后的电容触摸屏使用变得非常容易，本节代码编程流程如下：
+As can be seen above, the capacitive touch screen packaged with MicroPython becomes very easy to use. The programming process of this section is as follows:
 
 ```mermaid
 graph TD
-    导入触摸屏等相关模块 --> 初始相关模块 --> 读取触摸信息 --> 打印相关信息 --> 读取触摸信息;
+    id1[Import Touch module] --> id2[Initial modules] --> id3[Reading touch information] --> id4[Print related information] --> id3[Reading touch information];
 
 ```
 
-## 参考代码
+## Codes
 
 ```python
 '''
-实验名称：电容触摸屏
-实验平台：01Studio CanMV K230
-教程：wiki.01studio.cc
+Demo Name：Capacitive touch screen
+Platform：01Studio CanMV K230
+Tutorial：wiki.01studio.cc
 '''
 
 from machine import TOUCH
 import time
 
-# 实例化TOUCH设备0
+# Instantiate TOUCH device 0
 tp = TOUCH(0)
 
 while True:
 
-    # 获取TOUCH数据
+    # Get TOUCH data
     p = tp.read()
 
-    if p != (): #发生触摸事件
+    if p != (): #A touch event occurs
 
-        print(p) #打印原始触摸数据
+        print(p) #Printing raw touch data
 
-        #打印每个点坐标信息，最大5点。
+        #Print the coordinate information of each point, up to 5 points.
         for i in range(len(p)):
 
             print('x'+str(i)+'=',p[i].x, 'y'+str(i)+'=',p[i].y)
@@ -94,24 +94,24 @@ while True:
     time.sleep_ms(50)
 ```
 
-## 实验结果
+## Experimental Results
 
-运行程序，用手指触摸电容屏，可以看到终端打印出坐标信息。
+Run the program and touch the capacitive screen with your finger, you can see the terminal print out the coordinate information.
 
-- 单点触摸：
+- Single touch:
 
 ![touchscreen](./img/touchscreen/touchscreen1.png)
 
-IDE串口终端打印触摸信息（单点）：
+IDE serial terminal prints touch information (single point):
 
 ![touchscreen](./img/touchscreen/touchscreen2.png)
 
-- 多点触摸：
+- Multi-touch:
 
 ![touchscreen](./img/touchscreen/touchscreen3.png)
 
-IDE串口终端打印触摸信息（多点）：
+IDE serial terminal prints touch information (multi-point):
 
 ![touchscreen](./img/touchscreen/touchscreen4.png)
 
-有了触摸屏的应用，让开发板的人机交互变得更简单而有趣。
+With the application of touch screen, human-computer interaction of the development board becomes simpler and more interesting.
