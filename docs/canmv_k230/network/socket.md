@@ -148,19 +148,27 @@ def WIFI_Connect():
 
     wlan = network.WLAN(network.STA_IF) #STA模式
     wlan.active(True)                   #激活接口
-    start_time=time.time()              #记录时间做超时判断
 
     if not wlan.isconnected():
 
-        print('connecting to network...')
+        for i in range(3): #重复连接3次
 
-        #输入WIFI账号密码（仅支持2.4G信号）, 连接超过10秒为超时
-        wlan.connect('01Studio', '88888888')
+            #输入WIFI账号密码（仅支持2.4G信号）, 连接超过5秒为超时
+            wlan.connect('01Studio', '88888888')
+
+            if wlan.isconnected(): #连接成功
+                break
 
     if wlan.isconnected(): #连接成功
 
+        print('connect success')
+
         #LED蓝灯点亮
         WIFI_LED.value(1)
+
+        #等待获取IP地址
+        while wlan.ifconfig()[0] == '0.0.0.0':
+            pass
 
         #串口打印信息
         print('network information:', wlan.ifconfig())
@@ -188,25 +196,32 @@ if WIFI_Connect(): #连接成功
     addr=socket.getaddrinfo('192.168.1.115',10000)[0][-1] #服务器IP和端口
     print(addr)
     s.connect(addr)
+    s.settimeout(0)#接收不阻塞
     s.send('Hello 01Studio!')
 
     while True:
 
         text=s.recv(128) #单次最多接收128字节
-        if text == '':
+        if text == b'':
             pass
 
         else: #打印接收到的信息为字节，可以通过decode('utf-8')转成字符串
             print(text)
             s.send('I got:'+text.decode('utf-8'))
 
-        time.sleep_ms(300)
+        time.sleep_ms(50)
 
 ```
 
 WIFI连接代码在上一节已经讲解，这里不再重复，程序在连接成功后建了Socket连接，连接成功发送‘Hello 01Studio!’信息到服务器。另外K230定时器设定了了每100ms处理从服务器接收到的数据。将接收到数据通过串口打印和重新发送给服务器。
 
 ## 实验结果
+
+将代码中的WiFi网络账号和密码改成自己家里或者办公室的WiFi账号密码：**(只支持2.4G信号只，不支持5G或者2.4G&5G混合信号。)**
+```python
+#输入WIFI账号密码（仅支持2.4G信号）, 连接超过5秒为超时
+ wlan.connect('01Studio', '88888888')
+```
 
 保证电脑和CanMV k230在同一个网段下（通常是指连接在同一个路由器），同时最好关闭电脑防火墙。
 

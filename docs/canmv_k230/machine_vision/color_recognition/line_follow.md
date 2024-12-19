@@ -130,95 +130,72 @@ ROIS = [ # [ROI, weight]
 weight_sum = 0
 for r in ROIS: weight_sum += r[4] # r[4] 为矩形权重值.
 
-try:
+sensor = Sensor(width=1280, height=960) #构建摄像头对象，将摄像头长宽设置为4:3
+sensor.reset() #复位和初始化摄像头
+sensor.set_framesize(width=320, height=240) #设置帧大小，默认通道0
+sensor.set_pixformat(Sensor.GRAYSCALE) #设置输出图像格式，默认通道0
 
-    sensor = Sensor(width=1280, height=960) #构建摄像头对象，将摄像头长宽设置为4:3
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(width=320, height=240) #设置帧大小，默认通道0
-    sensor.set_pixformat(Sensor.GRAYSCALE) #设置输出图像格式，默认通道0
+Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
 
-    Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
+MediaManager.init() #初始化media资源管理器
 
-    MediaManager.init() #初始化media资源管理器
+sensor.run() #启动sensor
 
-    sensor.run() #启动sensor
+clock = time.clock()
 
-    clock = time.clock()
+while True:
 
-    while True:
+    ################
+    ## 这里编写代码 ##
+    ################
+    clock.tick()
 
+    img = sensor.snapshot() #拍摄一张图片
 
-        os.exitpoint() #检测IDE中断
+    centroid_sum = 0
 
-        ################
-        ## 这里编写代码 ##
-        ################
-        clock.tick()
+    for r in ROIS:
+        blobs = img.find_blobs(GRAYSCALE_THRESHOLD, roi=r[0:4], merge=True) # r[0:4] 是上面定义的roi元组.
 
-        img = sensor.snapshot() #拍摄一张图片
+        if blobs:
+            # Find the blob with the most pixels.
+            largest_blob = max(blobs, key=lambda b: b.pixels())
 
-        centroid_sum = 0
+            # Draw a rect around the blob.
+            img.draw_rectangle(largest_blob.rect())
+            img.draw_cross(largest_blob.cx(),
+                           largest_blob.cy())
 
-        for r in ROIS:
-            blobs = img.find_blobs(GRAYSCALE_THRESHOLD, roi=r[0:4], merge=True) # r[0:4] 是上面定义的roi元组.
+            centroid_sum += largest_blob.cx() * r[4] # r[4] 是每个roi的权重值.
 
-            if blobs:
-                # Find the blob with the most pixels.
-                largest_blob = max(blobs, key=lambda b: b.pixels())
+    center_pos = (centroid_sum / weight_sum) # 确定直线的中心.
 
-                # Draw a rect around the blob.
-                img.draw_rectangle(largest_blob.rect())
-                img.draw_cross(largest_blob.cx(),
-                               largest_blob.cy())
+    # 将直线中心位置转换成角度，便于机器人处理.
+    deflection_angle = 0
 
-                centroid_sum += largest_blob.cx() * r[4] # r[4] 是每个roi的权重值.
+    # 使用反正切函数计算直线中心偏离角度。可以自行画图理解
+    #权重X坐标落在图像左半部分记作正偏，落在右边部分记为负偏，所以计算结果加负号。
 
-        center_pos = (centroid_sum / weight_sum) # 确定直线的中心.
+    #deflection_angle = -math.atan((center_pos-80)/60) #采用图像为QQVGA 160*120时候使用
 
-        # 将直线中心位置转换成角度，便于机器人处理.
-        deflection_angle = 0
+    deflection_angle = -math.atan((center_pos-160)/120) #采用图像为QVGA 320*240时候使用
 
-        # 使用反正切函数计算直线中心偏离角度。可以自行画图理解
-        #权重X坐标落在图像左半部分记作正偏，落在右边部分记为负偏，所以计算结果加负号。
+    # 将偏离值转换成偏离角度.
+    deflection_angle = math.degrees(deflection_angle)
 
-        #deflection_angle = -math.atan((center_pos-80)/60) #采用图像为QQVGA 160*120时候使用
+    # 计算偏离角度后可以控制机器人进行调整.
+    print("Turn Angle: %f" % deflection_angle)
 
-        deflection_angle = -math.atan((center_pos-160)/120) #采用图像为QVGA 320*240时候使用
+    # LCD显示偏移角度,scale参数可以改变字体大小
+    img.draw_string_advanced(2,2,20, str('%.1f' % deflection_angle), color=(255,255,255))
 
-        # 将偏离值转换成偏离角度.
-        deflection_angle = math.degrees(deflection_angle)
+    #Display.show_image(img) #显示图片
 
-        # 计算偏离角度后可以控制机器人进行调整.
-        print("Turn Angle: %f" % deflection_angle)
+    #显示图片，仅用于LCD居中方式显示
+    Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2))
 
-        # LCD显示偏移角度,scale参数可以改变字体大小
-        img.draw_string_advanced(2,2,20, str('%.1f' % deflection_angle), color=(255,255,255))
-
-        #Display.show_image(img) #显示图片
-
-        #显示图片，仅用于LCD居中方式显示
-        Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2))
-
-        print(clock.fps()) #打印FPS
-
-###################
-# IDE中断释放资源代码
-###################
-except KeyboardInterrupt as e:
-    print("user stop: ", e)
-except BaseException as e:
-    print(f"Exception {e}")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-    # release media buffer
-    MediaManager.deinit()
+    print(clock.fps()) #打印FPS
 ```
 
 ## 实验结果

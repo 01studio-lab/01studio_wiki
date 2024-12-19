@@ -128,66 +128,42 @@ def barcode_name(code):
     if(code.type() == image.CODE128):
         return "CODE128"
 
-try:
+sensor = Sensor() #构建摄像头对象
+sensor.reset() #复位和初始化摄像头
+sensor.set_framesize(width=800, height=480) #设置帧大小为LCD分辨率(800x480)，默认通道0
+sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 
-    sensor = Sensor() #构建摄像头对象
-    sensor.reset() #复位和初始化摄像头
-    #sensor.set_framesize(Sensor.FHD) #设置帧大小FHD（1920x1080），默认通道0
-    sensor.set_framesize(width=800, height=480) #设置帧大小VGA，默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
 
-    Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
+MediaManager.init() #初始化media资源管理器
 
-    MediaManager.init() #初始化media资源管理器
+sensor.run() #启动sensor
 
-    sensor.run() #启动sensor
+clock = time.clock()
 
-    clock = time.clock()
+while True:
 
-    while True:
+    clock.tick()
 
-        os.exitpoint() #检测IDE中断
-        clock.tick()
+    img = sensor.snapshot() #拍摄图片
 
-        img = sensor.snapshot() #拍摄图片
+    codes = img.find_barcodes() #查找图像中所有条形码
 
-        codes = img.find_barcodes() #查找图像中所有条形码
+    for code in codes:
 
-        for code in codes:
+        #对条码画矩形表示
+        img.draw_rectangle(code.rect(),thickness=2)
 
-            #对条码画矩形表示
-            img.draw_rectangle(code.rect(),thickness=2)
+        #打印相关信息
+        print_args = (barcode_name(code), code.payload(), (180 * code.rotation()) / math.pi, code.quality())
+        print("Barcode %s, Payload \"%s\", rotation %f (degrees), quality %d" % print_args)
 
-            #打印相关信息
-            print_args = (barcode_name(code), code.payload(), (180 * code.rotation()) / math.pi, code.quality())
-            print("Barcode %s, Payload \"%s\", rotation %f (degrees), quality %d" % print_args)
+        img.draw_string_advanced(0, 0, 30, code.payload(), color = (255, 255, 255)) #图像显示条码信息
 
-            img.draw_string_advanced(0, 0, 30, code.payload(), color = (255, 255, 255)) #图像显示条码信息
+    Display.show_image(img) #显示图片
 
-        Display.show_image(img) #显示图片
-
-        print(clock.fps()) #打印帧率
-
-###################
-# IDE中断释放资源代码
-###################
-except KeyboardInterrupt as e:
-    print(f"user stop")
-except BaseException as e:
-    print(f"Exception '{e}'")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-
-    # release media buffer
-    MediaManager.deinit()
+    print(clock.fps()) #打印帧率
 ```
 
 ## 实验结果

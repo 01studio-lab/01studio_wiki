@@ -113,7 +113,7 @@ if __name__=="__main__":
     else:
         display_size=[800,480]
     # 模型路径
-    kmodel_path="/sdcard/app/tests/kmodel/LPD_640.kmodel"
+    kmodel_path="/sdcard/examples/kmodel/LPD_640.kmodel"
     # 其它参数设置
     confidence_threshold = 0.2
     nms_threshold = 0.2
@@ -128,26 +128,18 @@ if __name__=="__main__":
 
     clock = time.clock()
 
-    try:
-        while True:
-            os.exitpoint()
+    while True:
 
-            clock.tick()
+        clock.tick()
 
-            img=pl.get_frame() # 获取当前帧数据
-            res=licence_det.run(img) # 推理当前帧
-            licence_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
-            print(res) # 显示当前的绘制结果
-            pl.show_image() # 显示当前的绘制结果
-            gc.collect() # 垃圾回收
+        img=pl.get_frame() # 获取当前帧数据
+        res=licence_det.run(img) # 推理当前帧
+        licence_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
+        print(res) # 显示当前的绘制结果
+        pl.show_image() # 显示当前的绘制结果
+        gc.collect() # 垃圾回收
 
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        licence_det.deinit()
-        pl.destroy()
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -159,21 +151,20 @@ if __name__=="__main__":
 代码中 `res`为识别结果。
 
 ```python
-        ...
-        while True:
-            os.exitpoint()
+    ...
+    while True:
 
-            clock.tick()
+        clock.tick()
 
-            img=pl.get_frame() # 获取当前帧数据
-            res=licence_det.run(img) # 推理当前帧
-            licence_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
-            print(res) # 显示当前的绘制结果
-            pl.show_image() # 显示当前的绘制结果
-            gc.collect() # 垃圾回收
+        img=pl.get_frame() # 获取当前帧数据
+        res=licence_det.run(img) # 推理当前帧
+        licence_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
+        print(res) # 显示当前的绘制结果
+        pl.show_image() # 显示当前的绘制结果
+        gc.collect() # 垃圾回收
 
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

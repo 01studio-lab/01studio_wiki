@@ -37,70 +37,47 @@ thresholds = [(30, 100, 15, 127, 15, 127), # 红色阈值
 colors1 = [(255,0,0), (0,255,0), (0,0,255)]
 colors2 = ['RED', 'GREEN', 'BLUE']
 
-try:
 
-    sensor = Sensor() #构建摄像头对象
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(width=800, height=480) #设置帧大小为LCD分辨率(800x480)，默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+sensor = Sensor() #构建摄像头对象
+sensor.reset() #复位和初始化摄像头
+sensor.set_framesize(width=800, height=480) #设置帧大小为LCD分辨率(800x480)，默认通道0
+sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 
-    Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
+Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
 
-    MediaManager.init() #初始化media资源管理器
+MediaManager.init() #初始化media资源管理器
 
-    sensor.run() #启动sensor
+sensor.run() #启动sensor
 
-    clock = time.clock()
+clock = time.clock()
 
-    while True:
+while True:
 
+    ################
+    ## 这里编写代码 ##
+    ################
+    clock.tick()
 
-        os.exitpoint() #检测IDE中断
+    img = sensor.snapshot() #拍摄一张图片
 
-        ################
-        ## 这里编写代码 ##
-        ################
-        clock.tick()
+    for i in range(3):
 
-        img = sensor.snapshot() #拍摄一张图片
+        blobs = img.find_blobs([thresholds[i]]) # 0,1,2分别表示红，绿，蓝色。
 
-        for i in range(3):
+        if blobs:
 
-            blobs = img.find_blobs([thresholds[i]]) # 0,1,2分别表示红，绿，蓝色。
-
-            if blobs:
-
-                for b in blobs: #画矩形、箭头和字符表示
-                    tmp=img.draw_rectangle(b[0:4], thickness = 4, color = colors1[i])
-                    tmp=img.draw_cross(b[5], b[6], thickness = 2)
-                    tmp=img.draw_string_advanced(b[0], b[1]-35, 30, colors2[i],color = colors1[i])
+            for b in blobs: #画矩形、箭头和字符表示
+                tmp=img.draw_rectangle(b[0:4], thickness = 4, color = colors1[i])
+                tmp=img.draw_cross(b[5], b[6], thickness = 2)
+                tmp=img.draw_string_advanced(b[0], b[1]-35, 30, colors2[i],color = colors1[i])
 
 
-        img.draw_string_advanced(0, 0, 30, 'FPS: '+str("%.3f"%(clock.fps())), color = (255, 255, 255))
+    img.draw_string_advanced(0, 0, 30, 'FPS: '+str("%.3f"%(clock.fps())), color = (255, 255, 255))
 
-        Display.show_image(img) #显示图片
+    Display.show_image(img) #显示图片
 
-        print(clock.fps()) #打印FPS
-
-
-###################
-# IDE中断释放资源代码
-###################
-except KeyboardInterrupt as e:
-    print("user stop: ", e)
-except BaseException as e:
-    print(f"Exception {e}")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-    # release media buffer
-    MediaManager.deinit()
+    print(clock.fps()) #打印FPS
 ```
 
 与单一颜色识别例程相比，修改的代码如下，在颜色识别前中加入了for循环，识别预设的3种颜色：

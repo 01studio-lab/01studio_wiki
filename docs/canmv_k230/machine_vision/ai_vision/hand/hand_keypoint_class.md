@@ -78,7 +78,7 @@ class HandDetApp(AIBase):
         # 设置ai2d的输入输出的格式和数据类型
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，可以通过设置input_image_size自行修改输入尺寸
@@ -144,7 +144,7 @@ class HandKPClassApp(AIBase):
         # 设置ai2d的输入输出的格式和数据类型
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了crop和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了crop和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,det,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             ai2d_input_size=input_image_size if input_image_size else self.rgb888p_size
@@ -330,11 +330,11 @@ if __name__=="__main__":
     else:
         display_size=[800,480]
     # 手掌检测模型路径
-    hand_det_kmodel_path="/sdcard/app/tests/kmodel/hand_det.kmodel"
+    hand_det_kmodel_path="/sdcard/examples/kmodel/hand_det.kmodel"
     # 手掌关键点模型路径
-    hand_kp_kmodel_path="/sdcard/app/tests/kmodel/handkp_det.kmodel"
+    hand_kp_kmodel_path="/sdcard/examples/kmodel/handkp_det.kmodel"
     # 其他参数
-    anchors_path="/sdcard/app/tests/utils/prior_data_320.bin"
+    anchors_path="/sdcard/examples/utils/prior_data_320.bin"
     rgb888p_size=[1920,1080]
     hand_det_input_size=[512,512]
     hand_kp_input_size=[256,256]
@@ -350,29 +350,18 @@ if __name__=="__main__":
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame()                          # 获取当前帧
+        det_boxes,gesture_res=hkc.run(img)          # 推理当前帧
+        hkc.draw_result(pl,det_boxes,gesture_res)   # 绘制当前帧推理结果
+        print(det_boxes,gesture_res)
+        pl.show_image()                             # 展示推理结果
+        gc.collect()
 
-            img=pl.get_frame()                          # 获取当前帧
-            det_boxes,gesture_res=hkc.run(img)          # 推理当前帧
-            hkc.draw_result(pl,det_boxes,gesture_res)   # 绘制当前帧推理结果
-            print(det_boxes,gesture_res)
-            pl.show_image()                             # 展示推理结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        hkc.hand_det.deinit()
-        hkc.hand_kp.deinit()
-        pl.destroy()
-
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -384,22 +373,20 @@ if __name__=="__main__":
 代码中`det_boxes`变量为手掌结果， `gesture_res`为识别手势判断结果。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame()                          # 获取当前帧
+        det_boxes,gesture_res=hkc.run(img)          # 推理当前帧
+        hkc.draw_result(pl,det_boxes,gesture_res)   # 绘制当前帧推理结果
+        print(det_boxes,gesture_res)
+        pl.show_image()                             # 展示推理结果
+        gc.collect()
 
-            img=pl.get_frame()                          # 获取当前帧
-            det_boxes,gesture_res=hkc.run(img)          # 推理当前帧
-            hkc.draw_result(pl,det_boxes,gesture_res)   # 绘制当前帧推理结果
-            print(det_boxes,gesture_res)
-            pl.show_image()                             # 展示推理结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

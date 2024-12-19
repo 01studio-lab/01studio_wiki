@@ -86,7 +86,7 @@ class ObjectDetectionApp(AIBase):
         # 设置Ai2d的输入输出格式和类型
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，您可以通过设置input_image_size自行修改输入尺寸
@@ -201,7 +201,7 @@ if __name__=="__main__":
     else:
         display_size=[800,480]
     # 模型路径
-    kmodel_path="/sdcard/app/tests/kmodel/yolov8n_320.kmodel"
+    kmodel_path="/sdcard/examples/kmodel/yolov8n_320.kmodel"
     labels = ["person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee", "skis", "snowboard", "sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard", "tennis racket", "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl", "banana", "apple", "sandwich", "orange", "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch", "potted plant", "bed", "dining table", "toilet", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone", "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush"]
     # 其它参数设置
     confidence_threshold = 0.2
@@ -218,27 +218,18 @@ if __name__=="__main__":
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame() # 获取当前帧数据
+        res=ob_det.run(img) # 推理当前帧
+        ob_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
+        print(res)  # 打印当前结果
+        pl.show_image() # 显示当前的绘制结果
+        gc.collect()
 
-            img=pl.get_frame() # 获取当前帧数据
-            res=ob_det.run(img) # 推理当前帧
-            ob_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
-            print(res)  # 打印当前结果
-            pl.show_image() # 显示当前的绘制结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        ob_det.deinit()
-        pl.destroy()
+        print(clock.fps()) #打印帧率
 ```
 
 
@@ -251,22 +242,20 @@ if __name__=="__main__":
 代码中 `res`为识别结果, 包含目标位置和物体种类。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame() # 获取当前帧数据
+        res=ob_det.run(img) # 推理当前帧
+        ob_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
+        print(res)  # 打印当前结果
+        pl.show_image() # 显示当前的绘制结果
+        gc.collect()
 
-            img=pl.get_frame() # 获取当前帧数据
-            res=ob_det.run(img) # 推理当前帧
-            ob_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
-            print(res)  # 打印当前结果
-            pl.show_image() # 显示当前的绘制结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

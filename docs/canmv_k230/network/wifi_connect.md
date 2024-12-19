@@ -97,7 +97,7 @@ https://docs.micropython.org/en/latest/library/network.WLAN.html
 
 从上表可以看到MicroPython通过模块封装，让WIFI联网变得非常简单。模块包含热点AP模块和客户端STA模式，热点AP是指其它电脑或者手机设备连接到CanMV K230发出的热点实现连接，但这样你的电脑就不能上网了，因此我们一般情况下都是使用STA模式。也就是开发板和电脑等其它设备同时连接到相同网段的路由器上。
 
-wLAN.connect()连接15秒还没成功就退出连接。我们通过编程实现连接成功后蓝灯常亮，打印IP信息。连接失败蓝灯闪烁3次提示。
+wLAN.connect()连接5秒还没成功就退出连接。我们通过编程实现连接成功后蓝灯常亮，打印IP信息。连接失败蓝灯闪烁3次提示。
 
 代码编写流程如下：
 
@@ -133,13 +133,24 @@ def WIFI_Connect():
 
         print('connecting to network...')
 
-        #输入WIFI账号密码（仅支持2.4G信号）, 连接超过10秒为超时
-        wlan.connect('01Studio', '88888888')
+        for i in range(3): #重复连接3次
+
+            #输入WIFI账号密码（仅支持2.4G信号）, 连接超过5秒为超时
+            wlan.connect('01Studio', '88888888')
+
+            if wlan.isconnected(): #连接成功
+                break
 
     if wlan.isconnected(): #连接成功
 
+        print('connect success')
+
         #LED蓝灯点亮
         WIFI_LED.value(1)
+
+        #等待获取IP地址
+        while wlan.ifconfig()[0] == '0.0.0.0':
+            pass
 
         #串口打印信息
         print('network information:', wlan.ifconfig())
@@ -153,15 +164,22 @@ def WIFI_Connect():
             WIFI_LED.value(0)
             time.sleep_ms(300)
 
-        wlan.active(False)
+        #wlan.active(False)
 
 #执行WIFI连接函数
 WIFI_Connect()
+
 ```
 
 ## 实验结果
 
-运行程序，可以观察到连接WiFi成功后串口终端打印IP等信息。**(只支持2.4G信号只，不支持5G或者2.4G&5G混合信号。)**
+将代码中的WiFi网络账号和密码改成自己家里或者办公室的WiFi账号密码：**(只支持2.4G信号只，不支持5G或者2.4G&5G混合信号。)**
+```python
+#输入WIFI账号密码（仅支持2.4G信号）, 连接超过5秒为超时
+ wlan.connect('01Studio', '88888888')
+```
+
+运行程序，可以观察到连接WiFi成功后串口终端打印IP等信息。
 
 ![wifi_connect](./img/wifi_connect/wifi_connect1.png)
 

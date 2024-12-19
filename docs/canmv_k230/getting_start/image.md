@@ -8,6 +8,10 @@ sidebar_position: 2
 
 01科技 CanMV K230开发板使用带镜像的SD卡启动。用户可以通过烧录新版镜像获取新功能。镜像文件位于 **零一科技（01Studio）MicroPython开发套件（基于CanMV K230平台）配套资料\03-镜像** 文件夹下。（资料包默认是rar压缩包，需要自行解压后使用以 .img 结尾的镜像文件。）
 
+:::tip Tips
+01科技CanMV K230在线教程跟镜像配套使用，请使用我们资料包提供的镜像版本。镜像名称中的nncase_2.8.3指当前镜像使用的nncase版本，在一些场合比如在线训练可能会用到。
+:::
+
 ![image](./img/image/image1.png)
 
 将MicroSD卡通过读卡器连接到电脑：

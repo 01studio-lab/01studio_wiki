@@ -73,7 +73,7 @@ class FaceDetApp(AIBase):
         # 设置Ai2d的输入输出格式和类型
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，可以通过设置input_image_size自行修改输入尺寸
@@ -138,7 +138,7 @@ class FaceMeshApp(AIBase):
         # 设置Ai2d的输入输出格式和类型
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了crop和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了crop和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,det,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，可以通过设置input_image_size自行修改输入尺寸
@@ -294,13 +294,13 @@ if __name__=="__main__":
     else:
         display_size=[800,480]
     # 人脸检测模型路径
-    face_det_kmodel_path="/sdcard/app/tests/kmodel/face_detection_320.kmodel"
+    face_det_kmodel_path="/sdcard/examples/kmodel/face_detection_320.kmodel"
     # 人脸网格模型路径
-    face_mesh_kmodel_path="/sdcard/app/tests/kmodel/face_alignment.kmodel"
+    face_mesh_kmodel_path="/sdcard/examples/kmodel/face_alignment.kmodel"
     # 人脸网格后处理模型路径
-    face_mesh_post_kmodel_path="/sdcard/app/tests/kmodel/face_alignment_post.kmodel"
+    face_mesh_post_kmodel_path="/sdcard/examples/kmodel/face_alignment_post.kmodel"
     # 其他参数
-    anchors_path="/sdcard/app/tests/utils/prior_data_320.bin"
+    anchors_path="/sdcard/examples/utils/prior_data_320.bin"
     rgb888p_size=[1920,1080]
     face_det_input_size=[320,320]
     face_mesh_input_size=[120,120]
@@ -318,31 +318,18 @@ if __name__=="__main__":
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
+        img=pl.get_frame()                      # 获取当前帧
+        det_boxes,mesh_res=fm.run(img)          # 推理当前帧
+        print(det_boxes,mesh_res)               # 打印结果
+        fm.draw_result(pl,det_boxes,mesh_res)   # 绘制推理结果
+        pl.show_image()                         # 显示推理效果
+        gc.collect()
 
-            clock.tick()
-
-            img=pl.get_frame()                      # 获取当前帧
-            det_boxes,mesh_res=fm.run(img)          # 推理当前帧
-            print(det_boxes,mesh_res)               # 打印结果
-            fm.draw_result(pl,det_boxes,mesh_res)   # 绘制推理结果
-            pl.show_image()                         # 显示推理效果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        fm.face_det.deinit()
-        fm.face_mesh.deinit()
-        fm.face_mesh_post.deinit()
-        pl.destroy()
-
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -354,23 +341,20 @@ if __name__=="__main__":
 代码中`det_boxes`变量为人脸检测结果， `mesh_res`为网格点数据。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
+        img=pl.get_frame()                      # 获取当前帧
+        det_boxes,mesh_res=fm.run(img)          # 推理当前帧
+        print(det_boxes,mesh_res)               # 打印结果
+        fm.draw_result(pl,det_boxes,mesh_res)   # 绘制推理结果
+        pl.show_image()                         # 显示推理效果
+        gc.collect()
 
-            clock.tick()
-
-            img=pl.get_frame()                      # 获取当前帧
-            det_boxes,mesh_res=fm.run(img)          # 推理当前帧
-            print(det_boxes,mesh_res)               # 打印结果
-            fm.draw_result(pl,det_boxes,mesh_res)   # 绘制推理结果
-            pl.show_image()                         # 显示推理效果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

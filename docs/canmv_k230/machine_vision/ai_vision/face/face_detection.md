@@ -29,7 +29,7 @@ graph TD
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
 '''
-
+from media.sensor import * #导入sensor模块，使用摄像头相关接口
 from libs.PipeLine import PipeLine, ScopedTiming
 from libs.AIBase import AIBase
 from libs.AI2D import Ai2d
@@ -121,13 +121,13 @@ if __name__ == "__main__":
     else:
         display_size=[800,480]
     # 设置模型路径和其他参数
-    kmodel_path = "/sdcard/app/tests/kmodel/face_detection_320.kmodel"
+    kmodel_path = "/sdcard/examples/kmodel/face_detection_320.kmodel"
     # 其它参数
     confidence_threshold = 0.5
     nms_threshold = 0.2
     anchor_len = 4200
     det_dim = 4
-    anchors_path = "/sdcard/app/tests/utils/prior_data_320.bin"
+    anchors_path = "/sdcard/examples/utils/prior_data_320.bin"
     anchors = np.fromfile(anchors_path, dtype=np.float)
     anchors = anchors.reshape((anchor_len, det_dim))
     rgb888p_size = [1920, 1080]
@@ -141,34 +141,27 @@ if __name__ == "__main__":
 
     clock = time.clock()
 
-    try:
-        ###############
-        ## 这里编写代码
-        ###############
-        while True:
+    ###############
+    ## 这里编写代码
+    ###############
+    while True:
 
-            os.exitpoint()                      # 检查是否有退出信号
+        clock.tick()
 
-            clock.tick()
+        img = pl.get_frame()            # 获取当前帧数据
+        res = face_det.run(img)         # 推理当前帧
 
-            img = pl.get_frame()            # 获取当前帧数据
-            res = face_det.run(img)         # 推理当前帧
+        # 当检测到人脸时，打印结果
+        if res:
+            print(res)
 
-            # 当检测到人脸时，打印结果
-            if res:
-                print(res)
+        face_det.draw_result(pl, res)   # 绘制结果
 
-            face_det.draw_result(pl, res)   # 绘制结果
-            pl.show_image()                 # 显示结果
-            gc.collect()                    # 垃圾回收
+        pl.show_image()                 # 显示结果
+        gc.collect()                    # 垃圾回收
 
-            print(clock.fps()) #打印帧率
+        print(clock.fps()) #打印帧率
 
-    except Exception as e:
-        sys.print_exception(e)                  # 打印异常信息
-    finally:
-        face_det.deinit()                       # 反初始化
-        pl.destroy()                            # 销毁PipeLine实例
 ```
 
 这里对关键代码进行讲解：
@@ -195,29 +188,27 @@ if __name__ == "__main__":
 代码中`res`变量为识别结果，可以通过终端打印或结合其它章节内容实现跟其它MCU串口通讯、网络传输。
 
 ```python
-        ...
-        ###############
-        ## 这里编写代码
-        ###############
-        while True:
+    ...
+    ###############
+    ## 这里编写代码
+    ###############
+    while True:
 
-            os.exitpoint()                      # 检查是否有退出信号
+        clock.tick()
 
-            clock.tick()
+        img = pl.get_frame()            # 获取当前帧数据
+        res = face_det.run(img)         # 推理当前帧
 
-            img = pl.get_frame()            # 获取当前帧数据
-            res = face_det.run(img)         # 推理当前帧
+        # 当检测到人脸时，打印结果
+        if res:
+            print(res)
 
-            # 当检测到人脸时，打印结果
-            if res:
-                print(res)
+        face_det.draw_result(pl, res)   # 绘制结果
+        pl.show_image()                 # 显示结果
+        gc.collect()                    # 垃圾回收
 
-            face_det.draw_result(pl, res)   # 绘制结果
-            pl.show_image()                 # 显示结果
-            gc.collect()                    # 垃圾回收
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

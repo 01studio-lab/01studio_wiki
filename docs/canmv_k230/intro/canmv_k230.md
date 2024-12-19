@@ -28,7 +28,7 @@ CanMV开源项目由嘉楠科技（Canaan）官方创建和维护。是将MicroP
 |  :---:  | ---  |
 | K230主控  | ● CPU1: RISC-V , 1.6GHz, 支持RVV 1.0<br></br> ● CPU0: RISC-V , 800MHz |
 | 神经网络处理器  | KPU（6TOPS等效算力），支持INT8和INT16|
-| 内存  | 1GBytes （LPDDR4） | 
+| 内存（可选）| ● 1GBytes（LPDDR4）<br></br> ● 2GBytes（LPDDR4） | 
 | 存储  | MicroSD（最大支持512G） |
 | 摄像头  | ● GC2093(标配) / OV5647<br></br> ● 支持3路输入（3 x 2 lane CSI） |
 | 显示  | ● MIPI显示屏（1x4 lane DSI）最大支持1920x1080<br></br> ● HDMI显示器最大支持1920x1080<br></br> ● CanMV IDE显示最大支持1920x1080 |

@@ -32,6 +32,7 @@ graph TD
 实验名称：物体自分类学习
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
+说明：意外中断或重新采集需要将"/sdcard/examples/utils/"目录下的"features"文件夹删除。
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -106,7 +107,7 @@ class SelfLearningApp(AIBase):
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
         self.data_init()
 
-    # 配置预处理操作，这里使用了crop和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了crop和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，您可以通过设置input_image_size自行修改输入尺寸
@@ -207,8 +208,8 @@ if __name__=="__main__":
     else:
         display_size=[800,480]
     # 模型路径
-    kmodel_path="/sdcard/app/tests/kmodel/recognition.kmodel"
-    database_path="/sdcard/app/tests/utils/features/"
+    kmodel_path="/sdcard/examples/kmodel/recognition.kmodel"
+    database_path="/sdcard/examples/utils/features/" #重复运行需要将这个文件夹删除
     # 其它参数设置
     rgb888p_size=[1920,1080]
     model_input_size=[224,224]
@@ -227,43 +228,26 @@ if __name__=="__main__":
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
+        clock.tick()
 
-            os.exitpoint()
+        #检测按键
+        if KEY.value()==0:   #按键被按下
+            time.sleep_ms(10) #消除抖动
+            if KEY.value()==0: #确认按键被按下
+                print('KEY')
+                key_node = 1
+                while not KEY.value(): #检测按键是否松开
+                    pass
 
-            clock.tick()
+        img=pl.get_frame() # 获取当前帧数据
+        res=sl.run(img) # 推理当前帧
+        sl.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
+        print(res)  # 打印结果
+        pl.show_image() # 显示当前的绘制结果
+        gc.collect()
 
-            #检测按键
-            if KEY.value()==0:   #按键被按下
-                time.sleep_ms(10) #消除抖动
-                if KEY.value()==0: #确认按键被按下
-                    print('KEY')
-                    key_node = 1
-                    while not KEY.value(): #检测按键是否松开
-                        pass
-
-            img=pl.get_frame() # 获取当前帧数据
-            res=sl.run(img) # 推理当前帧
-            sl.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
-            print(res)  # 打印结果
-            pl.show_image() # 显示当前的绘制结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        # 删除features文件夹
-        stat_info = os.stat(database_path)
-        if (stat_info[0] & 0x4000):
-            list_files = os.listdir(database_path)
-            for l in list_files:
-                os.remove(database_path + l)
-        os.rmdir(database_path)
-        sl.deinit()
-        pl.destroy()
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -277,31 +261,29 @@ if __name__=="__main__":
 代码中 `res`为检测结果。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        #检测按键
+        if KEY.value()==0:   #按键被按下
+            time.sleep_ms(10) #消除抖动
+            if KEY.value()==0: #确认按键被按下
+                print('KEY')
+                key_node = 1
+                while not KEY.value(): #检测按键是否松开
+                    pass
 
-            #检测按键
-            if KEY.value()==0:   #按键被按下
-                time.sleep_ms(10) #消除抖动
-                if KEY.value()==0: #确认按键被按下
-                    print('KEY')
-                    key_node = 1
-                    while not KEY.value(): #检测按键是否松开
-                        pass
+        img=pl.get_frame() # 获取当前帧数据
+        res=sl.run(img) # 推理当前帧
+        sl.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
+        print(res)  # 打印结果
+        pl.show_image() # 显示当前的绘制结果
+        gc.collect()
 
-            img=pl.get_frame() # 获取当前帧数据
-            res=sl.run(img) # 推理当前帧
-            sl.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
-            print(res)  # 打印结果
-            pl.show_image() # 显示当前的绘制结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 可以通过修改`labels`增加或减少待学习识别物体数量：

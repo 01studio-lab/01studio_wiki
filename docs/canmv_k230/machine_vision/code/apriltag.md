@@ -108,7 +108,6 @@ graph TD
 ## 参考代码
 
 ```python
-
 '''
 实验名称：AprilTags标签识别
 实验平台：01Studio CanMV K230
@@ -151,65 +150,42 @@ def family_name(tag):
     if(tag.family() == image.ARTOOLKIT):
         return "ARTOOLKIT"
 
-try:
 
-    sensor = Sensor(width=1280, height=960) #构建摄像头对象，将摄像头长宽设置为4:3
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(width=320, height=240) #设置帧大小为LCD分辨率(800x480)，默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+sensor = Sensor(width=1280, height=960) #构建摄像头对象，将摄像头长宽设置为4:3
+sensor.reset() #复位和初始化摄像头
+sensor.set_framesize(width=320, height=240) #设置帧大小为LCD分辨率(800x480)，默认通道0
+sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 
-    Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
+Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
 
-    MediaManager.init() #初始化media资源管理器
+MediaManager.init() #初始化media资源管理器
 
-    sensor.run() #启动sensor
+sensor.run() #启动sensor
 
-    clock = time.clock()
+clock = time.clock()
 
-    while True:
+while True:
 
-        os.exitpoint() #检测IDE中断
-        clock.tick()
+    clock.tick()
 
-        img = sensor.snapshot() #拍摄图片
+    img = sensor.snapshot() #拍摄图片
 
 
-        for tag in img.find_apriltags(families=tag_families): # 如果没有给出家族，默认TAG36H11。
+    for tag in img.find_apriltags(families=tag_families): # 如果没有给出家族，默认TAG36H11。
 
-                img.draw_rectangle(tag.rect(), color = (255, 0, 0), thickness=4)
-                img.draw_cross(tag.cx(), tag.cy(), color = (0, 255, 0), thickness=2)
-                print_args = (family_name(tag), tag.id(), (180 * tag.rotation()) / math.pi) #打印标签信息
-                print("Tag Family %s, Tag ID %d, rotation %f (degrees)" % print_args)
-                #img.draw_string_advanced(0, 0, 30, code.payload(), color = (255, 255, 255)) #图像显示条码信息
+            img.draw_rectangle(tag.rect(), color = (255, 0, 0), thickness=4)
+            img.draw_cross(tag.cx(), tag.cy(), color = (0, 255, 0), thickness=2)
+            print_args = (family_name(tag), tag.id(), (180 * tag.rotation()) / math.pi) #打印标签信息
+            print("Tag Family %s, Tag ID %d, rotation %f (degrees)" % print_args)
+            #img.draw_string_advanced(0, 0, 30, code.payload(), color = (255, 255, 255)) #图像显示条码信息
 
-        #Display.show_image(img) #显示图片
+    #Display.show_image(img) #显示图片
 
-        #显示图片，LCD居中方式显示
-        Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2)) #显示图片
+    #显示图片，LCD居中方式显示
+    Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2)) #显示图片
 
-        print(clock.fps()) #打印帧率
-
-###################
-# IDE中断释放资源代码
-###################
-except KeyboardInterrupt as e:
-    print(f"user stop")
-except BaseException as e:
-    print(f"Exception '{e}'")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-
-    # release media buffer
-    MediaManager.deinit()
-
+    print(clock.fps()) #打印帧率
 ```
 
 ## 实验结果

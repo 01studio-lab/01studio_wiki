@@ -189,9 +189,9 @@ if __name__=="__main__":
     else:
         display_size=[800,480]
     # 车牌检测模型路径
-    licence_det_kmodel_path="/sdcard/app/tests/kmodel/LPD_640.kmodel"
+    licence_det_kmodel_path="/sdcard/examples/kmodel/LPD_640.kmodel"
     # 车牌识别模型路径
-    licence_rec_kmodel_path="/sdcard/app/tests/kmodel/licence_reco.kmodel"
+    licence_rec_kmodel_path="/sdcard/examples/kmodel/licence_reco.kmodel"
     # 其它参数
     rgb888p_size=[640,360]
     licence_det_input_size=[640,640]
@@ -206,27 +206,17 @@ if __name__=="__main__":
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
 
-            os.exitpoint()
+        clock.tick()
+        img=pl.get_frame()                  # 获取当前帧
+        det_res,rec_res=lr.run(img)         # 推理当前帧
+        lr.draw_result(pl,det_res,rec_res)  # 绘制当前帧推理结果
+        print(det_res,rec_res)              # 打印结果
+        pl.show_image()                     # 展示推理结果
+        gc.collect()
 
-            clock.tick()
-            img=pl.get_frame()                  # 获取当前帧
-            det_res,rec_res=lr.run(img)         # 推理当前帧
-            lr.draw_result(pl,det_res,rec_res)  # 绘制当前帧推理结果
-            print(det_res,rec_res)              #打印结果
-            pl.show_image()                     # 展示推理结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        lr.licence_det.deinit()
-        lr.licence_rec.deinit()
-        pl.destroy()
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -238,21 +228,19 @@ if __name__=="__main__":
 代码中 `det_res`为车牌检测结果， `rec_res`为车牌识别内容结果。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
+        img=pl.get_frame()                  # 获取当前帧
+        det_res,rec_res=lr.run(img)         # 推理当前帧
+        lr.draw_result(pl,det_res,rec_res)  # 绘制当前帧推理结果
+        print(det_res,rec_res)
+        pl.show_image()                     # 展示推理结果
+        gc.collect()
 
-            clock.tick()
-            img=pl.get_frame()                  # 获取当前帧
-            det_res,rec_res=lr.run(img)         # 推理当前帧
-            lr.draw_result(pl,det_res,rec_res)  # 绘制当前帧推理结果
-            print(det_res,rec_res)
-            pl.show_image()                     # 展示推理结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

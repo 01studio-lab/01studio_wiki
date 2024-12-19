@@ -177,94 +177,32 @@ from media.sensor import * #导入sensor模块，使用摄像头相关接口
 from media.display import * #导入display模块，使用display相关接口
 from media.media import * #导入media模块，使用meida相关接口
 
-try:
+sensor = Sensor() #构建摄像头对象
+sensor.reset() #复位和初始化摄像头
+sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，默认通道0
+sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 
-    sensor = Sensor() #构建摄像头对象
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+#使用IDE缓冲区输出图像,显示尺寸和sensor配置一致。
+Display.init(Display.VIRT, sensor.width(), sensor.height())
 
-    #使用IDE缓冲区输出图像,显示尺寸和sensor配置一致。
-    Display.init(Display.VIRT, sensor.width(), sensor.height())
+MediaManager.init() #初始化media资源管理器
 
-    MediaManager.init() #初始化media资源管理器
+sensor.run() #启动sensor
 
-    sensor.run() #启动sensor
+clock = time.clock()
 
-    clock = time.clock()
+while True:
 
-    while True:
+    ################
+    ## 这里编写代码 ##
+    ################
+    clock.tick()
 
+    img = sensor.snapshot() #拍摄一张图
 
-        os.exitpoint() #检测IDE中断
+    Display.show_image(img) #显示图片
 
-        ################
-        ## 这里编写代码 ##
-        ################
-        clock.tick()
-
-        img = sensor.snapshot() #拍摄一张图
-
-        Display.show_image(img) #显示图片
-
-        print(clock.fps()) #打印FPS
-
-
-###################
-# IDE中断释放资源代码
-###################
-except KeyboardInterrupt as e:
-    print("user stop: ", e)
-except BaseException as e:
-    print(f"Exception {e}")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-    # release media buffer
-    MediaManager.deinit()
-
-```
-
-由于CanMV K230 MicroPython底层基于Linux + RTOS实现，因此可以看到代码中出现一些辅助中断等代码，这些代码相对固定，本节中核心代码如下，非常简洁：
-
-```python
-    ...
-    sensor = Sensor() #构建摄像头对象
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
-
-    #使用IDE缓冲区输出图像,显示尺寸和sensor配置一致。
-    Display.init(Display.VIRT, sensor.width(), sensor.height())
-
-    MediaManager.init() #初始化media资源管理器
-
-    sensor.run() #启动sensor
-
-    clock = time.clock()
-
-    while True:
-
-
-        os.exitpoint() #检测IDE中断
-
-        ################
-        ## 这里编写代码 ##
-        ################
-        clock.tick()
-
-        img = sensor.snapshot() #拍摄一张图
-
-        Display.show_image(img) #显示图片
-
-        print(clock.fps()) #打印FPS
-
-    ...
+    print(clock.fps()) #打印FPS
 ```
 
 ## 实验结果

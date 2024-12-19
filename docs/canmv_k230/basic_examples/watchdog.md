@@ -22,7 +22,7 @@ from machine import WDT
 
 wdt = WDT(id, timeout)
 ```
-创建看门狗对象。
+创建看门狗对象。K230有2个看门狗，CPU0（小核800M）使用看门狗0，CPU1（大核1.6G）使用看门狗1，由于CanMV RTOS只使用CPU1，所以只有看门狗1能用。
 
 - `id` ：看门狗编号。
 

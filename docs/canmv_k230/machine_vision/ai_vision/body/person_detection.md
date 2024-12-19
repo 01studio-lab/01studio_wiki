@@ -31,7 +31,6 @@ graph TD
 教程：wiki.01studio.cc
 '''
 
-
 from libs.PipeLine import PipeLine, ScopedTiming
 from libs.AIBase import AIBase
 from libs.AI2D import Ai2d
@@ -77,7 +76,7 @@ class PersonDetectionApp(AIBase):
         # 设置Ai2d的输入输出格式和类型
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，您可以通过设置input_image_size自行修改输入尺寸
@@ -148,7 +147,7 @@ if __name__=="__main__":
     else:
         display_size=[800,480]
     # 模型路径
-    kmodel_path="/sdcard/app/tests/kmodel/person_detect_yolov5n.kmodel"
+    kmodel_path="/sdcard/examples/kmodel/person_detect_yolov5n.kmodel"
     # 其它参数设置
     confidence_threshold = 0.2
     nms_threshold = 0.6
@@ -165,28 +164,19 @@ if __name__=="__main__":
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame()  # 获取当前帧数据
+        res=person_det.run(img)  # 推理当前帧
+        person_det.draw_result(pl,res)  # 绘制结果到PipeLine的osd图像
+        print(res) # 打印结果
+        pl.show_image()  # 显示当前的绘制结果
+        gc.collect()
 
-            img=pl.get_frame()  # 获取当前帧数据
-            res=person_det.run(img)  # 推理当前帧
-            person_det.draw_result(pl,res)  # 绘制结果到PipeLine的osd图像
-            print(res) # 打印结果
-            pl.show_image()  # 显示当前的绘制结果
-            gc.collect()
+        print(clock.fps()) #打印帧率
 
-            print(clock.fps()) #打印帧率
-
-    #IDE中断注销相关对象，释放资源
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        person_det.deinit()
-        pl.destroy()
 ```
 
 这里对关键代码进行讲解：
@@ -213,22 +203,20 @@ if __name__=="__main__":
 代码中`res`变量为识别结果，可以通过终端打印或结合其它章节内容实现跟其它MCU串口通讯、网络传输。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame()  # 获取当前帧数据
+        res=person_det.run(img)  # 推理当前帧
+        person_det.draw_result(pl,res)  # 绘制结果到PipeLine的osd图像
+        print(res) # 打印结果
+        pl.show_image()  # 显示当前的绘制结果
+        gc.collect()
 
-            img=pl.get_frame()  # 获取当前帧数据
-            res=person_det.run(img)  # 推理当前帧
-            person_det.draw_result(pl,res)  # 绘制结果到PipeLine的osd图像
-            print(res) # 打印结果
-            pl.show_image()  # 显示当前的绘制结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

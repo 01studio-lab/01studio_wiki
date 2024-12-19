@@ -133,19 +133,27 @@ def WIFI_Connect():
 
     wlan = network.WLAN(network.STA_IF) #STA模式
     wlan.active(True)                   #激活接口
-    start_time=time.time()              #记录时间做超时判断
 
     if not wlan.isconnected():
 
         print('connecting to network...')
 
-        #输入WIFI账号密码（仅支持2.4G信号）, 连接超过10秒为超时
-        wlan.connect('01Studio', '88888888')
+        for i in range(3): #重复连接3次
+
+            #输入WIFI账号密码（仅支持2.4G信号）, 连接超过5秒为超时
+            wlan.connect('01Studio', '88888888')
+
+            if wlan.isconnected(): #连接成功
+                break
 
     if wlan.isconnected(): #连接成功
 
         #LED蓝灯点亮
         WIFI_LED.value(1)
+
+        #等待获取IP地址
+        while wlan.ifconfig()[0] == '0.0.0.0':
+            pass
 
         #串口打印信息
         print('network information:', wlan.ifconfig())
@@ -186,7 +194,6 @@ if WIFI_Connect():
 
 while True:
     pass
-
 ```
 
 ### 订阅者 subscribe
@@ -215,13 +222,22 @@ def WIFI_Connect():
 
         print('connecting to network...')
 
-        #输入WIFI账号密码（仅支持2.4G信号）, 连接超过10秒为超时
-        wlan.connect('01Studio', '88888888')
+        for i in range(3): #重复连接3次
+
+            #输入WIFI账号密码（仅支持2.4G信号）, 连接超过5秒为超时
+            wlan.connect('01Studio', '88888888')
+
+            if wlan.isconnected(): #连接成功
+                break
 
     if wlan.isconnected(): #连接成功
 
         #LED蓝灯点亮
         WIFI_LED.value(1)
+
+        #等待获取IP地址
+        while wlan.ifconfig()[0] == '0.0.0.0':
+            pass
 
         #串口打印信息
         print('network information:', wlan.ifconfig())
@@ -273,7 +289,6 @@ if WIFI_Connect():
 
 while True:
     pass
-
 ```
 
 ## 实验结果
@@ -281,6 +296,12 @@ while True:
 先将例程源码文件夹里面的`simple.py`库文件拷贝到CanMV K230开发板`sdcard`目录下：
 
 ![mqtt](./img/mqtt/mqtt4_2.png)
+
+将代码中的WiFi网络账号和密码改成自己家里或者办公室的WiFi账号密码：**(只支持2.4G信号只，不支持5G或者2.4G&5G混合信号。)**
+```python
+#输入WIFI账号密码（仅支持2.4G信号）, 连接超过5秒为超时
+ wlan.connect('01Studio', '88888888')
+```
 
 ### 发布者测试
 

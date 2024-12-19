@@ -83,7 +83,9 @@ graph TD
     导入相关模块 --> 初始化sensor模块 --> 摄像头拍摄 --> 通过IDE缓冲区,HDMI或MIPI屏显示图像 --> 摄像头拍摄;
 ```
 
-## 参考代码
+## IDE缓冲区显示
+
+### 参考代码
 
 ```python
 '''
@@ -98,73 +100,47 @@ from media.sensor import * #导入sensor模块，使用摄像头相关接口
 from media.display import * #导入display模块，使用display相关接口
 from media.media import * #导入media模块，使用meida相关接口
 
-try:
+sensor = Sensor() #构建摄像头对象
+sensor.reset() #复位和初始化摄像头
+sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，缓冲区和HDMI用,默认通道0
+#sensor.set_framesize(width=800,height=480) #设置帧大小800x480,LCD专用,默认通道0
+sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 
-    sensor = Sensor() #构建摄像头对象
-    sensor.reset() #复位和初始化摄像头
-    sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，缓冲区和HDMI用,默认通道0
-    #sensor.set_framesize(width=800,height=480) #设置帧大小800x480,LCD专用,默认通道0
-    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+#################################
+## 图像3种不同显示方式（修改注释实现）
+#################################
 
-    #################################
-    ## 图像3种不同显示方式（修改注释实现）
-    #################################
+Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+#Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
+#Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
 
-    Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
-    #Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
-    #Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
+MediaManager.init() #初始化media资源管理器
 
-    MediaManager.init() #初始化media资源管理器
+sensor.run() #启动sensor
 
-    sensor.run() #启动sensor
+clock = time.clock()
 
-    clock = time.clock()
+while True:
 
-    while True:
+    ####################
+    ## 这里编写主要代码
+    ####################
+    clock.tick()
 
+    img = sensor.snapshot() #拍摄一张图
 
-        os.exitpoint() #检测IDE中断
+    Display.show_image(img) #显示图片
 
-        ####################
-        ## 这里编写主要代码
-        ####################
-        clock.tick()
-
-        img = sensor.snapshot() #拍摄一张图
-
-        Display.show_image(img) #显示图片
-
-        print(clock.fps()) #打印FPS
-
-
-###################
-# IDE中断释放资源代码
-###################
-except KeyboardInterrupt as e:
-    print("user stop: ", e)
-except BaseException as e:
-    print(f"Exception {e}")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-    # release media buffer
-    MediaManager.deinit()
+    print(clock.fps()) #打印FPS
 ```
 
-## 实验结果
-
-### IDE缓冲区显示
+### 实验结果
 
 点击运行代码，可以看到在IDE右边显示摄像头实时拍摄图像。
 
 ![display](./img/display/display1.png)
 
-### HDMI显示器显示
+## HDMI显示器显示
 
 将参考代码中的代码改成LT9611 :
 ```python
@@ -178,13 +154,63 @@ finally:
 
 ```
 
+### 参考代码
+
+```python
+'''
+实验名称：图像3种显示方式
+实验平台：01Studio CanMV K230
+说明：实现摄像头图像采集通过IDE、HDMI和MIPI屏显示
+'''
+
+import time, os, sys
+
+from media.sensor import * #导入sensor模块，使用摄像头相关接口
+from media.display import * #导入display模块，使用display相关接口
+from media.media import * #导入media模块，使用meida相关接口
+
+sensor = Sensor() #构建摄像头对象
+sensor.reset() #复位和初始化摄像头
+sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，缓冲区和HDMI用,默认通道0
+#sensor.set_framesize(width=800,height=480) #设置帧大小800x480,LCD专用,默认通道0
+sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+
+#################################
+## 图像3种不同显示方式（修改注释实现）
+#################################
+
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
+#Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
+
+MediaManager.init() #初始化media资源管理器
+
+sensor.run() #启动sensor
+
+clock = time.clock()
+
+while True:
+
+    ####################
+    ## 这里编写主要代码
+    ####################
+    clock.tick()
+
+    img = sensor.snapshot() #拍摄一张图
+
+    Display.show_image(img) #显示图片
+
+    print(clock.fps()) #打印FPS
+```
+
+### 实验结果
 通过HDMI线连接到HDMI显示器：
 ![display](./img/display/display2.png)
 
 运行代码，可以看到HDMI显示摄像头采集图像, 最大支持1080p：
 ![display](./img/display/display3.png)
 
-### 3.5寸mipi显示屏显示
+## 3.5寸mipi显示屏显示
 
 使用3.5寸mipi显示屏显示图像需要修改2个地方：
 
@@ -206,6 +232,56 @@ finally:
     Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
 
 ```
+### 参考代码
+```python
+'''
+实验名称：图像3种显示方式
+实验平台：01Studio CanMV K230
+说明：实现摄像头图像采集通过IDE、HDMI和MIPI屏显示
+'''
+
+import time, os, sys
+
+from media.sensor import * #导入sensor模块，使用摄像头相关接口
+from media.display import * #导入display模块，使用display相关接口
+from media.media import * #导入media模块，使用meida相关接口
+
+sensor = Sensor() #构建摄像头对象
+sensor.reset() #复位和初始化摄像头
+#sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，缓冲区和HDMI用,默认通道0
+sensor.set_framesize(width=800,height=480) #设置帧大小800x480,LCD专用,默认通道0
+sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+
+#################################
+## 图像3种不同显示方式（修改注释实现）
+#################################
+
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+#Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
+Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
+
+MediaManager.init() #初始化media资源管理器
+
+sensor.run() #启动sensor
+
+clock = time.clock()
+
+while True:
+
+    ####################
+    ## 这里编写主要代码
+    ####################
+    clock.tick()
+
+    img = sensor.snapshot() #拍摄一张图
+
+    Display.show_image(img) #显示图片
+
+    print(clock.fps()) #打印FPS
+
+```
+
+### 实验结果
 
 通过排线连接01Studio 3.5寸mipi屏：
 ![display](./img/display/display4.png)
