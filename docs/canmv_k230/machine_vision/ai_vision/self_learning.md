@@ -296,6 +296,10 @@ if __name__=="__main__":
 
 ## 实验结果
 
+:::danger 警告
+每次运行代码后会在下面路径文件夹生成特征数据**/sdcard/examples/utils/features/**，如遇到意外中断情况可以删除整个`features`文件夹重新运行代码即可。
+:::
+
 在CanMV IDE中运行上述代码，按LCD提示进行操作,依次按下按键KEY开始采集3种水果特征。
 
 ![self_learn](./img/self_learn/self_learn1.png)
@@ -317,3 +321,4 @@ if __name__=="__main__":
 ![self_learn](./img/self_learn/self_learn5.png)
 
 可以看到识别成功的概率非常高>0.9（最大1）。
+

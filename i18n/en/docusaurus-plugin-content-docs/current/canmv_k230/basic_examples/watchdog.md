@@ -22,7 +22,7 @@ from machine import WDT
 
 wdt = WDT(id, timeout)
 ```
-Createwatchdog object.
+Createwatchdog object. K230 has 2 watchdogs, CPU0 (small core 800M) uses watchdog 0, CPU1 (large core 1.6G) uses watchdog 1. Since CanMV RTOS only uses CPU1, only watchdog 1 can be used.
 
 - `id` ：Watchdog Number.
 

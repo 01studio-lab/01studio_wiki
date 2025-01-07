@@ -130,70 +130,47 @@ def barcode_name(code):
     if(code.type() == image.CODE128):
         return "CODE128"
 
-try:
 
-    sensor = Sensor() #Constructing a camera object
-    sensor.reset() # reset the Camera
-    sensor.set_framesize(width=800, height=480) # Set the frame size to LCD resolution (800x480), channel 0
-    sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
-    
-    #Use 3.5-inch mipi screen and IDE buffer to display images at the same time, 800x480 resolution
-    Display.init(Display.ST7701, to_ide=True) 
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
+sensor = Sensor() #Constructing a camera object
+sensor.reset() # reset the Camera
+sensor.set_framesize(width=800, height=480) # Set the frame size to LCD resolution (800x480), channel 0
+sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
 
-    MediaManager.init() #Initialize the media resource manager
+#Use 3.5-inch mipi screen and IDE buffer to display images at the same time, 800x480 resolution
+Display.init(Display.ST7701, to_ide=True) 
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
 
-    sensor.run() #Start the camera
+MediaManager.init() #Initialize the media resource manager
 
-    clock = time.clock()
+sensor.run() #Start the camera
 
-    while True:
+clock = time.clock()
 
-        os.exitpoint() #Detect IDE interrupts
+while True:
 
-        ####################
-        ## Write codes here
-        ####################
-        clock.tick()
+    ####################
+    ## Write codes here
+    ####################
+    clock.tick()
 
-        img = sensor.snapshot() # Take a picture
+    img = sensor.snapshot() # Take a picture
 
-        codes = img.find_barcodes() # Find all barcodes in an image
+    codes = img.find_barcodes() # Find all barcodes in an image
 
-        for code in codes:
+    for code in codes:
 
-            #Draw a rectangle to represent the barcode
-            img.draw_rectangle(code.rect(),thickness=2)
+        #Draw a rectangle to represent the barcode
+        img.draw_rectangle(code.rect(),thickness=2)
 
-            #Print related information
-            print_args = (barcode_name(code), code.payload(), (180 * code.rotation()) / math.pi, code.quality())
-            print("Barcode %s, Payload \"%s\", rotation %f (degrees), quality %d" % print_args)
+        #Print related information
+        print_args = (barcode_name(code), code.payload(), (180 * code.rotation()) / math.pi, code.quality())
+        print("Barcode %s, Payload \"%s\", rotation %f (degrees), quality %d" % print_args)
 
-            img.draw_string_advanced(0, 0, 30, code.payload(), color = (255, 255, 255)) #Image display barcode information
+        img.draw_string_advanced(0, 0, 30, code.payload(), color = (255, 255, 255)) #Image display barcode information
 
-        Display.show_image(img) #Display images
+    Display.show_image(img) #Display images
 
-        print(clock.fps()) #FPS
-
-##############################################
-# IDE interrupts the release of resource code
-##############################################
-except KeyboardInterrupt as e:
-    print(f"user stop")
-except BaseException as e:
-    print(f"Exception '{e}'")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-
-    # release media buffer
-    MediaManager.deinit()
+    print(clock.fps()) #FPS
 ```
 
 ## Experimental Results

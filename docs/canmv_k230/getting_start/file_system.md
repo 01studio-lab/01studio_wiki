@@ -11,7 +11,7 @@ CanMV K230系统内置了文件系统，上电后出现的CanMV盘符就是。
 
 ![file_system1](./img/file_system/file_system1_1.png)
 
-- `sdcard` 里存放在一些MicroPython库文件、官方示例程序文件。其中官方示例代码位于 `CanMV\examples\` 目录下，**由于部分代码存在差异，本在线教程请以01科技资料包配套的代码为准**：
+- `sdcard` 里存放在一些MicroPython库文件、官方示例程序文件。其中官方示例代码位于 `CanMV\examples\` 目录下，**由于U盘部分代码更新滞后存在差异可能无法运行，本在线教程请以01科技资料包配套的代码为准**：
 
 ![file_system1](./img/file_system/file_system2.png)
 

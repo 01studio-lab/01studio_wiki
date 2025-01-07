@@ -28,7 +28,7 @@ In other words, if you are familiar with Micropython or Python, you can complete
 |  :---:  | ---  |
 | K230  | ● CPU1: RISC-V , 1.6GHz, Support RVV 1.0<br></br> ● CPU0: RISC-V , 800MHz |
 | Neural Network  | KPU（6TOPS Equivalence），Support INT8 & INT16|
-| RAM  | 1GBytes （LPDDR4） | 
+| RAM  | ● 1GBytes（LPDDR4）<br></br> ● 2GBytes（LPDDR4） | 
 | Storage  | MicroSD（512G max） |
 | Camera  | ● GC2093(Standard) / OV5647<br></br> ● Support 3 interfaces（3 x 2 lane CSI） |
 | Display  | ● MIPI LCD（1x4 lane DSI）, up to 1920x1080<br></br> ● HDMI Display, up to1920x1080<br></br> ● CanMV IDE, up to 1920x1080 |

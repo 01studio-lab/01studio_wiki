@@ -82,18 +82,18 @@ while True:
 
 与单一颜色识别例程相比，修改的代码如下，在颜色识别前中加入了for循环，识别预设的3种颜色：
 ```python
-        ...
-        for i in range(3):
+    ...
+    for i in range(3):
 
-            blobs = img.find_blobs([thresholds[i]]) # 0,1,2分别表示红，绿，蓝色。
+        blobs = img.find_blobs([thresholds[i]]) # 0,1,2分别表示红，绿，蓝色。
 
-            if blobs:
+        if blobs:
 
-                for b in blobs: #画矩形、箭头和字符表示
-                    tmp=img.draw_rectangle(b[0:4], thickness = 4, color = colors1[i])
-                    tmp=img.draw_cross(b[5], b[6], thickness = 2)
-                    tmp=img.draw_string_advanced(b[0], b[1]-35, 30, colors2[i],color = colors1[i])
-        ...
+            for b in blobs: #画矩形、箭头和字符表示
+                tmp=img.draw_rectangle(b[0:4], thickness = 4, color = colors1[i])
+                tmp=img.draw_cross(b[5], b[6], thickness = 2)
+                tmp=img.draw_string_advanced(b[0], b[1]-35, 30, colors2[i],color = colors1[i])
+    ...
 ```
 
 ### 实验结果

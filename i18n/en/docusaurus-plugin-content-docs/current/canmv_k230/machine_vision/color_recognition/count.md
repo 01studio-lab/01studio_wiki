@@ -111,66 +111,45 @@ from media.media import * #Import the media module and use meida API
 
 thresholds = [(18, 72, -13, 31, 18, 83)] # Yellow jumper cap threshold
 
-try:
-    sensor = Sensor() #Constructing a camera object
-    sensor.reset() # reset the Camera
-    sensor.set_framesize(width=800, height=480) # Set the frame size to LCD resolution (800x480), channel 0
-    sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
-    
-    #Use 3.5-inch mipi screen and IDE buffer to display images at the same time, 800x480 resolution
-    Display.init(Display.ST7701, to_ide=True) 
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
+sensor = Sensor() #Constructing a camera object
+sensor.reset() # reset the Camera
+sensor.set_framesize(width=800, height=480) # Set the frame size to LCD resolution (800x480), channel 0
+sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
 
-    MediaManager.init() #Initialize the media resource manager
+#Use 3.5-inch mipi screen and IDE buffer to display images at the same time, 800x480 resolution
+Display.init(Display.ST7701, to_ide=True)
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
 
-    sensor.run() #Start the camera
+MediaManager.init() #Initialize the media resource manager
 
-    clock = time.clock()
+sensor.run() #Start the camera
 
-    while True:
+clock = time.clock()
 
-        os.exitpoint() #Detect IDE interrupts
+while True:
 
-        ####################
-        ## Write codes here
-        ####################
-        clock.tick()
+    ####################
+    ## Write codes here
+    ####################
+    clock.tick()
 
-        img = sensor.snapshot() # Take a picture
-        
-        blobs = img.find_blobs([thresholds[0]]) # Looking for yellow jumper cap
+    img = sensor.snapshot() # Take a picture
 
-        if blobs: 
-            for b in blobs:
-                tmp=img.draw_rectangle(b[0:4])
-                tmp=img.draw_cross(b[5], b[6])
+    blobs = img.find_blobs([thresholds[0]]) # Looking for yellow jumper cap
 
-        #Display calculation information
-        img.draw_string_advanced(0, 0, 30, 'FPS: '+str("%.3f"%(clock.fps()))+'       Num: '
-                                 +str(len(blobs)), color = (255, 255, 255))
+    if blobs:
+        for b in blobs:
+            tmp=img.draw_rectangle(b[0:4])
+            tmp=img.draw_cross(b[5], b[6])
 
-        Display.show_image(img) # Display image
+    #Display calculation information
+    img.draw_string_advanced(0, 0, 30, 'FPS: '+str("%.3f"%(clock.fps()))+'       Num: '
+                             +str(len(blobs)), color = (255, 255, 255))
 
-        print(clock.fps()) #FPS
+    Display.show_image(img) # Display image
 
+    print(clock.fps()) #FPS
 
-##############################################
-# IDE interrupts the release of resource code
-##############################################
-except KeyboardInterrupt as e:
-    print("user stop: ", e)
-except BaseException as e:
-    print(f"Exception {e}")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-    # release media buffer
-    MediaManager.deinit()
 ```
 
 ## Experimental Results

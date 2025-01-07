@@ -28,7 +28,7 @@ All source code for this online tutorial.
 
 ### Firmware & Image
 
-Development board image, burn it to SD card and insert it into the development board to start.
+Development board image, burn it to SD card and insert it into the development board to start.(The online tutorial is used in conjunction with the image. Please use the image version provided in our data package)
 
 ![download](./img/download/download4.png)
 

@@ -184,93 +184,33 @@ from media.sensor import * #Import the sensor module and use the camera API
 from media.display import * #Import the display module and use display API
 from media.media import * #Import the media module and use meida API
 
-try:
+sensor = Sensor() #Constructing a camera object
+sensor.reset() #reset the Camera
+sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
+sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
 
-    sensor = Sensor() #Constructing a camera object
-    sensor.reset() #reset the Camera
-    sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
-    sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
+#Use IDE buffer to output images, the display size is consistent with sensor configuration.
+Display.init(Display.VIRT, sensor.width(), sensor.height())
 
-    #Use IDE buffer to output images, the display size is consistent with sensor configuration.
-    Display.init(Display.VIRT, sensor.width(), sensor.height())
+MediaManager.init() #Initialize the media resource manager
 
-    MediaManager.init() #Initialize the media resource manager
+sensor.run() #Start the camera
 
-    sensor.run() #Start the camera
+clock = time.clock()
 
-    clock = time.clock()
+while True:
 
-    while True:
+    ####################
+    ## Write codes here
+    ####################
+    clock.tick()
 
+    img = sensor.snapshot() #Take a picture
 
-        os.exitpoint() #Detect IDE interrupts
+    Display.show_image(img) #Show the Picture
 
-        ####################
-        ## Write codes here
-        ####################
-        clock.tick()
+    print(clock.fps()) #FPS
 
-        img = sensor.snapshot() #Take a picture
-
-        Display.show_image(img) #Show the Picture
-
-        print(clock.fps()) #FPS
-
-
-##############################################
-# IDE interrupts the release of resource code
-##############################################
-except KeyboardInterrupt as e:
-    print("user stop: ", e)
-except BaseException as e:
-    print(f"Exception {e}")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-    # release media buffer
-    MediaManager.deinit()
-
-```
-
-Since the underlying layer of CanMV K230 MicroPython is based on Linux + RTOS, you can see some auxiliary interrupt codes in the code. These codes are relatively fixed. The core code in this section is as follows, which is very concise:
-
-```python
-    ...
-    sensor = Sensor() #Constructing a camera object
-    sensor.reset() #reset the Camera
-    sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
-    sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
-
-    #Use IDE buffer to output images, the display size is consistent with sensor configuration.
-    Display.init(Display.VIRT, sensor.width(), sensor.height())
-
-    MediaManager.init() #Initialize the media resource manager
-
-    sensor.run() #Start the camera
-
-    clock = time.clock()
-
-    while True:
-
-
-        os.exitpoint() #Detect IDE interrupts
-
-        ####################
-        ## Write codes here
-        ####################
-        clock.tick()
-
-        img = sensor.snapshot() #Take a picture
-
-        Display.show_image(img) #Show the Picture
-
-        print(clock.fps()) #FPS
-    ...
 ```
 
 ## Experimental Results

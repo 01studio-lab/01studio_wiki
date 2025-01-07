@@ -10,6 +10,10 @@ sidebar_position: 2
 
 （The data package is a rar compressed package by default. You need to decompress it yourself and use the image file ending with .img.）
 
+:::tip Tips
+01Studio CanMV K230 online tutorial is used with the image. Please use the image version provided in our data package. The nncase_2.8.3 in the image name refers to the nncase version used by the current image, which may be used in some occasions such as online training.
+:::
+
 ![image](./img/image/image1.png)
 
 Connect the MicroSD card to your computer via a card reader:

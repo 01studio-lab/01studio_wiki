@@ -38,88 +38,65 @@ thresholds = [(30, 100, 15, 127, 15, 127), # Red Threshold
 colors1 = [(255,0,0), (0,255,0), (0,0,255)]
 colors2 = ['RED', 'GREEN', 'BLUE']
 
-try:
 
-    sensor = Sensor() #Constructing a camera object
-    sensor.reset() # reset the Camera
-    sensor.set_framesize(width=800, height=480) # Set the frame size to LCD resolution (800x480), channel 0
-    sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
-    
-    #Use 3.5-inch mipi screen and IDE buffer to display images at the same time, 800x480 resolution
-    Display.init(Display.ST7701, to_ide=True) 
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
+sensor = Sensor() #Constructing a camera object
+sensor.reset() # reset the Camera
+sensor.set_framesize(width=800, height=480) # Set the frame size to LCD resolution (800x480), channel 0
+sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
 
-    MediaManager.init() #Initialize the media resource manager
+#Use 3.5-inch mipi screen and IDE buffer to display images at the same time, 800x480 resolution
+Display.init(Display.ST7701, to_ide=True) 
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
 
-    sensor.run() #Start the camera
+MediaManager.init() #Initialize the media resource manager
 
-    clock = time.clock()
+sensor.run() #Start the camera
 
-    while True:
+clock = time.clock()
 
+while True:
 
-        os.exitpoint() #Detect IDE interrupts
+    ####################
+    ## Write codes here
+    ####################
+    clock.tick()
 
-        ####################
-        ## Write codes here
-        ####################
-        clock.tick()
+    img = sensor.snapshot() # Take a picture
 
-        img = sensor.snapshot() # Take a picture
+    for i in range(3):
 
-        for i in range(3):
+        blobs = img.find_blobs([thresholds[i]]) #0, 1, and 2 represent red, green, and blue respectively.
 
-            blobs = img.find_blobs([thresholds[i]]) #0, 1, and 2 represent red, green, and blue respectively.
+        if blobs:
 
-            if blobs:
-
-                for b in blobs: #Draw rectangles, crosses and string to represent
-                    tmp=img.draw_rectangle(b[0:4], thickness = 4, color = colors1[i])
-                    tmp=img.draw_cross(b[5], b[6], thickness = 2)
-                    tmp=img.draw_string_advanced(b[0], b[1]-35, 30, colors2[i],color = colors1[i])
+            for b in blobs: #Draw rectangles, crosses and string to represent
+                tmp=img.draw_rectangle(b[0:4], thickness = 4, color = colors1[i])
+                tmp=img.draw_cross(b[5], b[6], thickness = 2)
+                tmp=img.draw_string_advanced(b[0], b[1]-35, 30, colors2[i],color = colors1[i])
 
 
-        img.draw_string_advanced(0, 0, 30, 'FPS: '+str("%.3f"%(clock.fps())), color = (255, 255, 255))
+    img.draw_string_advanced(0, 0, 30, 'FPS: '+str("%.3f"%(clock.fps())), color = (255, 255, 255))
 
-        Display.show_image(img) # Display image
+    Display.show_image(img) # Display image
 
-        print(clock.fps()) #FPS
-
-
-##############################################
-# IDE interrupts the release of resource code
-##############################################
-except KeyboardInterrupt as e:
-    print("user stop: ", e)
-except BaseException as e:
-    print(f"Exception {e}")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-    # release media buffer
-    MediaManager.deinit()
+    print(clock.fps()) #FPS
 
 ```
 
 Compared with the single color recognition routine, the modified code is as follows. A for loop is added before color recognition to recognize the three preset colors:
 ```python
-        ...
-        for i in range(3):
+    ...
+    for i in range(3):
 
-            blobs = img.find_blobs([thresholds[i]]) #0, 1, and 2 represent red, green, and blue respectively.
+        blobs = img.find_blobs([thresholds[i]]) #0, 1, and 2 represent red, green, and blue respectively.
 
-            if blobs:
+        if blobs:
 
-                for b in blobs: #Draw rectangles, crosses and string to represent
-                    tmp=img.draw_rectangle(b[0:4], thickness = 4, color = colors1[i])
-                    tmp=img.draw_cross(b[5], b[6], thickness = 2)
-                    tmp=img.draw_string_advanced(b[0], b[1]-35, 30, colors2[i],color = colors1[i])
-        ...
+            for b in blobs: #Draw rectangles, crosses and string to represent
+                tmp=img.draw_rectangle(b[0:4], thickness = 4, color = colors1[i])
+                tmp=img.draw_cross(b[5], b[6], thickness = 2)
+                tmp=img.draw_string_advanced(b[0], b[1]-35, 30, colors2[i],color = colors1[i])
+    ...
 ```
 
 ## Experimental Results

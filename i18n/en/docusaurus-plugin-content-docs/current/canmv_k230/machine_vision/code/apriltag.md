@@ -152,68 +152,45 @@ def family_name(tag):
     if(tag.family() == image.ARTOOLKIT):
         return "ARTOOLKIT"
 
-try:
 
-    sensor = Sensor(width=1280, height=960) #Build a camera object and set the camera's length and width to 4:3
-    sensor.reset() # reset the Camera
-    sensor.set_framesize(width=320, height=240) # Set the frame size to LCD resolution, channel 0
-    sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
-    
-    #Use 3.5-inch mipi screen and IDE buffer to display images at the same time
-    Display.init(Display.ST7701, to_ide=True) 
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
+sensor = Sensor(width=1280, height=960) #Build a camera object and set the camera's length and width to 4:3
+sensor.reset() # reset the Camera
+sensor.set_framesize(width=320, height=240) # Set the frame size to LCD resolution, channel 0
+sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
 
-    MediaManager.init() #Initialize the media resource manager
+#Use 3.5-inch mipi screen and IDE buffer to display images at the same time
+Display.init(Display.ST7701, to_ide=True) 
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
 
-    sensor.run() #Start the camera
+MediaManager.init() #Initialize the media resource manager
 
-    clock = time.clock()
+sensor.run() #Start the camera
 
-    while True:
+clock = time.clock()
 
-        os.exitpoint() #Detect IDE interrupts
+while True:
 
-        ####################
-        ## Write codes here
-        ####################
-        clock.tick()
+    ####################
+    ## Write codes here
+    ####################
+    clock.tick()
 
-        img = sensor.snapshot() # Take a picture
+    img = sensor.snapshot() # Take a picture
 
 
-        for tag in img.find_apriltags(families=tag_families): # If no family is given, TAG36H11 is the default.
+    for tag in img.find_apriltags(families=tag_families): # If no family is given, TAG36H11 is the default.
 
-                img.draw_rectangle(tag.rect(), color = (255, 0, 0), thickness=4)
-                img.draw_cross(tag.cx(), tag.cy(), color = (0, 255, 0), thickness=2)
-                print_args = (family_name(tag), tag.id(), (180 * tag.rotation()) / math.pi) #Print label information
-                print("Tag Family %s, Tag ID %d, rotation %f (degrees)" % print_args)
-                
-        #Display.show_image(img) # Display images
+            img.draw_rectangle(tag.rect(), color = (255, 0, 0), thickness=4)
+            img.draw_cross(tag.cx(), tag.cy(), color = (0, 255, 0), thickness=2)
+            print_args = (family_name(tag), tag.id(), (180 * tag.rotation()) / math.pi) #Print label information
+            print("Tag Family %s, Tag ID %d, rotation %f (degrees)" % print_args)
+            
+    #Display.show_image(img) # Display images
 
-        #Display pictures, LCD centered display
-        Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2)) #显示图片
+    #Display pictures, LCD centered display
+    Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2)) #显示图片
 
-        print(clock.fps()) #FPS
-
-##############################################
-# IDE interrupts the release of resource code
-##############################################
-except KeyboardInterrupt as e:
-    print(f"user stop")
-except BaseException as e:
-    print(f"Exception '{e}'")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-
-    # release media buffer
-    MediaManager.deinit()
+    print(clock.fps()) #FPS
 ```
 
 ## Experimental Results

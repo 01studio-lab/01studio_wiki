@@ -83,7 +83,9 @@ graph TD
     id1[Import related modules] --> id2[Initialize the sensor module] --> id3[Camera shooting] --> id4[Display images via IDE buffer, HDMI or MIPI screen] --> id3;
 ```
 
-## Codes
+## IDE buffer display
+
+### Codes
 
 ```python
 '''
@@ -99,74 +101,48 @@ from media.sensor import * #Import the sensor module and use the camera API
 from media.display import * #Import the display module and use display API
 from media.media import * #Import the media module and use meida API
 
-try:
+sensor = Sensor() #Constructing a camera object
+sensor.reset() #reset the Camera
+sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
+#sensor.set_framesize(width=800,height=480) #Set frame size to 800x480,mipi LCD,channel0
+sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
 
-    sensor = Sensor() #Constructing a camera object
-    sensor.reset() #reset the Camera
-    sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
-    #sensor.set_framesize(width=800,height=480) #Set frame size to 800x480,mipi LCD,channel0
-    sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
+##############################################################
+## 3 different ways to display images (modify annotations)
+#############################################################
 
-    ##############################################################
-    ## 3 different ways to display images (modify annotations)
-    #############################################################
+Display.init(Display.VIRT, sensor.width(), sensor.height()) #Displaying images via IDE buffer
+#Display.init(Display.LT9611, to_ide=True) #Displaying images via HDMI
+#Display.init(Display.ST7701, to_ide=True) #Display images through 01Studio 3.5-inch mipi display
 
-    Display.init(Display.VIRT, sensor.width(), sensor.height()) #Displaying images via IDE buffer
-    #Display.init(Display.LT9611, to_ide=True) #Displaying images via HDMI
-    #Display.init(Display.ST7701, to_ide=True) #Display images through 01Studio 3.5-inch mipi display
+MediaManager.init() #Initialize the media resource manager
 
-    MediaManager.init() #Initialize the media resource manager
+sensor.run() #Start the camera
 
-    sensor.run() #Start the camera
+clock = time.clock()
 
-    clock = time.clock()
+while True:
 
-    while True:
+    ####################
+    ## Write codes here
+    ####################
+    clock.tick()
 
+    img = sensor.snapshot() #Take a picture
 
-        os.exitpoint() #Detect IDE interrupts
+    Display.show_image(img) #Show the Picture
 
-        ####################
-        ## Write codes here
-        ####################
-        clock.tick()
-
-        img = sensor.snapshot() #Take a picture
-
-        Display.show_image(img) #Show the Picture
-
-        print(clock.fps()) #FPS
-
-
-##############################################
-# IDE interrupts the release of resource code
-##############################################
-except KeyboardInterrupt as e:
-    print("user stop: ", e)
-except BaseException as e:
-    print(f"Exception {e}")
-finally:
-    # sensor stop run
-    if isinstance(sensor, Sensor):
-        sensor.stop()
-    # deinit display
-    Display.deinit()
-    os.exitpoint(os.EXITPOINT_ENABLE_SLEEP)
-    time.sleep_ms(100)
-    # release media buffer
-    MediaManager.deinit()
+    print(clock.fps()) #FPS
 
 ```
 
-## Experimental Results
-
-### IDE buffer display
+### Experimental Results
 
 Click Run Code, and you can see the real-time image captured by the camera displayed on the right side of the IDE.
 
 ![display](./img/display/display1.png)
 
-### HDMI display
+## HDMI display
 
 Change the reference code to LT9611:
 ```python
@@ -180,13 +156,66 @@ Change the reference code to LT9611:
 
 ```
 
+### Codes
+
+```python
+'''
+Demo Name：Display in 3 ways
+Platform：01Studio CanMV K230
+Description: Camera image acquisition through IDE, HDMI and MIPI screen display
+Tutorial：wiki.01studio.cc
+'''
+
+import time, os, sys
+
+from media.sensor import * #Import the sensor module and use the camera API
+from media.display import * #Import the display module and use display API
+from media.media import * #Import the media module and use meida API
+
+sensor = Sensor() #Constructing a camera object
+sensor.reset() #reset the Camera
+sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
+#sensor.set_framesize(width=800,height=480) #Set frame size to 800x480,mipi LCD,channel0
+sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
+
+##############################################################
+## 3 different ways to display images (modify annotations)
+#############################################################
+
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) #Displaying images via IDE buffer
+Display.init(Display.LT9611, to_ide=True) #Displaying images via HDMI
+#Display.init(Display.ST7701, to_ide=True) #Display images through 01Studio 3.5-inch mipi display
+
+MediaManager.init() #Initialize the media resource manager
+
+sensor.run() #Start the camera
+
+clock = time.clock()
+
+while True:
+
+    ####################
+    ## Write codes here
+    ####################
+    clock.tick()
+
+    img = sensor.snapshot() #Take a picture
+
+    Display.show_image(img) #Show the Picture
+
+    print(clock.fps()) #FPS
+
+```
+
+### Experimental Results
+
 Connect to an HDMI display via an HDMI cable:
 ![display](./img/display/display2.png)
 
 Run the code and you can see the HDMI display camera captures images, which supports up to 1080p:
 ![display](./img/display/display3.png)
 
-### 3.5-inch mipi LCD display
+## 3.5-inch mipi LCD display
 
 To display images using a 3.5-inch mipi display, two places need to be modified:
 
@@ -208,6 +237,59 @@ Change the camera capture resolution to below 800x480:
     Display.init(Display.ST7701, to_ide=True) #Display images through 01Studio 3.5-inch mipi display
 
 ```
+
+### Codes
+
+```python
+'''
+Demo Name：Display in 3 ways
+Platform：01Studio CanMV K230
+Description: Camera image acquisition through IDE, HDMI and MIPI screen display
+Tutorial：wiki.01studio.cc
+'''
+
+import time, os, sys
+
+from media.sensor import * #Import the sensor module and use the camera API
+from media.display import * #Import the display module and use display API
+from media.media import * #Import the media module and use meida API
+
+sensor = Sensor() #Constructing a camera object
+sensor.reset() #reset the Camera
+#sensor.set_framesize(Sensor.FHD) #Set frame size to FHD (1920x1080), default channel 0
+sensor.set_framesize(width=800,height=480) #Set frame size to 800x480,mipi LCD,channel0
+sensor.set_pixformat(Sensor.RGB565) #Set the output image format, channel 0
+
+##############################################################
+## 3 different ways to display images (modify annotations)
+#############################################################
+
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) #Displaying images via IDE buffer
+#Display.init(Display.LT9611, to_ide=True) #Displaying images via HDMI
+Display.init(Display.ST7701, to_ide=True) #Display images through 01Studio 3.5-inch mipi display
+
+MediaManager.init() #Initialize the media resource manager
+
+sensor.run() #Start the camera
+
+clock = time.clock()
+
+while True:
+
+    ####################
+    ## Write codes here
+    ####################
+    clock.tick()
+
+    img = sensor.snapshot() #Take a picture
+
+    Display.show_image(img) #Show the Picture
+
+    print(clock.fps()) #FPS
+
+```
+
+### Experimental Results
 
 Connect 01Studio 3.5-inch mipi screen via cable:
 ![display](./img/display/display4.png)

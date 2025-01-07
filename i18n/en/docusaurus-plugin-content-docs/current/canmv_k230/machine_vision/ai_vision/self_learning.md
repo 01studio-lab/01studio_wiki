@@ -314,6 +314,10 @@ if __name__=="__main__":
 
 ## 实验结果
 
+:::danger Warning
+Each time you run the code, feature data will be generated in the folder below: **/sdcard/examples/utils/features/**. If you encounter an unexpected interruption, you can delete the entire `features` folder and run the code again.
+:::
+
 在CanMV IDE中运行上述代码，按LCD提示进行操作,依次按下按键KEY开始采集3种水果特征。
 
 ![self_learn](./img/self_learn/self_learn1.png)
