@@ -27,8 +27,12 @@
     "message": "淘宝店铺",
     "description": "Navbar item with label 淘宝店铺"
   },
-  "item.label.Aliexpress": {
-    "message": "Aliexpress",
-    "description": "Navbar item with label Aliexpress"
+  "item.label.AliExpress": {
+    "message": "AliExpress",
+    "description": "Navbar item with label AliExpress"
+  },
+  "item.label.01官网": {
+    "message": "01 Official website",
+    "description": "Navbar item with label 01官网"
   }
 }

@@ -4,6 +4,17 @@ sidebar_position: 15
 
 # Update Notes
 
+## 2025-03-21
+
+- add **Basic examples** ：
+
+    - [record](./basic_examples/record.md) 
+    - [Audio Play](./basic_examples/audio_play.md) 
+    - [Chip Temperature](./basic_examples/chip_temp.md) 
+    - [Chip ID](./basic_examples/chipid.md) 
+
+- add [CanMV K230 Shell Assembly and Use Tutorial](./intro/module.md#shell) 
+
 ## 2025-1-7
 
 - The Tutorial Document image is upgraded to v1.2.2. The main upgraded functions are:

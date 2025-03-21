@@ -40,6 +40,10 @@ sidebar_position: 1
     - [Watch Dog](./basic_examples/watchdog.md) 
     - [file](./basic_examples/file.md) 
     - [TouchScreen](./basic_examples/touchscreen.md) 
+    - [record](./basic_examples/record.md) 
+    - [Audio Play](./basic_examples/audio_play.md) 
+    - [Chip Temperature](./basic_examples/chip_temp.md) 
+    - [Chip ID](./basic_examples/chipid.md) 
 
 - **Machine Vision**
 

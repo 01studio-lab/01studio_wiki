@@ -40,6 +40,10 @@ sidebar_position: 1
     - [看门狗](./basic_examples/watchdog.md) 
     - [文件读写](./basic_examples/file.md) 
     - [电容触摸屏](./basic_examples/touchscreen.md) 
+    - [录音](./basic_examples/record.md) 
+    - [音频播放](./basic_examples/audio_play.md) 
+    - [主控温度](./basic_examples/chip_temp.md) 
+    - [主控ID号](./basic_examples/chipid.md) 
 
 - **机器视觉**
 

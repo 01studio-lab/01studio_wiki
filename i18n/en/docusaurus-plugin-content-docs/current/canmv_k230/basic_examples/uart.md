@@ -134,7 +134,7 @@ uart.write('Hello 01Studio!')#Send data
 while True:
 
     text=uart.read(128) #Receive 128 characters
-    if text != b'':
+    if text != None:
         print(text) #Print the data received by UART3 through REPL
 
     time.sleep(0.1) #100ms
@@ -209,7 +209,7 @@ uart.write('Hello 01Studio!')#Send data
 while True:
 
     text=uart.read(128) #Receive 128 characters
-    if text != b'':
+    if text != None:
         print(text) #Print the data received by UART3 through REPL
 
     time.sleep(0.1) #100ms

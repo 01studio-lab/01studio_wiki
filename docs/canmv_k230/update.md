@@ -4,6 +4,15 @@ sidebar_position: 15
 
 # 更新说明
 
+## 2025-03-21
+
+- 新增 **基础实验** ：
+
+    - [录音](./basic_examples/record.md) 
+    - [音频播放](./basic_examples/audio_play.md) 
+    - [主控温度](./basic_examples/chip_temp.md) 
+    - [主控ID号](./basic_examples/chipid.md) 
+
 ## 2025-2-21
 
 - 新增 [CanMV K230外壳组装使用教程](./intro/module.md#外壳) 
@@ -17,7 +26,6 @@ sidebar_position: 15
     - SD卡全部容量可使用；
     - 去掉try释放资源等冗余代码，代码更简洁。
    
-
 ## 2024-9-11
 
 - 增加 **机器视觉 -- 摄像头** ：

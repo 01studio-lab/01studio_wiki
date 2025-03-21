@@ -24,6 +24,55 @@ The installation method of the CanMV K230 acrylic base plate is very simple. Tea
 
 ![module](./img/module/module4.png)
 
+## shell
+
+The function of the shell is to completely wrap and effectively protect the development board. Users can purchase: [Click to Buy>>](https://www.aliexpress.com/item/1005008584060443.html)
+
+![shell](./img/module/shell0.png)
+
+**Here is the assembly tutorial:**
+
+First make sure you have the following:
+
+- 01Studio CanMV K230 motherboard x1
+- Shell x1
+- Acrylic top cover x1
+- Acrylic bottom plate x1
+- M2.5*8+3 single-pass copper column x4
+- M2.5*4 double-pass copper column x4
+- M2.5*5 cross flat head screw x8
+
+![shell](./img/module/shell1.jpg)
+
+Step 1: Install the two copper pillars into the 4 holes as shown in the figure below and tighten them:
+![shell](./img/module/shell2.png)
+
+Then install the board into the shell from bottom to top:
+![shell](./img/module/shell3.png)
+
+Tear off the transparent acrylic protective film on the top cover:
+![shell](./img/module/shell4.png)
+
+Fix it to the top with screws:
+![shell](./img/module/shell5.png)
+
+The bottom cover acrylic is also operated in the same way:
+![shell](./img/module/shell6.png)
+
+At this point, the assembly is complete:
+![shell](./img/module/shell7.png)
+
+The top cover can be equipped with a cooling fan. Note that the fan screws are installed from bottom to top.
+![shell](./img/module/shell8.png)
+
+Connect the cooling fan power cable to the red and black pin headers shown in the figure below, and supply 5V power.
+
+![shell](./img/module/shell9.png)
+
+A 3.5-inch LCD MINI screen can also be installed on the back. First assemble the screen from the back of the development board, then put it into the shell and screw on the top cover.
+
+![shell](./img/module/shell10.png)
+
 ## 3.5 inch MIPI display
 
 [Click to Buy>>](https://www.aliexpress.com/item/1005007579014355.html)

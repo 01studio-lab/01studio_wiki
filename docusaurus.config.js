@@ -94,6 +94,11 @@ const config = {
             label: 'CanMV K230教程（新）',
           },
           {
+            href: 'https://www.01studio.cc',
+            label: '01官网',
+            position: 'right',
+          },
+          {
             href: 'https://forum.01studio.cc',
             label: '论坛',
             position: 'right',
@@ -184,6 +189,10 @@ const config = {
                 label: 'Blog',
                 to: '/blog',
               },*/
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/QxHYBxSzMG',
+              },
               {
                 label: 'CanMV QQ群: 578895334',
                 to: '/',

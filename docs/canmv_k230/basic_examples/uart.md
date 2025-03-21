@@ -209,7 +209,7 @@ uart.write('Hello 01Studio!')#发送一条数据
 while True:
 
     text=uart.read(128) #接收128个字符
-    if text != b'':
+    if text != None:
         print(text) #通过REPL打印串口3接收的数据
 
     time.sleep(0.1) #100ms
