@@ -4,6 +4,13 @@ sidebar_position: 15
 
 # 更新说明
 
+## 2025-03-23
+
+- 新增 **传感器和模块** ：
+
+    - [舵机](./sensor_module/servo.md) 
+    - [多路舵机/电机模块](./sensor_module/pyMotors.md) 
+
 ## 2025-03-21
 
 - 新增 **基础实验** ：

@@ -99,6 +99,8 @@ sidebar_position: 1
 - **传感器和拓展模块**
 
     - [继电器](./sensor_module/relay.md) 
+    - [舵机](./sensor_module/servo.md) 
+    - [多路舵机/电机模块](./sensor_module/pyMotors.md) 
 
 - [**更新说明**](./update.md)
 

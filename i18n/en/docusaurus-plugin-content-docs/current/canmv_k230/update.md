@@ -4,6 +4,13 @@ sidebar_position: 15
 
 # Update Notes
 
+## 2025-03-23
+
+- add **Sensors & Modules** ：
+
+    - [servo](./sensor_module/servo.md) 
+    - [Multi-channel servo/motor module](./sensor_module/pyMotors.md) 
+
 ## 2025-03-21
 
 - add **Basic examples** ：

@@ -99,6 +99,8 @@ sidebar_position: 1
 - **Sensors & Modules**
 
     - [relay](./sensor_module/relay.md) 
+    - [servo](./sensor_module/servo.md) 
+    - [Multi-channel servo/motor module](./sensor_module/pyMotors.md) 
 
 - [**Updage Notes**](./update.md)
 
