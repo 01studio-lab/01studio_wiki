@@ -145,7 +145,13 @@ while True:
 
 我们按照上述方式将USB转TTL的TX接到IO4，RX接到IO3。GND接一起，3.3V可以选择接或不接。
 
+- CanMV K230
+
 ![uart4](./img/uart/uart4.png)
+
+- CanMV K230 mini
+
+![uart4](./img/uart/uart4_1.png)
 
 这时候打开电脑的设备管理器，能看到2个COM。写着CH340的是串口工具，另外一个则是CanMV K230的REPL。如果CH340驱动没安装，则需要手动安装，驱动在：<u>配套资料包\开发工具\windows\串口终端\CH340文件夹</u> 下。
 
@@ -220,5 +226,12 @@ while True:
 
 串口2可以使用40Pin GPIO11（TX2）、GPIO12(RX2)引脚或者背面的4P座子（使用搭配的1.25mm转2.54mm杜邦线）连接其它外设串口设备模块，实现串口通讯。 
 
+- CanMV K230
+
 ![uart](./img/uart/uart8.png)
+
+- CanMV K230 mini
+
+![uart](./img/uart/uart8_1.png)
+
 

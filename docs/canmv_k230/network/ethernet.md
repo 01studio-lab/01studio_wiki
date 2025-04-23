@@ -18,7 +18,13 @@ sidebar_position: 4
 
 将USB转以太网卡USB端插入01Studio CanMV K230开发板，另一头插入网线连接到路由器。
 
+- CanMV K230
+
 ![ethernet](./img/ethernet/ethernet1.png)
+
+- CanMV K230 mini
+
+![ethernet](./img/ethernet/ethernet1_1.png)
 
 :::tip 提示
 务必先插入USB转以太网卡，再上电，系统会在上电过程中初始化该设备。

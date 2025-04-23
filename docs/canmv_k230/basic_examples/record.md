@@ -16,7 +16,13 @@ sidebar_position: 13
 
 01Studio CanMV K230开发板板载1个麦克风，连接K230主控的右路MIC输入（右声道）。
 
+- CanMV K230
+
 ![record](./img/record/record1.png)
+
+- CanMV K230 mini
+
+![record](./img/record/record1_1.png)
 
 
 CanMV K230 MicroPython库集成了PyAudio（音频流处理）和wave（wav文件处理）模块。可以使用python编程实现录音并保存为wav文件。具体介绍如下：
@@ -226,7 +232,14 @@ print("audio record done")
 
 运行程序，对着K230上的麦克风说话：
 
+- CanMV K230
+
 ![record](./img/record/record1.png)
+
+- CanMV K230 mini
+
+![record](./img/record/record1_1.png)
+
 
 录音结束后可以看到在canmv u盘的sdcard根目录生成`test.wav`音频文件。
 

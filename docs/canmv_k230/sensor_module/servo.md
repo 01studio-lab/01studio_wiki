@@ -23,7 +23,14 @@ sidebar_position: 2
 ![servo](./img/servo/servo2.png)
 
 01Studio CanMV K230引出的GPIO排针有4路PWM，可以用于控制PWM舵机，供电为5V（只引出2个5V排针引脚）。
+
+- CanMV K230
+
 ![servo](./img/servo/servo2_1.png)
+
+- CanMV K230 mini
+
+![servo](./img/servo/servo2_1_1.png)
 
 舵机的排母接口通常是3P连在一起，因此你可能需要使用**母对公**杜邦线用于连接舵机和K230开发板。
 

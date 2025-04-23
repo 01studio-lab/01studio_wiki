@@ -27,9 +27,19 @@ pyMotors模块资料包：[点击下载>>](https://download.01studio.cc/modules/
 
 本教程使用I2C2跟pyMotors模块连接。模块使用5V供电。
 
+- CanMV K230
+
 ![servo](./img/pymotors/pymotors3.png)
 
 ![servo](./img/pymotors/pymotors4.png)
+
+- CanMV K230 mini
+
+CanMV K230 mini使用配套的转接杜邦线进行连接。
+
+![servo](./img/pymotors/pymotors4_1.png)
+
+![servo](./img/pymotors/pymotors4_2.png)
 
 ## 舵机
 

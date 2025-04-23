@@ -58,6 +58,63 @@ CanMV开源项目由嘉楠科技（Canaan）官方创建和维护。是将MicroP
 
 ![intro](./img/canmv/size.png)
 
+
+## CanMV K230 mini开发板
+
+CanMV K230 mini是在CanMV K230硬件基础上进行了精简，具有更小的尺寸，镜像和代码完全通用。
+
+![intro2](./img/canmv/intro2.png)
+
+### 硬件资源
+
+![intro3](./img/canmv/mini_describe.png)
+
+### 详细参数
+
+|  产品参数 |
+|  :---:  | ---  |
+| K230主控  | ● CPU1: RISC-V , 1.6GHz, 支持RVV 1.0<br></br> ● CPU0: RISC-V , 800MHz |
+| 神经网络处理器  | KPU（6TOPS等效算力），支持INT8和INT16|
+| 内存（可选）| ● 1GBytes（LPDDR4）<br></br> ● 2GBytes（LPDDR4） | 
+| 存储  |  ● MicroSD（最大支持512G）<br></br> ● SD NAND（预留焊盘，位于SD卡槽下方，可自行焊接） |
+| 摄像头  | ● GC2093(标配) / OV5647<br></br> ● 支持2路CSI输入（1 x 2lane + 1 x 4lane） |
+| 显示  | ● MIPI显示屏（1x4 lane DSI）最大支持1920x1080<br></br> ● HDMI显示器最大支持1920x1080（需搭配转接板）<br></br> ● CanMV IDE显示最大支持1920x1080 |
+| 网络  | ● 2.4G WiFi无线网络（板载天线）<br></br> ● 以太网有线（需外接USB转以太网卡）|
+| 音频输出  | 音频口（双声道） |
+| 音频输入  | 麦克风咪头 |
+| USB  | x1 USB 2.0 HOST |
+| 按键  | x2 （可编程按键，复位键） |
+| LED  | x2 （可编程LED灯，电源灯） |
+| GPIO  | 2.54mm x 10P 排针 |
+| 串口/I2C接口  | XH-1.25mm-4P（送转接线） |
+| 备用调试串口  | ● CPU1 大核（UART3）<br></br> ●  CPU0 小核（UART0） |
+| TYPE-C  | IDE连接开发、代码调试、文件传输、供电多合一 |
+| 供电  | 5V @ 1A |
+
+|  外观规格 |
+|  :---:  | ---  |
+| 尺寸  | 60.3 x 42.7 x 17.6mm <br></br> 64.3 x 46.7 x 17.6 mm（含外壳）|
+| 重量  | 16克 <br></br> 40克（含外壳） |
+
+
+### GPIO引脚图
+
+![intro3](./img/canmv/mini_pinout.png)
+
+### 尺寸图
+
+#### 裸板尺寸
+
+![intro](./img/canmv/mini_size.png)
+
+#### 含外壳尺寸
+
+![intro](./img/canmv/mini_size2.png)
+
+## 2款开发板参数对比
+
+![intro](./img/canmv/vs.png)
+
 ## K230芯片参数
 
 ![intro](./img/canmv/intro5.png)

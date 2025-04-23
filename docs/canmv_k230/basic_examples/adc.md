@@ -7,6 +7,15 @@ sidebar_position: 6
 ## 前言
 ADC(analog to digital conversion) 模拟数字转换。意思就是将模拟信号转化成数字信号，由于单片机只能识别二级制数字，所以外界模拟信号常常会通过ADC转换成其可以识别的数字信息。常见的应用就是将变化的电压转成数字信号实现对电压值测量。
 
+## 实验平台
+
+01Studio CanMV K230 AI开发板。
+
+:::tip 提示
+本节教程适用于CanMV K230。CanMV K230 mini版本只通过PCB背面焊盘引出最大量程1.8V的ADC0和ADC1，用户有需要可自行焊接使用。
+
+![adc](./img/adc/adc1.png)
+:::
 
 ## 实验目的
 学习ADC编程。

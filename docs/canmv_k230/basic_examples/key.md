@@ -14,7 +14,14 @@ sidebar_position: 3
 
 CanMV K230自带功能按键KEY位于开发板下图所示位置：
 
+- CanMV K230
+
 ![key2](./img/key/key1.png)
+
+- CanMV K230 mini
+
+![key2](./img/key/key1_1.png)
+
 
 我们先来看看CanMV K230的原理图，找到按键对应的IO引脚。
 
@@ -135,6 +142,12 @@ while True:
 
 可以看到当按键KEY每次被按下时候，LED蓝灯亮灭状态发生翻转。
 
+- CanMV K230
+
 ![key](./img/key/key5.png)
+
+- CanMV K230 mini
+
+![key](./img/key/key5_2.png)
 
 Pin是非常通用的功能，学会了Pin，就可以把开发板所有的引脚为自己所用，灵活性很强。

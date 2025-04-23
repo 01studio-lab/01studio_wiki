@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # 目录
 
-![directory](./img/directory/directory1.png)
+![directory](./img/directory/directory2.png)
 
 - **CanMV K230套件介绍**
 

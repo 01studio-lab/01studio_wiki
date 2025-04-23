@@ -18,7 +18,7 @@ sidebar_position: 2
 
 - `IDE缓冲区显示`：性价比最高，图像质量有一定下降，但能满足大部分场合调试使用。最大支持1920x1080分辨率。
 - `HDMI`：外接HDMI显示屏，清晰度最高。最大支持1920x1080分辨率。
-- `MIPI显示屏`：外接01Studio 3.5寸MiPi显示屏，可以一体化组装，适合离线部署调试使用。最大支持800x480分辨率。
+- `MIPI显示屏`：外接01Studio 3.5寸（800x480）或2.4寸(640x480)MiPi显示屏，可以一体化组装，适合离线部署调试使用。
 
 以上显示方式均集成在 Display Python API。用户只需要简单修改代码即可实现不同方式显示。
 
@@ -236,7 +236,7 @@ while True:
 ```python
 '''
 实验名称：图像3种显示方式
-实验平台：01Studio CanMV K230
+实验平台：01Studio CanMV K230 + 3.5寸mipi屏
 说明：实现摄像头图像采集通过IDE、HDMI和MIPI屏显示
 '''
 
@@ -288,3 +288,88 @@ while True:
 
 运行代码，可以看到mipi屏上显示摄像头采集图像，最大支持800x480：
 ![display](./img/display/display5.png)
+
+
+## 2.4寸mipi显示屏显示
+
+由于2.4寸mipi显示屏分辨率为640x480, 显示图像需要修改几个地方：
+
+- 摄像头默认是1920x1080(16:9),因此建议初始化时修改成1280x960(4:3)避免图像畸变,因为2.4寸屏比例也是4:3（640x480）；
+
+- 将拍摄帧大小改为640x480以下；
+
+- Display.init()函数务必添加 **width=640, height=480** 参数。
+
+```python
+    sensor = Sensor(width=1280, height=960) #构建摄像头对象，将摄像头长宽设置为4:3
+    sensor.reset() #复位和初始化摄像头
+    #sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，缓冲区和HDMI用,默认通道0
+    sensor.set_framesize(width=640,height=480) #2.4寸设置帧大小640x480,LCD专用,默认通道0
+    sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+```
+
+将参考代码中的代码改成ST7701 :
+```python
+    #################################
+    ## 图像3种不同显示方式（修改注释实现）
+    #################################
+
+    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+    #Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
+    Display.init(Display.ST7701, width=640, height=480, to_ide=True) #ST7701默认分辨率为800x480,使用2.4寸需改为640x480,否则无法显示
+
+```
+### 参考代码
+```python
+'''
+实验名称：图像3种显示方式
+实验平台：01Studio CanMV K230 + 2.4寸mipi屏
+说明：实现摄像头图像采集通过IDE、HDMI和MIPI屏显示
+'''
+
+import time, os, sys
+
+from media.sensor import * #导入sensor模块，使用摄像头相关接口
+from media.display import * #导入display模块，使用display相关接口
+from media.media import * #导入media模块，使用meida相关接口
+
+sensor = Sensor(width=1280, height=960) #构建摄像头对象
+sensor.reset() #复位和初始化摄像头
+#sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，缓冲区和HDMI用,默认通道0
+sensor.set_framesize(width=640,height=480) #2.4寸设置帧大小640x480,LCD专用,默认通道0
+sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
+
+#################################
+## 图像3种不同显示方式（修改注释实现）
+#################################
+
+#Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+#Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
+Display.init(Display.ST7701, width=640, height=480, to_ide=True) #ST7701默认分辨率为800x480,使用2.4寸需改为640x480,否则无法显示
+
+MediaManager.init() #初始化media资源管理器
+
+sensor.run() #启动sensor
+
+clock = time.clock()
+
+while True:
+
+    ####################
+    ## 这里编写主要代码
+    ####################
+    clock.tick()
+
+    img = sensor.snapshot() #拍摄一张图
+
+    Display.show_image(img) #显示图片
+
+    print(clock.fps()) #打印FPS
+
+```
+
+### 实验结果
+
+通过排线连接01Studio 2.4寸mipi屏。运行代码，可以看到mipi屏上显示摄像头采集图像，最大支持640x480：
+
+![display](./img/display/display6.png)

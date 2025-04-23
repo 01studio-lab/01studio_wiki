@@ -24,9 +24,15 @@ sidebar_position: 1
 
 下图为电器连接示意图，左侧为低压控制部分，右侧为高压控制部分 (接线注意用电安全)：
 
+- CanMV K230
+
 ![relay](./img/relay/relay1.png)
 
-参考[GPIO介绍](../basic_examples/gpio_intro.md)章节可以看到上图连接的是IO2。因此连线后我们只需要控制GPIO2的高低电平即可控制继电器通断。我们结合按键实验，实现每次按下按键后继电器的通断状态改变。
+- CanMV K230 mini
+
+![relay](./img/relay/relay1_1.png)
+
+参考[GPIO介绍](../basic_examples/gpio_intro.md)章节可以看到上图连接的是IO4。因此连线后我们只需要控制GPIO2的高低电平即可控制继电器通断。我们结合按键实验，实现每次按下按键后继电器的通断状态改变。
 
 代码编写流程如下：
 
@@ -51,12 +57,12 @@ from machine import FPIOA
 import time
 
 
-#将GPIO2、GPIO21配置为普通GPIO模式
+#将GPIO4、GPIO21配置为普通GPIO模式
 fpioa = FPIOA()
-fpioa.set_function(2,FPIOA.GPIO2)
+fpioa.set_function(4,FPIOA.GPIO2)
 fpioa.set_function(21,FPIOA.GPIO21)
 
-RELAY=Pin(2,Pin.OUT) #构建继电器对象
+RELAY=Pin(4,Pin.OUT) #构建继电器对象
 KEY=Pin(21,Pin.IN,Pin.PULL_UP) #构建KEY对象
 
 state=0 #继电器通断状态

@@ -17,7 +17,13 @@ WIFI是物联网中非常重要的角色，现在基本上家家户户都有WIFI
 
 CanMV K230板载WiFi模块和陶瓷天线，可以直接连接2.4G无线网络。
 
+- CanMV K230
+
 ![wifi_connect](./img/wifi_connect/wifi_connect0.png)
+
+- CanMV K230 mini
+
+![wifi_connect](./img/wifi_connect/wifi_connect0_1.png)
 
 CanMV K230 MicroPython库已经集成了network模块，开发者使用内置的network模块函数可以非常方便地连接上路由器。
 

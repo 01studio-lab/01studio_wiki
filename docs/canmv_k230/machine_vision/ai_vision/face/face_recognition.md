@@ -359,6 +359,7 @@ if __name__=="__main__":
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
 说明：先执行人脸注册代码，再运行本代码
+说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -367,6 +368,7 @@ from libs.AI2D import Ai2d
 import os
 import ujson
 from media.media import *
+from media.sensor import *
 from time import *
 import nncase_runtime as nn
 import ulab.numpy as np
@@ -691,12 +693,19 @@ class FaceRecognition:
 
 if __name__=="__main__":
     # 注意：执行人脸识别任务之前，需要先执行人脸注册任务进行人脸身份注册生成feature数据库
-    # 显示模式，默认"hdmi",可以选择"hdmi"和"lcd"
-    display_mode="lcd"
+    # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
+
+    display_mode="lcd3_5"
+    
     if display_mode=="hdmi":
         display_size=[1920,1080]
-    else:
+        
+    elif display_mode=="lcd3_5":
         display_size=[800,480]
+    
+    elif display_mode=="lcd2_4":     
+        display_size=[640,480]
+
     # 人脸检测模型路径
     face_det_kmodel_path="/sdcard/examples/kmodel/face_detection_320.kmodel"
     # 人脸识别模型路径
@@ -704,7 +713,13 @@ if __name__=="__main__":
     # 其它参数
     anchors_path="/sdcard/examples/utils/prior_data_320.bin"
     database_dir ="/sdcard/examples/utils/db/"
-    rgb888p_size=[1920,1080]
+    
+    if display_mode=="lcd2_4":#2.4寸屏画面比例为4:3
+        rgb888p_size = [1280, 960] 
+        
+    else:
+        rgb888p_size = [1920, 1080]
+
     face_det_input_size=[320,320]
     face_reg_input_size=[112,112]
     confidence_threshold=0.5
@@ -717,7 +732,13 @@ if __name__=="__main__":
 
     # 初始化PipeLine，只关注传给AI的图像分辨率，显示的分辨率
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    pl.create()
+
+    if display_mode =="lcd2_4":         
+        pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
+    
+    else:        
+        pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
+
     fr=FaceRecognition(face_det_kmodel_path,face_reg_kmodel_path,det_input_size=face_det_input_size,reg_input_size=face_reg_input_size,database_dir=database_dir,anchors=anchors,confidence_threshold=confidence_threshold,nms_threshold=nms_threshold,face_recognition_threshold=face_recognition_threshold,rgb888p_size=rgb888p_size,display_size=display_size)
 
     clock = time.clock()

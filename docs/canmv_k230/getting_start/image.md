@@ -34,7 +34,13 @@ sidebar_position: 2
 
 将烧录好的SD卡插入01科技 CanMV K230开发板，然后通过type-c线连接到电脑。（注意请勿带电拔插SD卡，有烧坏风险。）
 
+- CanMV K230
+
 ![image](./img/image/image6.png)
+
+- CanMV K230 mini
+
+![image](./img/image/image6_1.png)
 
 我的电脑里面弹出CanMV盘符以及设备管理器出现COM号说明系统启动正常。（没出现可以按下开发板复位键试试。）
 

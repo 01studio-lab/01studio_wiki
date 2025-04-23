@@ -6,7 +6,13 @@ sidebar_position: 3
 
 我们使用CanMV K230 IDE来进行我们的第一个实验，借此来熟悉开发环境。插入带镜像SD卡，将CanMV K230开发板通过type-c线连接到电脑。
 
+- CanMV K230
+
 ![demo1](./img/demo/demo1.png)
+
+- CanMV K230 mini
+
+![demo1](./img/demo/k230_mini.png)
 
 我们用最简单的LED程序来测试，在CanMV K230 IDE中打开 **零一科技（01Studio）MicroPython开发套件（基于CanMV K230平台）配套资料\02-例程源码\1.基础实验\1.点亮第一个LED** 里面的led.py例程（也可以直接拖动过去），如下图所示：
 
@@ -46,7 +52,14 @@ LED.value(1) #点亮LED，也可以使用led.on()
 
 当前的例程是点亮LED蓝灯，我们点击绿色按键“运行”按钮，当看到CanMV K230开发板上的蓝灯亮时，说明代码运行成功:
 
+- CanMV K230
+
 ![demo6](./img/demo/demo6.png)
+
+- CanMV K230 mini
+
+![demo6](./img/demo/demo6_1.png)
+
 
 点击运行按钮旁边的`串口终端`窗口，这里可以看到代码调试信息。
 

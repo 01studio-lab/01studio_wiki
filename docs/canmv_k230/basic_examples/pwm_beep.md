@@ -132,7 +132,13 @@ Beep.enable(False)
 
 运行代码，可以听到蜂鸣器依次发出不同频率的响声。
 
+- CanMV K230
+
 ![pwm4](./img/pwm/pwm4.png)
+
+- CanMV K230 mini
+
+![pwm4](./img/pwm/pwm4_1.png)
 
 有条件的朋友可以使用示波器测量CanMV K230的IO42引脚。观察PWM波形变化。
 

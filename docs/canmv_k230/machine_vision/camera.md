@@ -224,7 +224,11 @@ while True:
 
 - OV5647（1080P 30FPS）。6cm/15cm/30cm 3款长度可选。 [**点击购买>>**](https://item.taobao.com/item.htm?id=833993249110)
 
+**CanMV K230 支持CSI0（2lane）和CSI1(2lane)两路扩展。**
 ![camera](./img/camera/camera4.png)
+
+**CanMV K230 mini 支持CSI0（4lane，兼容2lane）1路扩展。**
+![camera](./img/camera/camera5.png)
 
 使用方法很简单，只需要在上面示例代码基础上在初始化时候配置`id`参数即可。
 

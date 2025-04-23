@@ -102,6 +102,12 @@ while True:
 
 可以看到LED蓝灯每隔1秒闪烁1次。
 
+- CanMV K230
+
 ![timer1](./img/timer/timer2.png)
+
+- CanMV K230 mini
+
+![timer1](./img/timer/timer3.png)
 
 本节实验介绍了定时器的使用方式，有用户可能会认为使用延时延时也可以实现这个功能，但相比于延时函数，定时器的好处就是不占用过多的CPU资源。

@@ -14,7 +14,13 @@ sidebar_position: 2
 
 CanMV K230有一个跟GPIO连接可控制的LED灯。
 
+- CanMV K230
+
 ![led](./img/led/led1.png)
+
+- CanMV K230 mini
+
+![led](./img/led/led1_1.png)
 
 其连接到CanMV K230的IO引脚如下（可以看开发板原理图），LED蓝灯对应的GPIO为IO52，从电路可以看到当IO52为高电平时，蓝灯被点亮。
 
@@ -126,6 +132,12 @@ LED.value(1) #点亮LED，也可以使用led.on()
 
 可以看到LED蓝灯被点亮。
 
+- CanMV K230
+
 ![led](./img/led/led1.png)
+
+- CanMV K230 mini
+
+![led](./img/led/led1_1.png)
 
 从第一个实验我们可以看到，使用MicroPython来开发关键是要学会构造函数和其使用方法，便可完成对相关对象的操作，在强大的模块函数支持下，实验只用了简单的两行代码便实现了点亮LED灯。

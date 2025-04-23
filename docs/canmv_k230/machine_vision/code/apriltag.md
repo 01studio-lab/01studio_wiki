@@ -113,6 +113,7 @@ graph TD
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
 说明：推荐使用QVGA（320x240）分辨率，分辨率太高帧率会下降。
+     通过修改lcd_width和lcd_height参数值选择3.5寸或2.4寸mipi屏。
 '''
 
 import time, math, os, gc
@@ -120,9 +121,20 @@ import time, math, os, gc
 from media.sensor import * #导入sensor模块，使用摄像头相关接口
 from media.display import * #导入display模块，使用display相关接口
 from media.media import * #导入media模块，使用meida相关接口
+
+#3.5寸mipi屏分辨率定义
+lcd_width = 800
+lcd_height = 480
+
+'''
+#2.4寸mipi屏分辨率定义
+lcd_width = 640
+lcd_height = 480
+'''
+
+
 # apriltag代码最多支持可以同时处理6种tag家族。
 # 返回的tag标记对象，将有其tag标记家族及其在tag标记家族内的id。
-
 tag_families = 0
 tag_families |= image.TAG16H5 # 注释掉，禁用这个家族
 tag_families |= image.TAG25H7 # 注释掉，禁用这个家族
@@ -156,7 +168,7 @@ sensor.reset() #复位和初始化摄像头
 sensor.set_framesize(width=320, height=240) #设置帧大小为LCD分辨率(800x480)，默认通道0
 sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 
-Display.init(Display.ST7701, to_ide=True) #同时使用3.5寸mipi屏和IDE缓冲区显示图像，800x480分辨率
+Display.init(Display.ST7701,  width=lcd_width, height=lcd_height, to_ide=True) #同时使用mipi屏和IDE缓冲区显示图像
 #Display.init(Display.VIRT, sensor.width(), sensor.height()) #只使用IDE缓冲区显示图像
 
 MediaManager.init() #初始化media资源管理器
@@ -183,7 +195,7 @@ while True:
     #Display.show_image(img) #显示图片
 
     #显示图片，LCD居中方式显示
-    Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2)) #显示图片
+    Display.show_image(img, x=round((lcd_width-sensor.width())/2),y=round((480-sensor.height())/2)) #显示图片
 
     print(clock.fps()) #打印帧率
 ```
