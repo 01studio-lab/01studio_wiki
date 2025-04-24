@@ -63,7 +63,7 @@ CanMV开源项目由嘉楠科技（Canaan）官方创建和维护。是将MicroP
 
 CanMV K230 mini是在CanMV K230硬件基础上进行了精简，具有更小的尺寸，镜像和代码完全通用。
 
-![intro2](./img/canmv/intro2.png)
+![intro2](./img/canmv/mini_intro.png)
 
 ### 硬件资源
 
