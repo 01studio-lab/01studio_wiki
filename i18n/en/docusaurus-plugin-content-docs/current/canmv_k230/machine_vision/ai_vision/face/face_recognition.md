@@ -86,7 +86,7 @@ class FaceDetApp(AIBase):
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
         self.image_size=[]
 
-    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，可以通过设置input_image_size自行修改输入尺寸
@@ -153,7 +153,7 @@ class FaceRegistrationApp(AIBase):
         self.ai2d=Ai2d(debug_mode)
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了affine，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了affine，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,landm,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             ai2d_input_size=input_image_size if input_image_size else self.rgb888p_size
@@ -316,13 +316,13 @@ class FaceRegistration:
 
 if __name__=="__main__":
     # 人脸检测模型路径
-    face_det_kmodel_path="/sdcard/app/tests/kmodel/face_detection_320.kmodel"
+    face_det_kmodel_path="/sdcard/examples/kmodel/face_detection_320.kmodel"
     # 人脸注册模型路径
-    face_reg_kmodel_path="/sdcard/app/tests/kmodel/face_recognition.kmodel"
+    face_reg_kmodel_path="/sdcard/examples/kmodel/face_recognition.kmodel"
     # 其它参数
-    anchors_path="/sdcard/app/tests/utils/prior_data_320.bin"
-    database_dir="/sdcard/app/tests/utils/db/"
-    database_img_dir="/sdcard/app/tests/utils/db_img/"
+    anchors_path="/sdcard/examples/utils/prior_data_320.bin"
+    database_dir="/sdcard/examples/utils/db/"
+    database_img_dir="/sdcard/examples/utils/db_img/"
     face_det_input_size=[320,320]
     face_reg_input_size=[112,112]
     confidence_threshold=0.5
@@ -335,25 +335,20 @@ if __name__=="__main__":
     feature_num = 128                    #人脸识别特征维度
 
     fr=FaceRegistration(face_det_kmodel_path,face_reg_kmodel_path,det_input_size=face_det_input_size,reg_input_size=face_reg_input_size,database_dir=database_dir,anchors=anchors,confidence_threshold=confidence_threshold,nms_threshold=nms_threshold)
-    try:
-        # 获取图像列表
-        img_list = os.listdir(database_img_dir)
-        for img_file in img_list:
-            #本地读取一张图像
-            full_img_file = database_img_dir + img_file
-            print(full_img_file)
-            img = image.Image(full_img_file)
-            img.compress_for_ide()
-            # 转rgb888的chw格式
-            rgb888p_img_ndarry = fr.image2rgb888array(img)
-            # 人脸注册
-            fr.run(rgb888p_img_ndarry,img_file)
-            gc.collect()
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        fr.face_det.deinit()
-        fr.face_reg.deinit()
+
+    # 获取图像列表
+    img_list = os.listdir(database_img_dir)
+    for img_file in img_list:
+        #本地读取一张图像
+        full_img_file = database_img_dir + img_file
+        print(full_img_file)
+        img = image.Image(full_img_file)
+        img.compress_for_ide()
+        # 转rgb888的chw格式
+        rgb888p_img_ndarry = fr.image2rgb888array(img)
+        # 人脸注册
+        fr.run(rgb888p_img_ndarry,img_file)
+        gc.collect()
 ```
 
 ### 人脸识别
@@ -364,6 +359,7 @@ if __name__=="__main__":
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
 说明：先执行人脸注册代码，再运行本代码
+说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -372,6 +368,7 @@ from libs.AI2D import Ai2d
 import os
 import ujson
 from media.media import *
+from media.sensor import *
 from time import *
 import nncase_runtime as nn
 import ulab.numpy as np
@@ -407,7 +404,7 @@ class FaceDetApp(AIBase):
         # 设置Ai2d的输入输出格式和类型
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，可以通过设置input_image_size自行修改输入尺寸
@@ -473,7 +470,7 @@ class FaceRegistrationApp(AIBase):
         self.ai2d=Ai2d(debug_mode)
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了affine，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了affine，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,landm,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             ai2d_input_size=input_image_size if input_image_size else self.rgb888p_size
@@ -696,20 +693,33 @@ class FaceRecognition:
 
 if __name__=="__main__":
     # 注意：执行人脸识别任务之前，需要先执行人脸注册任务进行人脸身份注册生成feature数据库
-    # 显示模式，默认"hdmi",可以选择"hdmi"和"lcd"
-    display_mode="lcd"
+    # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
+
+    display_mode="lcd3_5"
+    
     if display_mode=="hdmi":
         display_size=[1920,1080]
-    else:
+        
+    elif display_mode=="lcd3_5":
         display_size=[800,480]
+    
+    elif display_mode=="lcd2_4":     
+        display_size=[640,480]
+
     # 人脸检测模型路径
-    face_det_kmodel_path="/sdcard/app/tests/kmodel/face_detection_320.kmodel"
+    face_det_kmodel_path="/sdcard/examples/kmodel/face_detection_320.kmodel"
     # 人脸识别模型路径
-    face_reg_kmodel_path="/sdcard/app/tests/kmodel/face_recognition.kmodel"
+    face_reg_kmodel_path="/sdcard/examples/kmodel/face_recognition.kmodel"
     # 其它参数
-    anchors_path="/sdcard/app/tests/utils/prior_data_320.bin"
-    database_dir ="/sdcard/app/tests/utils/db/"
-    rgb888p_size=[1920,1080]
+    anchors_path="/sdcard/examples/utils/prior_data_320.bin"
+    database_dir ="/sdcard/examples/utils/db/"
+    
+    if display_mode=="lcd2_4":#2.4寸屏画面比例为4:3
+        rgb888p_size = [1280, 960] 
+        
+    else:
+        rgb888p_size = [1920, 1080]
+
     face_det_input_size=[320,320]
     face_reg_input_size=[112,112]
     confidence_threshold=0.5
@@ -722,32 +732,31 @@ if __name__=="__main__":
 
     # 初始化PipeLine，只关注传给AI的图像分辨率，显示的分辨率
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    pl.create()
+
+    if display_mode =="lcd2_4":         
+        pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
+    
+    else:        
+        pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
+
     fr=FaceRecognition(face_det_kmodel_path,face_reg_kmodel_path,det_input_size=face_det_input_size,reg_input_size=face_reg_input_size,database_dir=database_dir,anchors=anchors,confidence_threshold=confidence_threshold,nms_threshold=nms_threshold,face_recognition_threshold=face_recognition_threshold,rgb888p_size=rgb888p_size,display_size=display_size)
 
     clock = time.clock()
 
-    try:
-        while True:
-            os.exitpoint()
+    while True:
 
-            clock.tick()
+        os.exitpoint()
 
-            img=pl.get_frame()                      # 获取当前帧
-            det_boxes,recg_res=fr.run(img)          # 推理当前帧
-            print(det_boxes,recg_res)               # 打印结果
-            fr.draw_result(pl,det_boxes,recg_res)   # 绘制推理结果
-            pl.show_image()                         # 展示推理效果
-            gc.collect()
+        clock.tick()
 
-            print(clock.fps()) #打印帧率
+        img=pl.get_frame()                      # 获取当前帧
+        det_boxes,recg_res=fr.run(img)          # 推理当前帧
+        print(det_boxes,recg_res)               # 打印结果
+        fr.draw_result(pl,det_boxes,recg_res)   # 绘制推理结果
+        pl.show_image()                         # 展示推理效果
+        gc.collect()
 
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        fr.face_det.deinit()
-        fr.face_reg.deinit()
-        pl.destroy()
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -759,30 +768,29 @@ if __name__=="__main__":
 代码中`det_boxes`变量为人脸检测结果， `recg_res`为人脸识别结果。
 
 ```python
-        ...
-        while True:
-            os.exitpoint()
+    ...
+    while True:
 
-            clock.tick()
+        clock.tick()
 
-            img=pl.get_frame()                      # 获取当前帧
-            det_boxes,recg_res=fr.run(img)          # 推理当前帧
-            print(det_boxes,recg_res)               # 打印结果
-            fr.draw_result(pl,det_boxes,recg_res)   # 绘制推理结果
-            pl.show_image()                         # 展示推理效果
-            gc.collect()
+        img=pl.get_frame()                      # 获取当前帧
+        det_boxes,recg_res=fr.run(img)          # 推理当前帧
+        print(det_boxes,recg_res)               # 打印结果
+        fr.draw_result(pl,det_boxes,recg_res)   # 绘制推理结果
+        pl.show_image()                         # 展示推理效果
+        gc.collect()
 
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果
 
-先运行**人脸注册**代码，人脸注册代码会将CanMV U盘`/sdcard/app/tests/utils/db_img/`目录下的人脸图片进行识别，可以看到里面预存了2张人脸图片，用户也可以放自己想识别的人脸。
+先运行**人脸注册**代码，人脸注册代码会将CanMV U盘`/sdcard/examples/utils/db_img/`目录下的人脸图片进行识别，可以看到里面预存了2张人脸图片，用户也可以放自己想识别的人脸。
 
 ![face_recognition](./img/face_recognition/face_recognition1.png)
 
-运行后可以看到在`/sdcard/app/tests/utils/db/`目录下出现了2个人脸数据库：
+运行后可以看到在`/sdcard/examples/utils/db/`目录下出现了2个人脸数据库：
 
 ![face_recognition](./img/face_recognition/face_recognition2.png)
 

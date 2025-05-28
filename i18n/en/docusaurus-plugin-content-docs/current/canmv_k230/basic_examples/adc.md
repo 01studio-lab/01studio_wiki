@@ -7,6 +7,15 @@ sidebar_position: 6
 ## Foreword
 ADC(analog to digital conversion) means converting analog signals into digital signals. Since the microcontroller can only recognize binary numbers, external analog signals are often converted into digital information that it can recognize through ADC. A common application is to convert the changing voltage into a digital signal to measure the voltage value.
 
+## Experimental platform
+
+01Studio CanMV K230 AI development board.
+
+:::tip Tips
+This tutorial is applicable to CanMV K230. The CanMV K230 mini version only leads to ADC0 and ADC1 with a maximum range of 1.8V through the pads on the back of the PCB. Users can solder and use them by themselves if necessary.
+
+![adc](./img/adc/adc1.png)
+:::
 
 ## Experiment Purpose
 Learn ADC programming.

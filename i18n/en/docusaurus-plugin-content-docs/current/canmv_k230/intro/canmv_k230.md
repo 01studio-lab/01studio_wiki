@@ -58,6 +58,57 @@ In other words, if you are familiar with Micropython or Python, you can complete
 
 ![intro](./img/canmv/size.png)
 
+## CanMV K230 mini Development Board
+
+CanMV K230 mini is a streamlined version of CanMV K230 hardware with a smaller size and fully universal images and codes.
+
+![intro2](./img/canmv/mini_intro1.png)
+
+### Hardware
+
+![intro2](./img/canmv/mini_intro2.png)
+
+### Product Parameters
+
+|  Product Parameters |
+|  :---:  | ---  |
+| K230  | ● CPU1: RISC-V , 1.6GHz, Support RVV 1.0<br></br> ● CPU0: RISC-V , 800MHz |
+| Neural Network  | KPU（6TOPS Equivalence），Support INT8 & INT16|
+| RAM (Optional)  | ● 1GBytes（LPDDR4）<br></br> ● 2GBytes（LPDDR4） | 
+| Storage  |● MicroSD（512G max）<br></br> ● SD NAND (reserved pad, located below the SD card slot, can be soldered by yourself) |
+| Camera  | ● GC2093(Standard) / OV5647<br></br> ● Support 2 interfaces CSI（1 x 2lane + 1 x 4lane） |
+| Display  | ● MIPI LCD（1x4 lane DSI）, up to 1920x1080<br></br> ● HDMI Display, up to1920x1080 (Need to use with adapter plate)<br></br> ● CanMV IDE, up to 1920x1080 |
+| Network  | ● 2.4G WiFi（onboard antenna）<br></br> ● Ethernet（An external USB to Ethernet cable is required）|
+| Audio Output  | xh-1.25mm-3P Audio port (dual channel) |
+| Audio Input  | Microphone |
+| USB  | x1 USB 2.0 HOST |
+| KEY  | x2 （Programmable Key，Reset Key） |
+| LED  | x2 （Programmable LED，Power LED） |
+| GPIO  | 2x5P 2.54mm Pin Header|
+| UART/I2C  | XH-1.25mm-4P |
+|  UART Debug  | ● CPU1（UART3）<br></br> ●  CPU0（UART0） |
+| TYPE-C  | IDE connection development,code debugging,filetransferpowersupplyall-in-one |
+| Power Supply  | 5V @ 1A |
+
+|  Appearance Parameters |
+|  :---:  | ---  |
+| Size  | ● 60.3 x 42.7 x 17.6mm  (PCB Size) <br></br> ● 64.3 x 46.7 x 17.6 mm (including case) |
+| Weight  | ● 16g <br></br> ● 40g (including case) |
+
+
+### GPIO PinOut
+
+![intro2](./img/canmv/mini_intro3.png)
+
+
+#### Bare board size
+
+![intro](./img/canmv/mini_size.png)
+
+#### Including shell size
+
+![intro](./img/canmv/mini_size2.png)
+
 ## K230 Chip Parameters
 
 ![intro](./img/canmv/intro5.png)

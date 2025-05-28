@@ -6,7 +6,14 @@ sidebar_position: 3
 
 We use CanMV K230 IDE to conduct our first experiment to get familiar with the development environment. Insert the SD card with image and connect the CanMV K230 development board to the computer via a type-c cable.
 
+- CanMV K230
+
 ![demo1](./img/demo/demo1.png)
+
+- CanMV K230 mini
+
+![demo1](./img/demo/k230_mini.png)
+
 
 We use the simplest LED program to test, open it in CanMV K230 IDE **01Studio MicroPython Develop Kits (Base on CanMV K230) Resources_2024-11-8\02-Codes\1.Basic Examples\1.LED** led.py demo（You can also drag it to the IDE directly），As shown in the figure below：
 
@@ -48,7 +55,13 @@ After the connection is successful, the Run button turns green.
 
 The current routine is to light up the blue LED. We click the green "Run" button. When the blue light on the CanMV K230 development board is on, it means the code is running successfully:
 
+- CanMV K230
+
 ![demo6](./img/demo/demo6.png)
+
+- CanMV K230 mini
+
+![demo6](./img/demo/demo6_1.png)
 
 Click the `Serial Terminal` window next to the Run button, where you can see the code debugging information.
 

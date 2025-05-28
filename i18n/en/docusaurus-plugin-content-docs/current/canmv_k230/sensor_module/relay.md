@@ -24,7 +24,14 @@ Be sure to use a 3.3V level controlled relay, because the K230 GPIO output is 3.
 
 The following figure is a schematic diagram of electrical connection. The left side is the low-voltage control part, and the right side is the high-voltage control part (pay attention to electrical safety when wiring):
 
+- CanMV K230
+
 ![relay](./img/relay/relay1.png)
+
+- CanMV K230 mini
+
+![relay](./img/relay/relay1_1.png)
+
 
 Refer to the [GPIO Introduction](../basic_examples/gpio_intro.md) section to see that the above figure is connected to IO2. Therefore, after the connection, we only need to control the high and low levels of GPIO2 to control the on and off of the relay. We combine the key experiment to achieve the change of the on and off state of the relay every time the key is pressed.
 

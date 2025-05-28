@@ -30,6 +30,7 @@ graph TD
 实验名称：目标跟踪
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
+说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -39,6 +40,7 @@ from random import randint
 import os
 import ujson
 from media.media import *
+from media.sensor import *
 from time import *
 import nncase_runtime as nn
 import ulab.numpy as np
@@ -78,7 +80,7 @@ class TrackCropApp(AIBase):
         self.ai2d_crop.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
         self.need_pad=False
 
-    # 配置预处理操作，这里使用了crop、pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了crop、pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，可以通过设置input_image_size自行修改输入尺寸
@@ -168,7 +170,7 @@ class TrackSrcApp(AIBase):
         self.ai2d_crop.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
         self.need_pad=False
 
-    # 配置预处理操作，这里使用了crop、pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了crop、pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,center_xy_wh,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，可以通过设置input_image_size自行修改输入尺寸
@@ -390,18 +392,25 @@ class NanoTracker:
 
 
 if __name__=="__main__":
-    # 显示模式，默认"hdmi",可以选择"hdmi"和"lcd"
-    display_mode="lcd"
+    # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
+
+    display_mode="lcd3_5"
+    
     if display_mode=="hdmi":
         display_size=[1920,1080]
-    else:
+        
+    elif display_mode=="lcd3_5":
         display_size=[800,480]
+    
+    elif display_mode=="lcd2_4":     
+        display_size=[640,480]
+
     # 跟踪模板模型路径
-    track_crop_kmodel_path="/sdcard/app/tests/kmodel/cropped_test127.kmodel"
+    track_crop_kmodel_path="/sdcard/examples/kmodel/cropped_test127.kmodel"
     # 跟踪实时模型路径
-    track_src_kmodel_path="/sdcard/app/tests/kmodel/nanotrack_backbone_sim.kmodel"
+    track_src_kmodel_path="/sdcard/examples/kmodel/nanotrack_backbone_sim.kmodel"
     # 跟踪模型路径
-    tracker_kmodel_path="/sdcard/app/tests/kmodel/nanotracker_head_calib_k230.kmodel"
+    tracker_kmodel_path="/sdcard/examples/kmodel/nanotracker_head_calib_k230.kmodel"
     # 其他参数
     rgb888p_size=[1280,720]
     track_crop_input_size=[127,127]
@@ -410,34 +419,27 @@ if __name__=="__main__":
 
     # 初始化PipeLine，只关注传给AI的图像分辨率，显示的分辨率
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    pl.create()
+    if display_mode =="lcd2_4":         
+        pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
+    
+    else:        
+        pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
     track=NanoTracker(track_crop_kmodel_path,track_src_kmodel_path,tracker_kmodel_path,crop_input_size=track_crop_input_size,src_input_size=track_src_input_size,threshold=threshold,rgb888p_size=rgb888p_size,display_size=display_size)
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame()              # 获取当前帧
+        output=track.run(img)           # 推理当前帧
+        track.draw_result(pl,output)    # 绘制当前帧推理结果
+        print(output)                   # 打印当前结果
+        pl.show_image()                 # 展示推理结果
+        gc.collect()
 
-            img=pl.get_frame()              # 获取当前帧
-            output=track.run(img)           # 推理当前帧
-            track.draw_result(pl,output)    # 绘制当前帧推理结果
-            print(output)                   # 打印当前结果
-            pl.show_image()                 # 展示推理结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        track.track_crop.deinit()
-        track.track_src.deinit()
-        track.tracker.deinit()
-        pl.destroy()
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -449,22 +451,20 @@ if __name__=="__main__":
 代码中 `output`为检测结果。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame()              # 获取当前帧
+        output=track.run(img)           # 推理当前帧
+        track.draw_result(pl,output)    # 绘制当前帧推理结果
+        print(output)                   # 打印当前结果
+        pl.show_image()                 # 展示推理结果
+        gc.collect()
 
-            img=pl.get_frame()              # 获取当前帧
-            output=track.run(img)           # 推理当前帧
-            track.draw_result(pl,output)    # 绘制当前帧推理结果
-            print(output)                   # 打印当前结果
-            pl.show_image()                 # 展示推理结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

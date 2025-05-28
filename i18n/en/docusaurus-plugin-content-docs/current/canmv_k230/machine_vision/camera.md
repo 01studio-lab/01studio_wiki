@@ -232,7 +232,11 @@ In addition to the GC2093 (60FPS) camera that comes stand ard with the CSI2 inte
 
 - OV5647 (1080P 30FPS). 3 lengths are available: 6cm/15cm/30cm. [**Click to Buy>>**](https://www.aliexpress.com/item/1005007707000572.html)
 
+**CanMV K230 supports CSI0 (2lane) and CSI1 (2lane) two-way expansion. **
 ![camera](./img/camera/camera4.png)
+
+**CanMV K230 mini supports CSI0 (4lane, compatible with 2lane) 1-way expansion. **
+![camera](./img/camera/camera5.png)
 
 The usage is very simple. You only need to configure the `id` parameter during initialization based on the above sample code.
 

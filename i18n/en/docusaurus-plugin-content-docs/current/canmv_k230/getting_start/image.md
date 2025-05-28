@@ -36,7 +36,13 @@ After the programming is completed, it will be shown as follows:
 
 Insert the burned SD card into the 01 Technology CanMV K230 development board, and then connect it to the computer via a type-c cable. (Note: Do not unplug or plug the SD card while it is powered on, as there is a risk of burning it.)
 
+- CanMV K230
+
 ![image](./img/image/image6.png)
+
+- CanMV K230 mini
+
+![image](./img/image/image6_1.png)
 
 The CanMV drive letter pops up in my computer and the COM number appears in the device manager, indicating that the system boots normally. **(If it does not appear, you can try pressing the reset button of the development board.)**
 

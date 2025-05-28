@@ -29,8 +29,8 @@ graph TD
 实验名称：人体检测
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
+说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
-
 
 from libs.PipeLine import PipeLine, ScopedTiming
 from libs.AIBase import AIBase
@@ -38,6 +38,7 @@ from libs.AI2D import Ai2d
 import os
 import ujson
 from media.media import *
+from media.sensor import *
 from time import *
 import nncase_runtime as nn
 import ulab.numpy as np
@@ -77,7 +78,7 @@ class PersonDetectionApp(AIBase):
         # 设置Ai2d的输入输出格式和类型
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，您可以通过设置input_image_size自行修改输入尺寸
@@ -141,52 +142,62 @@ class PersonDetectionApp(AIBase):
         return  top, bottom, left, right
 
 if __name__=="__main__":
-    # 显示模式，默认"hdmi",可以选择"hdmi"和"lcd"
-    display_mode="lcd"
+    # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
+
+    display_mode="lcd3_5"
+    
     if display_mode=="hdmi":
         display_size=[1920,1080]
-    else:
+        
+    elif display_mode=="lcd3_5":
         display_size=[800,480]
+    
+    elif display_mode=="lcd2_4":     
+        display_size=[640,480]
+
     # 模型路径
-    kmodel_path="/sdcard/app/tests/kmodel/person_detect_yolov5n.kmodel"
+    kmodel_path="/sdcard/examples/kmodel/person_detect_yolov5n.kmodel"
     # 其它参数设置
     confidence_threshold = 0.2
     nms_threshold = 0.6
-    rgb888p_size=[1920,1080]
+
+    if display_mode=="lcd2_4":#2.4寸屏画面比例为4:3
+        rgb888p_size = [1280, 960] 
+        
+    else:
+        rgb888p_size = [1920, 1080]
+
     labels = ["person"]
     anchors = [10, 13, 16, 30, 33, 23, 30, 61, 62, 45, 59, 119, 116, 90, 156, 198, 373, 326]
 
     # 初始化PipeLine
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    pl.create()
+
+    if display_mode =="lcd2_4":         
+        pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
+    
+    else:        
+        pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
+        
     # 初始化自定义人体检测实例
     person_det=PersonDetectionApp(kmodel_path,model_input_size=[640,640],labels=labels,anchors=anchors,confidence_threshold=confidence_threshold,nms_threshold=nms_threshold,nms_option=False,strides=[8,16,32],rgb888p_size=rgb888p_size,display_size=display_size,debug_mode=0)
     person_det.config_preprocess()
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame()  # 获取当前帧数据
+        res=person_det.run(img)  # 推理当前帧
+        person_det.draw_result(pl,res)  # 绘制结果到PipeLine的osd图像
+        print(res) # 打印结果
+        pl.show_image()  # 显示当前的绘制结果
+        gc.collect()
 
-            img=pl.get_frame()  # 获取当前帧数据
-            res=person_det.run(img)  # 推理当前帧
-            person_det.draw_result(pl,res)  # 绘制结果到PipeLine的osd图像
-            print(res) # 打印结果
-            pl.show_image()  # 显示当前的绘制结果
-            gc.collect()
+        print(clock.fps()) #打印帧率
 
-            print(clock.fps()) #打印帧率
-
-    #IDE中断注销相关对象，释放资源
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        person_det.deinit()
-        pl.destroy()
 ```
 
 这里对关键代码进行讲解：
@@ -213,22 +224,20 @@ if __name__=="__main__":
 代码中`res`变量为识别结果，可以通过终端打印或结合其它章节内容实现跟其它MCU串口通讯、网络传输。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame()  # 获取当前帧数据
+        res=person_det.run(img)  # 推理当前帧
+        person_det.draw_result(pl,res)  # 绘制结果到PipeLine的osd图像
+        print(res) # 打印结果
+        pl.show_image()  # 显示当前的绘制结果
+        gc.collect()
 
-            img=pl.get_frame()  # 获取当前帧数据
-            res=person_det.run(img)  # 推理当前帧
-            person_det.draw_result(pl,res)  # 绘制结果到PipeLine的osd图像
-            print(res) # 打印结果
-            pl.show_image()  # 显示当前的绘制结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

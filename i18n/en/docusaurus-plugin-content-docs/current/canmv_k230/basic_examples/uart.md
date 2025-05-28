@@ -145,7 +145,13 @@ while True:
 
 We connect the TX of USB to TTL to IO4 and RX to IO3 according to the above method. GND is connected together, and 3.3V can be selected or not.
 
+- CanMV K230
+
 ![uart4](./img/uart/uart4.png)
+
+- CanMV K230 mini
+
+![uart4](./img/uart/uart4_1.png)
 
 At this time, open the computer's device manager and you will see two COMs. The one with CH340 is the serial port tool, and the other is the CanMV K230 REPL. If the CH340 driver is not installed, you need to install it manually. The driver is in：<u>01Studio MicroPython Develop Kits (Base on CanMV K230)\01-Tools\01-windows\Serial Terminal\CH340 Driver</u> .
 
@@ -220,5 +226,11 @@ while True:
 
 UART2 can use the 40-pin GPIO11 (TX2), GPIO12 (RX2) pins or the 4-pin connector on the back (using the matching 1.25mm to 2.54mm DuPont cable) to connect other peripheral serial port device modules to achieve serial port communication. 
 
+- CanMV K230
+
 ![uart](./img/uart/uart8.png)
+
+- CanMV K230 mini
+
+![uart](./img/uart/uart8_1.png)
 

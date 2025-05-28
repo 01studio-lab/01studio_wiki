@@ -113,6 +113,7 @@ Demo Name：AprilTags recognition
 Platform：01Studio CanMV K230
 Tutorial：wiki.01studio.cc/en
 Note: It is recommended to use QVGA (320x240) resolution. If the resolution is too high, the frame rate will drop.
+    Select 3.5-inch or 2.4-inch mipi screen by modifying the lcd_width and lcd_height parameter values.
 '''
 
 import time, math, os, gc
@@ -121,6 +122,15 @@ from media.sensor import * #Import the sensor module and use the camera API
 from media.display import * #Import the display module and use display API
 from media.media import * #Import the media module and use meida API
 
+#3.5 inch mipi screen resolution definition
+lcd_width = 800
+lcd_height = 480
+
+'''
+#2.4 inch mipi screen resolution definition
+lcd_width = 640
+lcd_height = 480
+'''
 
 # The apriltag code supports processing up to 6 tag families at the same time.
 # The returned tag object will have its tag family and its id within the tag family.
@@ -159,7 +169,7 @@ sensor.set_framesize(width=320, height=240) # Set the frame size to LCD resoluti
 sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
 
 #Use 3.5-inch mipi screen and IDE buffer to display images at the same time
-Display.init(Display.ST7701, to_ide=True) 
+Display.init(Display.ST7701,  width=lcd_width, height=lcd_height, to_ide=True) 
 #Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
 
 MediaManager.init() #Initialize the media resource manager
@@ -188,7 +198,7 @@ while True:
     #Display.show_image(img) # Display images
 
     #Display pictures, LCD centered display
-    Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2)) #显示图片
+    Display.show_image(img, x=round((lcd_width-sensor.width())/2),y=round((lcd_height-sensor.height())/2)) #显示图片
 
     print(clock.fps()) #FPS
 ```

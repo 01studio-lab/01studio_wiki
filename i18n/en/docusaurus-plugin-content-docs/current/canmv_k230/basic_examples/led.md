@@ -14,7 +14,13 @@ Learn how to light up the LED and turn on the LED (blue light).
 
 CanMV K230 has a controllable LED light connected to GPIO.
 
+- CanMV K230
+
 ![led](./img/led/led1.png)
+
+- CanMV K230 mini
+
+![led](./img/led/led1_1.png)
 
 The IO pins connected to CanMV K230 are as follows (see the schematic diagram of the development board). The GPIO corresponding to the LED blue light is IO52. From the circuit, we can see that when IO52 is high, the blue light is on.
 
@@ -126,6 +132,12 @@ After connecting the development board, run the above code in the CanMV K230 IDE
 
 You can see the blue LED light is on.
 
+- CanMV K230
+
 ![led](./img/led/led1.png)
+
+- CanMV K230 mini
+
+![led](./img/led/led1_1.png)
 
 From the first experiment, we can see that the key to using MicroPython for development is to learn the constructor and its usage, so that operations on related objects can be completed. With the support of powerful module functions, the experiment only used two simple lines of code to light up the LED.

@@ -132,7 +132,13 @@ This experiment uses PIN 42 to connect a passive buzzer.
 
 Run the code and you can hear the buzzer emit different frequencies in turn.
 
+- CanMV K230
+
 ![pwm4](./img/pwm/pwm4.png)
+
+- CanMV K230 mini
+
+![pwm4](./img/pwm/pwm4_1.png)
 
 f you have the conditions, you can use an oscilloscope to measure the IO42 pin of CanMV K230 and observe the changes in the PWM waveform.
 

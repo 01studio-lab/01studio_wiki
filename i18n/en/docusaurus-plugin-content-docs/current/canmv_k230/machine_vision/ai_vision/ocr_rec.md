@@ -30,6 +30,7 @@ graph TD
 实验名称：字符识别（OCR）
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
+说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -38,6 +39,7 @@ from libs.AI2D import Ai2d
 import os
 import ujson
 from media.media import *
+from media.sensor import *
 from time import *
 import nncase_runtime as nn
 import ulab.numpy as np
@@ -68,7 +70,7 @@ class OCRDetectionApp(AIBase):
         # 设置Ai2d的输入输出格式和类型
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，您可以通过设置input_image_size自行修改输入尺寸
@@ -143,7 +145,7 @@ class OCRRecognitionApp(AIBase):
         self.ai2d=Ai2d(debug_mode)
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.RGB_packed,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
 
-    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了pad和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None,input_np=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             ai2d_input_size=input_image_size if input_image_size else self.rgb888p_size
@@ -253,18 +255,25 @@ class OCRDetRec:
 
 
 if __name__=="__main__":
-    # 显示模式，默认"hdmi",可以选择"hdmi"和"lcd"
-    display_mode="lcd"
+    # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
+
+    display_mode="lcd3_5"
+    
     if display_mode=="hdmi":
         display_size=[1920,1080]
-    else:
+        
+    elif display_mode=="lcd3_5":
         display_size=[800,480]
+    
+    elif display_mode=="lcd2_4":     
+        display_size=[640,480]
+
     # OCR检测模型路径
-    ocr_det_kmodel_path="/sdcard/app/tests/kmodel/ocr_det_int16.kmodel"
+    ocr_det_kmodel_path="/sdcard/examples/kmodel/ocr_det_int16.kmodel"
     # OCR识别模型路径
-    ocr_rec_kmodel_path="/sdcard/app/tests/kmodel/ocr_rec_int16.kmodel"
+    ocr_rec_kmodel_path="/sdcard/examples/kmodel/ocr_rec_int16.kmodel"
     # 其他参数
-    dict_path="/sdcard/app/tests/utils/dict.txt"
+    dict_path="/sdcard/examples/utils/dict.txt"
     rgb888p_size=[640,360]
     ocr_det_input_size=[640,640]
     ocr_rec_input_size=[512,32]
@@ -273,33 +282,27 @@ if __name__=="__main__":
 
     # 初始化PipeLine，只关注传给AI的图像分辨率，显示的分辨率
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    pl.create()
+    if display_mode =="lcd2_4":         
+        pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
+    
+    else:        
+        pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
     ocr=OCRDetRec(ocr_det_kmodel_path,ocr_rec_kmodel_path,det_input_size=ocr_det_input_size,rec_input_size=ocr_rec_input_size,dict_path=dict_path,mask_threshold=mask_threshold,box_threshold=box_threshold,rgb888p_size=rgb888p_size,display_size=display_size)
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame()                  # 获取当前帧
+        det_res,rec_res=ocr.run(img)        # 推理当前帧
+        ocr.draw_result(pl,det_res,rec_res) # 绘制当前帧推理结果
+        print(det_res,rec_res)              # 打印结果
+        pl.show_image()                     # 展示当前帧推理结果
+        gc.collect()
 
-            img=pl.get_frame()                  # 获取当前帧
-            det_res,rec_res=ocr.run(img)        # 推理当前帧
-            ocr.draw_result(pl,det_res,rec_res) # 绘制当前帧推理结果
-            print(det_res,rec_res)              # 打印结果
-            pl.show_image()                     # 展示当前帧推理结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        ocr.ocr_det.deinit()
-        ocr.ocr_rec.deinit()
-        pl.destroy()
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -311,22 +314,20 @@ if __name__=="__main__":
 代码中 `det_res`为字符位置检测结果， `rec_res`为字符识别内容结果。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        img=pl.get_frame()                  # 获取当前帧
+        det_res,rec_res=ocr.run(img)        # 推理当前帧
+        ocr.draw_result(pl,det_res,rec_res) # 绘制当前帧推理结果
+        print(det_res,rec_res)              # 打印结果
+        pl.show_image()                     # 展示当前帧推理结果
+        gc.collect()
 
-            img=pl.get_frame()                  # 获取当前帧
-            det_res,rec_res=ocr.run(img)        # 推理当前帧
-            ocr.draw_result(pl,det_res,rec_res) # 绘制当前帧推理结果
-            print(det_res,rec_res)              # 打印结果
-            pl.show_image()                     # 展示当前帧推理结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

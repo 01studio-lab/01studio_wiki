@@ -17,7 +17,13 @@ Connecting to a router to surf the Internet is something we do every day. In dai
 
 CanMV K230 has an onboard WiFi module and ceramic antenna, which can directly connect to a 2.4G wireless network.
 
+- CanMV K230
+
 ![wifi_connect](./img/wifi_connect/wifi_connect0.png)
+
+- CanMV K230 mini
+
+![wifi_connect](./img/wifi_connect/wifi_connect0_1.png)
 
 The CanMV K230 MicroPython library has integrated the network module. Developers can easily connect to the router using the built-in network module functions.
 

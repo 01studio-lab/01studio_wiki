@@ -28,7 +28,18 @@ The installation method of the CanMV K230 acrylic base plate is very simple. Tea
 
 The function of the shell is to completely wrap and effectively protect the development board. Users can purchase: [Click to Buy>>](https://www.aliexpress.com/item/1005008584060443.html)
 
+:::tip 提示
+The assembly method of CanMV K230 and CanMV K230 mini is the same.
+:::
+
+- CanMV K230
+
 ![shell](./img/module/shell0.png)
+
+- CanMV K230 mini
+
+![shell](./img/module/shell0_1.png)
+
 
 **Here is the assembly tutorial:**
 
@@ -62,26 +73,39 @@ The bottom cover acrylic is also operated in the same way:
 At this point, the assembly is complete:
 ![shell](./img/module/shell7.png)
 
-The top cover can be equipped with a cooling fan. Note that the fan screws are installed from bottom to top.
-![shell](./img/module/shell8.png)
-
-Connect the cooling fan power cable to the red and black pin headers shown in the figure below, and supply 5V power.
-
-![shell](./img/module/shell9.png)
-
 A 3.5-inch LCD MINI screen can also be installed on the back. First assemble the screen from the back of the development board, then put it into the shell and screw on the top cover.
 
 ![shell](./img/module/shell10.png)
 
-## 3.5 inch MIPI display
+## Cooling fan
+
+The top cover can be equipped with a cooling fan. Note that the fan screws are installed from bottom to top. The installation method of the two development boards is the same.
+
+![shell](./img/module/shell8.png)
+
+The power cable of the CanMV K230 cooling fan is connected to the red and black pin headers shown in the figure below, and 5V power is supplied.
+
+![shell](./img/module/shell9.png)
+
+The power cable of the CanMV K230 mini cooling fan is connected to the pin headers shown in the figure below. You can choose to use 5V power supply or 3.3V power supply. 3.3V power supply is quieter (the black fan lead is GND, and the red is the positive pole of the power supply).
+
+![shell](./img/module/shell9_1.png)
+
+## MIPI display
+
+### 3.5 inch MIPI display
 
 [Click to Buy>>](https://www.aliexpress.com/item/1005007579014355.html)
 
-### Function Introduction
+:::tip Tips
+Since the LCD backlight is turned off by default after power-on, it looks like nothing is happening. You need to burn the image and run the LCD-related code to see the LCD light up. You can run the drawing code for testing [**Drawing Example>>**](../machine_vision/draw.md#codes)
+:::
+
+#### Function Introduction
 
 ![module](./img/module/lcd.png)
 
-### Product Parameters
+#### Product Parameters
 
 |  Product Parameters |
 |  :---:  | ---  |
@@ -95,6 +119,33 @@ A 3.5-inch LCD MINI screen can also be installed on the back. First assemble the
 |  :---:  | ---  |
 | Size  | 87 x 56 mm |
 | weight  | 52g |
+
+### 2.4 inch MIPI display
+
+[Click to Buy>>](https://www.aliexpress.com/item/1005008986294698.html)
+
+:::tip Tips
+Since the LCD backlight is turned off by default after power-on, it looks like nothing is happening. You need to burn the image and run the LCD-related code to see the LCD light up. You can run the drawing code for testing [**Drawing Example>>**](../machine_vision/draw.md#codes)
+:::
+
+#### Function Introduction
+
+![module](./img/module/lcd2.png)
+
+#### Product Parameters
+
+|  Product Parameters |
+|  :---:  | ---  |
+| Resolution  | 640 x 480（Pixel） |
+| Interface | MIPI 2lane|
+| Driver IC  | ST7701S | 
+| Touch  | CST128 (Capacitive touch) |
+| Operating Temperature  | -20℃ ~ 70℃ |
+
+|  Appearance Parameters |
+|  :---:  | ---  |
+| Size  | 60.3 x 42.7 mm |
+| weight  | 26.7g |
 
 ### Assembly
 
@@ -170,3 +221,11 @@ Optional accessory, suitable for scenarios where Ethernet connection is required
 [Ethernet Wired Connection Usage Tutorial](../network/ethernet.md)
 
 ![module](./img/module/module8.jpg)
+
+## Audio adapter cable
+
+CanMV K230 mipi can be converted to a standard 3.5mm audio interface (female) through the matching audio adapter cable. So as to connect to audio playback devices such as speakers. [**Click to Buy>>**](https://www.aliexpress.com/item/1005009040115849.html)
+
+![module](./img/module/audio_line_1.png)
+
+![module](./img/module/audio_line_2.png)

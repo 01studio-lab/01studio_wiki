@@ -14,7 +14,13 @@ Learn how to use the key to change the state of the LED (blue light) by MicroPyt
 
 CanMV K230's built-in KEY is located on the development board as shown in the figure below:
 
+- CanMV K230
+
 ![key2](./img/key/key1.png)
+
+- CanMV K230 mini
+
+![key2](./img/key/key1_1.png)
 
 Let's look at the schematic diagram of CanMV K230 and find the IO pins corresponding to the buttons at first.
 
@@ -136,6 +142,12 @@ After connecting the development board, run the above code in the CanMV K230 IDE
 
 It can be seen that each time the key KEY is pressed, the on and off status of the LED blue light flip.
 
+- CanMV K230
+
 ![key](./img/key/key5.png)
+
+- CanMV K230 mini
+
+![key](./img/key/key5_2.png)
 
 Pin is a very common function. Once you have learned Pin, you can use all the pins of the development board for your own use, which is very flexible.

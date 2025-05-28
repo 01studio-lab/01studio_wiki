@@ -116,7 +116,6 @@ while True:
 
 ```
 
-
 ### CanMV K230 mini + 2.4寸mipi屏
 
 ```python

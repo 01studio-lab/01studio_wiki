@@ -6,7 +6,9 @@ sidebar_position: 3
 
 ## Download
 
-- [Click to download](https://en.01studio.cc/micropython/CanMV-K230/CanMV-K230.html)
+- [Click to download](https://github.com/01studio-lab/K230_Resource/releases/tag/2025-5-28)
+
+![download](./img/download/download0.png)
 
 ## Information
 

@@ -32,6 +32,8 @@ graph TD
 实验名称：物体自分类学习
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
+说明：意外中断或重新采集需要将"/sdcard/examples/utils/"目录下的"features"文件夹删除。
+说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -40,6 +42,7 @@ from libs.AI2D import Ai2d
 import os
 import ujson
 from media.media import *
+from media.sensor import *
 from time import *
 import nncase_runtime as nn
 import ulab.numpy as np
@@ -106,7 +109,7 @@ class SelfLearningApp(AIBase):
         self.ai2d.set_ai2d_dtype(nn.ai2d_format.NCHW_FMT,nn.ai2d_format.NCHW_FMT,np.uint8, np.uint8)
         self.data_init()
 
-    # 配置预处理操作，这里使用了crop和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/app/libs/AI2D.py查看
+    # 配置预处理操作，这里使用了crop和resize，Ai2d支持crop/shift/pad/resize/affine，具体代码请打开/sdcard/libs/AI2D.py查看
     def config_preprocess(self,input_image_size=None):
         with ScopedTiming("set preprocess config",self.debug_mode > 0):
             # 初始化ai2d预处理配置，默认为sensor给到AI的尺寸，您可以通过设置input_image_size自行修改输入尺寸
@@ -200,17 +203,30 @@ class SelfLearningApp(AIBase):
 
 
 if __name__=="__main__":
-    # 显示模式，默认"hdmi",可以选择"hdmi"和"lcd"
-    display_mode="lcd"
+    # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
+
+    display_mode="lcd3_5"
+    
     if display_mode=="hdmi":
         display_size=[1920,1080]
-    else:
+        
+    elif display_mode=="lcd3_5":
         display_size=[800,480]
+    
+    elif display_mode=="lcd2_4":     
+        display_size=[640,480]
+
     # 模型路径
-    kmodel_path="/sdcard/app/tests/kmodel/recognition.kmodel"
-    database_path="/sdcard/app/tests/utils/features/"
+    kmodel_path="/sdcard/examples/kmodel/recognition.kmodel"
+    database_path="/sdcard/examples/utils/features/" #重复运行需要将这个文件夹删除
     # 其它参数设置
-    rgb888p_size=[1920,1080]
+
+    if display_mode=="lcd2_4":#2.4寸屏画面比例为4:3
+        rgb888p_size = [1280, 960] 
+        
+    else:
+        rgb888p_size = [1920, 1080]
+
     model_input_size=[224,224]
 
     labels=["苹果","香蕉","葡萄"]
@@ -220,50 +236,39 @@ if __name__=="__main__":
 
     # 初始化PipeLine
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    pl.create()
+    
+    if display_mode =="lcd2_4":         
+        pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
+    
+    else:        
+        pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
+
     # 初始化自学习实例
     sl=SelfLearningApp(kmodel_path,model_input_size=model_input_size,labels=labels,top_k=top_k,threshold=threshold,database_path=database_path,rgb888p_size=rgb888p_size,display_size=display_size,debug_mode=0)
     sl.config_preprocess()
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
+        clock.tick()
 
-            os.exitpoint()
+        #检测按键
+        if KEY.value()==0:   #按键被按下
+            time.sleep_ms(10) #消除抖动
+            if KEY.value()==0: #确认按键被按下
+                print('KEY')
+                key_node = 1
+                while not KEY.value(): #检测按键是否松开
+                    pass
 
-            clock.tick()
+        img=pl.get_frame() # 获取当前帧数据
+        res=sl.run(img) # 推理当前帧
+        sl.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
+        print(res)  # 打印结果
+        pl.show_image() # 显示当前的绘制结果
+        gc.collect()
 
-            #检测按键
-            if KEY.value()==0:   #按键被按下
-                time.sleep_ms(10) #消除抖动
-                if KEY.value()==0: #确认按键被按下
-                    print('KEY')
-                    key_node = 1
-                    while not KEY.value(): #检测按键是否松开
-                        pass
-
-            img=pl.get_frame() # 获取当前帧数据
-            res=sl.run(img) # 推理当前帧
-            sl.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
-            print(res)  # 打印结果
-            pl.show_image() # 显示当前的绘制结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        # 删除features文件夹
-        stat_info = os.stat(database_path)
-        if (stat_info[0] & 0x4000):
-            list_files = os.listdir(database_path)
-            for l in list_files:
-                os.remove(database_path + l)
-        os.rmdir(database_path)
-        sl.deinit()
-        pl.destroy()
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -277,31 +282,29 @@ if __name__=="__main__":
 代码中 `res`为检测结果。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
 
-            clock.tick()
+        #检测按键
+        if KEY.value()==0:   #按键被按下
+            time.sleep_ms(10) #消除抖动
+            if KEY.value()==0: #确认按键被按下
+                print('KEY')
+                key_node = 1
+                while not KEY.value(): #检测按键是否松开
+                    pass
 
-            #检测按键
-            if KEY.value()==0:   #按键被按下
-                time.sleep_ms(10) #消除抖动
-                if KEY.value()==0: #确认按键被按下
-                    print('KEY')
-                    key_node = 1
-                    while not KEY.value(): #检测按键是否松开
-                        pass
+        img=pl.get_frame() # 获取当前帧数据
+        res=sl.run(img) # 推理当前帧
+        sl.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
+        print(res)  # 打印结果
+        pl.show_image() # 显示当前的绘制结果
+        gc.collect()
 
-            img=pl.get_frame() # 获取当前帧数据
-            res=sl.run(img) # 推理当前帧
-            sl.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
-            print(res)  # 打印结果
-            pl.show_image() # 显示当前的绘制结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 可以通过修改`labels`增加或减少待学习识别物体数量：
@@ -314,8 +317,8 @@ if __name__=="__main__":
 
 ## 实验结果
 
-:::danger Warning
-Each time you run the code, feature data will be generated in the folder below: **/sdcard/examples/utils/features/**. If you encounter an unexpected interruption, you can delete the entire `features` folder and run the code again.
+:::danger 警告
+每次运行代码后会在下面路径文件夹生成特征数据**/sdcard/examples/utils/features/**，如遇到意外中断情况可以删除整个`features`文件夹重新运行代码即可。
 :::
 
 在CanMV IDE中运行上述代码，按LCD提示进行操作,依次按下按键KEY开始采集3种水果特征。
@@ -339,3 +342,4 @@ Each time you run the code, feature data will be generated in the folder below: 
 ![self_learn](./img/self_learn/self_learn5.png)
 
 可以看到识别成功的概率非常高>0.9（最大1）。
+

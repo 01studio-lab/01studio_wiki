@@ -30,6 +30,7 @@ graph TD
 实验名称：车牌识别
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
+说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -38,6 +39,7 @@ from libs.AI2D import Ai2d
 import os
 import ujson
 from media.media import *
+from media.sensor import *
 from time import *
 import nncase_runtime as nn
 import ulab.numpy as np
@@ -182,16 +184,23 @@ class LicenceRec:
 
 
 if __name__=="__main__":
-    # 显示模式，默认"hdmi",可以选择"hdmi"和"lcd"
-    display_mode="lcd"
+    # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
+
+    display_mode="lcd3_5"
+    
     if display_mode=="hdmi":
         display_size=[1920,1080]
-    else:
+        
+    elif display_mode=="lcd3_5":
         display_size=[800,480]
+    
+    elif display_mode=="lcd2_4":     
+        display_size=[640,480]
+
     # 车牌检测模型路径
-    licence_det_kmodel_path="/sdcard/app/tests/kmodel/LPD_640.kmodel"
+    licence_det_kmodel_path="/sdcard/examples/kmodel/LPD_640.kmodel"
     # 车牌识别模型路径
-    licence_rec_kmodel_path="/sdcard/app/tests/kmodel/licence_reco.kmodel"
+    licence_rec_kmodel_path="/sdcard/examples/kmodel/licence_reco.kmodel"
     # 其它参数
     rgb888p_size=[640,360]
     licence_det_input_size=[640,640]
@@ -201,32 +210,27 @@ if __name__=="__main__":
 
     # 初始化PipeLine，只关注传给AI的图像分辨率，显示的分辨率
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    pl.create()
+    if display_mode =="lcd2_4":         
+        pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
+    
+    else:        
+        pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
+
     lr=LicenceRec(licence_det_kmodel_path,licence_rec_kmodel_path,det_input_size=licence_det_input_size,rec_input_size=licence_rec_input_size,confidence_threshold=confidence_threshold,nms_threshold=nms_threshold,rgb888p_size=rgb888p_size,display_size=display_size)
 
     clock = time.clock()
 
-    try:
-        while True:
+    while True:
 
-            os.exitpoint()
+        clock.tick()
+        img=pl.get_frame()                  # 获取当前帧
+        det_res,rec_res=lr.run(img)         # 推理当前帧
+        lr.draw_result(pl,det_res,rec_res)  # 绘制当前帧推理结果
+        print(det_res,rec_res)              # 打印结果
+        pl.show_image()                     # 展示推理结果
+        gc.collect()
 
-            clock.tick()
-            img=pl.get_frame()                  # 获取当前帧
-            det_res,rec_res=lr.run(img)         # 推理当前帧
-            lr.draw_result(pl,det_res,rec_res)  # 绘制当前帧推理结果
-            print(det_res,rec_res)              #打印结果
-            pl.show_image()                     # 展示推理结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        lr.licence_det.deinit()
-        lr.licence_rec.deinit()
-        pl.destroy()
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -238,21 +242,19 @@ if __name__=="__main__":
 代码中 `det_res`为车牌检测结果， `rec_res`为车牌识别内容结果。
 
 ```python
-        ...
-        while True:
+    ...
+    while True:
 
-            os.exitpoint()
+        clock.tick()
+        img=pl.get_frame()                  # 获取当前帧
+        det_res,rec_res=lr.run(img)         # 推理当前帧
+        lr.draw_result(pl,det_res,rec_res)  # 绘制当前帧推理结果
+        print(det_res,rec_res)
+        pl.show_image()                     # 展示推理结果
+        gc.collect()
 
-            clock.tick()
-            img=pl.get_frame()                  # 获取当前帧
-            det_res,rec_res=lr.run(img)         # 推理当前帧
-            lr.draw_result(pl,det_res,rec_res)  # 绘制当前帧推理结果
-            print(det_res,rec_res)
-            pl.show_image()                     # 展示推理结果
-            gc.collect()
-
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

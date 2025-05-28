@@ -31,6 +31,7 @@ graph TD
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
 说明：检测车牌位置并用矩形框指示
+    可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -39,6 +40,7 @@ from libs.AI2D import Ai2d
 import os
 import ujson
 from media.media import *
+from media.sensor import *
 from time import *
 import nncase_runtime as nn
 import ulab.numpy as np
@@ -106,48 +108,58 @@ class LicenceDetectionApp(AIBase):
                 pl.osd_img.clear()  # 如果没有检测结果，则清空屏幕
 
 if __name__=="__main__":
-    # 显示模式，默认"hdmi",可以选择"hdmi"和"lcd"
-    display_mode="lcd"
+    # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
+
+    display_mode="lcd3_5"
+    
     if display_mode=="hdmi":
         display_size=[1920,1080]
-    else:
+        
+    elif display_mode=="lcd3_5":
         display_size=[800,480]
+    
+    elif display_mode=="lcd2_4":     
+        display_size=[640,480]
+
     # 模型路径
-    kmodel_path="/sdcard/app/tests/kmodel/LPD_640.kmodel"
+    kmodel_path="/sdcard/examples/kmodel/LPD_640.kmodel"
     # 其它参数设置
     confidence_threshold = 0.2
     nms_threshold = 0.2
-    rgb888p_size=[1920,1080]
+
+    if display_mode=="lcd2_4":#2.4寸屏画面比例为4:3
+        rgb888p_size = [1280, 960] 
+        
+    else:
+        rgb888p_size = [1920, 1080]
 
     # 初始化PipeLine
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    pl.create()
+
+    if display_mode =="lcd2_4":         
+        pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
+    
+    else:        
+        pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
+
     # 初始化自定义车牌检测实例
     licence_det=LicenceDetectionApp(kmodel_path,model_input_size=[640,640],confidence_threshold=confidence_threshold,nms_threshold=nms_threshold,rgb888p_size=rgb888p_size,display_size=display_size,debug_mode=0)
     licence_det.config_preprocess()
 
     clock = time.clock()
 
-    try:
-        while True:
-            os.exitpoint()
+    while True:
 
-            clock.tick()
+        clock.tick()
 
-            img=pl.get_frame() # 获取当前帧数据
-            res=licence_det.run(img) # 推理当前帧
-            licence_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
-            print(res) # 显示当前的绘制结果
-            pl.show_image() # 显示当前的绘制结果
-            gc.collect() # 垃圾回收
+        img=pl.get_frame() # 获取当前帧数据
+        res=licence_det.run(img) # 推理当前帧
+        licence_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
+        print(res) # 显示当前的绘制结果
+        pl.show_image() # 显示当前的绘制结果
+        gc.collect() # 垃圾回收
 
-            print(clock.fps()) #打印帧率
-
-    except Exception as e:
-        sys.print_exception(e)
-    finally:
-        licence_det.deinit()
-        pl.destroy()
+        print(clock.fps()) #打印帧率
 ```
 
 这里对关键代码进行讲解：
@@ -159,21 +171,20 @@ if __name__=="__main__":
 代码中 `res`为识别结果。
 
 ```python
-        ...
-        while True:
-            os.exitpoint()
+    ...
+    while True:
 
-            clock.tick()
+        clock.tick()
 
-            img=pl.get_frame() # 获取当前帧数据
-            res=licence_det.run(img) # 推理当前帧
-            licence_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
-            print(res) # 显示当前的绘制结果
-            pl.show_image() # 显示当前的绘制结果
-            gc.collect() # 垃圾回收
+        img=pl.get_frame() # 获取当前帧数据
+        res=licence_det.run(img) # 推理当前帧
+        licence_det.draw_result(pl,res) # 绘制结果到PipeLine的osd图像
+        print(res) # 显示当前的绘制结果
+        pl.show_image() # 显示当前的绘制结果
+        gc.collect() # 垃圾回收
 
-            print(clock.fps()) #打印帧率
-        ...
+        print(clock.fps()) #打印帧率
+    ...
 ```
 
 ## 实验结果

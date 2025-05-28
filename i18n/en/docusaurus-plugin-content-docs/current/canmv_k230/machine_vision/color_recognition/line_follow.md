@@ -14,7 +14,7 @@ The line inspection case in this section is still based on color recognition. Th
 
 The deviation angle of the black line in the CanMV K230 camera image is achieved through programming.
 
-## 实验讲解
+## Experimental Explanation
 
 This experiment has certain requirements for the screen, that is, the camera must capture an image with only one continuous black straight line. The program cuts the screen into three parts, calculates the X coordinate of the center point of the black line in each part, and then uses the weighted average algorithm to estimate the deviation position of the straight line. Generally, the closer to the bottom, the closer to the camera, and the top represents the distant line segment. Therefore, the weight of the bottom figure is high. The following is a schematic diagram for explanation:
 
@@ -88,6 +88,7 @@ graph TD
 Demo Name：Robot line patrol (solid line)
 Platform：01Studio CanMV K230
 Tutorial：wiki.01studio.cc
+          Select 3.5-inch or 2.4-inch mipi screen by modifying the lcd_width and lcd_height parameter values.
 
 # Black Grayscale Line Following Example
 #
@@ -107,6 +108,16 @@ import time, os, sys, math
 from media.sensor import * #Import the sensor module and use the camera API
 from media.display import * #Import the display module and use display API
 from media.media import * #Import the media module and use meida API
+
+#3.5 inch mipi screen resolution definition
+lcd_width = 800
+lcd_height = 480
+
+'''
+#2.4 inch mipi screen resolution definition
+lcd_width = 640
+lcd_height = 480
+'''
 
 # Trace the black line. Use [(128, 255)] to trace the white line.
 GRAYSCALE_THRESHOLD = [(0, 64)]
@@ -142,7 +153,7 @@ sensor.set_framesize(width=320, height=240) # Set the frame size to LCD resoluti
 sensor.set_pixformat(Sensor.RGB565) # Set the output image format, channel 0
 
 #Use 3.5-inch mipi screen and IDE buffer to display images at the same time
-Display.init(Display.ST7701, to_ide=True)
+Display.init(Display.ST7701, width=lcd_width, height=lcd_height, to_ide=True)
 #Display.init(Display.VIRT, sensor.width(), sensor.height()) ##Use only the IDE buffer to display images
 
 MediaManager.init() #Initialize the media resource manager
@@ -202,7 +213,7 @@ while True:
     #Display.show_image(img) #Dispaly images
 
     #Display images, only used for LCD center display
-    Display.show_image(img, x=round((800-sensor.width())/2),y=round((480-sensor.height())/2))
+    Display.show_image(img, x=round((lcd_width-sensor.width())/2),y=round((lcd_height-sensor.height())/2))
 
     print(clock.fps()) #FPS
 ```

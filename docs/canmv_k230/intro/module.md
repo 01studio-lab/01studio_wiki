@@ -130,6 +130,10 @@ CanMV K230 mini散热扇电源线接到下图所示排针，可以选择使用5V
 
 [点击购买>>](https://item.taobao.com/item.htm?id=915067380212)
 
+:::tip Tips
+由于上电后LCD背光默认关闭，所以看起来没有现象。需要烧录镜像后运行LCD相关代码才能看到LCD点亮，可运行画图代码进行测试 [**画图例程>>**](../machine_vision/draw.md#参考代码)
+:::
+
 #### 功能介绍
 
 ![module](./img/module/lcd2.png)

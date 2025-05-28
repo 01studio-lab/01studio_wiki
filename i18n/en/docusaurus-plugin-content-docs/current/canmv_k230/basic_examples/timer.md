@@ -102,6 +102,12 @@ Run the code in CanMV K230 IDE:
 
 You can see that the blue LED light flashes once every 1s.
 
+- CanMV K230
+
 ![timer1](./img/timer/timer2.png)
+
+- CanMV K230 mini
+
+![timer1](./img/timer/timer3.png)
 
 This section of the experiment introduces how to use the timer. Some users may think that this function can also be achieved by using a delay function, but compared to the delay function, the advantage of the timer is that it does not take up too much CPU resources.

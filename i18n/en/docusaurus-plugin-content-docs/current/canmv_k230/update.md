@@ -4,6 +4,10 @@ sidebar_position: 15
 
 # Update Notes
 
+## 2025-4-24
+
+- Added **CanMV K230 mini introduction and tutorial**
+
 ## 2025-03-23
 
 - add **Sensors & Modules** ：

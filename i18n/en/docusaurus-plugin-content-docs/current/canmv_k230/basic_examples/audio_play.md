@@ -16,8 +16,15 @@ sidebar_position: 14
 
 01Studio CanMV K230开发板带有双声道3.5mm音频座，可以外接扬声器。
 
+- CanMV K230
+
 ![audio_play](./img/audio_play/audio_play1.png)
 
+- CanMV K230 mini
+
+CanMV K230 mini需要搭配音频转接线使用。
+
+![audio_play](./img/audio_play/audio_play1_1.png)
 
 CanMV K230 MicroPython库集成了PyAudio（音频流处理）和wave（wav文件处理）模块。可以使用python编程实现播放wav音频文件。具体介绍如下：
 

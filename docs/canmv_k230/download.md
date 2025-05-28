@@ -13,7 +13,9 @@ sidebar_position: 3
 
 ### 海外地区下载
 
-- [点击下载](https://en.01studio.cc/micropython/CanMV-K230/CanMV-K230.html)
+- [点击下载](https://github.com/01studio-lab/K230_Resource/releases/tag/2025-5-28)
+
+![download](./img/download/download0.png)
 
 ## 资料介绍：
 
