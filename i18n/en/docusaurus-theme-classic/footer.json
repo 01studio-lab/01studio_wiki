@@ -46,5 +46,9 @@
   "link.item.label.Discord": {
     "message": "Discord",
     "description": "The label of footer link with label=Discord linking to https://discord.gg/QxHYBxSzMG"
+  },
+  "link.item.label.核桃派": {
+    "message": "WalnutPi",
+    "description": "The label of footer link with label=核桃派 linking to https://www.walnutpi.com"
   }
 }

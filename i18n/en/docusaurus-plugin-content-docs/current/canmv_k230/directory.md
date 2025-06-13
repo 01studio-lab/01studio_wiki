@@ -88,7 +88,7 @@ sidebar_position: 1
         - [Object Detection（YOLOv8n）](./machine_vision/ai_vision/object_detection.md) 
         - [Target Tracking](./machine_vision/ai_vision/tracker.md) 
         - [Self-classification learning](./machine_vision/ai_vision/self_learning.md) 
-
+    - [Model Training](./machine_vision/train.md)
 - **Network**
 
     - [WiFi Connect](./network/wifi_connect.md) 
@@ -101,6 +101,8 @@ sidebar_position: 1
     - [relay](./sensor_module/relay.md) 
     - [servo](./sensor_module/servo.md) 
     - [Multi-channel servo/motor module](./sensor_module/pyMotors.md) 
+
+- [**Users DIY**](./diy.md)
 
 - [**Updage Notes**](./update.md)
 

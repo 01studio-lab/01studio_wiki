@@ -167,6 +167,10 @@ const config = {
                 label: 'GitHub',
                 href: 'https://github.com/01studio-lab',
               },
+              {
+                label: '核桃派',
+                href: 'https://www.walnutpi.com',
+              },
             ],
           },
           {

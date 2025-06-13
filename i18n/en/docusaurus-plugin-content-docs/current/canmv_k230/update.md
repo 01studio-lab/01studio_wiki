@@ -1,8 +1,17 @@
 ---
-sidebar_position: 15
+sidebar_position: 20
 ---
 
 # Update Notes
+
+## 2025-06-13
+
+- add **machine vision** ：
+
+    - [Model Training](./machine_vision/train.md) 
+
+- add [Users DIY](./diy.md)
+
 
 ## 2025-4-24
 
