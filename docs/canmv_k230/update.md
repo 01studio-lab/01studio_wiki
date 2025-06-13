@@ -1,8 +1,16 @@
 ---
-sidebar_position: 15
+sidebar_position: 20
 ---
 
 # 更新说明
+
+## 2025-06-13
+
+- 新增 **机器视觉** ：
+
+    - [模型训练](./machine_vision/train.md) 
+
+- 新增 [社区用户开源项目分享](./diy.md)
 
 ## 2025-4-24
 
