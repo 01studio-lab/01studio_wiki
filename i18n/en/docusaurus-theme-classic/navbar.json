@@ -34,5 +34,17 @@
   "item.label.01官网": {
     "message": "01 Official website",
     "description": "Navbar item with label 01官网"
+  },
+  "item.label.CanMV K230教程": {
+    "message": "CanMV K230 Tutorial",
+    "description": "Navbar item with label CanMV K230教程"
+  },
+  "item.label.开源项目教程": {
+    "message": "Open Source Project Tutorials",
+    "description": "Navbar item with label 开源项目教程"
+  },
+  "item.label.pyDrone四轴飞行器": {
+    "message": "pyDrone Quadcopter",
+    "description": "Navbar item with label pyDrone四轴飞行器"
   }
 }

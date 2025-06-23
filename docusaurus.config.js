@@ -91,7 +91,20 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'newSidebar',
             position: 'left',
-            label: 'CanMV K230教程（新）',
+            label: 'CanMV K230教程',
+          },
+          {
+            type: 'dropdown',
+            label: '开源项目教程',
+            position: 'left',
+            className: 'navbar_dorp_items',
+            items: [
+              {
+              type: 'docSidebar',
+              sidebarId: 'pyDroneSidebar',
+              label: 'pyDrone四轴飞行器',
+              },
+            ],
           },
           {
             href: 'https://www.01studio.cc',
