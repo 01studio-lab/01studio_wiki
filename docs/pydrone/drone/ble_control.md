@@ -22,8 +22,7 @@ pyDrone和pyController手柄。
 
 ## 实验讲解
 
-关于01Studio pyController遥控/游戏手柄学习内容可以在下载站找到：
-https://download.01studio.cc/zh_CN/latest/project/pyController/pyController.html
+关于01Studio pyController遥控/游戏手柄学习教程见：https://wiki.01studio.cc/docs/pycontroller
 
 由于四轴飞行器对实时性要求非常高，因此核心部分在01Studio pyDrone固件底层实现，通过开放出micropython接口，让用户通过简单的python语句便可实现pyDrone四轴的各种控制。
 

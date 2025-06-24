@@ -4,8 +4,6 @@ sidebar_position: 1
 
 # pyDrone简介
 
-## CanMV是什么
-
 ![intro1](./img/intro/intro1.gif)
 
 pyDrone是由01Studio(01科技)发起的MicroPython开源四轴飞行器项目。

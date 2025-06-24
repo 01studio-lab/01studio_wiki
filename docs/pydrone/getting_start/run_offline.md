@@ -23,7 +23,7 @@ Micropython机制是上电默认先运行名字为boot.py文件，然后在运�
 
 ![run_offline](./img/run_offline/run_offline1.png)
 
-按下开发板左上角的复位键，可以看到LED蓝灯被点亮：
+按下开发板的复位键，可以看到LED蓝灯被点亮：
 
 ![run_offline](./img/run_offline/run_offline2.png)
 

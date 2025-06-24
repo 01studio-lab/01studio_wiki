@@ -44,7 +44,11 @@
     "description": "Navbar item with label 开源项目教程"
   },
   "item.label.pyDrone四轴飞行器": {
-    "message": "pyDrone Quadcopter",
+    "message": "pyDrone",
     "description": "Navbar item with label pyDrone四轴飞行器"
+  },
+  "item.label.pyController遥控手柄": {
+    "message": "pyController",
+    "description": "Navbar item with label pyController遥控手柄"
   }
 }

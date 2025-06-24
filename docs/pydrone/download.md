@@ -18,7 +18,7 @@ https://download.01studio.cc/project/pyDrone/pyDrone.html
 
 ## 资料介绍：
 
-CanMV K230在线教程配套软件、源代码、原理图、芯片手册等。
+pyDrone在线教程配套软件、源代码、原理图、芯片手册等。
 
 ![download](./img/download/download1.png)
 

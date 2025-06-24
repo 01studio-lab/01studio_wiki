@@ -210,5 +210,45 @@
   "sidebar.pyDroneSidebar.category.四轴综合实验.link.generated-index.description": {
     "message": "四轴综合应用",
     "description": "The generated-index page description for category 四轴综合实验 in sidebar pyDroneSidebar"
+  },
+  "sidebar.pyControllerSidebar.category.开箱指南": {
+    "message": "开箱指南",
+    "description": "The label for category 开箱指南 in sidebar pyControllerSidebar"
+  },
+  "sidebar.pyControllerSidebar.category.开箱指南.link.generated-index.description": {
+    "message": "硬件和相关资源介绍",
+    "description": "The generated-index page description for category 开箱指南 in sidebar pyControllerSidebar"
+  },
+  "sidebar.pyControllerSidebar.category.开发环境搭建": {
+    "message": "开发环境搭建",
+    "description": "The label for category 开发环境搭建 in sidebar pyControllerSidebar"
+  },
+  "sidebar.pyControllerSidebar.category.开发环境搭建.link.generated-index.description": {
+    "message": "开始使用你的CanMV K230 AI开发板。",
+    "description": "The generated-index page description for category 开发环境搭建 in sidebar pyControllerSidebar"
+  },
+  "sidebar.pyControllerSidebar.category.基础实验": {
+    "message": "基础实验",
+    "description": "The label for category 基础实验 in sidebar pyControllerSidebar"
+  },
+  "sidebar.pyControllerSidebar.category.基础实验.link.generated-index.description": {
+    "message": "常用GPIO基础实验",
+    "description": "The generated-index page description for category 基础实验 in sidebar pyControllerSidebar"
+  },
+  "sidebar.pyControllerSidebar.category.WiFi应用": {
+    "message": "WiFi应用",
+    "description": "The label for category WiFi应用 in sidebar pyControllerSidebar"
+  },
+  "sidebar.pyControllerSidebar.category.WiFi应用.link.generated-index.description": {
+    "message": "CanMV开发板实现Socket、MQTT等常用网络编程应用",
+    "description": "The generated-index page description for category WiFi应用 in sidebar pyControllerSidebar"
+  },
+  "sidebar.pyControllerSidebar.category.手柄综合实验": {
+    "message": "手柄综合实验",
+    "description": "The label for category 手柄综合实验 in sidebar pyControllerSidebar"
+  },
+  "sidebar.pyControllerSidebar.category.手柄综合实验.link.generated-index.description": {
+    "message": "四轴综合应用",
+    "description": "The generated-index page description for category 手柄综合实验 in sidebar pyControllerSidebar"
   }
 }

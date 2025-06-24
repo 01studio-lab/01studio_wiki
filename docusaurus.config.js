@@ -104,6 +104,11 @@ const config = {
               sidebarId: 'pyDroneSidebar',
               label: 'pyDrone四轴飞行器',
               },
+              {
+              type: 'docSidebar',
+              sidebarId: 'pyControllerSidebar',
+              label: 'pyController遥控手柄',
+              },
             ],
           },
           {
