@@ -96,7 +96,7 @@ sensor.snapshot()
 
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/sensor.html
+https://www.kendryte.com/canmv/main/canmv/library/canmv/sensor.html
 
 ## clock对象
 
@@ -122,7 +122,7 @@ clock.fps()
 停止追踪运行时间，并返回当前FPS（每秒帧数）。**在调用该函数前始终首先调用 clock.tick() 。**
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/micropython/utime.html#clock
+https://www.kendryte.com/canmv/main/canmv/library/micropython/utime.html#clock
 
 <br></br>
 

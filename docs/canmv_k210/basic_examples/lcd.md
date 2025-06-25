@@ -108,7 +108,7 @@ lcd.deinit()
 <br></br>
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/lcd.html
+https://www.kendryte.com/canmv/main/canmv/library/canmv/lcd.html
 
 我们来跑一下其主要功能显示字符和图像，代码编写流程如下：
 

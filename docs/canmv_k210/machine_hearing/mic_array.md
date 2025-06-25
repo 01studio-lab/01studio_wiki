@@ -74,7 +74,7 @@ mic.deinit()
 
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/maix/maix.mic_array.html#maix-mic-array
+https://www.kendryte.com/canmv/main/canmv/library/canmv/maix/maix.mic_array.html#maix-mic-array
 
 声源定位代码编写流程如下：
 

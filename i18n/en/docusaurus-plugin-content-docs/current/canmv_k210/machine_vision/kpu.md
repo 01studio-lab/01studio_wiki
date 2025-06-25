@@ -107,4 +107,4 @@ KPU注销函数，释放模型占用的内存。
 <br></br>
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/maix/maix.KPU_NEW.html
+https://www.kendryte.com/canmv/main/canmv/library/canmv/maix/maix.KPU_NEW.html

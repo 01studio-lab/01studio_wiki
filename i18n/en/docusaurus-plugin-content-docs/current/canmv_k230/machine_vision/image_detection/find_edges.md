@@ -34,7 +34,7 @@ Parameter Description:
 Call the function directly.
 
 For more usage, please read the official documentation:<br></br>
-https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-edges
+https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#find-edges
 
 <br></br>
 

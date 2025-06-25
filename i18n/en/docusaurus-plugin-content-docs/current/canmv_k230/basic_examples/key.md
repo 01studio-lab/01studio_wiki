@@ -28,7 +28,7 @@ Let's look at the schematic diagram of CanMV K230 and find the IO pins correspon
 
 As can be seen from the schematic diagram, one side of the KEY is connected to pin 21 of K230, and the other side is connected to GND. So when the Key is not pressed, it inputs a high level (1), and when it is pressed, it inputs a low level (0).
 
-Since K230 has many functions, most GPIO pins will reuse multiple functions. Therefore, CanMV K230 provides FPIOA library (Field Programmable Input and Output Array) to realize different pin function selection. For details, please refer to:[FPIOA](https://developer.canaan-creative.com/k230_canmv/main/zh/api/machine/K230_CanMV_FPIOA%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
+Since K230 has many functions, most GPIO pins will reuse multiple functions. Therefore, CanMV K230 provides FPIOA library (Field Programmable Input and Output Array) to realize different pin function selection. For details, please refer to:[FPIOA](https://www.kendryte.com/k230_canmv/main/zh/api/machine/K230_CanMV_FPIOA%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
 
 Like the Light Up LED in the previous chapter, the input detection of the Key also uses the Pin object module, as follows:
 

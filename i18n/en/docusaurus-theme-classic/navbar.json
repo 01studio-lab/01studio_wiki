@@ -50,5 +50,9 @@
   "item.label.pyController遥控手柄": {
     "message": "pyController",
     "description": "Navbar item with label pyController遥控手柄"
+  },
+  "item.label.pyCar小车": {
+    "message": "pyCar",
+    "description": "Navbar item with label pyCar小车"
   }
 }

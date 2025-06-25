@@ -72,7 +72,7 @@ GPIO.disirq()
 关闭中断。
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/maix/maix.GPIO.html
+https://www.kendryte.com/canmv/main/canmv/library/canmv/maix/maix.GPIO.html
 
 <br></br>
 

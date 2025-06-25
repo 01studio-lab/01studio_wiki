@@ -141,7 +141,7 @@ image.draw_string_advanced(x, y, char_size,str,[color, font])
 
 <br></br>
 
-更多用法请阅读: [CanMV K230官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html)
+更多用法请阅读: [CanMV K230官方文档](https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html)
 
 熟悉了image对象的画图功能后，我们尝试在摄像头采集到的画面依次画出线段、矩形、圆形、箭头、十字交叉和字符。具体编程思路如下：
 

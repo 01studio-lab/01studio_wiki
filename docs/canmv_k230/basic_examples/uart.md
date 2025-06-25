@@ -70,7 +70,7 @@ UART.deinit()
 注销串口。
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/k230_canmv/main/zh/api/machine/K230_CanMV_UART%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html
+https://www.kendryte.com/k230_canmv/main/zh/api/machine/K230_CanMV_UART%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html
 
 <br></br>
 

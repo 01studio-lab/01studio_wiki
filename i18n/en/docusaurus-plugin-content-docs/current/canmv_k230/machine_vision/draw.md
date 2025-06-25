@@ -141,7 +141,7 @@ Draw String(support Chinese)
 
 <br></br>
 
-For more usage, please read: [CanMV K230 Docs](https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html)
+For more usage, please read: [CanMV K230 Docs](https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html)
 
 After getting familiar with the drawing function of the image object, we try to draw line segments, rectangles, circles, arrows, crosses and characters in the images captured by the camera. The specific programming ideas are as follows:
 

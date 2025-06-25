@@ -31,7 +31,7 @@ Parameter Description:
 Call this function directly. (Most parameters can be left as default, **compressed images and bayer images are not supported**)
 
 For more usage, please read the official documentation:<br></br>
-https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-rects
+https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#find-rects
 
 <br></br>
 

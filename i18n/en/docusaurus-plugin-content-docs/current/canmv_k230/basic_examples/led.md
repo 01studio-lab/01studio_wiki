@@ -26,7 +26,7 @@ The IO pins connected to CanMV K230 are as follows (see the schematic diagram of
 
 ![led](./img/led/led2.png)
 
-Since K230 has many functions, most GPIO pins will reuse multiple functions. Therefore, CanMV K230 provides FPIOA library (Field Programmable Input and Output Array) to realize different pin function selection. For details, please refer to:[FPIOA](https://developer.canaan-creative.com/k230_canmv/en/main/api/machine/K230_CanMV_FPIOA_API_Manual.html)。
+Since K230 has many functions, most GPIO pins will reuse multiple functions. Therefore, CanMV K230 provides FPIOA library (Field Programmable Input and Output Array) to realize different pin function selection. For details, please refer to:[FPIOA](https://www.kendryte.com/k230_canmv/en/main/api/machine/K230_CanMV_FPIOA_API_Manual.html)。
 
 To control the LED, use the Pin object in the machine module. The instructions are as follows:
 

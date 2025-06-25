@@ -23,8 +23,6 @@ pyDrone上的按键（KEY），跟主控ESP32-S3模块引脚0相连，上一节�
 
 ## Pin对象
 
-## Pin对象
-
 ### 构造函数
 ```python
 KEY = machine.Pin(id, mode, pull)

@@ -55,7 +55,7 @@ blob.cy()
 
 <br></br>
 
-更多用法请阅读[官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-blobs)
+更多用法请阅读[官方文档](https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#find-blobs)
 
 <br></br>
 

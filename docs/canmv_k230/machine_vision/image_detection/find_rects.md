@@ -31,7 +31,7 @@ image.find_rects([roi=Auto, threshold=10000])
 直接调用该函数。（大部分参数使用默认即可，**不支持压缩图像和bayer图像**）
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-rects
+https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#find-rects
 
 <br></br>
 

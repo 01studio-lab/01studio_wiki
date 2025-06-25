@@ -52,7 +52,7 @@ np.display()
 往灯带写入设置的数据。
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/maix/maix.GPIO.html
+https://www.kendryte.com/canmv/main/canmv/library/canmv/maix/maix.GPIO.html
 
 代码编程流程图如下：
 

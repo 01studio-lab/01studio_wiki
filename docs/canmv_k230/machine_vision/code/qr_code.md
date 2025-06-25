@@ -52,7 +52,7 @@ qrcode.verison()
 <br></br>
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/image.html#find-qrcodes
+https://www.kendryte.com/canmv/main/canmv/library/canmv/image.html#find-qrcodes
 
 <br></br>
 

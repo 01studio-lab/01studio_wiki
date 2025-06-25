@@ -23,8 +23,6 @@ pyController上的**BACK**按键，跟主控ESP32-S3模块引脚1相连，上一
 
 ## Pin对象
 
-## Pin对象
-
 ### 构造函数
 ```python
 KEY = machine.Pin(id, mode, pull)

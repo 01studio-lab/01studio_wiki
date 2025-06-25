@@ -69,7 +69,7 @@ blob.cy()
 <br></br>
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/image.html#find-blobs
+https://www.kendryte.com/canmv/main/canmv/library/canmv/image.html#find-blobs
 
 <br></br>
 

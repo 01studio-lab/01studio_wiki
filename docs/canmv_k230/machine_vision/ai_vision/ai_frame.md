@@ -18,11 +18,11 @@ sidebar_position: 1
 
 AI视觉开发框架主要API接口有：
 
-- `PineLine` : 将sensor、display封装成固定接口，用于采集图像、画图以及结果图片显示。[点击查看详细介绍](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#pipeline)
+- `PineLine` : 将sensor、display封装成固定接口，用于采集图像、画图以及结果图片显示。[点击查看详细介绍](https://www.kendryte.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#pipeline)
 
 
-- `Ai2d` : 预处理（Preprocess）相关接口。[点击查看详细介绍](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#ai2d)
+- `Ai2d` : 预处理（Preprocess）相关接口。[点击查看详细介绍](https://www.kendryte.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#ai2d)
 
-- `AIBase` : 模型推理主要接口。[点击查看详细介绍](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#aibase)
+- `AIBase` : 模型推理主要接口。[点击查看详细介绍](https://www.kendryte.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#aibase)
 
 本章AI视觉例程均通过上述接口实现主要功能。

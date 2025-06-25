@@ -114,7 +114,7 @@ s.accept()
 <br></br>
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/micropython/usocket.html#socket
+https://www.kendryte.com/canmv/main/canmv/library/micropython/usocket.html#socket
 
 本实验中CanMV K210属于客户端，因此只用到客户端的函数即可。实验代码编写流程如下：
 

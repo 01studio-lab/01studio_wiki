@@ -69,7 +69,7 @@ blob.cy()
 
 <br></br>
 
-[官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-blobs)
+[官方文档](https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#find-blobs)
 
 <br></br>
 

@@ -91,7 +91,7 @@ Timer.deinit()
 注销定时器。
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/micropython/spec/machine.Timer.html
+https://www.kendryte.com/canmv/main/canmv/library/micropython/spec/machine.Timer.html
 
 <br></br>
 

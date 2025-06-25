@@ -37,7 +37,7 @@ image.find_circles([roi[, x_stride=2[, y_stride=1[, threshold=2000[, x_margin=10
 直接调用该函数。（大部分参数使用默认即可，**不支持压缩图像和bayer图像**）
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-circles
+https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#find-circles
 
 <br></br>
 

@@ -101,6 +101,11 @@ const config = {
             items: [
               {
               type: 'docSidebar',
+              sidebarId: 'pyCarSidebar',
+              label: 'pyCar小车',
+              },
+              {
+              type: 'docSidebar',
               sidebarId: 'pyDroneSidebar',
               label: 'pyDrone四轴飞行器',
               },

@@ -14,7 +14,7 @@ Micropython是指使用Python做各类嵌入式硬件设备编程。MicroPython�
 
 ## 硬件资源
 
-01Studio pyDrone使用乐鑫科技ESP32-S3(N8R2)主控。
+01Studio pyController使用乐鑫科技ESP32-S3(N8R2)主控。
 
 ![intro2](./img/intro/intro2.png)
 

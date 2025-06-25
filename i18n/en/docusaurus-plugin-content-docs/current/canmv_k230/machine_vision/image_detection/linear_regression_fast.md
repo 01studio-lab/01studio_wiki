@@ -30,7 +30,7 @@ Parameter Description:
 
 Call the function directly.
 
-For more usage, please read: [CanMV K230 Docs](https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#get-regression)
+For more usage, please read: [CanMV K230 Docs](https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#get-regression)
 
 
 In order to improve the processing effect, we can first convert the image into a binary (black and white) image. The method is as follows:

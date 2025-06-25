@@ -69,7 +69,7 @@ Returns the barcode type.
 <br></br>
 
 For more usage, please read the official documentation:：<br></br>
-https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-barcodes
+https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#find-barcodes
 
 <br></br>
 

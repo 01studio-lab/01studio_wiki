@@ -18,11 +18,11 @@ The advantage of this framework is that users can directly implement their own f
 
 The main API interfaces of the AI ​​visual development framework are:
 
-- `PineLine` : Encapsulate the sensor and display into a fixed interface for image acquisition, drawing, and result image display.[Click to view detailed description](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#pipeline)
+- `PineLine` : Encapsulate the sensor and display into a fixed interface for image acquisition, drawing, and result image display.[Click to view detailed description](https://www.kendryte.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#pipeline)
 
 
-- `Ai2d` : Preprocessing related interfaces. [Click to view detailed introduction](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#ai2d)
+- `Ai2d` : Preprocessing related interfaces. [Click to view detailed introduction](https://www.kendryte.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#ai2d)
 
-- `AIBase` : Main interface for model reasoning. [Click here for detailed description](https://developer.canaan-creative.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#aibase)
+- `AIBase` : Main interface for model reasoning. [Click here for detailed description](https://www.kendryte.com/k230_canmv/main/zh/example/ai/AI_Demo%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3.html#aibase)
 
 The AI ​​vision routines in this chapter all implement their main functions through the above interfaces.

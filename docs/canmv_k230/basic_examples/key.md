@@ -29,7 +29,7 @@ CanMV K230自带功能按键KEY位于开发板下图所示位置：
 
 从原理图可以看到，按键KEY的一端连接到K230的引脚21，另一端连接到GND。所以按键在没按下时候输入高电平（1），按下时候输入低电平（0）。
 
-由于K230功能多，所以大部分GPIO引脚会复用多个功能，因此CanMV K230 提供FPIOA库（Field Programmable Input and Output Array **现场可编程IO阵列**)，以便实现不同引脚功能选择。详情请参考：[FPIOA 说明](https://developer.canaan-creative.com/k230_canmv/main/zh/api/machine/K230_CanMV_FPIOA%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
+由于K230功能多，所以大部分GPIO引脚会复用多个功能，因此CanMV K230 提供FPIOA库（Field Programmable Input and Output Array **现场可编程IO阵列**)，以便实现不同引脚功能选择。详情请参考：[FPIOA 说明](https://www.kendryte.com/k230_canmv/main/zh/api/machine/K230_CanMV_FPIOA%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
 
 和前面LED一样，按键的输入检测也是用到Pin对象模块，具体如下：
 

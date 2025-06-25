@@ -52,7 +52,7 @@ print(len(p)) #Indicates the number of touch points, up to 5
 
 print(p[0].x, p[0].y) #Print the x,y coordinates of the first point
 
-For more usage, please read [Official Website](https://developer.canaan-creative.com/k230_canmv/main/zh/api/machine/K230_CanMV_TOUCH%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
+For more usage, please read [Official Website](https://www.kendryte.com/k230_canmv/main/zh/api/machine/K230_CanMV_TOUCH%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
 
 As can be seen above, the capacitive touch screen packaged with MicroPython becomes very easy to use. The programming process of this section is as follows:
 

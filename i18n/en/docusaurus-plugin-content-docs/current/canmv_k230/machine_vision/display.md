@@ -72,7 +72,7 @@ Unregister the Display module. Must be called before `MediaManager.deinit()` and
 
 <br></br>
 
-For more usage, please read:[CanMV K230 Docs](https://developer.canaan-creative.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Display%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
+For more usage, please read:[CanMV K230 Docs](https://www.kendryte.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Display%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
 
 
 After getting familiar with the usage of Display API, let's take a look at the code writing flow chart:

@@ -50,7 +50,7 @@ fm.register(pin,func,force=False)
 
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/built-in/fpioa_manager.html#fm
+https://www.kendryte.com/canmv/main/canmv/library/canmv/built-in/fpioa_manager.html#fm
 
 ## GPIO对象
 
@@ -87,7 +87,7 @@ GPIO.value([value])
 **当IO被配置为输入模式且时候参数为空时，表示获取当前IO输入电平值。**
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/maix/maix.GPIO.html
+https://www.kendryte.com/canmv/main/canmv/library/canmv/maix/maix.GPIO.html
 
 <br></br>
 

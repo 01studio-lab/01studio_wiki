@@ -52,7 +52,7 @@ Returns the QR code version number.
 <br></br>
 
 For more usage, please read the official documentation: <br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/image.html#find-qrcodes
+https://www.kendryte.com/canmv/main/canmv/library/canmv/image.html#find-qrcodes
 
 <br></br>
 

@@ -127,7 +127,7 @@ sensor.snapshot()
 使用相机拍摄一张照片，并返回 image 对象。
 
 
-更多用法请阅读: [CanMV K230官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Sensor%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
+更多用法请阅读: [CanMV K230官方文档](https://www.kendryte.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Sensor%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
 
 ## clock对象
 

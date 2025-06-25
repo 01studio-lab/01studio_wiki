@@ -100,7 +100,7 @@ i2s.play(audio)
 
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/audio.html#audio
+https://www.kendryte.com/canmv/main/canmv/library/canmv/audio.html#audio
 
 ## FFT对象
 
@@ -136,7 +136,7 @@ amp = FFT.amplitude(FFT_res)
 返回值amp: 返回一个列表，该列表存放了各个频率点的幅值
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/maix/maix.FFT.html#maix-fft
+https://www.kendryte.com/canmv/main/canmv/library/canmv/maix/maix.FFT.html#maix-fft
 
 <br></br>
 

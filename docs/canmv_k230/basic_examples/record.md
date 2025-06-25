@@ -133,7 +133,7 @@ wf.write_frames(data)
 
 - `data`:音频数据（ bytes 字节序列）
 
-更多用法请阅读[官方文档](https://developer.canaan-creative.com/k230_canmv/zh/main/zh/api/mpp/K230_CanMV_Audio%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
+更多用法请阅读[官方文档](https://www.kendryte.com/k230_canmv/zh/main/zh/api/mpp/K230_CanMV_Audio%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
 
 本节代码编程流程如下：
 

@@ -134,7 +134,7 @@ graph TD
 
 ## 参考代码
 
-### pyDrone（四轴从机）代码
+### pyDrone四轴（蓝牙从机）代码
 
 - `main.py`代码
 

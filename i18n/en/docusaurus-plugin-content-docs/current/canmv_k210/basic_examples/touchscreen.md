@@ -56,7 +56,7 @@ ts.read()
 <br></br>
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/canmv/main/canmv/library/canmv/touchscreen.html#touchscreen
+https://www.kendryte.com/canmv/main/canmv/library/canmv/touchscreen.html#touchscreen
 
 从上表可以看到，通过MicroPython封装后的电阻触摸屏使用变得非常容易，另外加入一个按键KEY作为清屏功能，本节代码编程流程如下：
 

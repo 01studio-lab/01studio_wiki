@@ -33,7 +33,7 @@ image.find_line_segments([roi[, merge_distance=0[, max_theta_difference=15]]])
 直接调用该函数。（大部分参数使用默认即可，**不支持压缩图像和bayer图像**）
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-segments
+https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#find-segments
 
 <br></br>
 

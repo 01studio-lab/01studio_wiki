@@ -70,7 +70,7 @@ UART.deinit()
 Unregister UART.
 
 For more usage, please read the official documentation：<br></br>
-https://developer.canaan-creative.com/k230_canmv/main/zh/api/machine/K230_CanMV_UART%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html
+https://www.kendryte.com/k230_canmv/main/zh/api/machine/K230_CanMV_UART%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html
 
 <br></br>
 

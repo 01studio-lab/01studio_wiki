@@ -56,7 +56,7 @@ Returns the center y position of the blob (int). You can get this value by using
 
 <br></br>
 
-For more usage, please read: [CanMV K230 Docs](https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-blobs)
+For more usage, please read: [CanMV K230 Docs](https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#find-blobs)
 
 <br></br>
 

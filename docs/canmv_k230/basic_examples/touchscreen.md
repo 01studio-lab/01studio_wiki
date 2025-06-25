@@ -60,7 +60,7 @@ print(len(p)) #表示触摸点数量，最大5个
 
 print(p[0].x, p[0].y) #打印第1个点的x,y坐标
 
-更多用法请阅读[官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/machine/K230_CanMV_TOUCH%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
+更多用法请阅读[官方文档](https://www.kendryte.com/k230_canmv/main/zh/api/machine/K230_CanMV_TOUCH%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
 
 从上表可以看到，通过MicroPython封装后的电容触摸屏使用变得非常容易，本节代码编程流程如下：
 

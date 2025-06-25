@@ -131,7 +131,7 @@ wf.read_frames(nframes)
 
 - `nframes`:读取的帧长度（声道数 × 每个采样点的采样精度 / 8 ）
 
-更多用法请阅读[官方文档](https://developer.canaan-creative.com/k230_canmv/zh/main/zh/api/mpp/K230_CanMV_Audio%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
+更多用法请阅读[官方文档](https://www.kendryte.com/k230_canmv/zh/main/zh/api/mpp/K230_CanMV_Audio%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
 
 本节代码编程流程如下：
 

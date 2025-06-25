@@ -72,7 +72,7 @@ Display.deinit()
 
 <br></br>
 
-更多用法请阅读: [CanMV K230官方文档](https://developer.canaan-creative.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Display%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
+更多用法请阅读: [CanMV K230官方文档](https://www.kendryte.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Display%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
 
 
 熟悉Display API用法后，我们来看看代码的编写流程图：

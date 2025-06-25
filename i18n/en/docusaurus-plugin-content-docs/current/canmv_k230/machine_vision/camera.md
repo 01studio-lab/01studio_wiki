@@ -133,7 +133,7 @@ sensor.snapshot()
 Take a picture and return an image object.
 
 
-For more usage, please refer to:[CanMV K230 Docs](https://developer.canaan-creative.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Sensor%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
+For more usage, please refer to:[CanMV K230 Docs](https://www.kendryte.com/k230_canmv/main/zh/api/mpp/K230_CanMV_Sensor%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)
 
 ## class clock
 

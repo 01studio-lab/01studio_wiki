@@ -34,7 +34,7 @@ image.find_edges(edge_type[, threshold])
 直接调用该函数。
 
 更多用法请阅读官方文档：<br></br>
-https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#find-edges
+https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#find-edges
 
 <br></br>
 

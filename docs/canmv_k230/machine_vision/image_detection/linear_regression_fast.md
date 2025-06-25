@@ -28,7 +28,7 @@ image.get_regression(thresholds[, invert=False[, roi[, x_stride=2[, y_stride=1[,
 
 ### 使用方法
 
-直接调用该函数。 更多用法请阅读[官方文档。](https://developer.canaan-creative.com/k230_canmv/main/zh/api/openmv/image.html#get-regression)
+直接调用该函数。 更多用法请阅读[官方文档。](https://www.kendryte.com/k230_canmv/main/zh/api/openmv/image.html#get-regression)
 
 
 为了提高处理效果，我们可以先将图像变成二值（黑白）图像。方法如下：
