@@ -30,7 +30,7 @@ graph TD
 实验名称：字符识别（OCR）
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
-说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
+说明：可以通过display="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -255,18 +255,24 @@ class OCRDetRec:
 
 
 if __name__=="__main__":
+
     # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
 
-    display_mode="lcd3_5"
-    
-    if display_mode=="hdmi":
+    display="lcd3_5"
+
+    if display=="hdmi":
+        display_mode='hdmi'
         display_size=[1920,1080]
-        
-    elif display_mode=="lcd3_5":
+
+    elif display=="lcd3_5":
+        display_mode= 'st7701'
         display_size=[800,480]
-    
-    elif display_mode=="lcd2_4":     
+
+    elif display=="lcd2_4":
+        display_mode= 'st7701'
         display_size=[640,480]
+
+    rgb888p_size=[640,360] #特殊尺寸定义
 
     # OCR检测模型路径
     ocr_det_kmodel_path="/sdcard/examples/kmodel/ocr_det_int16.kmodel"
@@ -274,7 +280,7 @@ if __name__=="__main__":
     ocr_rec_kmodel_path="/sdcard/examples/kmodel/ocr_rec_int16.kmodel"
     # 其他参数
     dict_path="/sdcard/examples/utils/dict.txt"
-    rgb888p_size=[640,360]
+
     ocr_det_input_size=[640,640]
     ocr_rec_input_size=[512,32]
     mask_threshold=0.25
@@ -282,10 +288,10 @@ if __name__=="__main__":
 
     # 初始化PipeLine，只关注传给AI的图像分辨率，显示的分辨率
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    if display_mode =="lcd2_4":         
+    if display =="lcd2_4":
         pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
-    
-    else:        
+
+    else:
         pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
     ocr=OCRDetRec(ocr_det_kmodel_path,ocr_rec_kmodel_path,det_input_size=ocr_det_input_size,rec_input_size=ocr_rec_input_size,dict_path=dict_path,mask_threshold=mask_threshold,box_threshold=box_threshold,rgb888p_size=rgb888p_size,display_size=display_size)
 
@@ -303,6 +309,7 @@ if __name__=="__main__":
         gc.collect()
 
         print(clock.fps()) #打印帧率
+
 ```
 
 这里对关键代码进行讲解：

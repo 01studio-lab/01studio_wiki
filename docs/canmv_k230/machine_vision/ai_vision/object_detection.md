@@ -36,7 +36,7 @@ graph TD
 实验名称：物体检测（基于yolov8n）
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
-说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
+说明：可以通过display="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -196,18 +196,24 @@ class ObjectDetectionApp(AIBase):
 
 
 if __name__=="__main__":
+    
     # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
 
-    display_mode="lcd3_5"
-    
-    if display_mode=="hdmi":
+    display="lcd3_5"
+
+    if display=="hdmi":
+        display_mode='hdmi'
         display_size=[1920,1080]
-        
-    elif display_mode=="lcd3_5":
+
+    elif display=="lcd3_5":
+        display_mode= 'st7701'
         display_size=[800,480]
-    
-    elif display_mode=="lcd2_4":     
+
+    elif display=="lcd2_4":
+        display_mode= 'st7701'
         display_size=[640,480]
+
+    rgb888p_size=[320,320] #特殊尺寸定义
 
     # 模型路径
     kmodel_path="/sdcard/examples/kmodel/yolov8n_320.kmodel"
@@ -216,12 +222,11 @@ if __name__=="__main__":
     confidence_threshold = 0.2
     nms_threshold = 0.2
     max_boxes_num = 50
-    rgb888p_size=[320,320]
 
     # 初始化PipeLine
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
     
-    if display_mode =="lcd2_4":         
+    if display =="lcd2_4":         
         pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
     
     else:        

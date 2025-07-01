@@ -33,7 +33,7 @@ graph TD
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
 说明：意外中断或重新采集需要将"/sdcard/examples/utils/"目录下的"features"文件夹删除。
-说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
+说明：可以通过display="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -203,29 +203,30 @@ class SelfLearningApp(AIBase):
 
 
 if __name__=="__main__":
+
     # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
 
-    display_mode="lcd3_5"
-    
-    if display_mode=="hdmi":
+    display="lcd3_5"
+
+    if display=="hdmi":
+        display_mode='hdmi'
         display_size=[1920,1080]
-        
-    elif display_mode=="lcd3_5":
+        rgb888p_size = [1920, 1080]
+
+    elif display=="lcd3_5":
+        display_mode= 'st7701'
         display_size=[800,480]
-    
-    elif display_mode=="lcd2_4":     
+        rgb888p_size = [1920, 1080]
+
+    elif display=="lcd2_4":
+        display_mode= 'st7701'
         display_size=[640,480]
+        rgb888p_size = [1280, 960] #2.4寸屏摄像头画面比例为4:3
 
     # 模型路径
     kmodel_path="/sdcard/examples/kmodel/recognition.kmodel"
     database_path="/sdcard/examples/utils/features/" #重复运行需要将这个文件夹删除
     # 其它参数设置
-
-    if display_mode=="lcd2_4":#2.4寸屏画面比例为4:3
-        rgb888p_size = [1280, 960] 
-        
-    else:
-        rgb888p_size = [1920, 1080]
 
     model_input_size=[224,224]
 
@@ -236,12 +237,8 @@ if __name__=="__main__":
 
     # 初始化PipeLine
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    
-    if display_mode =="lcd2_4":         
-        pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
-    
-    else:        
-        pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
+
+    pl.create(Sensor(width=rgb888p_size[0], height=rgb888p_size[1]))  # 创建PipeLine实例
 
     # 初始化自学习实例
     sl=SelfLearningApp(kmodel_path,model_input_size=model_input_size,labels=labels,top_k=top_k,threshold=threshold,database_path=database_path,rgb888p_size=rgb888p_size,display_size=display_size,debug_mode=0)
@@ -269,6 +266,7 @@ if __name__=="__main__":
         gc.collect()
 
         print(clock.fps()) #打印帧率
+
 ```
 
 这里对关键代码进行讲解：

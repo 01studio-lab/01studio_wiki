@@ -18,4 +18,4 @@ Thonny Python IDE是一款开源软件，以极简方式设计，对MicroPython�
 
 ![ide](./img/ide/ide2.png)
 
-至此，Thonny安装完成。关于如何在Thonny上使用pyDrone，我们在接下来的章节将详细讲解。
+至此，Thonny安装完成。关于如何在Thonny上使用pyController，我们在接下来的章节将详细讲解。

@@ -30,7 +30,7 @@ graph TD
 实验名称：跌倒检测
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
-说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
+说明：可以通过display="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -133,27 +133,27 @@ if __name__ == "__main__":
 
     # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
 
-    display_mode="lcd3_5"
-    
-    if display_mode=="hdmi":
+    display="lcd3_5"
+
+    if display=="hdmi":
+        display_mode='hdmi'
         display_size=[1920,1080]
-        
-    elif display_mode=="lcd3_5":
+        rgb888p_size = [1920, 1080]
+
+    elif display=="lcd3_5":
+        display_mode= 'st7701'
         display_size=[800,480]
-    
-    elif display_mode=="lcd2_4":     
+        rgb888p_size = [1920, 1080]
+
+    elif display=="lcd2_4":
+        display_mode= 'st7701'
         display_size=[640,480]
+        rgb888p_size = [1280, 960] #2.4寸屏摄像头画面比例为4:3
 
     # 设置模型路径和其他参数
     kmodel_path = "/sdcard/examples/kmodel/yolov5n-falldown.kmodel"
     confidence_threshold = 0.3
     nms_threshold = 0.45
-
-    if display_mode=="lcd2_4":#2.4寸屏画面比例为4:3
-        rgb888p_size = [1280, 960] 
-        
-    else:
-        rgb888p_size = [1920, 1080]
 
     labels = ["Fall","NoFall"]  # 模型输出类别名称
     anchors = [10, 13, 16, 30, 33, 23, 30, 61, 62, 45, 59, 119, 116, 90, 156, 198, 373, 326]  # anchor设置
@@ -161,12 +161,8 @@ if __name__ == "__main__":
     # 初始化PipeLine，用于图像处理流程
     pl = PipeLine(rgb888p_size=rgb888p_size, display_size=display_size, display_mode=display_mode)
 
-    if display_mode =="lcd2_4":         
-        pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
-    
-    else:        
-        pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
-        
+    pl.create(Sensor(width=rgb888p_size[0], height=rgb888p_size[1]))  # 创建PipeLine实例
+
     # 初始化自定义跌倒检测实例
     fall_det = FallDetectionApp(kmodel_path, model_input_size=[640, 640], labels=labels, anchors=anchors, confidence_threshold=confidence_threshold, nms_threshold=nms_threshold, nms_option=False, strides=[8,16,32], rgb888p_size=rgb888p_size, display_size=display_size, debug_mode=0)
     fall_det.config_preprocess()
@@ -185,22 +181,34 @@ if __name__ == "__main__":
         gc.collect()                                # 垃圾回收
 
         print(clock.fps()) #打印帧率
+
 ```
 
 这里对关键代码进行讲解：
 
 - 设置显示方式：
-    通过改变display_mode的参数选择 `hdmi` 或 `lcd`（3.5寸mipi显示屏）显示图像。
+    通过改变`display`的参数选择 `hdmi` 或 `lcd`（3.5寸mipi显示屏）显示图像。
 ```python
     ...
 
-    # 显示模式，默认"hdmi",可以选择"hdmi"和"lcd"
-    display_mode="lcd"
-    if display_mode=="hdmi":
-        display_size=[1920,1080]
-    else:
-        display_size=[800,480]
+    # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
 
+    display="lcd3_5"
+
+    if display=="hdmi":
+        display_mode='hdmi'
+        display_size=[1920,1080]
+        rgb888p_size = [1920, 1080]
+
+    elif display=="lcd3_5":
+        display_mode= 'st7701'
+        display_size=[800,480]
+        rgb888p_size = [1920, 1080]
+
+    elif display=="lcd2_4":
+        display_mode= 'st7701'
+        display_size=[640,480]
+        rgb888p_size = [1280, 960] #2.4寸屏摄像头画面比例为4:3
     ...    
 ```
 

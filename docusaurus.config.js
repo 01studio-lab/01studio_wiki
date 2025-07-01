@@ -114,6 +114,11 @@ const config = {
               sidebarId: 'pyControllerSidebar',
               label: 'pyController遥控手柄',
               },
+              /*{
+              type: 'docSidebar',
+              sidebarId: 'pyClockSidebar',
+              label: 'pyClock天气时钟',
+              },*/
             ],
           },
           {

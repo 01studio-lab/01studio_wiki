@@ -62,15 +62,16 @@ from media.sensor import * #导入sensor模块，使用摄像头相关接口
 from media.display import * #导入display模块，使用display相关接口
 from media.media import * #导入media模块，使用meida相关接口
 
-'''
+
 #3.5寸mipi屏分辨率定义
 lcd_width = 800
 lcd_height = 480
-'''
 
+'''
 #2.4寸mipi屏分辨率定义
 lcd_width = 640
 lcd_height = 480
+'''
 
 sensor = Sensor(width=1280, height=960) #构建摄像头对象，将摄像头长宽设置为4:3
 sensor.reset() #复位和初始化摄像头

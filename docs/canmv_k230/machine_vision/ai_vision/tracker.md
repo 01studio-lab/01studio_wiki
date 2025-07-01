@@ -30,7 +30,7 @@ graph TD
 实验名称：目标跟踪
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
-说明：可以通过display_mode="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
+说明：可以通过display="xxx"参数选择"hdmi"、"lcd3_5"(3.5寸mipi屏)或"lcd2_4"(2.4寸mipi屏)显示方式
 '''
 
 from libs.PipeLine import PipeLine, ScopedTiming
@@ -392,18 +392,24 @@ class NanoTracker:
 
 
 if __name__=="__main__":
+
     # 显示模式，可以选择"hdmi"、"lcd3_5"(3.5寸mipi屏)和"lcd2_4"(2.4寸mipi屏)
 
-    display_mode="lcd3_5"
-    
-    if display_mode=="hdmi":
+    display="lcd3_5"
+
+    if display=="hdmi":
+        display_mode='hdmi'
         display_size=[1920,1080]
-        
-    elif display_mode=="lcd3_5":
+
+    elif display=="lcd3_5":
+        display_mode= 'st7701'
         display_size=[800,480]
-    
-    elif display_mode=="lcd2_4":     
+
+    elif display=="lcd2_4":
+        display_mode= 'st7701'
         display_size=[640,480]
+
+    rgb888p_size=[1280,720] #特殊尺寸定义
 
     # 跟踪模板模型路径
     track_crop_kmodel_path="/sdcard/examples/kmodel/cropped_test127.kmodel"
@@ -412,17 +418,17 @@ if __name__=="__main__":
     # 跟踪模型路径
     tracker_kmodel_path="/sdcard/examples/kmodel/nanotracker_head_calib_k230.kmodel"
     # 其他参数
-    rgb888p_size=[1280,720]
+
     track_crop_input_size=[127,127]
     track_src_input_size=[255,255]
     threshold=0.1
 
     # 初始化PipeLine，只关注传给AI的图像分辨率，显示的分辨率
     pl=PipeLine(rgb888p_size=rgb888p_size,display_size=display_size,display_mode=display_mode)
-    if display_mode =="lcd2_4":         
+    if display =="lcd2_4":
         pl.create(Sensor(width=1280, height=960))  # 创建PipeLine实例，画面4:3
-    
-    else:        
+
+    else:
         pl.create(Sensor(width=1920, height=1080))  # 创建PipeLine实例
     track=NanoTracker(track_crop_kmodel_path,track_src_kmodel_path,tracker_kmodel_path,crop_input_size=track_crop_input_size,src_input_size=track_src_input_size,threshold=threshold,rgb888p_size=rgb888p_size,display_size=display_size)
 
@@ -440,30 +446,7 @@ if __name__=="__main__":
         gc.collect()
 
         print(clock.fps()) #打印帧率
-```
 
-这里对关键代码进行讲解：
-
-- 主函数代码：
-
-可以看到使用默认配置后只使用了4行代码便实现了**获取当前帧图像、AI推理、绘制结果、显示结果** 的识别流程。
-
-代码中 `output`为检测结果。
-
-```python
-    ...
-    while True:
-
-        clock.tick()
-
-        img=pl.get_frame()              # 获取当前帧
-        output=track.run(img)           # 推理当前帧
-        track.draw_result(pl,output)    # 绘制当前帧推理结果
-        print(output)                   # 打印当前结果
-        pl.show_image()                 # 展示推理结果
-        gc.collect()
-
-        print(clock.fps()) #打印帧率
     ...
 ```
 
