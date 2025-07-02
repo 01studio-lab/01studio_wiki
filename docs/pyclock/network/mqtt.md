@@ -181,6 +181,7 @@ if WIFI_Connect():
     #开启RTOS定时器，编号为-1,周期1000ms，执行socket通信接收任务
     tim = Timer(-1)
     tim.init(period=1000, mode=Timer.PERIODIC,callback=MQTT_Send)
+
 ```
 
 ### 订阅者 subscribe
@@ -260,13 +261,14 @@ if WIFI_Connect():
     #开启RTOS定时器，编号为1,周期300ms，执行socket通信接收任务
     tim = Timer(1)
     tim.init(period=300, mode=Timer.PERIODIC,callback=MQTT_Rev)
+
 ```
 
 ## 实验结果
 
 ### 发布者测试
 
-电脑打开 **01Studio pyCar资料包/01-开发工具/通讯猫MQTT助手** 下的通讯猫软件，保证电脑是连接到互联网的：
+电脑打开 **开发板资料包/01-开发工具/通讯猫MQTT助手** 下的通讯猫软件，保证电脑是连接到互联网的：
 
 ![mqtt5](./img/mqtt/mqtt5.png)
 

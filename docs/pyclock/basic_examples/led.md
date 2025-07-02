@@ -5,28 +5,17 @@ sidebar_position: 2
 # 点亮第1个LED
 
 ## 前言
-相信大部分人开始学习嵌入式单片机编程都会从点亮LED开始，基于K230平台的MicroPython的学习也不例外，通过点亮第一个LED能让你对编译环境和程序架构有一定的认识，为以后的学习和更大型的程序打下基础，增加信心。
+相信大部分人开始学习嵌入式单片机编程都会从点亮LED开始，基于MicroPython的pyClock平台学习也不例外，通过点亮第一个LED能让你对编译环境和程序架构有一定的认识，为以后的学习和更大型的程序打下基础，增加信心。
 
 ## 实验目的
 学习LED的点亮，点亮LED（蓝灯）。
 
 ## 实验讲解
 
-CanMV K230有一个跟GPIO连接可控制的LED灯。
-
-- CanMV K230
+pyClock上有1个LED（蓝色），跟主控ESP32-C3模块引脚2相连，通过输出高电平方式点亮。
 
 ![led](./img/led/led1.png)
 
-- CanMV K230 mini
-
-![led](./img/led/led1_1.png)
-
-其连接到CanMV K230的IO引脚如下（可以看开发板原理图），LED蓝灯对应的GPIO为IO52，从电路可以看到当IO52为高电平时，蓝灯被点亮。
-
-![led](./img/led/led2.png)
-
-由于K230功能多，所以大部分GPIO引脚会复用多个功能，因此CanMV K230 提供FPIOA库（Field Programmable Input and Output Array **现场可编程IO阵列**)，以便实现不同引脚功能选择。详情请参考：[FPIOA 说明](https://www.kendryte.com/k230_canmv/main/zh/api/machine/K230_CanMV_FPIOA%E6%A8%A1%E5%9D%97API%E6%89%8B%E5%86%8C.html#)。
 
 控制LED使用machine模块中的Pin对象，使用说明如下：
 
@@ -44,7 +33,7 @@ LED = Pin(id, mode, pull)
 
 Pin位于machine模块下，直接import使用:
 
-- `id` ：芯片引脚编号。如：1、2、52。
+- `id` ：芯片引脚编号。如：42、46。
 - `mode` ：输入/输出模式。
     - `Pin.IN` : 输入模式；
     - `Pin.OUT` : 输出模式；   
@@ -98,7 +87,7 @@ https://docs.micropython.org/en/latest/library/machine.Pin.html#machine-pin
 
 ```mermaid
 graph TD
-    导入Pin模块 --> 配置引脚功能为普通IO --> GPIO52输出高电平点亮LED蓝灯;
+    导入Pin模块 --> 构造LED对象 --> GPIO2输出高电平点亮LED蓝灯;
 ```
 
 ## 参考代码
@@ -107,40 +96,34 @@ graph TD
 '''
 实验名称：点亮LED蓝灯
 版本：v1.0
+日期：2022.6
 作者：01Studio
-实验平台：01Studio CanMV K230
-教程：wiki.01studio.cc
+平台：pyClock天气时钟
 '''
 
 from machine import Pin #导入Pin模块
-from machine import FPIOA
-import time
 
-#将GPIO52配置为普通GPIO
-fpioa = FPIOA()
-fpioa.set_function(52,FPIOA.GPIO52)
-
-LED=Pin(52,Pin.OUT) #构建led对象，GPIO52,输出
-LED.value(1) #点亮LED，也可以使用led.on()
+led=Pin(2,Pin.OUT) #构建led对象，GPIO46,输出
+led.value(1) #点亮LED，也可以使用led.on()
 
 while True:
+
     pass
+
 ```
 
 ## 实验结果
 
-连接开发板后在CanMV K230 IDE中运行上述代码:
+连接开发板后在Thonny IDE中运行上述代码:
 
-![led](./img/led/led3.png)
+![led](./img/led/led2.png)
 
 可以看到LED蓝灯被点亮。
 
-- CanMV K230
+![led](./img/led/led3.png)
 
-![led](./img/led/led1.png)
-
-- CanMV K230 mini
-
-![led](./img/led/led1_1.png)
+:::tip 提示
+ESP32C3使用USB REPL时候需要注意的是代码运行后不能再次点运行，需要先点击“运行 – 中断执行”才可再次运行。否则USB会挂掉，需要重新上电连接。
+:::
 
 从第一个实验我们可以看到，使用MicroPython来开发关键是要学会构造函数和其使用方法，便可完成对相关对象的操作，在强大的模块函数支持下，实验只用了简单的两行代码便实现了点亮LED灯。

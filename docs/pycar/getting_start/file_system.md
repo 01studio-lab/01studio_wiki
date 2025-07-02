@@ -18,6 +18,6 @@ pyCar里面内置了文件系统，可以简单理解成上电后运行的python
 
 ![file_system1](./img/file_system/file_system3.png)
 
-可以看到pyDrone的总空间是4M（固件占掉了2M）。也就是可以存放总大小为2的py代码、数据文件或图片文件。
+可以看到pyCar的总空间是4M（固件占掉了2M）。也就是可以存放总大小为2的py代码、数据文件或图片文件。
 
 ![file_system1](./img/file_system/file_system4.png)
