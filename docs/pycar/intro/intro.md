@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ![intro1](./img/intro/intro1.png)
 
-pyCar是由01Studio(01科技)发起的MicroPython开源小车项目。
+pyCar是由01Studio(01科技)发起的MicroPython开源小车项目。[点击购买>>](https://item.taobao.com/item.htm?id=663109305555)
 
 Micropython是指使用Python做各类嵌入式硬件设备编程。MicroPython发展势头强劲，01Studio一直致力于Python嵌入式编程，特此推出pyDrone开源项目，旨在让MicroPython变得更加流行。使用MicroPython，你可以轻松地实现小车的前进、后台、巡线、避障、红外遥控，WiFi蓝牙遥控等功能。
 

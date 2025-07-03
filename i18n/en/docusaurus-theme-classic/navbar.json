@@ -11,10 +11,6 @@
     "message": "CanMV K210 Tutorial",
     "description": "Navbar item with label CanMV K210教程"
   },
-  "item.label.CanMV K230教程（新）": {
-    "message": "CanMV K230 Tutorial（New）",
-    "description": "Navbar item with label CanMV K230教程（新）"
-  },
   "item.label.论坛": {
     "message": "Forum",
     "description": "Navbar item with label 论坛"
@@ -54,5 +50,9 @@
   "item.label.pyCar小车": {
     "message": "pyCar",
     "description": "Navbar item with label pyCar小车"
+  },
+  "item.label.pyClock天气时钟": {
+    "message": "pyClock",
+    "description": "Navbar item with label pyClock天气时钟"
   }
 }

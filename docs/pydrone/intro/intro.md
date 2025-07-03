@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ![intro1](./img/intro/intro1.gif)
 
-pyDrone是由01Studio(01科技)发起的MicroPython开源四轴飞行器项目。
+pyDrone是由01Studio(01科技)发起的MicroPython开源四轴飞行器项目。[点击购买>>](https://item.taobao.com/item.htm?id=678913113280)
 
 Micropython是指使用Python做各类嵌入式硬件设备编程。MicroPython发展势头强劲，01Studio一直致力于Python嵌入式编程，特此推出pyDrone开源项目，旨在让MicroPython变得更加流行。使用MicroPython，你可以轻松地实现四轴飞行器的起飞、降落、悬停、移动、自转等各种姿态和动作。
 
