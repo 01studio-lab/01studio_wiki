@@ -234,4 +234,12 @@ while True:
 
 ![uart](./img/uart/uart8_1.png)
 
+## 跟其它单片机开发板串口接线
+
+先保证其它单片机开发板的串口电平是3.3V。常见的STM32、ESP32、Arduino和树莓派等都是3.3V IO电平。接线需要共地（GND连接在一起）。RX和TX交叉接线。**3.3V引脚可以不接。**
+
+![uart](./img/uart/mcu.png)
+
+
+
 
