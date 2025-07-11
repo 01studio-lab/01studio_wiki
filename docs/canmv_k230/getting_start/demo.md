@@ -38,6 +38,9 @@ fpioa.set_function(52,FPIOA.GPIO52)
 
 LED=Pin(52,Pin.OUT) #构建led对象，GPIO52,输出
 LED.value(1) #点亮LED，也可以使用led.on()
+
+while True:
+    pass
 ```
 
 ![demo2](./img/demo/demo2.png)

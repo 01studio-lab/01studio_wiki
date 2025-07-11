@@ -204,6 +204,39 @@ CanMV K230 mini散热扇电源线接到下图所示排针，可以选择使用5V
 
 ![module](./img/module/fpc2.png)
 
+### GC2093（可调焦）
+
+可以通过手动旋转镜头调整焦距，实现不同距离拍照时更好的清晰度。[**点击购买>>**](https://item.taobao.com/item.htm?id=947782638904)
+
+![module](./img/module/gc2093_2_1.png)
+
+![module](./img/module/gc2093_2_4.png)
+
+
+#### 产品参数
+
+|  产品参数 |
+|  :---:  | ---  |
+| 感光芯片  | GC2093 |
+| 像素 | 1920X1080（K230 AI应用最大支持1080P）|
+| 镜头  | 可手动调焦 |
+| 视场角  | 100° 无畸变 | 
+| 接口  | 22P-0.5mm FPC |
+
+|  外观规格 |
+|  :---:  | ---  |
+| 总长  | 10cm |
+
+#### 使用说明
+
+CanMV K230可以通过CSI0、CSI1接口外接此摄像头。[多路摄像头接口使用教程>>](../machine_vision/camera.md#多路摄像头接口使用)
+
+![module](./img/module/gc2093_2_2.png)
+
+CanMV K230 mini可以通过CSI0接口外接此摄像头，教程和代码一样。
+
+![module](./img/module/gc2093_2_3.png)
+
 ### OV5647
 
 [**点击购买>>**](https://item.taobao.com/item.htm?id=833993249110)

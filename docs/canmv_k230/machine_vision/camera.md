@@ -222,6 +222,7 @@ while True:
 
 01科技 CanMV K230除了CSI2接口标配的GC2093（60FPS）摄像头外，还可以通过CSI0、CSI1接口外接摄像头。外接摄像头目前支持型号:
 
+- GC2093（1080P 60FPS）。10cm长度。可手动调焦镜头（100°无畸变） [**点击购买>>**](https://item.taobao.com/item.htm?id=947782638904)
 - OV5647（1080P 30FPS）。6cm/15cm/30cm 3款长度可选。 [**点击购买>>**](https://item.taobao.com/item.htm?id=833993249110)
 
 **CanMV K230 支持CSI0（2lane）和CSI1(2lane)两路扩展。**
