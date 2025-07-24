@@ -1,0 +1,8 @@
+{
+  "label": "二维舵机云台",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "CanMV K230二维舵机云台应用"
+  }
+}

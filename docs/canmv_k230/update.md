@@ -1,8 +1,12 @@
 ---
-sidebar_position: 20
+sidebar_position: 24
 ---
 
 # 更新说明
+
+## 2025-7-23
+
+- 新增 [**二维舵机云台**](./sensor_module/gimbal/intro.md) 应用。含云台组装、舵机控制、PID算法、人脸追踪等教程。
 
 ## 2025-7-1
 

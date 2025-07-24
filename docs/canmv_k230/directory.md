@@ -25,6 +25,7 @@ sidebar_position: 1
     - [REPL串口交互调试](./getting_start/repl.md)
     - [文件系统](./getting_start/file_system.md)
     - [代码离线运行](./getting_start/run_offline.md)
+    - [供电方式](./getting_start/power_supply.md)
 
 - **基础实验**
 
@@ -102,6 +103,12 @@ sidebar_position: 1
     - [继电器](./sensor_module/relay.md) 
     - [舵机](./sensor_module/servo.md) 
     - [多路舵机/电机模块](./sensor_module/pyMotors.md) 
+    - **二维舵机云台**
+        - [云台介绍和安装](./sensor_module/gimbal/intro.md) 
+        - [云台舵机控制](./sensor_module/gimbal/servo.md)
+        - [PID控制原理](./sensor_module/gimbal/pid.md)   
+        - [人脸追踪](./sensor_module/gimbal/face_tracking.md)      
+        - [色块追踪](./sensor_module/gimbal/color_tracking.md)  
 
 - [**社区用户开源项目分享**](./diy.md)
 

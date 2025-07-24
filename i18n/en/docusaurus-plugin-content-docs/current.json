@@ -338,5 +338,13 @@
   "sidebar.pyClockSidebar.category.天气时钟综合实验.link.generated-index.description": {
     "message": "手柄综合应用",
     "description": "The generated-index page description for category 天气时钟综合实验 in sidebar pyClockSidebar"
+  },
+  "sidebar.newSidebar.category.二维舵机云台": {
+    "message": "2D Servo Gimbal",
+    "description": "The label for category 二维舵机云台 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.二维舵机云台.link.generated-index.description": {
+    "message": "CanMV K230二维舵机云台应用",
+    "description": "The generated-index page description for category 二维舵机云台 in sidebar newSidebar"
   }
 }
