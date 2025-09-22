@@ -54,5 +54,9 @@
   "item.label.pyClock天气时钟": {
     "message": "pyClock",
     "description": "Navbar item with label pyClock天气时钟"
+  },
+  "item.label.在线模型训练": {
+    "message": "Online model training",
+    "description": "Navbar item with label 在线模型训练"
   }
 }
