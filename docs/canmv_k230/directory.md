@@ -89,7 +89,7 @@ sidebar_position: 1
         - [物体检测（YOLOv8n）](./machine_vision/ai_vision/object_detection.md) 
         - [目标跟踪](./machine_vision/ai_vision/tracker.md) 
         - [自分类学习](./machine_vision/ai_vision/self_learning.md) 
-        - [模型训练](./machine_vision/train.md)
+        - [在线模型训练](./machine_vision/train.md)
 
 - **网络应用**
 

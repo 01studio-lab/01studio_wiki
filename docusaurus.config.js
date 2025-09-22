@@ -122,6 +122,11 @@ const config = {
             ],
           },
           {
+            href: 'https://ai.01studio.cc',
+            label: '在线模型训练',
+            position: 'right',
+          },
+          {
             href: 'https://www.01studio.cc',
             label: '01官网',
             position: 'right',

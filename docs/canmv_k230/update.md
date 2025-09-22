@@ -4,6 +4,13 @@ sidebar_position: 24
 
 # 更新说明
 
+## 2025-9-23
+
+- 01Studio在线训练平台发布
+- 新增 **机器视觉** ：
+
+    - [在线模型训练](./machine_vision/train.md) 
+
 ## 2025-7-23
 
 - 新增 [**二维舵机云台**](./sensor_module/gimbal/intro.md) 应用。含云台组装、舵机控制、PID算法、人脸追踪等教程。
@@ -13,10 +20,6 @@ sidebar_position: 24
 - AI视觉代码适配 **v1.3** 版本镜像 
 
 ## 2025-06-13
-
-- 新增 **机器视觉** ：
-
-    - [模型训练](./machine_vision/train.md) 
 
 - 新增 [社区用户开源项目分享](./diy.md)
 
