@@ -23,7 +23,7 @@ PWM（脉冲宽度调制）就是一个特定信号输出，主要用于输出�
 
 ### 构造函数
 ```python
-pwm = machine.PWM(channel, freq, duty, enable=False)
+pwm = machine.PWM(channel, freq, duty)
 ```
 构建PWM对象，PWM对象位于machine模块下。
 
@@ -36,7 +36,6 @@ pwm = machine.PWM(channel, freq, duty, enable=False)
     
 - `freq` ：PWM频率，单位：Hz, 
 - `duty` ：PWM占空比，即高电平占正个周期的百分比，取值范围：0-100, 默认50;
-- `enable` ：PWM通道输出使能，可选参数，默认False
 
 ### 使用方法
 ```python
@@ -83,7 +82,7 @@ graph TD
 ```python
 '''
 实验名称：PWM
-版本：v1.0
+版本：v1.1
 作者：01Studio
 实验平台：01Studio CanMV K230
 说明：通过不同频率的PWM信号输出，驱动无源蜂鸣器发出不同频率的声音。
@@ -99,7 +98,7 @@ fpioa = FPIOA()
 fpioa.set_function(42,FPIOA.PWM0)
 
 #构建蜂鸣器PWM对象，通道0，频率为200Hz，占空比为50%，默认使能输出
-Beep = PWM(0,200, 50, enable=True) # 在同一语句下创建和配置PWM,占空比50%
+Beep = PWM(0, freq=200, duty=50) # 在同一语句下创建和配置PWM,占空比50%
 
 #蜂鸣器发出频率200Hz响声
 Beep.freq(200)

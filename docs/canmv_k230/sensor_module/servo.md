@@ -50,9 +50,6 @@ CanMV库并没有集成Servo模块，但从上面可以看到上面是通过PWM�
 
 代码编程流程图如下：
 
-
-
-
 ```mermaid
 graph TD
     导入PWM模块 --> 初始化相关模块 --> 定义舵机驱动函数 --> 控制舵机旋转至不同角度;
@@ -67,6 +64,7 @@ graph TD
 实验名称：舵机控制
 实验平台：01Studio CanMV K230
 说明：通过编程控制舵机旋转到不同角度
+版本：v1.1
 '''
 
 from machine import Pin, PWM
@@ -78,8 +76,8 @@ import time
 fpioa = FPIOA()
 fpioa.set_function(42,FPIOA.PWM0)
 
-#构建PWM0对象，通道0，频率为50Hz，占空比为0，默认使能输出
-S1 = PWM(0, 50, 0, enable=True) # 在同一语句下创建和配置PWM
+#构建PWM0对象，通道0，频率为50Hz，占空比为0ns，默认使能输出
+S1 = PWM(0, freq=50, duty_ns=0) # 在同一语句下创建和配置PWM
 
 '''
 #其它PWM引脚配置参考代码
@@ -88,19 +86,19 @@ S1 = PWM(0, 50, 0, enable=True) # 在同一语句下创建和配置PWM
 fpioa = FPIOA()
 fpioa.set_function(43,FPIOA.PWM1)
 
-#构建PWM1对象，通道1，频率为50Hz，占空比为0，默认使能输出
-S1 = PWM(1, 50, 0, enable=True) # 在同一语句下创建和配置PWM
+#构建PWM1对象，通道1，频率为50Hz，占空比为0ns，默认使能输出
+S2 = PWM(1, freq=50, duty_ns=0) # 在同一语句下创建和配置PWM
 '''
 
 '''
 说明：舵机控制函数
 功能：180度舵机：angle:-90至90 表示相应的角度
      360连续旋转度舵机：angle:-90至90 旋转方向和速度值。
-    【duty】占空比值：0-100
+    【duty_ns】占空比值：0.5ms-2.5ms
 '''
-
 def Servo(servo,angle):
-    servo.duty((angle+90)/180*10+2.5)
+    
+    servo.duty_ns(int((angle+90)/180*2000000+500000))
 
 
 while True:

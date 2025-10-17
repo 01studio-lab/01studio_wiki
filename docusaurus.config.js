@@ -123,7 +123,7 @@ const config = {
           },
           {
             href: 'https://ai.01studio.cc',
-            label: '在线模型训练',
+            label: 'AI模型训练',
             position: 'right',
           },
           {
@@ -188,12 +188,7 @@ const config = {
             title: '开发者资源',
             items: [
               {
-                label: '教程',
-                to: '/docs/canmv_k210',
-                
-              },
-              {
-                label: '论坛',
+                label: '技术论坛',
                 href: 'https://forum.01studio.cc',
               },
               {
