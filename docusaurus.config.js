@@ -80,19 +80,18 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'CanMV K210教程',
-          },                
           {
             type: 'docSidebar',
             sidebarId: 'newSidebar',
             position: 'left',
             label: 'CanMV K230教程',
           },
+          {
+            type: 'docSidebar',
+            sidebarId: 'tutorialSidebar',
+            position: 'left',
+            label: 'CanMV K210教程',
+          },                
           {
             type: 'dropdown',
             label: '开源项目教程',

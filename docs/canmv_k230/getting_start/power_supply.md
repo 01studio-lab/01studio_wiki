@@ -39,4 +39,8 @@ CanMV K230 mini排针引脚1为5V，引脚2为GND。
 
 ![power_supply](./img/power_supply/power_supply4.png)
 
+- CM-K230核心板套件
+
+![power_supply](./img/power_supply/power_supply5.png)
+
 

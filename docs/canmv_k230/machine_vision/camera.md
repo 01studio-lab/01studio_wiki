@@ -183,7 +183,7 @@ sensor.set_framesize(Sensor.FHD) #设置帧大小FHD(1920x1080)，默认通道0
 sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 
 #使用IDE缓冲区输出图像,显示尺寸和sensor配置一致。
-Display.init(Display.VIRT, sensor.width(), sensor.height())
+Display.init(Display.VIRT, sensor.width(), sensor.height(), to_ide=True)
 
 MediaManager.init() #初始化media资源管理器
 
@@ -206,6 +206,11 @@ while True:
 ```
 
 ## 实验结果
+
+:::tip 提示
+CanMV K230 和 CanMV K230 mini板载摄像头默认接在CSI2接口（上面代码默认接口）。如果使用CM-K230核心板套件，请将也摄像头接在CSI2接口。
+![camera2](./img/camera/camera7.png)
+:::
 
 点击运行代码，可以看到在右边显示摄像头实时拍摄情况，下方则显示RGB颜色直方图。
 
@@ -231,15 +236,18 @@ while True:
 **CanMV K230 mini 支持CSI0（4lane，兼容2lane）1路扩展。**
 ![camera](./img/camera/camera5.png)
 
-使用方法很简单，只需要在上面示例代码基础上在初始化时候配置`id`参数即可。
+**CM-K230核心板套件 CSI0（2lane）和CSI1(2lane)两路扩展。**
+![camera](./img/camera/camera8.png)
 
-# CSI0接口
+使用方法很简单，只需要在上面示例代码基础上在初始化时候配置`id`参数即可，id默认值为2。
+
+### CSI0接口
 ```python
     ...
     sensor = Sensor(id=0) #id=0表示使用CSI0接口上的摄像头
     ...
 ```
-# CSI1接口
+### CSI1接口
 
 ```python
     ...

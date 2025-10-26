@@ -63,6 +63,11 @@ while True:
 
 ![demo6](./img/demo/demo6_1.png)
 
+- CM-K230核心板套件
+
+![demo6](./img/demo/demo6_2.png)
+
+
 
 点击运行按钮旁边的`串口终端`窗口，这里可以看到代码调试信息。
 

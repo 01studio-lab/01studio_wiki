@@ -9,7 +9,7 @@ sidebar_position: 1
 
 - **CanMV K230套件介绍**
 
-    - [CanMV K230](./intro/canmv_k230.md)
+    - [产品参数](./intro/canmv_k230.md)
     - [配件安装使用](./intro/module.md)
     - [支架安装](./intro/bracket.md)
 

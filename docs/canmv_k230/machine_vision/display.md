@@ -110,7 +110,7 @@ sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 ## 图像3种不同显示方式（修改注释实现）
 #################################
 
-Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+Display.init(Display.VIRT, sensor.width(), sensor.height(), to_ide=True) #通过IDE缓冲区显示图像
 #Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
 #Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
 
@@ -148,7 +148,7 @@ while True:
     ## 图像3种不同显示方式（修改注释实现）
     #################################
 
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+    #Display.init(Display.VIRT, sensor.width(), sensor.height(), to_ide=True) #通过IDE缓冲区显示图像
     Display.init(Display.LT9611 ,to_ide=True) #通过HDMI显示图像
     #Display.init(Display.ST7701 ,to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
 
@@ -179,7 +179,7 @@ sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 ## 图像3种不同显示方式（修改注释实现）
 #################################
 
-#Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+#Display.init(Display.VIRT, sensor.width(), sensor.height(), to_ide=True) #通过IDE缓冲区显示图像
 Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
 #Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
 
@@ -227,7 +227,7 @@ while True:
     ## 图像3种不同显示方式（修改注释实现）
     #################################
 
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+    #Display.init(Display.VIRT, sensor.width(), sensor.height(), to_ide=True) #通过IDE缓冲区显示图像
     #Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
     Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
 
@@ -256,7 +256,7 @@ sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 ## 图像3种不同显示方式（修改注释实现）
 #################################
 
-#Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+#Display.init(Display.VIRT, sensor.width(), sensor.height(), to_ide=True) #通过IDE缓冲区显示图像
 #Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
 Display.init(Display.ST7701, to_ide=True) #通过01Studio 3.5寸mipi显示屏显示图像
 
@@ -314,7 +314,7 @@ while True:
     ## 图像3种不同显示方式（修改注释实现）
     #################################
 
-    #Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+    #Display.init(Display.VIRT, sensor.width(), sensor.height(), to_ide=True) #通过IDE缓冲区显示图像
     #Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
     Display.init(Display.ST7701, width=640, height=480, to_ide=True) #ST7701默认分辨率为800x480,使用2.4寸需改为640x480,否则无法显示
 
@@ -343,7 +343,7 @@ sensor.set_pixformat(Sensor.RGB565) #设置输出图像格式，默认通道0
 ## 图像3种不同显示方式（修改注释实现）
 #################################
 
-#Display.init(Display.VIRT, sensor.width(), sensor.height()) #通过IDE缓冲区显示图像
+#Display.init(Display.VIRT, sensor.width(), sensor.height(), to_ide=True) #通过IDE缓冲区显示图像
 #Display.init(Display.LT9611, to_ide=True) #通过HDMI显示图像
 Display.init(Display.ST7701, width=640, height=480, to_ide=True) #ST7701默认分辨率为800x480,使用2.4寸需改为640x480,否则无法显示
 
