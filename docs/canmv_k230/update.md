@@ -4,6 +4,12 @@ sidebar_position: 24
 
 # 更新说明
 
+## 2025-11-4
+
+- 新增 **机器视觉**
+
+    - [cv_lite图像处理](./machine_vision/cv_lite/intro.md)
+
 ## 2025-10-27
 
 - 新增 **产品参数**

@@ -50,5 +50,9 @@
   "link.item.label.核桃派": {
     "message": "WalnutPi",
     "description": "The label of footer link with label=核桃派 linking to https://www.walnutpi.com"
+  },
+  "link.item.label.技术论坛": {
+    "message": "技术论坛",
+    "description": "The label of footer link with label=技术论坛 linking to https://forum.01studio.cc"
   }
 }

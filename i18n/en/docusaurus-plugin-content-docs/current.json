@@ -346,5 +346,21 @@
   "sidebar.newSidebar.category.二维舵机云台.link.generated-index.description": {
     "message": "CanMV K230二维舵机云台应用",
     "description": "The generated-index page description for category 二维舵机云台 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.CanMV K230套件介绍": {
+    "message": "CanMV K230 Introduce",
+    "description": "The label for category CanMV K230套件介绍 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.CanMV K230套件介绍.link.generated-index.description": {
+    "message": "硬件和相关资源介绍",
+    "description": "The generated-index page description for category CanMV K230套件介绍 in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.cv_lite图像处理（高速）": {
+    "message": "cv_lite Iamge processing (high speed)",
+    "description": "The label for category cv_lite图像处理（高速） in sidebar newSidebar"
+  },
+  "sidebar.newSidebar.category.cv_lite图像处理（高速）.link.generated-index.description": {
+    "message": "条形码、二维码等识别",
+    "description": "The generated-index page description for category cv_lite图像处理（高速） in sidebar newSidebar"
   }
 }

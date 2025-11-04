@@ -58,5 +58,9 @@
   "item.label.在线模型训练": {
     "message": "Online model training",
     "description": "Navbar item with label 在线模型训练"
+  },
+  "item.label.AI模型训练": {
+    "message": "AI model training",
+    "description": "Navbar item with label AI模型训练"
   }
 }
