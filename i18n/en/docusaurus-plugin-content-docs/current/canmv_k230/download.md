@@ -6,7 +6,9 @@ sidebar_position: 3
 
 ## Download
 
-- [Click to download](https://github.com/01studio-lab/K230_Resource/releases/tag/2025-5-28)
+- [Click to download](https://github.com/01studio-lab/K230_Resource/releases)
+
+Please select the latest version to download.
 
 ![download](./img/download/download0.png)
 

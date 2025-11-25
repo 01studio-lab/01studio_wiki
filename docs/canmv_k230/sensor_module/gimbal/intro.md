@@ -101,7 +101,7 @@ sidebar_position: 1
 
 ![intro](./img/intro/intro7.png)
 
-注意彩色排线颜色随机，因此第一根GND可能是红色线，注意不要接错。顺序是  GND-3.3V-SDA（IO11）-SCL(IO12)
+注意彩色排线颜色随机，因此第一根GND可能是红色线，注意不要接错。顺序是  GND-3.3V-SDA（IO12）-SCL(IO11)
 
 ![intro](./img/intro/intro8.png)
 

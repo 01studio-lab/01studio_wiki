@@ -4,6 +4,35 @@ sidebar_position: 20
 
 # Update Notes
 
+## 2025-11-4
+
+- add **Machine Vision**
+
+    - [cv_lite Image processing](./machine_vision/cv_lite/intro.md)
+
+## 2025-10-27
+
+- add **Product Specifications**
+
+    - [CM-K230 Core Module](./intro/canmv_k230.md#cm-k230-core-module)
+
+## 2025-10-16
+
+- add **Machine vision -- AI model training**:
+
+    - [Model share](./machine_vision/train.md#model-share)
+
+## 2025-9-22
+
+- 01Studio online training platform released
+- add **Machine vision** ：
+
+    - [AI model training](./machine_vision/train.md) 
+
+## 2025-7-23
+
+- add [**2D servo gimbal**](./sensor_module/gimbal/intro.md). Includes tutorials on gimbal assembly, servo control, PID algorithms, and face tracking.
+
 ## 2025-06-13
 
 - add **machine vision** ：

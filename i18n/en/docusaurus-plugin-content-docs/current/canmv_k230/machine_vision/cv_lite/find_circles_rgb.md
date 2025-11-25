@@ -47,25 +47,25 @@ graph TD
 
 ```python
 '''
-实验名称：色块检测
+实验名称：圆形检测
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
 说明：通过修改lcd_width和lcd_height参数值选择3.5寸或2.4寸屏。
 '''
 
 # ============================================================
-# MicroPython RGB888 彩色块检测测试代码（使用 cv_lite 扩展模块）
-# RGB888 Color Blob Detection Test using cv_lite extension
+# MicroPython 基于 cv_lite 的 RGB888 霍夫圆检测测试代码
+# RGB888 Hough Circle Detection Test using cv_lite extension
 # ============================================================
 
 import time, os, sys, gc
 from machine import Pin
-from media.sensor import *  # 导入摄像头接口 / Camera interface
-from media.display import * # 导入显示接口 / Display interface
-from media.media import *   # 导入媒体资源管理器 / Media manager
+from media.sensor import *    # 导入摄像头接口 / Camera interface
+from media.display import *   # 导入显示接口 / Display interface
+from media.media import *     # 导入媒体资源管理器 / Media manager
 import _thread
-import cv_lite              # cv_lite 扩展模块
-import ulab.numpy as np     # MicroPython NumPy 类库
+import cv_lite                # 导入 cv_lite 扩展模块 / cv_lite extension
+import ulab.numpy as np       # MicroPython 类 NumPy 库
 
 #CanMV K230 - 3.5寸mipi屏分辨率定义
 lcd_width = 800
@@ -83,19 +83,17 @@ lcd_height = 480
 image_shape = [480, 640]  # 高 x 宽 / Height x Width
 
 # -------------------------------
-# 初始化摄像头（RGB888模式） / Initialize camera (rgb888 mode)
+# 初始化摄像头（RGB888格式） / Initialize camera (RGB888 format)
 # -------------------------------
-sensor = Sensor(id=2, width=1280, height = 960, fps = 90)
+sensor = Sensor(id=2, width=1280, height=960,fps=90)
 sensor.reset()
-sensor_width = sensor.width(None)
-sensor_height = sensor.height(None)
 sensor.set_framesize(width=image_shape[1], height=image_shape[0])
-sensor.set_pixformat(Sensor.RGB888)  # RGB888格式 / rgb888 format
+sensor.set_pixformat(Sensor.RGB888)  # 设置 RGB888 像素格式 / Set RGB888 pixel format
 
 # -------------------------------
-# 初始化显示（IDE虚拟显示模式） / Initialize display (IDE virtual output)
+# 初始化显示器（IDE虚拟显示） / Initialize display (IDE virtual output)
 # -------------------------------
-Display.init(Display.ST7701, width=lcd_width, height=lcd_height, to_ide=True, quality=50)
+Display.init(Display.ST7701, width=lcd_width, height=lcd_height, to_ide=True, quality=100)
 
 # -------------------------------
 # 初始化媒体资源管理器 / Initialize media manager
@@ -104,19 +102,19 @@ MediaManager.init()
 sensor.run()
 
 # -------------------------------
-# 色块检测阈值 / Blob detection thresholds
-# 格式：[Rmin, Rmax, Gmin, Gmax, Bmin, Bmax]
-threshold = [120, 255, 0, 50, 0, 50] #红色
-#threshold = [0, 50, 120, 255, 0, 50] #绿色
-#threshold = [0, 50, 0, 50, 120, 255] #蓝色
-
-min_area = 100    # 最小色块面积 / Minimum blob area
-kernel_size = 1   # 腐蚀膨胀核大小（用于预处理）/ Kernel size for morphological ops
-
-# -------------------------------
 # 启动帧率计时器 / Start FPS timer
 # -------------------------------
 clock = time.clock()
+
+# -------------------------------
+# 霍夫圆检测参数 / Hough Circle parameters
+# -------------------------------
+dp = 1           # 累加器分辨率与图像分辨率的反比 / Inverse ratio of accumulator resolution
+minDist = 30     # 检测到的圆心最小距离 / Minimum distance between detected centers
+param1 = 80      # Canny边缘检测高阈值 / Higher threshold for Canny edge detection
+param2 = 20      # 霍夫变换圆心检测阈值 / Threshold for center detection in accumulator
+minRadius = 10   # 检测圆最小半径 / Minimum circle radius
+maxRadius = 50   # 检测圆最大半径 / Maximum circle radius
 
 # -------------------------------
 # 主循环 / Main loop
@@ -128,30 +126,31 @@ while True:
     img = sensor.snapshot()
     img_np = img.to_numpy_ref()  # 获取 RGB888 ndarray 引用
 
-    # 调用 cv_lite 扩展进行色块检测，返回 [x, y, w, h, ...] 列表
-    blobs = cv_lite.rgb888_find_blobs(image_shape, img_np, threshold, min_area, kernel_size)
+    # 调用 cv_lite 扩展的霍夫圆检测函数，返回圆参数列表 [x, y, r, ...]
+    circles = cv_lite.rgb888_find_circles(
+        image_shape, img_np, dp, minDist, param1, param2, minRadius, maxRadius
+    )
 
-    # 遍历检测到的色块并绘制矩形框
-    for i in range(len(blobs) // 4):   # 修正为整数除法
-        x = blobs[4*i]
-        y = blobs[4*i + 1]
-        w = blobs[4*i + 2]
-        h = blobs[4*i + 3]
-        img.draw_rectangle(x, y, w, h, color=(255, 255, 255), thickness=2)  # 红色框
+    # 遍历检测到的圆形，绘制圆形框
+    for i in range(0, len(circles), 3):
+        x = circles[i]
+        y = circles[i + 1]
+        r = circles[i + 2]
+        img.draw_circle(x, y, r, color=(255, 0, 0), thickness=2)  # 红色圆圈
 
     img.draw_string_advanced(0, 0, 30, 'FPS: '+str("%.3f"%(clock.fps())), color = (255, 255, 255))
 
     # 显示结果图像 / Show image with blobs
     Display.show_image(img, x=round((lcd_width-sensor.width())/2),y=round((lcd_height-sensor.height())/2))
 
-    # 打印帧率 / Print FPS
-    print("findblobs:", clock.fps())
-
     # 垃圾回收 / Garbage collect
     gc.collect()
 
+    # 打印帧率 / Print FPS
+    print("findcircles:", clock.fps())
+
 # -------------------------------
-# 退出释放资源 / Cleanup on exit
+# 程序退出时释放资源 / Cleanup on exit
 # -------------------------------
 sensor.stop()
 Display.deinit()
@@ -164,25 +163,25 @@ MediaManager.deinit()
 
 ```python
 '''
-实验名称：色块检测
+实验名称：圆形检测
 实验平台：01Studio CanMV K230
 教程：wiki.01studio.cc
 说明：通过修改lcd_width和lcd_height参数值选择3.5寸或2.4寸屏。
 '''
 
 # ============================================================
-# MicroPython RGB888 彩色块检测测试代码（使用 cv_lite 扩展模块）
-# RGB888 Color Blob Detection Test using cv_lite extension
+# MicroPython 基于 cv_lite 的 RGB888 霍夫圆检测测试代码
+# RGB888 Hough Circle Detection Test using cv_lite extension
 # ============================================================
 
 import time, os, sys, gc
 from machine import Pin
-from media.sensor import *  # 导入摄像头接口 / Camera interface
-from media.display import * # 导入显示接口 / Display interface
-from media.media import *   # 导入媒体资源管理器 / Media manager
+from media.sensor import *    # 导入摄像头接口 / Camera interface
+from media.display import *   # 导入显示接口 / Display interface
+from media.media import *     # 导入媒体资源管理器 / Media manager
 import _thread
-import cv_lite              # cv_lite 扩展模块
-import ulab.numpy as np     # MicroPython NumPy 类库
+import cv_lite                # 导入 cv_lite 扩展模块 / cv_lite extension
+import ulab.numpy as np       # MicroPython 类 NumPy 库
 
 '''
 #CanMV K230 - 3.5寸mipi屏分辨率定义
@@ -200,19 +199,17 @@ lcd_height = 480
 image_shape = [480, 640]  # 高 x 宽 / Height x Width
 
 # -------------------------------
-# 初始化摄像头（RGB888模式） / Initialize camera (rgb888 mode)
+# 初始化摄像头（RGB888格式） / Initialize camera (RGB888 format)
 # -------------------------------
-sensor = Sensor(id=2, width=1280, height = 960, fps = 90)
+sensor = Sensor(id=2, width=1280, height=960,fps=90)
 sensor.reset()
-sensor_width = sensor.width(None)
-sensor_height = sensor.height(None)
 sensor.set_framesize(width=image_shape[1], height=image_shape[0])
-sensor.set_pixformat(Sensor.RGB888)  # RGB888格式 / rgb888 format
+sensor.set_pixformat(Sensor.RGB888)  # 设置 RGB888 像素格式 / Set RGB888 pixel format
 
 # -------------------------------
-# 初始化显示（IDE虚拟显示模式） / Initialize display (IDE virtual output)
+# 初始化显示器（IDE虚拟显示） / Initialize display (IDE virtual output)
 # -------------------------------
-Display.init(Display.ST7701, width=lcd_width, height=lcd_height, to_ide=True, quality=50)
+Display.init(Display.ST7701, width=lcd_width, height=lcd_height, to_ide=True, quality=100)
 
 # -------------------------------
 # 初始化媒体资源管理器 / Initialize media manager
@@ -221,19 +218,19 @@ MediaManager.init()
 sensor.run()
 
 # -------------------------------
-# 色块检测阈值 / Blob detection thresholds
-# 格式：[Rmin, Rmax, Gmin, Gmax, Bmin, Bmax]
-threshold = [120, 255, 0, 50, 0, 50] #红色
-#threshold = [0, 50, 120, 255, 0, 50] #绿色
-#threshold = [0, 50, 0, 50, 120, 255] #蓝色
-
-min_area = 100    # 最小色块面积 / Minimum blob area
-kernel_size = 1   # 腐蚀膨胀核大小（用于预处理）/ Kernel size for morphological ops
-
-# -------------------------------
 # 启动帧率计时器 / Start FPS timer
 # -------------------------------
 clock = time.clock()
+
+# -------------------------------
+# 霍夫圆检测参数 / Hough Circle parameters
+# -------------------------------
+dp = 1           # 累加器分辨率与图像分辨率的反比 / Inverse ratio of accumulator resolution
+minDist = 30     # 检测到的圆心最小距离 / Minimum distance between detected centers
+param1 = 80      # Canny边缘检测高阈值 / Higher threshold for Canny edge detection
+param2 = 20      # 霍夫变换圆心检测阈值 / Threshold for center detection in accumulator
+minRadius = 10   # 检测圆最小半径 / Minimum circle radius
+maxRadius = 50   # 检测圆最大半径 / Maximum circle radius
 
 # -------------------------------
 # 主循环 / Main loop
@@ -245,30 +242,31 @@ while True:
     img = sensor.snapshot()
     img_np = img.to_numpy_ref()  # 获取 RGB888 ndarray 引用
 
-    # 调用 cv_lite 扩展进行色块检测，返回 [x, y, w, h, ...] 列表
-    blobs = cv_lite.rgb888_find_blobs(image_shape, img_np, threshold, min_area, kernel_size)
+    # 调用 cv_lite 扩展的霍夫圆检测函数，返回圆参数列表 [x, y, r, ...]
+    circles = cv_lite.rgb888_find_circles(
+        image_shape, img_np, dp, minDist, param1, param2, minRadius, maxRadius
+    )
 
-    # 遍历检测到的色块并绘制矩形框
-    for i in range(len(blobs) // 4):   # 修正为整数除法
-        x = blobs[4*i]
-        y = blobs[4*i + 1]
-        w = blobs[4*i + 2]
-        h = blobs[4*i + 3]
-        img.draw_rectangle(x, y, w, h, color=(255, 255, 255), thickness=2)  # 红色框
+    # 遍历检测到的圆形，绘制圆形框
+    for i in range(0, len(circles), 3):
+        x = circles[i]
+        y = circles[i + 1]
+        r = circles[i + 2]
+        img.draw_circle(x, y, r, color=(255, 0, 0), thickness=2)  # 红色圆圈
 
     img.draw_string_advanced(0, 0, 30, 'FPS: '+str("%.3f"%(clock.fps())), color = (255, 255, 255))
 
     # 显示结果图像 / Show image with blobs
     Display.show_image(img, x=round((lcd_width-sensor.width())/2),y=round((lcd_height-sensor.height())/2))
 
-    # 打印帧率 / Print FPS
-    print("findblobs:", clock.fps())
-
     # 垃圾回收 / Garbage collect
     gc.collect()
 
+    # 打印帧率 / Print FPS
+    print("findcircles:", clock.fps())
+
 # -------------------------------
-# 退出释放资源 / Cleanup on exit
+# 程序退出时释放资源 / Cleanup on exit
 # -------------------------------
 sensor.stop()
 Display.deinit()
