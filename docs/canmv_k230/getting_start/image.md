@@ -24,7 +24,7 @@ sidebar_position: 2
 
 ![image](./img/image/image2.png)
 
-检查对应U盘盘符，然后选择SD卡版本的.img镜像文件，点击开始：
+检查对应U盘盘符，然后点击 **`选择`** 按钮，选择前面下载解压的SD卡版本的.img镜像文件，点击开始：
 
 ![image](./img/image/image4.png)
 

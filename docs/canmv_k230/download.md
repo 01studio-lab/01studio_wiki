@@ -13,7 +13,7 @@ sidebar_position: 3
 
 ### 海外地区下载
 
-- [点击下载](https://github.com/01studio-lab/K230_Resource/releases/tag/2025-5-28)
+- [点击下载](https://github.com/01studio-lab/K230_Resource/releases)
 
 ![download](./img/download/download0.png)
 

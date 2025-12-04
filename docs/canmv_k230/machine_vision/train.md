@@ -9,7 +9,7 @@ sidebar_position: 12
 
 在线训练网站链接：https://ai.01studio.cc 
 
-支持平台：01Studio CanMV K230 / CanMV K230 mini （**请使用v1.3以上版本镜像**）
+支持平台：01Studio CanMV K230 / CanMV K230 mini （**请使用v1.4以上版本镜像**）
 
 支持视觉识别类型：图像分类、图像检测
 

@@ -81,16 +81,35 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'newSidebar',
+            type: 'dropdown',
+            label: 'AI视觉系列',
             position: 'left',
-            label: 'CanMV K230教程',
-          },
+            className: 'navbar_dorp_items',
+            items: [
+              {
+              type: 'docSidebar',
+              sidebarId: 'newSidebar',
+              label: 'CanMV K230',
+              },
+              {
+              type: 'docSidebar',
+              sidebarId: 'tutorialSidebar',
+              label: 'CanMV K210',
+              },
+            ],
+          },         
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            type: 'dropdown',
+            label: 'STM32系列',
             position: 'left',
-            label: 'CanMV K210教程',
+            className: 'navbar_dorp_items',
+            items: [
+              {
+              type: 'docSidebar',
+              sidebarId: 'pyboardSidebar',
+              label: 'pyBoard (STM32F405RGT6)',
+              },
+            ],
           },                
           {
             type: 'dropdown',

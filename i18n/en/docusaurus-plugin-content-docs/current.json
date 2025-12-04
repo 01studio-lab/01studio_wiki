@@ -362,5 +362,53 @@
   "sidebar.newSidebar.category.cv_lite图像处理（高速）.link.generated-index.description": {
     "message": "条形码、二维码等识别",
     "description": "The generated-index page description for category cv_lite图像处理（高速） in sidebar newSidebar"
+  },
+  "sidebar.pyboardSidebar.category.pyBoard开发套件介绍": {
+    "message": "pyBoard开发套件介绍",
+    "description": "The label for category pyBoard开发套件介绍 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.pyBoard开发套件介绍.link.generated-index.description": {
+    "message": "硬件和相关资源介绍",
+    "description": "The generated-index page description for category pyBoard开发套件介绍 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.开发环境搭建": {
+    "message": "开发环境搭建",
+    "description": "The label for category 开发环境搭建 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.开发环境搭建.link.generated-index.description": {
+    "message": "开发环境建立。",
+    "description": "The generated-index page description for category 开发环境搭建 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.基础实验": {
+    "message": "基础实验",
+    "description": "The label for category 基础实验 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.基础实验.link.generated-index.description": {
+    "message": "常用GPIO基础实验",
+    "description": "The generated-index page description for category 基础实验 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.传感器": {
+    "message": "传感器",
+    "description": "The label for category 传感器 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.传感器.link.generated-index.description": {
+    "message": "各种传感器使用",
+    "description": "The generated-index page description for category 传感器 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.拓展模块": {
+    "message": "拓展模块",
+    "description": "The label for category 拓展模块 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.拓展模块.link.generated-index.description": {
+    "message": "各种外设模块使用",
+    "description": "The generated-index page description for category 拓展模块 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.网络应用": {
+    "message": "网络应用",
+    "description": "The label for category 网络应用 in sidebar pyboardSidebar"
+  },
+  "sidebar.pyboardSidebar.category.网络应用.link.generated-index.description": {
+    "message": "实现Socket、MQTT等常用网络编程应用",
+    "description": "The generated-index page description for category 网络应用 in sidebar pyboardSidebar"
   }
 }

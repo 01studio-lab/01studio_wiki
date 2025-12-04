@@ -62,5 +62,25 @@
   "item.label.AI模型训练": {
     "message": "AI model training",
     "description": "Navbar item with label AI模型训练"
+  },
+  "item.label.AI视觉系列": {
+    "message": "AI Vision Series",
+    "description": "Navbar item with label AI视觉系列"
+  },
+  "item.label.STM32系列": {
+    "message": "STM32 series",
+    "description": "Navbar item with label STM32系列"
+  },
+  "item.label.CanMV K230": {
+    "message": "CanMV K230",
+    "description": "Navbar item with label CanMV K230"
+  },
+  "item.label.CanMV K210": {
+    "message": "CanMV K210",
+    "description": "Navbar item with label CanMV K210"
+  },
+  "item.label.pyBoard (STM32F405RGT6)": {
+    "message": "pyBoard (STM32F405RGT6)",
+    "description": "Navbar item with label pyBoard (STM32F405RGT6)"
   }
 }
