@@ -40,6 +40,18 @@ sidebar_position: 2
 
 ![image](./img/image/image5_1.png)
 
+在设备管理器找到K230 USB BOOT，如果出现感叹号就要先安装K230 USB boot驱动：在[开发板配套资料包](../download.md)找到**开发工具-EMMC烧录工具--K230 USB boot驱动**，打开里面的应用安装：
+
+![image](./img/image/boot0.png)
+
+按下图选择，点击install安装即可：
+
+![image](./img/image/boot1.png)
+
+安装后同样按着BOOT键不放，重新拔插开发板USB线进入BOOT模式，出现下面驱动表示安装成功。
+
+![image](./img/image/boot2.png)
+
 在[开发板配套资料包](../download.md)找到开发工具-EMMC烧录工具，解压后得到bin文件，绿色版无需安装。
 
 ![image](./img/image/image5_2.png)

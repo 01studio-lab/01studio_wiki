@@ -107,13 +107,18 @@ const config = {
               {
               type: 'docSidebar',
               sidebarId: 'pyboardSidebar',
-              label: 'pyBoard (STM32F405RGT6)',
+              label: 'pyBoard (STM32F405)',
+              },
+              {
+              type: 'docSidebar',
+              sidebarId: 'columbusSidebar',
+              label: '哥伦布 (STM32F407)',
               },
             ],
           },                
           {
             type: 'dropdown',
-            label: '开源项目教程',
+            label: '开源项目',
             position: 'left',
             className: 'navbar_dorp_items',
             items: [

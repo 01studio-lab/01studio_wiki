@@ -10,14 +10,31 @@ sidebar_position: 5
 
 为了解决这样的问题，我们引入外部中断概念，顾名思义，就是当按键被按下(产生中断)时，我们才去执行相关功能。这大大节省了CPU的资源，因此中断的在实际项目的应用非常普遍。
 
+## 实验平台
+
+pyBoard 或 pyBoard + pyBase 开发套件。
+
+![led](./img/led/led1.png)
+
+![led](./img/led/led2.png)
 
 ## 实验目的
 利用中断方式来检查按键KEY状态，被按键被按下（产生外部中断）后使LED的亮灭状态翻转。
 
 ## 实验讲解
-按键对应核桃派PicoW的IO在上一节已经讲过，为引脚0。
+按键对应的IO在上一节已经讲过
 
-![exti0](./img/exti/exti0.png)
+- 按键的引脚是 B3或者X17
+
+![key](./img/gpio/gpio1.png)
+
+- LED蓝灯的引脚是 B4
+
+![key](./img/gpio/gpio2.png)
+
+:::tips 提示
+PBx是STM32芯片引脚，X17是pyboard专门定义的引脚。都可以作为引脚编号使用。详情请看[PinOUT图](../intro/product.md#引脚图)
+:::
 
 外部中断也是通过machine模块的Pin子模块来配置，我们先来看看其配构造函数和使用方法：
 
@@ -82,15 +99,16 @@ graph TD
 '''
 实验名称：外部中断
 版本：v1.0
-作者：WalnutPi
+平台：pyBoard
+作者：01Studio
 说明：通过按键改变LED的亮灭状态（外部中断方式）
 '''
 
 from machine import Pin
 import time
 
-LED=Pin(46,Pin.OUT) #构建LED对象,开始熄灭
-KEY=Pin(0,Pin.IN,Pin.PULL_UP) #构建KEY对象
+LED=Pin('B4',Pin.OUT) #构建LED对象,开始熄灭
+KEY=Pin('X17',Pin.IN,Pin.PULL_UP) #构建KEY对象
 state=0  #LED引脚状态
 
 #LED状态翻转函数
@@ -113,11 +131,7 @@ KEY.irq(fun,Pin.IRQ_FALLING) #定义中断，下降沿触发
 
 ## 实验结果
 
-在Thonny IDE中运行代码：
-
-![exti](./img/exti/exti3.png)
-
-每次按下按键KEY时候，可以看到LED蓝灯的亮灭状态翻转。
+在Thonny IDE中运行代码，每次按下按键KEY时候，可以看到LED蓝灯的亮灭状态翻转。
 
 ![exti](./img/exti/exti4.png)
 

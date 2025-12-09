@@ -55,7 +55,7 @@ nic.isconnected()
 ```python
 nic.ifconfig([(ip, subnet, gateway, dns)])
 ```
-配置WiFi信息，当参数为空时表示查看WiFi连接信息。
+配置网络IP等信息，当参数为空时表示查看网络连接信息。
 - `ip`: IP地址；
 - `subnet` : 子网掩码；
 - `gateway`: 网关地址；

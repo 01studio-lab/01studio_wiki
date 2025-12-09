@@ -410,5 +410,77 @@
   "sidebar.pyboardSidebar.category.网络应用.link.generated-index.description": {
     "message": "实现Socket、MQTT等常用网络编程应用",
     "description": "The generated-index page description for category 网络应用 in sidebar pyboardSidebar"
+  },
+  "sidebar.columbusSidebar.category.哥伦布开发套件介绍": {
+    "message": "哥伦布开发套件介绍",
+    "description": "The label for category 哥伦布开发套件介绍 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.哥伦布开发套件介绍.link.generated-index.description": {
+    "message": "硬件和相关资源介绍",
+    "description": "The generated-index page description for category 哥伦布开发套件介绍 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.开发环境搭建": {
+    "message": "开发环境搭建",
+    "description": "The label for category 开发环境搭建 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.开发环境搭建.link.generated-index.description": {
+    "message": "开发环境建立。",
+    "description": "The generated-index page description for category 开发环境搭建 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.基础实验": {
+    "message": "基础实验",
+    "description": "The label for category 基础实验 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.基础实验.link.generated-index.description": {
+    "message": "常用GPIO基础实验",
+    "description": "The generated-index page description for category 基础实验 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.多媒体": {
+    "message": "多媒体",
+    "description": "The label for category 多媒体 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.多媒体.link.generated-index.description": {
+    "message": "各种多媒体案例",
+    "description": "The generated-index page description for category 多媒体 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.传感器": {
+    "message": "传感器",
+    "description": "The label for category 传感器 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.传感器.link.generated-index.description": {
+    "message": "各种传感器使用",
+    "description": "The generated-index page description for category 传感器 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.拓展模块": {
+    "message": "拓展模块",
+    "description": "The label for category 拓展模块 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.拓展模块.link.generated-index.description": {
+    "message": "各种外设模块使用",
+    "description": "The generated-index page description for category 拓展模块 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.通讯实验": {
+    "message": "通讯实验",
+    "description": "The label for category 通讯实验 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.通讯实验.link.generated-index.description": {
+    "message": "各种接口通讯实验",
+    "description": "The generated-index page description for category 通讯实验 in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.网络应用（以太网）": {
+    "message": "网络应用（以太网）",
+    "description": "The label for category 网络应用（以太网） in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.网络应用（以太网）.link.generated-index.description": {
+    "message": "实现Socket、MQTT等常用网络编程应用",
+    "description": "The generated-index page description for category 网络应用（以太网） in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.pyIOT（无线通讯模块）": {
+    "message": "pyIOT（无线通讯模块）",
+    "description": "The label for category pyIOT（无线通讯模块） in sidebar columbusSidebar"
+  },
+  "sidebar.columbusSidebar.category.pyIOT（无线通讯模块）.link.generated-index.description": {
+    "message": "各类串口无线通讯模块",
+    "description": "The generated-index page description for category pyIOT（无线通讯模块） in sidebar columbusSidebar"
   }
 }

@@ -23,7 +23,7 @@ pyBoard开发套件、3.2寸LCD（电阻触摸）。
 
 ### 构造函数
 ```python
-tftlcd.XPT2046(portrait=1)
+touch.XPT2046(portrait=1)
 ```
 构建触摸屏对象。XPT2046表示驱动芯片型号。
 
@@ -54,7 +54,7 @@ XPT2046.read()
 <br></br>
 
 更多用法请阅读官方文档：<br></br>
-https://docs.01studio.cc/library/tftlcd/tftlcd.LCD32.html
+https://docs.01studio.cc/library/touch/touch.XPT2046.html
 <br></br>
 
 学会了触摸对象用法后，我们可以编程实现触摸后屏幕打点表示，然后左上角显示当前触摸的坐标。另外再加入一个按键，按下清空屏幕。编程流程图如下：

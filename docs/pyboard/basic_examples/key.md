@@ -7,6 +7,14 @@ sidebar_position: 3
 ## 前言
 按键是最简单也最常见的输入设备，很多产品都离不开按键，包括早期的iphone，今天我们就来学习一下如何使用MicroPython来编写按键程序。有了按键输入功能，我们就可以做很多好玩的东西了。
 
+## 实验平台
+
+pyBoard 或 pyBoard + pyBase 开发套件。
+
+![led](./img/led/led1.png)
+
+![led](./img/led/led2.png)
+
 ## 实验目的
 使用按键功能，通过检测按键被按下后，改变LED(4)蓝灯的亮灭状态。
 

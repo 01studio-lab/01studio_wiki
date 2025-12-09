@@ -82,5 +82,17 @@
   "item.label.pyBoard (STM32F405RGT6)": {
     "message": "pyBoard (STM32F405RGT6)",
     "description": "Navbar item with label pyBoard (STM32F405RGT6)"
+  },
+  "item.label.开源项目": {
+    "message": "Open Source Project",
+    "description": "Navbar item with label 开源项目"
+  },
+  "item.label.pyBoard (STM32F405)": {
+    "message": "pyBoard (STM32F405)",
+    "description": "Navbar item with label pyBoard (STM32F405)"
+  },
+  "item.label.哥伦布 (STM32F407)": {
+    "message": "Columbus (STM32F407)",
+    "description": "Navbar item with label 哥伦布 (STM32F407)"
   }
 }

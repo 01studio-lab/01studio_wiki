@@ -67,7 +67,7 @@ client.publish(topic,message)
 ```
 发布信息。
 - `topic` : 主题名称；
-- `message` : 信息内容，例：'Hello WalnutPi!'
+- `message` : 信息内容，例：'Hello 01Studio!'
 
 <br></br>
 

@@ -60,6 +60,7 @@ s.angle(angle,time=0)
 - `time` ：旋转到指定角度的时间，单位ms，默认0表示最快
 
 <br></br>
+
 ```python
 s.speed(speed,time=0)
 ```
