@@ -43,7 +43,6 @@ sidebar_position: 1
     - [4.3寸RGB屏触摸](./basic_examples/touch/4_3_rgb_t.md) 
     - [7寸RGB屏触摸](./basic_examples/touch/7_rgb_t.md) 
     - [4.3寸MCU屏触摸](./basic_examples/touch/4_3_mcu_t.md) 
-- [电容触摸屏](./basic_examples/touch.md) 
 - [触摸屏按钮](./basic_examples/touch_button.md) 
 - [ADC（电压测量）](./basic_examples/adc.md) 
 - [RTC（实时时钟）](./basic_examples/rtc.md) 
