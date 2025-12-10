@@ -5,7 +5,7 @@ sidebar_position: 4
 # GPIO
 
 ## 前言
-我们能看到pyboard和MicroPython开发套件上引出了非常多的引脚和GPIO口（General Purpose Input/Output，通用输入输出口），前两节的LED和按键实验背后原理都是使用GPIO来实现的，只是被提前封装好了。今天我们来做一下GPIO口的实验。
+我们能看到哥伦布开发板上引出了非常多的引脚和GPIO口（General Purpose Input/Output，通用输入输出口），前两节的LED和按键实验背后原理都是使用GPIO来实现的，只是被提前封装好了。今天我们来做一下GPIO口的实验。
 
 ## 实验平台
 
@@ -18,13 +18,13 @@ sidebar_position: 4
 
 ## 实验讲解
 
-前面实验实验了pyb模块来控制LED和按键，pyb顾名思义就是早期用于pyBoard的专用模块，随着micropython移植到越来越多平台，逐渐改为更为通用的machine模块，基本上pyboard的每个IO口都可以配置成特定的GPIO方式来进行应用。
+前面实验实验了pyb模块来控制LED和按键，pyb顾名思义就是早期用于pyBoard的专用模块，随着micropython移植到越来越多平台，逐渐改为更为通用的machine模块，基本上哥伦布的每个IO口都可以配置成特定的GPIO方式来进行应用。
 
 使用Pin就需要看开发板原理图，确认要操作IO的编号。
 
 ![key](./img/gpio/gpio1.png)
 
-从上面原理图可以看到LED（4）连接倒PF10引脚，USR按键连接到PE4引脚。我们将LED（4）即“F10”引脚配置成输出，将USER按键即“E7”引脚配置成输入，实现当检测到按键被按下时候点亮LED（4），松开时关闭LED（4）。代码编写流程如下：
+从上面原理图可以看到LED（4）连接倒PF10引脚，USR按键连接到PE4引脚。我们将LED（4）即“F10”引脚配置成输出，将USER按键即“E4”引脚配置成输入，实现当检测到按键被按下时候点亮LED（4），松开时关闭LED（4）。代码编写流程如下：
 
 我们先来了解一下machine中GPIO使用到的Pin对象的构造函数和使用方法：
 

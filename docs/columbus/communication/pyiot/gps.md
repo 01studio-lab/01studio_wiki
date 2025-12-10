@@ -23,7 +23,7 @@ sidebar_position: 1
 
 pyIOT-GPS ATGM336H是标准的串口卫星定位模块，通过串口单向输出卫星信息，产品参数如下：  [**点击购买>>**](https://item.taobao.com/item.htm?id=624363387479)
 
-![img](./img/ble/ble2.jpg)
+![img](./img/gps/gps2.jpg)
 
 |  产品参数 |
 |  :---:  |  --- |

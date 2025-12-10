@@ -30,13 +30,13 @@ OLED的特性是自己发光，不像TFT LCD需要背光，因此可视度和亮
 
 ![timer](./img/oled/oled1.png)
 
-在了解完I2C和OLED显示屏后，我们先来看看开发板的原理图，也就是MicroPython上的OLED接口是如何连线的。pyBoard有2个自带I2C接口，但1个用于三轴加速度传感器（X9,X10），另外一个(Y9,Y10)保留了日后其他设备接入使用。
+在了解完I2C和OLED显示屏后，我们先来看看开发板的原理图，也就是MicroPython上的OLED接口是如何连线的。
 
 - OLED接口原理图
 
 ![timer](./img/oled/oled2.png)
 
-本节使用会用到Pin、SoftI2C和ssd1306对象，介绍如下：
+从上图结合OLED引脚顺序可得知，开发板的PB0引脚连接到SCL，PF11引脚连接到SDA，本节使用会用到Pin、SoftI2C和ssd1306对象，介绍如下：
 
 ## Pin对象
 

@@ -482,5 +482,93 @@
   "sidebar.columbusSidebar.category.pyIOT（无线通讯模块）.link.generated-index.description": {
     "message": "各类串口无线通讯模块",
     "description": "The generated-index page description for category pyIOT（无线通讯模块） in sidebar columbusSidebar"
+  },
+  "sidebar.magellanSidebar.category.麦哲伦开发套件介绍": {
+    "message": "麦哲伦开发套件介绍",
+    "description": "The label for category 麦哲伦开发套件介绍 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.麦哲伦开发套件介绍.link.generated-index.description": {
+    "message": "硬件和相关资源介绍",
+    "description": "The generated-index page description for category 麦哲伦开发套件介绍 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.开发环境搭建": {
+    "message": "开发环境搭建",
+    "description": "The label for category 开发环境搭建 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.开发环境搭建.link.generated-index.description": {
+    "message": "开发环境建立。",
+    "description": "The generated-index page description for category 开发环境搭建 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.基础实验": {
+    "message": "基础实验",
+    "description": "The label for category 基础实验 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.基础实验.link.generated-index.description": {
+    "message": "常用GPIO基础实验",
+    "description": "The generated-index page description for category 基础实验 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.LCD显示屏": {
+    "message": "LCD显示屏",
+    "description": "The label for category LCD显示屏 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.LCD显示屏.link.generated-index.description": {
+    "message": "多款LCD显示屏案例",
+    "description": "The generated-index page description for category LCD显示屏 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.电容触摸屏": {
+    "message": "电容触摸屏",
+    "description": "The label for category 电容触摸屏 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.电容触摸屏.link.generated-index.description": {
+    "message": "多款电容触摸屏案例",
+    "description": "The generated-index page description for category 电容触摸屏 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.多媒体": {
+    "message": "多媒体",
+    "description": "The label for category 多媒体 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.多媒体.link.generated-index.description": {
+    "message": "各种多媒体案例",
+    "description": "The generated-index page description for category 多媒体 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.传感器": {
+    "message": "传感器",
+    "description": "The label for category 传感器 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.传感器.link.generated-index.description": {
+    "message": "各种传感器使用",
+    "description": "The generated-index page description for category 传感器 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.拓展模块": {
+    "message": "拓展模块",
+    "description": "The label for category 拓展模块 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.拓展模块.link.generated-index.description": {
+    "message": "各种外设模块使用",
+    "description": "The generated-index page description for category 拓展模块 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.通讯实验": {
+    "message": "通讯实验",
+    "description": "The label for category 通讯实验 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.通讯实验.link.generated-index.description": {
+    "message": "各种接口通讯实验",
+    "description": "The generated-index page description for category 通讯实验 in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.网络应用（以太网）": {
+    "message": "网络应用（以太网）",
+    "description": "The label for category 网络应用（以太网） in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.网络应用（以太网）.link.generated-index.description": {
+    "message": "实现Socket、MQTT等常用网络编程应用",
+    "description": "The generated-index page description for category 网络应用（以太网） in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.pyIOT（无线通讯模块）": {
+    "message": "pyIOT（无线通讯模块）",
+    "description": "The label for category pyIOT（无线通讯模块） in sidebar magellanSidebar"
+  },
+  "sidebar.magellanSidebar.category.pyIOT（无线通讯模块）.link.generated-index.description": {
+    "message": "各类串口无线通讯模块",
+    "description": "The generated-index page description for category pyIOT（无线通讯模块） in sidebar magellanSidebar"
   }
 }

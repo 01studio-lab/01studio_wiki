@@ -114,6 +114,11 @@ const config = {
               sidebarId: 'columbusSidebar',
               label: '哥伦布 (STM32F407)',
               },
+                            {
+              type: 'docSidebar',
+              sidebarId: 'magellanSidebar',
+              label: '麦哲伦 (STM32H743)',
+              },
             ],
           },                
           {

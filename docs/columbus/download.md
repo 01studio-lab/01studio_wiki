@@ -10,7 +10,7 @@ sidebar_position: 3
 
 ### 01Studio下载站（百度网盘）
 
-点击进入下载页面：https://download.01studio.cc/micropython/columbus/columbus.html
+点击进入下载页面：https://download.01studio.cc/micropython/magellan/magellan.html
 
 ## 资料介绍
 

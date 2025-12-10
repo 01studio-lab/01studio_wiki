@@ -66,7 +66,7 @@ graph TD
 平台：哥伦布开发板 + 4.3寸MCU屏（电容触摸）
 作者：01Studio
 说明：在LCD上显示时间
-社区：www.01studio.org
+社区：www.01studio.cc
 '''
 
 #导入相关模块

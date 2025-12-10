@@ -4,14 +4,14 @@ sidebar_position: 10
 
 # 固件更新
 
-当pyboard上的固件意外丢失或者我们希望升级到较新版本固件时候，就需重新烧录pyboard的固件。Pyboard上面是一个M4单片机，所以这个操作相当于给M4单片机重新烧录程序。
+当开发板上的固件意外丢失或者我们希望升级到较新版本固件时候，就需重新烧录的固件。
 
-我们采用DFU的烧写方式，DFU烧写方式优势是不需要ST-LINK一类仿真器，只需要安装一个软件即可。我们打开 **pyBoard开发套件配套资料\开发工具\Windows\固件更新工具\DfuSe_Demo_V3.0.5** 目录下的DfuSe安装软件。DFU软件安装完成后相当于电脑所需要的驱动也安装了。
+我们采用DFU的烧写方式，DFU烧写方式优势是不需要ST-LINK一类仿真器，只需要安装一个软件即可。我们打开 **开发套件配套资料\开发工具\Windows\固件更新工具\DfuSe_Demo_V3.0.5** 目录下的DfuSe安装软件。DFU软件安装完成后相当于电脑所需要的驱动也安装了。
 
 
 ![firmware_update](./img/firmware_update/firmware_update0.png)
 
-将开发板上的默认连接的BOOT--GND跳线帽连接到3.3V，让pyboard进入DFU烧写模式，如下图所示：
+将开发板上的默认连接的BOOT--GND跳线帽连接到3.3V，让开发板进入DFU烧写模式，如下图所示：
 
 ![firmware_update](./img/firmware_update/firmware_update0_1.png)
 
@@ -23,7 +23,7 @@ sidebar_position: 10
 
 ![firmware_update2](./img/firmware_update/firmware_update2.png)
 
-点击choose，选择要升级的固件版本，在MicroPython开发板配套资料\相关固件\pyboard v1.1目录下选择要升级的固件版本。
+点击choose，选择要升级的固件版本，在MicroPython开发板配套资料\相关固件\目录下选择要升级的固件版本。
 
 ![firmware_update2](./img/firmware_update/firmware_update3.png)
 
@@ -45,7 +45,7 @@ sidebar_position: 10
 
 ![firmware_update2](./img/firmware_update/firmware_update8.png)
 
-可以见到系统检测到pyboard的U盘文件系统。说明固件更新完成并启动正常。
+可以见到系统检测到哥伦布的U盘文件系统。说明固件更新完成并启动正常。
 
 ![firmware_update2](./img/firmware_update/firmware_update9.png)
 

@@ -94,5 +94,9 @@
   "item.label.哥伦布 (STM32F407)": {
     "message": "Columbus (STM32F407)",
     "description": "Navbar item with label 哥伦布 (STM32F407)"
+  },
+  "item.label.麦哲伦 (STM32H743)": {
+    "message": "Magellan (STM32H743)",
+    "description": "Navbar item with label 麦哲伦 (STM32H743)"
   }
 }
