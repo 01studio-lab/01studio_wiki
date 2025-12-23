@@ -124,7 +124,7 @@ pyBase是01Studio针对多款micropython开发平台量身定制的底板，可�
 
 |  产品参数 |
 |  :---:  | ---  |
-| pyBoard接口 | 兼容个系列pyBoard核心板 |
+| pyBoard接口 | 兼容各系列pyBoard核心板 |
 | 2.54mm排针 | 引出pyBoard全部引脚 |
 | 按键  |  ● 可编程按键<br></br> ● 复位键 (RST) |
 | 电位器  | ADC输入 | 

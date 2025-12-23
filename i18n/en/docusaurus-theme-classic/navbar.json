@@ -98,5 +98,13 @@
   "item.label.麦哲伦 (STM32H743)": {
     "message": "Magellan (STM32H743)",
     "description": "Navbar item with label 麦哲伦 (STM32H743)"
+  },
+  "item.label.ESP32系列": {
+    "message": "STM32 series",
+    "description": "Navbar item with label ESP32系列"
+  },
+  "item.label.pyWiFi ESP32-S3": {
+    "message": "pyWiFi ESP32-S3",
+    "description": "Navbar item with label pyWiFi ESP32-S3"
   }
 }

@@ -7,7 +7,7 @@ sidebar_position: 1
 
 ![directory](./img/directory/directory2.png)
 
-### CanMV K230套件介绍
+### **CanMV K230套件介绍**
 
 - [产品参数](./intro/canmv_k230.md)
 - [配件安装使用](./intro/module.md)

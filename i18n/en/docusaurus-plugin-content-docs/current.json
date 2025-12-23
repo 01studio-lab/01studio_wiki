@@ -570,5 +570,93 @@
   "sidebar.magellanSidebar.category.pyIOT（无线通讯模块）.link.generated-index.description": {
     "message": "各类串口无线通讯模块",
     "description": "The generated-index page description for category pyIOT（无线通讯模块） in sidebar magellanSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CanMV K210套件介绍": {
+    "message": "CanMV K210套件介绍",
+    "description": "The label for category CanMV K210套件介绍 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CanMV K210套件介绍.link.generated-index.description": {
+    "message": "硬件和相关资源介绍",
+    "description": "The generated-index page description for category CanMV K210套件介绍 in sidebar tutorialSidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.pyWiFi ESP32-S3套件介绍": {
+    "message": "pyWiFi ESP32-S3套件介绍",
+    "description": "The label for category pyWiFi ESP32-S3套件介绍 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.pyWiFi ESP32-S3套件介绍.link.generated-index.description": {
+    "message": "硬件和相关资源介绍",
+    "description": "The generated-index page description for category pyWiFi ESP32-S3套件介绍 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.开发环境搭建": {
+    "message": "开发环境搭建",
+    "description": "The label for category 开发环境搭建 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.开发环境搭建.link.generated-index.description": {
+    "message": "开始使用的pyWiFi ESP32-S3开发板。",
+    "description": "The generated-index page description for category 开发环境搭建 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.基础实验": {
+    "message": "基础实验",
+    "description": "The label for category 基础实验 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.基础实验.link.generated-index.description": {
+    "message": "常用GPIO基础实验",
+    "description": "The generated-index page description for category 基础实验 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.WiFi应用": {
+    "message": "WiFi应用",
+    "description": "The label for category WiFi应用 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.WiFi应用.link.generated-index.description": {
+    "message": "实现Socket、MQTT等常用网络编程应用",
+    "description": "The generated-index page description for category WiFi应用 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.蓝牙应用": {
+    "message": "蓝牙应用",
+    "description": "The label for category 蓝牙应用 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.蓝牙应用.link.generated-index.description": {
+    "message": "实现蓝牙数据收发等应用",
+    "description": "The generated-index page description for category 蓝牙应用 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.传感器": {
+    "message": "传感器",
+    "description": "The label for category 传感器 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.传感器.link.generated-index.description": {
+    "message": "驱动各种传感器",
+    "description": "The generated-index page description for category 传感器 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.拓展模块": {
+    "message": "拓展模块",
+    "description": "The label for category 拓展模块 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.拓展模块.link.generated-index.description": {
+    "message": "各种外设模块",
+    "description": "The generated-index page description for category 拓展模块 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.OV2640摄像头": {
+    "message": "OV2640摄像头",
+    "description": "The label for category OV2640摄像头 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.OV2640摄像头.link.generated-index.description": {
+    "message": "OV2640摄像头示例",
+    "description": "The generated-index page description for category OV2640摄像头 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.USB摄像头": {
+    "message": "USB摄像头",
+    "description": "The label for category USB摄像头 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.USB摄像头.link.generated-index.description": {
+    "message": "USB摄像头示例",
+    "description": "The generated-index page description for category USB摄像头 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.AI视觉识别": {
+    "message": "AI视觉识别",
+    "description": "The label for category AI视觉识别 in sidebar pyWiFi_ESP32_S3Sidebar"
+  },
+  "sidebar.pyWiFi_ESP32_S3Sidebar.category.AI视觉识别.link.generated-index.description": {
+    "message": "pyWiFi ESP32-S3机器视觉应用",
+    "description": "The generated-index page description for category AI视觉识别 in sidebar pyWiFi_ESP32_S3Sidebar"
   }
 }

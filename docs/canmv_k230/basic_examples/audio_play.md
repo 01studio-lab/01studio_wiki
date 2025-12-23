@@ -22,10 +22,16 @@ sidebar_position: 14
 
 - CanMV K230 mini
 
-CanMV K230 mini需要搭配音频转接线使用。
+CanMV K230 mini需要搭配音频转接线使用。[点击购买>>](https://item.taobao.com/item.htm?id=914588414214)
 
 ![audio_play](./img/audio_play/audio_play1_1.png)
 
+
+01Studio CanMV K230带有标准USB母头，因此音频实验可以可以使用USB供电+3.5mm接口的扬声器：[点击购买>>](https://item.taobao.com/item.htm?id=999081698146)
+
+**接线方式如下：**
+
+![audio_play](./img/audio_play/audio_play2.png)
 
 CanMV K230 MicroPython库集成了PyAudio（音频流处理）和wave（wav文件处理）模块。可以使用python编程实现播放wav音频文件。具体介绍如下：
 

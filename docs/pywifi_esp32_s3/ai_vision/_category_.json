@@ -1,0 +1,8 @@
+{
+  "label": "AI视觉识别",
+  "position": 11,
+  "link": {
+    "type": "generated-index",
+    "description": "pyWiFi ESP32-S3机器视觉应用"
+  }
+}

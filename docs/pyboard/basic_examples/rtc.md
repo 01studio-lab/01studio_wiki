@@ -31,9 +31,9 @@ rtc = machine.RTC()
 
 ### 使用方法
 ```python
-rtc.datetime((2025, 1, 1, 0, 0, 0, 0, 0))
+rtc.datetime((2025, 1, 1, 2, 0, 0, 0, 0))
 ```
-设置RTC日期和时间。(2025, 1, 1, 0, 0, 0, 0, 0)按顺序分别表示（年，月，日，星期，时，分，秒，微妙），其中星期使用0-6表示星期一到星期日。
+设置RTC日期和时间。(2025, 1, 1, 2, 0, 0, 0, 0)按顺序分别表示（年，月，日，星期，时，分，秒，微妙），其中星期使用0-6表示星期一到星期日。
 
 <br></br>
 
@@ -43,7 +43,7 @@ rtc.datetime()
 获取当前RTC时间。返回元组：（年，月，日，星期，时，分，秒，微妙），其中星期使用0-6表示星期一到星期日。
 
 更多用法请阅读官方文档：<br></br>
-https://docs.micropython.org/en/latest/library/machine.RTC.html#machine-rtc
+https://docs.01studio.cc/library/machine.RTC.html#machine-rtc
 
 <br></br>
 

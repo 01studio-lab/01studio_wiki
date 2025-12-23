@@ -1,0 +1,8 @@
+{
+  "label": "蓝牙应用",
+  "position": 8,
+  "link": {
+    "type": "generated-index",
+    "description": "实现蓝牙数据收发等应用"
+  }
+}

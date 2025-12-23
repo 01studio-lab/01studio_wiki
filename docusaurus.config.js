@@ -97,7 +97,7 @@ const config = {
               label: 'CanMV K210',
               },
             ],
-          },         
+          },                   
           {
             type: 'dropdown',
             label: 'STM32系列',
@@ -120,7 +120,20 @@ const config = {
               label: '麦哲伦 (STM32H743)',
               },
             ],
-          },                
+          },    
+          {
+            type: 'dropdown',
+            label: 'ESP32系列',
+            position: 'left',
+            className: 'navbar_dorp_items',
+            items: [
+              {
+              type: 'docSidebar',
+              sidebarId: 'pyWiFi_ESP32_S3Sidebar',
+              label: 'pyWiFi ESP32-S3',
+              },
+            ],
+          },                       
           {
             type: 'dropdown',
             label: '开源项目',

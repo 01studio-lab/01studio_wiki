@@ -1,0 +1,8 @@
+{
+  "label": "传感器",
+  "position": 9,
+  "link": {
+    "type": "generated-index",
+    "description": "驱动各种传感器"
+  }
+}
