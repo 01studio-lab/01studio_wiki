@@ -14,7 +14,11 @@ sidebar_position: 2
 
 ![image](./img/image/image1.png)
 
-### SD卡烧录
+### 方式一：SD卡烧录
+
+:::tip 提示
+本方式适用于 **CanMV K230、CanMV K230 mini和CM-K230无EMMC版本** ，需要SD卡启动的开发板。
+:::
 
 将MicroSD卡通过读卡器连接到电脑：
 
@@ -32,7 +36,13 @@ sidebar_position: 2
 
 ![image](./img/image/image5.png)
 
-### EMMC烧录
+至此烧录完成，接下来请看下面 [开机](#开机) 内容。
+
+### 方式二：EMMC烧录
+
+:::tip 提示
+本方式仅适用于 **CM-K230 带EMMC版本** 开发板。
+:::
 
 01Studio目前只有 [**CM-K230核心板**](../intro/canmv_k230.md#cm-k230核心板) 提供带EMMC的版本，烧录方式如下：
 
