@@ -272,6 +272,14 @@ CanMV K230 mini可以通过CSI0接口外接此摄像头，教程和代码一样�
 
 ![module](./img/module/module8.jpg)
 
+## CM-K230 WiFi模块
+
+此WiFi模块为CM-K230开发套件专用。通讯接口是SDIO，2.4G频段。[点击购买>>](https://item.taobao.com/item.htm?id=1008808103706)
+
+![module](./img/module/wifi1.png)
+
+![module](./img/module/wifi2.png)
+
 ## MIPI转HDMI模块
 
 CanMV K230 mipi没有板载mipi转HDMI芯片，但可以通过使用配套的MIPI转HDMI模块实现HDMI显示。[点击购买>>](https://item.taobao.com/item.htm?id=914232335854)
@@ -293,5 +301,10 @@ CanMV K230 mipi 可以通过配套的音频转接线实现转出标准的3.5mm�
 ![module](./img/module/audio_line_1.png)
 
 ![module](./img/module/audio_line_2.png)
+
+
+
+
+
 
 

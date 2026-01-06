@@ -149,14 +149,20 @@ def WIFI_Connect():
     wlan = network.WLAN(network.STA_IF) #STA模式
     wlan.active(True)                   #激活接口
 
+    start_time=time.time() #记录时间做超时判断
+
     if not wlan.isconnected():
 
-        for i in range(3): #重复连接3次
+        print('connecting to network...')
 
-            #输入WIFI账号密码（仅支持2.4G信号）, 连接超过5秒为超时
-            wlan.connect('01Studio', '88888888')
+        #输入WIFI账号密码（仅支持2.4G信号）, 连接超过5秒为超时
+        wlan.connect('01Studio', '88888888')
 
-            if wlan.isconnected(): #连接成功
+        while not wlan.isconnected():
+
+            #超时判断,10秒没连接成功判定为超时
+            if time.time()-start_time > 10 :
+                print('WIFI Connected Timeout!')
                 break
 
     if wlan.isconnected(): #连接成功
