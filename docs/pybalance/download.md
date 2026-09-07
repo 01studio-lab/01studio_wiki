@@ -14,11 +14,9 @@ https://download.01studio.cc/project/pybalance/pybalance.html
 
 - Github仓库：https://github.com/01studio-lab/pyBalance
 
-![download](./img/download/download0.png)
-
 ## 资料介绍：
 
-pyController在线教程配套软件、源代码、原理图、芯片手册等。
+pyBalance在线教程配套软件、源代码、原理图、芯片手册等。
 
 ![download](./img/download/download1.png)
 
@@ -36,13 +34,13 @@ pyController在线教程配套软件、源代码、原理图、芯片手册等�
 
 ### 固件
 
-pyDrone MicroPython固件。
+01Studio pyBalance MicroPython固件。内置出厂例程代码。
 
 ![download](./img/download/download4.png)
 
-### 原理图和功能图
+### 硬件资料
 
-开发板原理图和接口说明图片。
+开发板原理图和接口说明图片等。
 
 ![download](./img/download/download5.png)
 
