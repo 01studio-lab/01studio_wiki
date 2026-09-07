@@ -164,6 +164,11 @@ const config = {
               },
               {
               type: 'docSidebar',
+              sidebarId: 'pyBalanceSidebar',
+              label: 'pyBalance平衡小车',
+              },
+              {
+              type: 'docSidebar',
               sidebarId: 'pyControllerSidebar',
               label: 'pyController遥控手柄',
               },
