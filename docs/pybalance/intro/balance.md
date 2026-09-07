@@ -70,7 +70,7 @@ LCD 从上到下依次显示标题及小车当前状态，包括倾斜角、实�
 ![img](./img/balance/15.png) 
 
 
-![img](./img/balance/14.jpg) 
+![img](./img/balance/14.JPG) 
 
 
 ## 校准
