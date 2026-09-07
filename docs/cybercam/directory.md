@@ -84,6 +84,21 @@ sidebar_position: 1
 
 - [继电器](./sensor_module/relay.md) 
 
+### **二维舵机云台**
+
+- [云台介绍和安装](./gimbal/intro.md) 
+- [云台舵机控制](./gimbal/servo.md)
+- [PID控制原理](./gimbal/pid.md)   
+- [人脸追踪](./gimbal/face_tracking.md)      
+- [色块追踪](./gimbal/color_tracking.md)  
+
+### **视觉小车**
+
+- [小车介绍和组装](./car/intro.md) 
+- [小车电机控制](./car/motor.md) 
+- [小车动作](./car/move.md) 
+- [巡线小车](./car/line_follow.md) 
+
 ### [**社区用户开源项目分享**](./diy.md)
 
 ### [**更新说明**](./update.md)
