@@ -8,11 +8,11 @@ sidebar_position: 3
 
 ### 百度网盘
 
-https://download.01studio.cc/project/pyCar/pyCar.html
+https://download.01studio.cc/project/pybalance/pybalance.html
 
 ### 海外地区下载
 
-- [点击下载](https://github.com/01studio-lab/pyCar/releases/tag/2025-6-25)
+- Github仓库：https://github.com/01studio-lab/pyBalance
 
 ![download](./img/download/download0.png)
 

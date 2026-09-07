@@ -5,12 +5,13 @@ sidebar_position: 1
 
 # 目录
 
-![directory](./img/directory/directory1.png)换产品图
+![directory](./img/directory/directory1.png)
 
 ### **开箱指南**
 
-- [pybalance简介](./intro/intro.md)
-- [pybalance组装](./intro/assembly.md)
+- [pyBalance简介](./intro/intro.md)
+- [pyBalance组装](./intro/assembly.md)
+- [使用教程](./intro/balance.md)
 - [充电](./intro/charge.md)
 
 ### [**开发板资料下载**](./download.md)
@@ -37,7 +38,7 @@ sidebar_position: 1
 - [UART（串口通讯）](./basic_examples/uart.md)
 - [RGB彩灯](./basic_examples/rgb.md)
 - [LCD显示屏](./basic_examples/lcd.md)
-- [超声波测距（HC-SR04](./basic_examples/hcsr04.md)
+- [超声波测距（HC-SR04）](./basic_examples/hcsr04.md)
 - [QMI8658A六轴](./basic_examples/qmi8658.md)
 - [电池电量（ADC](./basic_examples/adc.md)
 - [电机控制（PWM）](./basic_examples/motor.md)

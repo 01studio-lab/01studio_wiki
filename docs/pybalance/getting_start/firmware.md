@@ -18,7 +18,11 @@ sidebar_position: 10
 
 ![firmware](./img/firmware/firmware1.png)
 
-找到路径：**零一科技（01Studio）MicroPython开发套件配套资料\01-开发工具\01-Windows\固件更新工具\flash_download_tools_v3.9.2** 下的flash_download_tools_v3.9.2.exe软件，双击打开。
+找到路径：**零一科技（01Studio）MicroPython开发套件配套资料\01-开发工具\固件更新工具\flash_download_tools_v3.9.11** 下的flash_download_tools_v3.9.11.exe软件，双击打开。
+
+:::tip 提示
+请使用v3.9.11以上版本进行烧录。低版本烧录可能出错。
+:::
 
 ![firmware](./img/firmware/firmware2.png)
 
@@ -48,7 +52,7 @@ sidebar_position: 10
 
 ## 使用在线网站更新固件
 
-如果不想额外安装烧录软件，可以按照教程通过在线烧录方式完成固件更新。
+如果不想额外安装烧录软件，可以按照教程通过在线烧录方式完成固件更新。 网址：https://flash.01studio.cc/
 
 点击“连接”后，浏览器左上方会弹出可连接的设备列表。
 
