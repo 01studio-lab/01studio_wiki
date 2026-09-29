@@ -8,7 +8,7 @@ sidebar_position: 3
 
 ### 百度网盘
 
-https://download.01studio.cc/project/pybalance/pybalance.html
+https://download.01studio.cc/project/pyBalance/pyBalance.html
 
 ### 海外地区下载
 
