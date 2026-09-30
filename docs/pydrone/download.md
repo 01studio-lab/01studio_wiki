@@ -12,7 +12,7 @@ https://download.01studio.cc/project/pyDrone/pyDrone.html
 
 ### 海外地区下载
 
-- [点击下载](https://github.com/01studio-lab/pyDrone/releases/tag/2025-6-23)
+GitHub: https://github.com/01studio-lab/pyDrone/
 
 ![download](./img/download/download0.png)
 
