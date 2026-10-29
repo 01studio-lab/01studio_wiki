@@ -106,5 +106,25 @@
   "item.label.pyWiFi ESP32-S3": {
     "message": "pyWiFi ESP32-S3",
     "description": "Navbar item with label pyWiFi ESP32-S3"
+  },
+  "item.label.在线应用服务": {
+    "message": "Online Services",
+    "description": "Navbar item with label 在线应用服务"
+  },
+  "item.label.CyberCAM": {
+    "message": "CyberCAM",
+    "description": "Navbar item with label CyberCAM"
+  },
+  "item.label.pyBalance平衡小车": {
+    "message": "pyBalance",
+    "description": "Navbar item with label pyBalance平衡小车"
+  },
+  "item.label.应用市场": {
+    "message": "APP Market",
+    "description": "Navbar item with label 应用市场"
+  },
+  "item.label.ESP32在线烧录": {
+    "message": "ESP32 Online Flashing",
+    "description": "Navbar item with label ESP32在线烧录"
   }
 }

@@ -433,5 +433,11 @@
   },
   "Python开发，快速上手": {
     "message": "Python programming, quick start"
+  },
+  "CyberCAM 开始学习": {
+    "message": "CyberCAM 开始学习"
+  },
+  "IDE可视化编程，实时查看图像识别结果": {
+    "message": "IDE可视化编程，实时查看图像识别结果"
   }
 }

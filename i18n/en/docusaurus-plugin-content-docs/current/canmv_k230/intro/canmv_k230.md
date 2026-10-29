@@ -127,14 +127,22 @@ CM-K230 is the core board for stamp-hole encapsulation.[**Click to Buy>>**](http
 
 ![intro](./img/canmv/CM-K230_4.png)
 
+:::tip Design Recommendations
+1、The VIN_5V input voltage range is 3.6-5.5V and supports Li-battery power supply. Generally use USB 5V input, and do not exceed the maximum withstand voltage of 5.5V.<br></br>
+2、Avoid placing components that generate a lot of heat or are prone to interference, as well as high-speed signal traces, under the core board;<br></br>
+3、Match the USB differential impedance to 90R. If the trace is too long, a 22R resistor can be connected in series on the D+ and D- pins near the USB connector.<br></br>
+4、Match the CSI and DSI differential impedance to 100R.<br></br>
+**Refer to the official baseboard PCB files.**
+:::
+
 |  Pin | Name | Function |  Pin | Name | Function |
 |  :---:  | :---:  | --- |  :---:  | :---:  | --- |
 | 1 | GND | Power GND | 71 | GND  | Power GND |
 | 2 | GND | Power GND | 72 | CSI1_D2_N  | CSI1/Camera |
 | 3 | GND | Power GND | 73 | CSI1_D2_P  | CSI1/Camera | 
-| 4 | VIN_5V | Power In/5V | 74 | CSI1_CLK_P  | CSI1/Camera | 
-| 5 | VIN_5V | Power In/5V | 75 | CSI1_CLK_N  | CSI1/Camera | 
-| 6 | VIN_5V | Power In/5V | 76 | CSI1_D3_P  | CSI1/Camera | 
+| 4 | VIN_5V | Power In/3.6-5.5V | 74 | CSI1_CLK_P  | CSI1/Camera | 
+| 5 | VIN_5V | Power In/3.6-5.5V | 75 | CSI1_CLK_N  | CSI1/Camera | 
+| 6 | VIN_5V | Power In/3.6-5.5V | 76 | CSI1_D3_P  | CSI1/Camera | 
 | 7 | VOUT_3V3   | Power Out/3V3/I(max)=300mA | 77 | CSI1_D3_N  | CSI1/Camera | 
 | 8 | VOUT_1V8  | Power Out/1V8/I(max)=100mA | 78 | GND  | Power GND |
 | 9 | GPIO18  | OSPI_D2/QSPI1_CS2/QSPI0_D2 | 79 | DSI_D3_P  | Display |

@@ -54,5 +54,21 @@
   "link.item.label.技术论坛": {
     "message": "Forum",
     "description": "The label of footer link with label=技术论坛 linking to https://forum.01studio.cc"
+  },
+  "link.item.label.Tel: +86-18123953882 (微信同号)": {
+    "message": "Tel: +86-18123953882 (Wechat/Whatsapp)",
+    "description": "The label of footer link with label=Tel: +86-18123953882 (微信同号) linking to /"
+  },
+  "link.item.label.Email: support@01studio.cc": {
+    "message": "Email: support@01studio.cc",
+    "description": "The label of footer link with label=Email: support@01studio.cc linking to /"
+  },
+  "link.item.label.Add: 深圳市宝安区福海街道大洋路中粮（福安）机器人智造产业园": {
+    "message": "Add: No. 90, Dayang Road, Fuhai Street, Bao'an District, Shenzhen",
+    "description": "The label of footer link with label=Add: 深圳市宝安区福海街道大洋路中粮（福安）机器人智造产业园 linking to /"
+  },
+  "link.item.label.CyberCAM QQ群: 933425083": {
+    "message": "CyberCAM QQ Group: 933425083",
+    "description": "The label of footer link with label=CyberCAM QQ群: 933425083 linking to /"
   }
 }

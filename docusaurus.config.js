@@ -180,9 +180,24 @@ const config = {
             ],
           },
           {
+            type: 'dropdown',
+            label: '在线应用服务',
+            position: 'right',
+            className: 'navbar_dorp_items',
+            items: [
+            {
             href: 'https://ai.01studio.cc',
             label: 'AI模型训练',
-            position: 'right',
+            },
+            {
+            href: 'https://app.walnutpi.com',
+            label: '应用市场',
+            },
+            {
+            href: 'https://flash.01studio.cc',
+            label: 'ESP32在线烧录',
+            },
+            ],
           },
           {
             href: 'https://www.01studio.cc',
